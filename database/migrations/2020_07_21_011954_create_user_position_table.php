@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepartmentsTable extends Migration
+class CreateUserPositionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('user_position', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('department_name');
-            $table->unsignedInteger('parent_id')->nullable();
-            $table->unsignedBigInteger('manager_id')->nullable();
-            $table->unsignedInteger('sort')->nullable();
+            $table->string('name');
+            $table->integer('level')->default(100); //Count from CEO
+            $table->unsignedInteger('department_id')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,8 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('user_position');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

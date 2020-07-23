@@ -33,5 +33,23 @@
 <script src="{{asset('template/AdminLTE/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('template/AdminLTE/dist/js/demo.js')}}"></script>
+<!-- SWAL2 -->
+<script src="{{asset('template\AdminLTE\plugins\sweetalert2\sweetalert2.all.min.js')}}"></script>
+<!-- Select 2 -->
+<script src="{{asset('template\AdminLTE\plugins\select2\js\select2.full.min.js')}}"></script>
+
+@include('admin.partials.alert')
+<!-- Page script -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+  })
+</script>
 
 @yield('custom-js')

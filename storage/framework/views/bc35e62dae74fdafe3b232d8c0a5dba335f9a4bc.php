@@ -1,6 +1,6 @@
-{{-- Need add under script of sweetaleart2 --}}
+
 <!--message-->
-@if(session()->has('success'))
+<?php if(session()->has('success')): ?>
 
 <script type="text/javascript">
   const Toast = Swal.mixin({
@@ -13,12 +13,12 @@
   Toast.fire({
     type: 'success',
     icon: 'success',
-    title: '{!! session()->get('success') !!}'
+    title: '<?php echo session()->get('success'); ?>'
   })
 </script>
-@endif
+<?php endif; ?>
 
-@if(session()->has('error'))
+<?php if(session()->has('error')): ?>
 <script type="text/javascript">
   const Toast = Swal.mixin({
     toast: true,
@@ -30,12 +30,12 @@
   Toast.fire({
     type: 'error',
     icon: 'error',
-    title: '{!! session()->get('error') !!}'
+    title: '<?php echo session()->get('error'); ?>'
   })
 </script>
-@endif
+<?php endif; ?>
 
-@if(session()->has('warning'))
+<?php if(session()->has('warning')): ?>
 <script type="text/javascript">
   const Toast = Swal.mixin({
     toast: true,
@@ -47,7 +47,8 @@
   Toast.fire({
     type: 'warning',
     icon: 'warning',
-    title: '{!! session()->get('warning') !!}'
+    title: '<?php echo session()->get('warning'); ?>'
   })
 </script>
-@endif
+<?php endif; ?>
+<?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/alert.blade.php ENDPATH**/ ?>

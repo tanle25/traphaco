@@ -1,8 +1,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('admin.home')}}" class="brand-link">
-      <img src="{{asset('template/AdminLTE/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="<?php echo e(route('admin.home')); ?>" class="brand-link">
+      <img src="<?php echo e(asset('template/AdminLTE/dist/img/AdminLTELogo.png')); ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">TRAPHACO USER</span>
     </a>
@@ -12,7 +12,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('template/AdminLTE/dist/img/user6-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image'">
+          <img src="<?php echo e(asset('template/AdminLTE/dist/img/user6-128x128.jpg')); ?>" class="img-circle elevation-2" alt="User Image'">
         </div>
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
@@ -34,7 +34,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.department.index')}}" class="nav-link">
+                <a href="<?php echo e(route('admin.department.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tạo mới</p>
                 </a>
@@ -58,14 +58,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.usermanage.index')}}" class="nav-link">
+                <a href="<?php echo e(route('admin.usermanage.index')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách người dùng</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{route('admin.usermanage.create')}}" class="nav-link">
+                <a href="<?php echo e(route('admin.usermanage.create')); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm user mới</p>
                 </a>
@@ -78,3 +78,4 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+<?php /**PATH E:\DEV\Employees management\HR manager\resources\views/Admin/partials/sidebar.blade.php ENDPATH**/ ?>

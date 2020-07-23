@@ -7,11 +7,10 @@
     @include('Admin.partials.sidebar')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include('Admin.partials.content_header')
     <!-- Main content -->
     <section class="content">
     <div class="container-fluid">
-        @yield('content')
+    @yield('content')
     </div>
     </section>
     <!-- /.content -->

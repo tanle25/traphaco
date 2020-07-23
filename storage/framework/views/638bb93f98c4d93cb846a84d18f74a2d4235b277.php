@@ -1,21 +1,21 @@
-@extends('admin.main_layout')
 
-@php
+
+<?php
     $list_root = $departments->filter(function ($value) {
         return $value->parent_id == null;
     });
-@endphp
+?>
 
-@section('title')
+<?php $__env->startSection('title'); ?>
   Quản lý phòng ban
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('custom-css')
-  <link rel="stylesheet" href="{{asset('template/css/nestable.min.css')}}">
-@endsection
+<?php $__env->startSection('custom-css'); ?>
+  <link rel="stylesheet" href="<?php echo e(asset('template/css/nestable.min.css')); ?>">
+<?php $__env->stopSection(); ?>
 
-@section('content')
-  @include('admin.partials.content_header', ['title' => 'Quản lý phòng ban'])
+<?php $__env->startSection('content'); ?>
+  <?php echo $__env->make('admin.partials.content_header', ['title' => 'Quản lý phòng ban'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   <div class="row">
     <section class="col-lg-4 col-12">
       <div class="card">
@@ -28,46 +28,70 @@
         </div>
 
         <div class="card-body">
-          <form action="{{route('admin.department.store')}}" method="post">
-            @csrf
+          <form action="<?php echo e(route('admin.department.store')); ?>" method="post">
+            <?php echo csrf_field(); ?>
             <div class="form-group">
               <label for="department_name_input">Tên phòng ban</label>
               <input name="department_name" type="text" class="form-control" id="department_name_input" placeholder="Nhập tên phòng ban">
-              @error('department_name')
+              <?php $__errorArgs = ['department_name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                   <strong class="text-red">
-                    {{$message}}
+                    <?php echo e($message); ?>
+
                   </strong>
-              @enderror
+              <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="form-group">
               <label>Phòng ban trực thuộc</label>
               <select name="parent_id" class="form-control select2"">
                 <option value="" selected="selected">--ROOT--</option>
-                @foreach ($departments as $department )
-                  <option value="{{$department->id}}">{{$department->department_name}}</option>
-                @endforeach
+                <?php $__currentLoopData = $departments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $department): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <option value="<?php echo e($department->id); ?>"><?php echo e($department->department_name); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </select>
-              @error('parent_id')
+              <?php $__errorArgs = ['parent_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                   <strong class="text-red">
-                    {{$message}}
+                    <?php echo e($message); ?>
+
                   </strong>
-              @enderror
+              <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="form-group">
               <label for="department_name_input">Người quản lý</label>
               <select name="manager_id" class="form-control select2"">
                 <option value="">Trống</option>
-                @foreach ($users as $user )
-                  <option value="{{$user->id}}">{{$user->fullname}}</option>
-                @endforeach
+                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <option value="<?php echo e($user->id); ?>"><?php echo e($user->fullname); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </select>
-              @error('manage_id')
+              <?php $__errorArgs = ['manage_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                   <strong class="text-red">
-                    {{$message}}
+                    <?php echo e($message); ?>
+
                   </strong>
-              @enderror
+              <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="form-group">
@@ -94,7 +118,7 @@
 
         <div class="card-body">
           <div id="department-list" class="dd">
-            @include('admin.pages.departments.department_tree_child', ['list' => $list_root])
+            <?php echo $__env->make('admin.pages.departments.department_tree_child', ['list' => $list_root], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
           </div>
         </div>
 
@@ -105,10 +129,10 @@
     <!-- ./col -->
 </div>
 
-@endsection 
+<?php $__env->stopSection(); ?> 
 
-@section('custom-js')
-  <script src="{{asset('template/js/nestable.js')}}"></script>
+<?php $__env->startSection('custom-js'); ?>
+  <script src="<?php echo e(asset('template/js/nestable.js')); ?>"></script>
 
   <script>
     const MenuToast = Swal.mixin({
@@ -127,7 +151,7 @@
     function saveTree(data){
         $.ajax({
             type: 'post',
-            url: "{{route('admin.department.savetree')}}",
+            url: "<?php echo e(route('admin.department.savetree')); ?>",
             data: {
                 jsonData:data,
             },
@@ -143,7 +167,7 @@
     function deleteDepartment(id) {
         $.ajax({
             type: 'post',
-            url: "{{route('admin.department.destroy')}}",
+            url: "<?php echo e(route('admin.department.destroy')); ?>",
             data: {
                 id:id,
             },
@@ -193,4 +217,5 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/pages/departments/list.blade.php ENDPATH**/ ?>
