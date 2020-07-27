@@ -139,7 +139,7 @@
             <i class="fas fa-file mr-2"></i> 3 new reports
           </a>
           <div class="dropdown-divider"></div>
-          <form action="/logout" method="post">
+          <form action="<?php echo e(route('logout')); ?>" method="post">
             <?php echo csrf_field(); ?>
             <button type="submit" class="dropdown-item text-center">Logout</button>
           </form>
