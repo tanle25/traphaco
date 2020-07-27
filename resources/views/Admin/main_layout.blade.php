@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-    @include('Admin.partials.head')
+    @include('admin.partials.head')
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-    @include('Admin.partials.nav')
-    @include('Admin.partials.sidebar')
+    @include('admin.partials.nav')
+    @include('admin.partials.sidebar')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <!-- Main content -->
@@ -15,7 +15,7 @@
     </section>
     <!-- /.content -->
   </div>
-    @include('Admin.partials.footer')
+    @include('admin.partials.footer')
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -23,6 +23,6 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('Admin.partials.scripts')
+@include('admin.partials.scripts')
 </body>
 </html>

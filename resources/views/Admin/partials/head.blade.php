@@ -7,6 +7,6 @@
 
     <title>AdminLTE 3 | Dashboard</title>
 
-    @include('Admin.partials.css')
+    @include('admin.partials.css')
 
   </head>
