@@ -49,6 +49,9 @@
     icon: 'warning',
     title: '<?php echo session()->get('warning'); ?>'
   })
+
+  //===============Toast function================//
+
 </script>
 <?php endif; ?>
 <?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/alert.blade.php ENDPATH**/ ?>

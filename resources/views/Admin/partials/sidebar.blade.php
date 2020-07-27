@@ -36,15 +36,10 @@
               <li class="nav-item">
                 <a href="{{route('admin.department.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Tạo mới</p>
+                  <p>Danh sách phòng ban</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sửa</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
 
@@ -70,6 +65,33 @@
                   <p>Thêm user mới</p>
                 </a>
               </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Quản lý khảo sát
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.survey.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách bài khảo sát</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('admin.survey.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm bài khảo sát</p>
+                </a>
+              </li>
+              
             </ul>
           </li>
         </ul>

@@ -1,15 +1,9 @@
 @extends('admin.main_layout')
-@php
-    $list_root = $departments->filter(function ($value) {
-        return $value->parent_id == null;
-    });
-@endphp
 @section('title')
-  Quản lý phòng ban
+  Quản lý người dùng
 @endsection
 
 @section('custom-css')
-  <link rel="stylesheet" href="{{asset('template/css/nestable.min.css')}}">
 @endsection
 
 @section('content')

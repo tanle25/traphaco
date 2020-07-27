@@ -1,90 +1,66 @@
-<div class="row">
-    <section class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    Tạo mới User
-                </div>
+<div class="question-tool mx-auto d-flex" style="max-width: 768px">
+    <div class="card col-12 ">
+
+        <div class="card-header">
+            <div class="card-title">
+                Bộ câu hỏi
             </div>
-
-            <div class="card-body">
-                <form action="{{route('admin.usermanage.store')}}" method="post">
-                    @csrf
-
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label for="">Họ và tên</label>
-                                <input name="fullname" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên người dùng mới (Bắt buộc)">
-                                @error('fullname')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
+        </div>
+        <div class="card-body ">
+            <div class="sortable editor-body">
+                <div class="card section-wraper" data-section-id="${newSection}" style="margin-bottom: 20px">
+                    <div class="sortable-handle text-center p-2">
+                        <i class="fas fa-grip-lines"></i>
+                    </div>
+                    <div class=" section-header callout">
+                        <div class=" row">
+                            <div class="col-sm-10 section-title">
+                                <input type="text" placeholder="Tiêu đề section" value="Không có tiêu đề">
+                                <div class="focus-line"></div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="">Username</label>
-                                <input name="username" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên đăng nhập (Bắt buộc)">
-                                @error('username')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input name="email" type="text" class="form-control" id="" placeholder="Nhập Email">
-                                @error('email')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Password</label>
-                                <input name="password" type="text" class="form-control" id=""
-                                    placeholder="Nhập password (Bắt buộc)">
-                                @error('password')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
+                            <div class="section-remove">
+                                <i class="far fa-trash-alt" style="font-size: 20px; cursor:pointer"></i>
                             </div>
                         </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label>Phòng ban trực thuộc</label>
-                                <select name="parent_id" class="form-control select2"">
-                      <option value="" selected=" selected">--ROOT--</option>
-                                    @foreach ($departments as $department )
-                                    <option value="{{$department->id}}">{{$department->department_name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('parent_id')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
+                        <textarea oninput="auto_grow(this)" name="email" type="text" class="section-content"
+                            placeholder="Nhập nội dung section" cols="30" rows="1"></textarea>
+                    </div>
+                    <div class="sortable question-container">
+                        <div class="callout question-wraper" data-question-id="${newQuestion}">
+                            <div class="form-group row">
+                                <div class="col-sm-10 question-title">
+                                    <textarea oninput="auto_grow(this)" name="" id="" cols="30" rows="1"
+                                        placeholder="Câu hỏi"></textarea>
+                                </div>
+                                <div class="question-remove">
+                                    <i class="far fa-trash-alt" style="font-size: 20px; cursor:pointer"></i>
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="department_name_input">Thứ tự</label>
-                                <input name="sort" type="number" class="form-control" placeholder="Số thứ tự">
+                            <div class="sortable options-wraper">
+                            </div>
+                            <div class="col-8 add-option">
+                                <input readonly type="text" class="question-option-add" id=""
+                                    placeholder="Thêm câu trả lời">
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary">
-                        Lưu thông tin
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
-    </section>
-    </section>
+        <div>
+            <button class="btn btn-primary m-3">
+                Cập nhật thông tin
+            </button>
+        </div>
+    </div>
+    <div class="question-tool-menu card" data-csstransition="false">
+        <div class="question-tool-menu-btn add-section-btn" data-toggle="tooltip" data-placement="right"
+            title="Tạo mới section">
+            <i class="far fa-file"></i>
+        </div>
+        <div class="question-tool-menu-btn add-question-btn" data-toggle="tooltip" data-placement="right"
+            title="Tạo mới câu hỏi">
+            <i class="far fa-edit"></i>
+        </div>
+    </div>
 </div>

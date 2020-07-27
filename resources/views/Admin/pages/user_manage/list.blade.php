@@ -46,19 +46,20 @@
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <script>
-    $(function () {
-      $("#user-table").dataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{route('admin.usermanage.list_user')}}",
-        columns: [
-          { "data": "id" },
-          { "data": "fullname" },
-          { "data": "email" },
-          { "data": "department_name" },
-          { "data" :"action"}
-        ]
-      });
+  $(function () {
+    $("#user-table").dataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth:false,
+      ajax: "{{route('admin.usermanage.list_user')}}",
+      columns: [
+        { "data": "id" },
+        { "data": "fullname" },
+        { "data": "email" },
+        { "data": "department_name" },
+        { "data" :"action"}
+      ]
     });
+  });
 </script>
 @endsection

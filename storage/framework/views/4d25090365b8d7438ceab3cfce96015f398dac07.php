@@ -46,20 +46,21 @@
 <script src="<?php echo e(asset('template/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js')); ?>"></script>
 <script src="<?php echo e(asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
 <script>
-    $(function () {
-      $("#user-table").dataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "<?php echo e(route('admin.usermanage.list_user')); ?>",
-        columns: [
-          { "data": "id" },
-          { "data": "fullname" },
-          { "data": "email" },
-          { "data": "department_name" },
-          { "data" :"action"}
-        ]
-      });
+  $(function () {
+    $("#user-table").dataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth:false,
+      ajax: "<?php echo e(route('admin.usermanage.list_user')); ?>",
+      columns: [
+        { "data": "id" },
+        { "data": "fullname" },
+        { "data": "email" },
+        { "data": "department_name" },
+        { "data" :"action"}
+      ]
     });
+  });
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/pages/user_manage/list.blade.php ENDPATH**/ ?>

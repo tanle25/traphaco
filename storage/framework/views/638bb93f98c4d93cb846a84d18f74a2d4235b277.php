@@ -197,7 +197,7 @@ unset($__errorArgs, $__bag); ?>
 
     $('.dd-item .remove-department').on('click', function(){
       let id = $(this).attr('data-id');
-        Swal.fire({
+      Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
 			icon: 'warning',
@@ -205,13 +205,13 @@ unset($__errorArgs, $__bag); ?>
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Yes, delete it!',
-		})
-		.then((result) => {
-			if (result.value) {
-				$(this).parent().parent().parent().remove();
-				deleteDepartment(id);
-			}
-		})
+      })
+      .then((result) => {
+        if (result.value) {
+          $(this).parent().parent().parent().remove();
+          deleteDepartment(id);
+        }
+      })
     })
 </script>
 

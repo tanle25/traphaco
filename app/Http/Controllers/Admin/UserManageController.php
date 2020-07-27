@@ -22,8 +22,8 @@ class UserManageController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10, ['*'], 'page', 15);
-        return view('admin.pages.user_manage.list', compact('users'));
+        //$users = User::paginate(10, ['*'], 'page', 15);
+        return view('admin.pages.user_manage.list');
     }
 
     public function listUser(Request $request)

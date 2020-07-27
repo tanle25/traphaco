@@ -49,5 +49,8 @@
     icon: 'warning',
     title: '{!! session()->get('warning') !!}'
   })
+
+  //===============Toast function================//
+
 </script>
 @endif

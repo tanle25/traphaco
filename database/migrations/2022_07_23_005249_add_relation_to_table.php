@@ -35,17 +35,24 @@ class AddRelationToTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['department_id', 'manager_id']);
+            $table->dropForeign(['department_id']);
+            $table->dropForeign(['position_id']);
+
         });
 
         Schema::table('departments', function (Blueprint $table) {
-            $table->dropForeign(['parent_id', 'position_id']);
+            $table->dropForeign(['parent_id']);
+            $table->dropForeign(['manager_id']);
         });
 
         Schema::table('user_position', function (Blueprint $table) {
             $table->dropForeign(['department_id']);
         });
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
     }
 }

@@ -50,6 +50,19 @@
       theme: 'bootstrap4'
     })
   })
+
+  function swalToast(message, type = 'success', position = 'top-end') {
+    Swal.mixin({
+      toast: true,
+      position: position,
+      showConfirmButton: false,
+      timer: 3000
+    }).fire({
+      type: type,
+      icon: type,
+      title: message,
+    })
+  }
 </script>
 
 <?php echo $__env->yieldContent('custom-js'); ?>
