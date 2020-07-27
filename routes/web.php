@@ -30,13 +30,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/user-position/update', 'UserPositionController@update')->name('admin.user_position.update');
     Route::post('/user-position/destroy', 'UserPositionController@destroy')->name('admin.user_position.destroy');
 
-    Route::get('/usermanage', 'UsermanageController@index')->name('admin.usermanage.index');
-    Route::get('/usermanage/create', 'UsermanageController@create')->name('admin.usermanage.create');
-    Route::post('/usermanage/store', 'UsermanageController@store')->name('admin.usermanage.store');
-    Route::get('/usermanage/edit/{id}', 'UsermanageController@edit')->name('admin.usermanage.edit');
-    Route::post('/usermanage/update/{id}', 'UsermanageController@update')->name('admin.usermanage.update');
-    Route::get('/usermanage/destroy/{id}', 'UsermanageController@destroy')->name('admin.usermanage.destroy');
-    Route::get('/usermanage/list-user', 'UsermanageController@listUser')->name('admin.usermanage.list_user');
+    Route::get('/usermanage', 'UserManageController@index')->name('admin.usermanage.index');
+    Route::get('/usermanage/create', 'UserManageController@create')->name('admin.usermanage.create');
+    Route::post('/usermanage/store', 'UserManageController@store')->name('admin.usermanage.store');
+    Route::get('/usermanage/edit/{id}', 'UserManageController@edit')->name('admin.usermanage.edit');
+    Route::post('/usermanage/update/{id}', 'UserManageController@update')->name('admin.usermanage.update');
+    Route::get('/usermanage/destroy/{id}', 'UserManageController@destroy')->name('admin.usermanage.destroy');
+    Route::get('/usermanage/list-user', 'UserManageController@listUser')->name('admin.usermanage.list_user');
 
     Route::get('/survey', 'SurveyController@index')->name('admin.survey.index');
     Route::get('/survey/create', 'SurveyController@create')->name('admin.survey.create');
