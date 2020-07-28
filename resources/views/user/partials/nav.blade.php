@@ -145,9 +145,6 @@
           </form>
         </div>
       </li>
-
-
-
     </ul>
   </nav>
   <!-- /.navbar -->

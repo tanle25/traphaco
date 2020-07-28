@@ -8,179 +8,209 @@
 
 <style>
     .section-title input {
-        height: 60px;
-        font-size: 40px;
-        border-width: 0 0 1px 0;
-        padding-left: 0;
-        border-color: rgb(148, 143, 143); 
-        position: relative;
-        width: 100%;
-        position: relative;
-    }
+    height: 60px;
+    font-size: 40px;
+    border-width: 0 0 1px 0;
+    padding-left: 0;
+    border-color: rgb(148, 143, 143);
+    position: relative;
+    width: 100%;
+    position: relative;
+}
 
-    .section-title{
-        margin-bottom: 30px;
-    }
+.section-title {
+    margin-bottom: 30px;
+}
 
-    .section-title .focus-line{
-        height: 5px;
-        width: 0%;
-        color: #20C997;
-        position: absolute;;
-        top: 100%;
-        left:0;
-        transition: 0.5s;
-        z-index: 100;
-    }
+.section-title .focus-line {
+    height: 5px;
+    width: 0%;
+    color: #20c997;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: 0.5s;
+    z-index: 100;
+}
 
-    .section-title input:focus{
-        outline: none;
-    }
+.section-title input:focus {
+    outline: none;
+}
 
-    .section-title input:focus ~ .focus-line{
-        width: 100%;
-    }
+.section-title input:focus ~ .focus-line {
+    width: 100%;
+}
 
-    .section-title:focus::before{
-        width: 100%;
-    }
+.section-title:focus::before {
+    width: 100%;
+}
 
-    .section-title input ::placeholder{
-        font-size: 40px;
-    }
+.section-title input ::-webkit-input-placeholder {
+    font-size: 40px;
+}
 
-    .section-remove, .question-remove{
-        text-align: center;
-        line-height: 60px;
-        height: 60px;
-        width: 60px;
-        border-radius: 50%;
-    }
+.section-title input ::-moz-placeholder {
+    font-size: 40px;
+}
 
-    .section-remove:hover, .question-remove:hover{
-        background-color:  rgb(243, 243, 243);
-    }
+.section-title input :-ms-input-placeholder {
+    font-size: 40px;
+}
 
-    .question-remove{
-        height: 45px;
-        width:45px;
-        line-height: 45px;
+.section-title input ::-ms-input-placeholder {
+    font-size: 40px;
+}
 
-    }
-    
-    .section-header textarea {
-        border-width: 0 0 1px 0;
-        padding-left: 0;
-        border-color: rgb(148, 143, 143); 
-        position: relative;
-        width: 100%;
-        position: relative;
-        z-index: 1;
-        height: auto;
-    }
-    textarea{
-        resize: none;
-        overflow: hidden;
-    }
+.section-title input ::placeholder {
+    font-size: 40px;
+}
 
-    textarea:focus{
-        outline: none;
-    }
+.section-remove,
+.question-remove {
+    text-align: center;
+    line-height: 60px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
 
-    .question-wraper input{
-        height: 45px;
-        font-size: 18px;
-        padding-left: 0;
-        border-color: rgb(148, 143, 143); 
-        position: relative;
-        width: 100%;
-        position: relative;
-        z-index: 1;
-        border-width: 0 0 0 0;
+.section-remove:hover,
+.question-remove:hover {
+    background-color: rgb(243, 243, 243);
+}
 
-    }
+.question-remove {
+    height: 45px;
+    width: 45px;
+    line-height: 45px;
+}
 
-    .question-wraper input:focus{
-        outline: none;
-        border-width: 0 0 1px 0;
-    }
+.section-header textarea {
+    border-width: 0 0 1px 0;
+    padding-left: 0;
+    border-color: rgb(148, 143, 143);
+    position: relative;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    height: auto;
+}
+textarea {
+    resize: none;
+    overflow: hidden;
+}
 
-    .question-option:hover input {
-        border-width: 0 0 1px 0;
-    }
+textarea:focus {
+    outline: none;
+}
 
-    .question-option-label{
-        height: 45px;
-        width: 30px;
-        line-height: 45px;
-        color: #757575;
-        font-size: 23px;
+.question-wraper input {
+    height: 45px;
+    font-size: 18px;
+    padding-left: 0;
+    border-color: rgb(148, 143, 143);
+    position: relative;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    border-width: 0 0 0 0;
+}
 
-    }
+.question-wraper input:focus {
+    outline: none;
+    border-width: 0 0 1px 0;
+}
 
-    .question-title input::placeholder{
-        font-size: 25px;
-    }
+.question-option:hover input {
+    border-width: 0 0 1px 0;
+}
 
-    .question-title input, {
-        font-size: 25px;
-        background-color: #F8F9FA;
-    }
+.question-option-label {
+    height: 45px;
+    width: 30px;
+    line-height: 45px;
+    color: #757575;
+    font-size: 23px;
+}
 
-    .question-title textarea{
-        font-size: 25px;
-        background-color: #F8F9FA;
-        border-width: 0 0 1px 0;
-        padding-left: 0;
-        border-color: rgb(148, 143, 143); 
-        position: relative;
-        width: 100%;
-        position: relative;
-        z-index: 1;
-    }
+.question-title input::-webkit-input-placeholder {
+    font-size: 25px;
+}
 
-    .question-title{
-        margin-right:30px;
-    }
+.question-title input::-moz-placeholder {
+    font-size: 25px;
+}
 
-    .question-tool{
-        position: relative;
-    }
+.question-title input:-ms-input-placeholder {
+    font-size: 25px;
+}
 
-    .question-tool-menu{
-        position: absolute;
-        left:101%;
-        margin-top: 50px; 
-        padding: 20px 5px;
-    }
+.question-title input::-ms-input-placeholder {
+    font-size: 25px;
+}
 
-    .question-tool-menu-btn{
-        margin-bottom: 20px;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        line-height: 40px;
-        cursor: pointer;
+.question-title input::placeholder {
+    font-size: 25px;
+}
 
-    }
+.question-title input {
+    font-size: 25px;
+    background-color: #f8f9fa;
+}
 
-    .question-tool-menu i {
-        display: block;
-        font-size: 30px;
-    }
+.question-title textarea {
+    font-size: 25px;
+    background-color: #f8f9fa;
+    border-width: 0 0 1px 0;
+    padding-left: 0;
+    border-color: rgb(148, 143, 143);
+    position: relative;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
 
-    .sortable-handle{
-        cursor: move;
-    }
+.question-title {
+    margin-right: 30px;
+}
 
-    .section-wraper.active .sortable-handle{
-        background: #20C997;
-        color: white;
-        width: calc(100% +2px);
-    }
-    .section-wraper.active {
-        border: 1px solid #20C997;
-    }
+.question-tool {
+    position: relative;
+}
+
+.question-tool-menu {
+    position: absolute;
+    left: 101%;
+    margin-top: 50px;
+    padding: 20px 5px;
+}
+
+.question-tool-menu-btn {
+    margin-bottom: 20px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.question-tool-menu i {
+    display: block;
+    font-size: 30px;
+}
+
+.sortable-handle {
+    cursor: move;
+}
+
+.section-wraper.active .sortable-handle {
+    background: #20c997;
+    color: white;
+    width: calc(100% +2px);
+}
+.section-wraper.active {
+    border: 1px solid #20c997;
+}
 
 </style>
 @endsection
