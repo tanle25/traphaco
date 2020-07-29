@@ -44,7 +44,6 @@ class UserManageController extends Controller
             ->filterColumn('department_name', function ($query, $keyword) {
                 $sql = "CONCAT(departments.department_name,' - ',user_position.name) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
-
             })
             ->addColumn('action', function ($user) {
                 return '<a href="' . route('admin.usermanage.edit', $user->id) . '"class="btn text-success"><i class="fas fa-user-edit"></i></a>
@@ -131,9 +130,10 @@ class UserManageController extends Controller
         } else {
             $data['is_admin'] = 0;
         }
-
         if ($request->has('password')) {
-            $data['password'] = Hash::make($data['password']);
+            if ($request->password !== null) {
+                $user->password = Hash::make($data['password']);
+            }
         }
         $user->update($data);
         return redirect()->back()->with(['success' => 'Cập nhật user thành công']);

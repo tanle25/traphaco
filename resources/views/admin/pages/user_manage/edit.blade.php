@@ -66,7 +66,7 @@
 
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input name="password" type="text" class="form-control" id=""
+                                <input name="password" type="text" class="form-control" id="" value=''
                                     placeholder="Nhập pass nếu muốn thay đổi">
                                 @error('password')
                                 <strong class="text-red">

@@ -61,4 +61,24 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/question-option/update', 'QuestionOptionController@update')->name('admin.question_option.update');
     Route::post('/question-option/destroy', 'QuestionOptionController@destroy')->name('admin.question_option.destroy');
 
+    Route::get('/test/index', 'TestController@index')->name('admin.test.index');
+    Route::get('/test/create', 'TestController@create')->name('admin.test.create');
+    Route::post('/test/store', 'TestController@store')->name('admin.test.store');
+    Route::get('/test/show', 'TestController@show')->name('admin.test.show');
+    Route::post('/test/update/{id}', 'TestController@update')->name('admin.test.update');
+    Route::get('/test/get-list', 'TestController@getList')->name('admin.test.get_list');
+    Route::get('/test/send-all/{survey_round}', 'TestController@sendSurveyToAllUser')->name('admin.test.send_all');
+    Route::post('/test/send-survey/{id}', 'TestController@sendTest')->name('admin.test.send_survey');
+    Route::post('/test/destroy/{id}', 'TestController@destroy')->name('admin.test.destroy');
+
+    Route::get('/round-survey', 'RoundSurveyController@index')->name('admin.survey_round.index');
+    Route::get('/round-survey/create', 'RoundSurveyController@create')->name('admin.survey_round.create');
+    Route::post('/round-survey/store', 'RoundSurveyController@store')->name('admin.survey_round.store');
+    Route::get('/round-survey/edit/{id}', 'RoundSurveyController@edit')->name('admin.survey_round.edit');
+    Route::post('/round-survey/update/{id}', 'RoundSurveyController@update')->name('admin.survey_round.update');
+    Route::post('/round-survey/destroy/{id}', 'RoundSurveyController@destroy')->name('admin.survey_round.destroy');
+    Route::get('/round-survey/list-survey-round', 'RoundSurveyController@getList')->name('admin.survey_round.list');
+
+    Route::get('/test/candiate/get-list', 'TestController@getCandiate')->name('admin.test.get_candiate');
+    Route::get('/test/examiner/get-list', 'TestController@getExaminer')->name('admin.test.get_examiner');
 });

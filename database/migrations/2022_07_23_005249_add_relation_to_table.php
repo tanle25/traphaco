@@ -26,6 +26,7 @@ class AddRelationToTable extends Migration
         Schema::table('user_position', function (Blueprint $table) {
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
         });
+
     }
 
     /**

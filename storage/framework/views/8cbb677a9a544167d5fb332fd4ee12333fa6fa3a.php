@@ -90,7 +90,7 @@ unset($__errorArgs, $__bag); ?>
 
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input name="password" type="text" class="form-control" id=""
+                                <input name="password" type="text" class="form-control" id="" value=''
                                     placeholder="Nhập pass nếu muốn thay đổi">
                                 <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
