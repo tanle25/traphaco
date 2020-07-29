@@ -133,10 +133,10 @@ class TestController extends Controller
                         if ($examiner->position && $candiate->position) {
                             try {
                                 if ($examiner->position->level > $candiate->position->level) {
-                                    $multiplier = 3;
+                                    $multiplier = 1;
                                 }
                                 if ($examiner->position->level < $candiate->position->level) {
-                                    $multiplier = 1;
+                                    $multiplier = 3;
                                 }
                                 if ($examiner->position->level == $candiate->position->level) {
                                     $multiplier = 2;
