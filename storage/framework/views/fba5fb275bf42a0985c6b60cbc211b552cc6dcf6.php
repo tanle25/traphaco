@@ -120,6 +120,32 @@
               
             </ul>
           </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Cá nhân
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo e(route('answer.index')); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách bài khảo sát</p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.survey_round.create')); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mở đợt khảo sát</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

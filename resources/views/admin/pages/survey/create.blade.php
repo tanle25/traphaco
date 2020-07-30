@@ -78,6 +78,7 @@
         z-index: 1;
         height: auto;
     }
+    
     textarea{
         resize: none;
         overflow: hidden;

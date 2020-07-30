@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('admin', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'is_admin']], function () {
     Route::get('/department', 'DepartmentController@index')->name('admin.department.index');
@@ -81,4 +81,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/test/candiate/get-list', 'TestController@getCandiate')->name('admin.test.get_candiate');
     Route::get('/test/examiner/get-list', 'TestController@getExaminer')->name('admin.test.get_examiner');
+});
+
+Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
+
+    Route::get('answer/mark/{test_id}', 'Admin\AnswerController@showTest')->name('answer.mark');
+    Route::post('answer/store', 'Admin\AnswerController@store')->name('answer.store');
+    Route::get('answer/list-test', 'Admin\AnswerController@listTest')->name('answer.list_test');
+
+    Route::get('answer/{id}/edit', 'Admin\AnswerController@edit')->name('answer.show.re_ans');
+
+    Route::get('answer/list', 'Admin\AnswerController@index')->name('answer.index');
 });

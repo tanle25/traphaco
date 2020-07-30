@@ -14,16 +14,21 @@ class Test extends Model
 
     public function candiate()
     {
-        return $this->belongsTo('App\Models\User', 'candiate_id');
+        return $this->belongsTo('App\User', 'candiate_id');
     }
 
     public function examiner()
     {
-        return $this->belongsTo('App\Models\User', 'examiner_id');
+        return $this->belongsTo('App\User', 'examiner_id');
     }
 
     public function survey()
     {
         return $this->belongsTo('App\Models\Survey', 'survey_id');
+    }
+
+    public function answer()
+    {
+        return $this->hasMany('App\Models\Answer', 'test_id', 'id');
     }
 }

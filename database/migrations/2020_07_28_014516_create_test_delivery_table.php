@@ -36,6 +36,7 @@ class CreateTestDeliveryTable extends Migration
             $table->id();
             $table->unsignedBigInteger('test_id');
             $table->unsignedBigInteger('question_id')->nullable(); // Chú ý xét kỹ trường hợp null
+            $table->unsignedBigInteger('option_choice')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
         });
@@ -88,5 +89,6 @@ class CreateTestDeliveryTable extends Migration
         Schema::dropIfExists('tests');
         Schema::dropIfExists('answers');
         Schema::dropIfExists('option_choices');
+        Schema::dropIfExists('survey_round');
     }
 }

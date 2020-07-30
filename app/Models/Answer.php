@@ -8,6 +8,8 @@ class Answer extends Model
 {
     protected $table = 'answers';
 
+    protected $fillable = ['test_id', 'question_id', 'option_choice', 'comment'];
+
     public $timestamps = true;
 
     public function test()
