@@ -18,8 +18,19 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('marked')) {
+            if ($request->marked == 1) {
+                return view('admin.pages.user_tests.list', ['marked' => 1]);
+            }
+
+            if ($request->marked == 0) {
+                return view('admin.pages.user_tests.list', ['marked' => 0]);
+            }
+
+        }
+
         return view('admin.pages.user_tests.list');
     }
 
@@ -33,11 +44,21 @@ class AnswerController extends Controller
         //
     }
 
-    public function listTest()
+    public function listTest(Request $request)
     {
+        if ($request->has('marked')) {
+            if ($request->marked == 1) {
+                $test = Test::where('status', '3');
+            } elseif ($request->marked == 0) {
+                $test = Test::where('status', '2');
+            } else {
+                $test = Test::query();
+            }
+
+        }
         $examiner = Auth::user();
 
-        $tests = Test::join('survey', 'tests.survey_id', '=', 'survey.id')
+        $tests = $test->join('survey', 'tests.survey_id', '=', 'survey.id')
             ->join('users as c', 'tests.candiate_id', '=', 'c.id')
             ->leftJoin('departments as d1', 'c.department_id', '=', 'd1.id')
             ->leftJoin('user_position as d2', 'c.position_id', '=', 'd2.id')
@@ -78,6 +99,9 @@ class AnswerController extends Controller
                 return $test->multiplier;
             })
             ->addColumn('action', function (Test $test) {
+                if ($test->status == 3) {
+                    return '';
+                }
                 return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-success send-test"><i class="far fa-edit">Làm bài</i></a>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])

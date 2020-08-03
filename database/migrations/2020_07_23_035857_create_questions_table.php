@@ -24,7 +24,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('question_options', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('question_id');
-            $table->unsignedInteger('score')->nullable();
+            $table->unsignedInteger('score')->default(0)->nullable();
             $table->text('content')->nullable();
             $table->unsignedInteger('order')->nullable();
             $table->timestamps();

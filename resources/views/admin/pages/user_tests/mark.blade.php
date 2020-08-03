@@ -74,7 +74,7 @@
                             </div>  
                             @endforeach
                         @endforeach
-                        <button href="{{route('answer.store')}}" class="btn btn-primary send-result">Gửi kết quả</button>
+                        <button href="{{route('answer.store')}}" class="btn btn-traphaco send-result">Gửi kết quả</button>
 
                     </div> 
 
@@ -152,7 +152,7 @@
                             swalToast(data.msg);
                         }
                         setTimeout(function () {
-                            location.href = "{{route('answer.index')}}";
+                            location.href = "{{route('answer.index', ['marked' => 0])}}";
                         }, 300)
                     },
                     error: function (errors) {

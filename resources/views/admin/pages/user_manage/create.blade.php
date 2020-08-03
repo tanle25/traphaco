@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-traphaco">
                         Lưu thông tin
                     </button>
                 </form>

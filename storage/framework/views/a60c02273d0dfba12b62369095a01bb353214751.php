@@ -28,4 +28,16 @@
 
 <link rel="stylesheet" href="<?php echo e(asset('template\css\custom_style.css')); ?>">
 
+<style>
+    .btn-traphaco{
+        background-color: #008a43;
+        border: #008a43;
+        color: white;
+    }
+    .btn-traphaco:hover{
+        background-color: orange;
+        color: white !important;
+    }
+</style>
+
 <?php echo $__env->yieldContent('custom-css'); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/css.blade.php ENDPATH**/ ?>

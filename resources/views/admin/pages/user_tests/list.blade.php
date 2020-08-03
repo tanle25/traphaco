@@ -63,7 +63,12 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
-      ajax: "{{route('answer.list_test')}}",
+      ajax:{
+        url: "{{route('answer.list_test')}}",
+        data: {
+          marked: {{$marked ?? ''}}
+        }
+      } ,
       columns: [
         { "data": "id" },
         { "data": "survey_round" },

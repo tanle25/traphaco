@@ -28,4 +28,16 @@
 
 <link rel="stylesheet" href="{{asset('template\css\custom_style.css')}}">
 
+<style>
+    .btn-traphaco{
+        background-color: #008a43;
+        border: #008a43;
+        color: white;
+    }
+    .btn-traphaco:hover{
+        background-color: orange;
+        color: white !important;
+    }
+</style>
+
 @yield('custom-css')

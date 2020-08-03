@@ -299,7 +299,10 @@ class TestController extends Controller
      */
     public function sendSurveyToAllUser($survey_round)
     {
-        Test::where('survey_round', $survey_round)->update(['status' => 2]);
+        $test = Test::where('survey_round', $survey_round)->where('status', 1);
+        if ($test) {
+            $test->update(['status' => 2]);
+        };
         return redirect()->route('admin.survey_round.edit', $survey_round)->with('success', "Đã gửi đến tất cả user trong danh sách");
     }
 

@@ -5,7 +5,10 @@
       
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>AdminLTE 3 | Dashboard</title>
+  <link rel="shortcut icon" href="<?php echo e(asset('images/favicon.ico')); ?>">
+
+    <title>Traphaco</title>
+
 
     <?php echo $__env->make('admin.partials.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

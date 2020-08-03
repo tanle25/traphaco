@@ -5,7 +5,10 @@
       {{-- csrf token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>AdminLTE 3 | Dashboard</title>
+  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+
+    <title>Traphaco</title>
+
 
     @include('admin.partials.css')
 

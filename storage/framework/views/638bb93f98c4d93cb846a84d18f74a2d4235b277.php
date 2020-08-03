@@ -99,7 +99,7 @@ unset($__errorArgs, $__bag); ?>
               <input name="sort" type="number" class="form-control" placeholder="Số thứ tự">
             </div>
 
-            <button class="btn btn-primary">
+            <button class="btn btn-traphaco">
               Lưu thông tin
             </button>
           </form>

@@ -156,7 +156,7 @@
                             swalToast(data.msg);
                         }
                         setTimeout(function () {
-                            location.href = "<?php echo e(route('answer.index')); ?>";
+                            location.href = "<?php echo e(route('answer.index', ['marked' => 0])); ?>";
                         }, 300)
                     },
                     error: function (errors) {

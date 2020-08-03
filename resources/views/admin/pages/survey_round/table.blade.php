@@ -32,8 +32,17 @@
             <div class="form-group col-md-4">
                 <label>Chọn người được chấm</label>
                 <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select">
-                    @foreach ($users as $user )
-                    <option value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
+                    @foreach ($departments as $department)
+                        <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
+                        @foreach ($department->users as $user)
+                        <option department-holder="{{$department->id}}"  value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
+                        @endforeach
+                    @endforeach
+                    <option value="1"  class="department" department-holder="x">Khong ro phong ban</option>
+                    @foreach ($users as $user)
+                        @if ($user->department == null)
+                        <option data-department="1000" department-holder="x"  value="{{$user->id}}">{{$user->fullname ?? ''}} </option>
+                        @endif
                     @endforeach
                 </select>
                 @error('candiate_id')
@@ -46,8 +55,17 @@
             <div class="form-group col-md-4">
                 <label>Chọn người chấm</label>
                 <select name="examiner_id[]" multiple="multiple" class="form-control select2" id="examiner-select">
-                    @foreach ($users as $user )
-                    <option value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
+                    @foreach ($departments as $department)
+                        <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
+                        @foreach ($department->users as $user)
+                        <option department-holder="{{$department->id}}"  value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
+                        @endforeach
+                    @endforeach
+                    <option value="1"  class="department" department-holder="x">Khong ro phong ban</option>
+                    @foreach ($users as $user)
+                        @if ($user->department == null)
+                        <option data-department="1000" department-holder="x"  value="{{$user->id}}">{{$user->fullname ?? ''}} </option>
+                        @endif
                     @endforeach
                 </select>
                 @error('examiner_id')
@@ -57,10 +75,9 @@
                 @enderror
             </div>
             <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary">Thêm bài test</button>
+                <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
             </div>
         </form>
-        
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <form action="{{route('admin.test.store2')}}" class="row mb-3" method="post">
@@ -89,10 +106,20 @@
 
                 <label>Chọn người được chấm</label>
                 <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select2">
-                    @foreach ($users as $user )
-                    <option value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
+                    @foreach ($departments as $department)
+                        <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
+                        @foreach ($department->users as $user)
+                        <option department-holder="{{$department->id}}"  value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
+                        @endforeach
+                    @endforeach
+                    <option value="1"  class="department" department-holder="x">Khong ro phong ban</option>
+                    @foreach ($users as $user)
+                        @if ($user->department == null)
+                        <option data-department="1000" department-holder="x"  value="{{$user->id}}">{{$user->fullname ?? ''}} </option>
+                        @endif
                     @endforeach
                 </select>
+                
                 @error('candiate_id')
                 <strong class="text-red">
                     {{$message}}
@@ -101,8 +128,10 @@
 
             </div>
 
+     
+
             <div class="form-group col-12">
-                <button type="submit" class="btn btn-primary">Thêm bài test</button>
+                <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
             </div>
         </form>   
     </div>

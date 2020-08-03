@@ -53,10 +53,10 @@
               @enderror
             </div>
 
-            <button class="btn btn-primary">
+            <button class="btn btn-traphaco" style="background">
               Lưu thông tin
             </button>
-            <a href="{{route('admin.department.index')}}" class="float-right btn btn-primary">Tạo mới</a>
+            <a href="{{route('admin.department.index')}}" class="float-right btn btn-traphaco">Tạo mới</a>
           </form>
           
         </div>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Thêm mới</button>
+                  <button type="submit" class="btn btn-traphaco">Thêm mới</button>
                 </div>
               </form>
             </div>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                  <button type="submit" class="btn btn-primary">Cập nhật</button>
+                  <button type="submit" class="btn btn-traphaco">Cập nhật</button>
                 </div>
               </form>
             </div>

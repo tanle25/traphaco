@@ -6,10 +6,12 @@
 @section('custom-css')
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('template/css/multiple-select.min.css')}}">
 @endsection
 
 @section('content')
 @include('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'])
+
 
 
 <div class="row">
@@ -43,7 +45,7 @@
             </div>
           </div>
         
-          <button type="submit" class="btn btn-primary ml-2">Lưu thông tin</button>
+          <button type="submit" class="btn btn-traphaco ml-2">Lưu thông tin</button>
         </form>      
         </div>
 
@@ -71,9 +73,28 @@
 <script src="{{asset('template/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('template/js/multiple-select.min.js')}}"></script>
 <script>
     //Initialize Select2 Elements
-$('.select2').select2();
+$('.select2').select2({
+});
+
+$('.select2').on('select2:select', function(e){
+//console.log(e.params.data.element.getAttribute('value'));
+selectContain = e.target;
+
+if(e.params.data.element.classList.contains('department')){
+  el = e.params.data.element;
+  departmentId = el.getAttribute('department-holder');
+  selectContain.querySelectorAll(`option[department-holder="${departmentId}"]`).forEach(function(item){
+    item.selected = true;
+  });
+  $(".select2").trigger("change");
+}
+
+
+
+});
 
 $("input[data-bootstrap-switch]").each(function(){
     $(this).bootstrapSwitch('state', $(this).prop('checked'));

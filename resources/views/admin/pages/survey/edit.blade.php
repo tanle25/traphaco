@@ -289,7 +289,7 @@ textarea:focus {
 
                     </div>
 
-                    <button class="btn btn-primary">
+                    <button class="btn btn-traphaco">
                         Cập nhật thông tin
                     </button>
                 </form>

@@ -32,7 +32,7 @@
                         <label for="remember-checkbox">Nhớ mật khẩu</label>
                         <a href="#" class="forgot-password">Quên mật khẩu</a>
                     </div>
-                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    <button type="submit" class="btn btn-traphaco">Đăng nhập</button>
                 </form>
                 <div class="social-login col-lg-6">
                     <button class="social-login-btn btn btn-outline-warning">Google</button>

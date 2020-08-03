@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Survey;
 use App\Models\SurveyRound;
 use App\User;
@@ -97,7 +98,9 @@ class RoundSurveyController extends Controller
 
         $users = User::all()->sortBy('id');
 
-        return view('admin.pages.survey_round.edit', compact('survey_round', 'survey', 'users'));
+        $departments = Department::all();
+
+        return view('admin.pages.survey_round.edit', compact('survey_round', 'survey', 'users', 'departments'));
     }
 
     /**

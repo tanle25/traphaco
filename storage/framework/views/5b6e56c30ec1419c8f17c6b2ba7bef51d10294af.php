@@ -63,7 +63,13 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
-      ajax: "<?php echo e(route('answer.list_test')); ?>",
+      ajax:{
+        url: "<?php echo e(route('answer.list_test')); ?>",
+        data: {
+          marked: <?php echo e($marked ?? ''); ?>
+
+        }
+      } ,
       columns: [
         { "data": "id" },
         { "data": "survey_round" },

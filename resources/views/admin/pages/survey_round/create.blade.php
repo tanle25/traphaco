@@ -6,6 +6,7 @@
 @section('custom-css')
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('template/css/multiple-select.min.css')}}">
 @endsection
 
 @section('content')
@@ -42,7 +43,7 @@
             </div>
           </div>
         
-          <button type="submit" class="btn btn-primary ml-2">Lưu thông tin</button>
+          <button type="submit" class="btn btn-traphaco ml-2">Lưu thông tin</button>
         </form>      
         </div>
     </section>
@@ -59,6 +60,7 @@
 <script src="{{asset('template/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('template/js/multiple-select.min.js')}}"></script>
 <script>
     //Initialize Select2 Elements
 $('.select2').select2();
