@@ -78,7 +78,7 @@ class AnswerController extends Controller
                 return $test->multiplier;
             })
             ->addColumn('action', function (Test $test) {
-                return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-success send-test"><i class="far fa-paper-plane"></i></a>';
+                return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-success send-test"><i class="far fa-edit">Làm bài</i></a>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])
             ->make(true);
@@ -95,6 +95,8 @@ class AnswerController extends Controller
         $request->validate([
             'test_id' => 'required|numeric',
         ]);
+
+        $test = Test::findOrFail($request->test_id);
 
         if (empty($request->answer)) {
             return ['error' => 'Không tìm thấy câu trả lời!'];
@@ -117,10 +119,14 @@ class AnswerController extends Controller
                     'test_id' => $request->test_id,
                     'question_id' => $answer['question_id'],
                 ]);
+                $test->status = 3;
+                $test->save();
             };
         }
 
-        return ['msg' => 'Cập nhật thành công kết quả!'];
+        $total_score = $test->getScore();
+
+        return ['msg' => 'Cập nhật thành công kết quả!', 'score' => $total_score];
 
     }
 

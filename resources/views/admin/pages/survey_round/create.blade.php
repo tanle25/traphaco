@@ -11,7 +11,6 @@
 @section('content')
 @include('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'])
 
-
 <div class="row">
     <section class="col-12">
 

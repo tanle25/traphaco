@@ -101,12 +101,12 @@ class TestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeTestType1(Request $request)
     {
         $request->validate([
             'candiate_id' => 'required',
             'examiner_id' => 'required',
-            'survey_id' => 'required|numeric',
+            'survey_id' => 'required',
         ], [
             'candiate_id.required' => 'Người được chấm không được để trống',
             'examiner_id.required' => 'Người chấm không được để trống',
@@ -115,39 +115,86 @@ class TestController extends Controller
 
         $list_candiate = $request->candiate_id;
         $list_examiner = $request->examiner_id;
-        $survey_id = $request->survey_id;
+        $survey_ids = $request->survey_id;
         $survey_round_id = $request->survey_round_id;
 
-        foreach ($list_candiate as $candiate_id) {
-            $candiate = User::find($candiate_id);
-            if ($candiate) {
-                foreach ($list_examiner as $examiner_id) {
-                    if ($this->isExsistTest($survey_round_id, $survey_id, $candiate_id, $examiner_id)) {
-                        continue;
-                    }
-                    if ($candiate_id == $examiner_id) {
-                        continue;
-                    }
-                    $examiner = User::find($examiner_id);
-                    if ($examiner) {
-                        if ($examiner->position && $candiate->position) {
-                            try {
-                                if ($examiner->position->level > $candiate->position->level) {
+        foreach ($survey_ids as $survey_id) {
+            $survey = Survey::find($survey_id);
+            if ($survey) {
+                foreach ($list_candiate as $candiate_id) {
+                    $candiate = User::find($candiate_id);
+                    if ($candiate) {
+                        foreach ($list_examiner as $examiner_id) {
+                            if ($this->isExsistTest($survey_round_id, $survey_id, $candiate_id, $examiner_id)) {
+                                continue;
+                            }
+                            if ($candiate_id == $examiner_id) {
+                                continue;
+                            }
+                            $examiner = User::find($examiner_id);
+                            if ($examiner) {
+                                if ($examiner->position && $candiate->position) {
+                                    try {
+                                        if ($examiner->position->level > $candiate->position->level) {
+                                            $multiplier = 1;
+                                        }
+                                        if ($examiner->position->level < $candiate->position->level) {
+                                            $multiplier = 3;
+                                        }
+                                        if ($examiner->position->level == $candiate->position->level) {
+                                            $multiplier = 2;
+                                        }
+                                    } catch (Exception $e) {
+                                        break;
+                                    }
+
+                                } else {
                                     $multiplier = 1;
                                 }
-                                if ($examiner->position->level < $candiate->position->level) {
-                                    $multiplier = 3;
-                                }
-                                if ($examiner->position->level == $candiate->position->level) {
-                                    $multiplier = 2;
-                                }
-                            } catch (Exception $e) {
-                                break;
+                                Test::create([
+                                    'survey_round' => $survey_round_id,
+                                    'candiate_id' => $candiate_id,
+                                    'examiner_id' => $examiner_id,
+                                    'survey_id' => $survey_id,
+                                    'status' => 1,
+                                    'multiplier' => $multiplier,
+                                ]);
                             }
-
-                        } else {
-                            $multiplier = 1;
                         }
+                    }
+                }
+            }
+        }
+        return redirect()->route('admin.survey_round.edit', $survey_round_id);
+
+    }
+
+    public function storeTestType2(Request $request)
+    {
+        $request->validate([
+            'candiate_id' => 'required',
+            'survey_id' => 'required',
+        ], [
+            'candiate_id.required' => 'Người được chấm không được để trống',
+            'examiner_id.required' => 'Người chấm không được để trống',
+            'survey_id.required' => 'Bài khảo sát không được để trống',
+        ]);
+
+        $list_candiate = $request->candiate_id;
+        $survey_id_list = $request->survey_id;
+        $survey_round_id = $request->survey_round_id;
+
+        foreach ($survey_id_list as $survey_id) {
+            $survey = Survey::find($survey_id);
+            if ($survey) {
+                foreach ($list_candiate as $candiate_id) {
+                    $candiate = User::find($candiate_id);
+                    if ($candiate) {
+                        $examiner_id = $candiate->id;
+                        if ($this->isExsistTest($survey_round_id, $survey_id, $candiate_id, $examiner_id)) {
+                            continue;
+                        }
+                        $multiplier = 1;
                         Test::create([
                             'survey_round' => $survey_round_id,
                             'candiate_id' => $candiate_id,
@@ -156,13 +203,12 @@ class TestController extends Controller
                             'status' => 1,
                             'multiplier' => $multiplier,
                         ]);
+
                     }
                 }
             }
         }
-
-        return redirect()->route('admin.survey_round.edit', $survey_round_id);
-
+        return redirect()->back();
     }
 
     protected function isExsistTest($survey_round_id, $survey_id, $candiate_id, $examiner_id)

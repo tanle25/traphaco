@@ -86,7 +86,7 @@ class SurveyController extends Controller
             throw new Exception($e->getMessage());
         }
 
-        return ['msg' => 'Tạo mới thành công', 'newSurvey' => $survey->id, 'editUrl' => route('admin.survey.edit', $survey->id)];
+        return ['request' => $request->all(), 'msg' => 'Tạo mới thành công', 'newSurvey' => $survey->id, 'editUrl' => route('admin.survey.edit', $survey->id)];
     }
 
     /**
@@ -122,7 +122,6 @@ class SurveyController extends Controller
      */
     public function update(UpdateSurveyRequest $request, $id)
     {
-
         $survey = Survey::findOrFail($id);
         $survey->update($request->all());
         return ['msg' => 'Cập nhật thành công'];

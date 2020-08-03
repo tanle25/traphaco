@@ -63,7 +63,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/test/index', 'TestController@index')->name('admin.test.index');
     Route::get('/test/create', 'TestController@create')->name('admin.test.create');
-    Route::post('/test/store', 'TestController@store')->name('admin.test.store');
+    Route::post('/test/store', 'TestController@storeTestType1')->name('admin.test.store');
+    Route::post('/test/store2', 'TestController@storeTestType2')->name('admin.test.store2');
+
     Route::get('/test/show', 'TestController@show')->name('admin.test.show');
     Route::post('/test/update/{id}', 'TestController@update')->name('admin.test.update');
     Route::get('/test/get-list', 'TestController@getList')->name('admin.test.get_list');
@@ -92,4 +94,8 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('answer/{id}/edit', 'Admin\AnswerController@edit')->name('answer.show.re_ans');
 
     Route::get('answer/list', 'Admin\AnswerController@index')->name('answer.index');
+
+    Route::get('/result/index', 'ResultController@index')->name('result.index');
+    Route::get('/result/list-test', 'ResultController@listResult')->name('result.list_test');
+
 });

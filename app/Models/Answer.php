@@ -22,9 +22,9 @@ class Answer extends Model
         return $this->belongsTo('App\Models\Question', 'question_id', 'id');
     }
 
-    public function option_choice()
+    public function selected_option()
     {
-        return $this->hasOne('App\Models\OptionChoice', 'answer_id', 'id');
+        return $this->hasOne('App\Models\QuestionOption', 'id', 'option_choice');
     }
 
 }

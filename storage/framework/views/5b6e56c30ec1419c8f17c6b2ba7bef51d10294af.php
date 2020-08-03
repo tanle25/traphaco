@@ -12,7 +12,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Quản lý phòng ban'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Bài đánh giá'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -20,7 +20,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách người dùng</h3>
+                <h3 class="card-title">Danh sách bài test</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

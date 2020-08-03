@@ -82,7 +82,7 @@ class UserManageController extends Controller
             $data['is_admin'] = 0;
         }
         $data['password'] = Hash::make($data['password']);
-        User::create($data);
+        $newUser = User::create($data);
         return redirect()->back()->with(['success' => 'Tạo user mới thành công']);
     }
 
@@ -131,8 +131,10 @@ class UserManageController extends Controller
             $data['is_admin'] = 0;
         }
         if ($request->has('password')) {
-            if ($request->password !== null) {
-                $user->password = Hash::make($data['password']);
+            if ($request->password == null) {
+                $data['password'] = $user->password;
+            } else {
+                $data['password'] = Hash::make($data['password']);
             }
         }
         $user->update($data);

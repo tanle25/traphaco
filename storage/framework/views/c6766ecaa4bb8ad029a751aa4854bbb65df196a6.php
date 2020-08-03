@@ -78,6 +78,7 @@
         z-index: 1;
         height: auto;
     }
+    
     textarea{
         resize: none;
         overflow: hidden;
@@ -234,6 +235,15 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
+
+                            <div class="form-group">
+                                <label for="">Loại khảo sát</label>
+                                <select name="type" class="form-control" id="">
+                                    <option value="1">Bài khảo sát</option>
+                                    <option value="2">Bài đánh giá chất lượng nhân viên</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-group">

@@ -17,9 +17,7 @@
   </div>
     <?php echo $__env->make('admin.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
+    
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->

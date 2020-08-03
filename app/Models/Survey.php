@@ -9,7 +9,7 @@ class Survey extends Model
 {
     protected $table = 'survey';
 
-    protected $fillable = ['title', 'name', 'content', 'created_by'];
+    protected $fillable = ['title', 'name', 'content', 'created_by', 'type'];
 
     public $timestamps = true;
 
@@ -34,4 +34,15 @@ class Survey extends Model
         return $result;
     }
 
+    public function getMaxScore()
+    {
+        $result = 0;
+        $survey_sections = $this->section;
+        foreach ($survey_sections as $survey_section) {
+            foreach ($survey_section->questions as $question) {
+                $result += $question->maxScore();
+            }
+        }
+        return $result;
+    }
 }

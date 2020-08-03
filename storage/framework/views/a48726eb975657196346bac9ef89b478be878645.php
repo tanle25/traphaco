@@ -1,15 +1,9 @@
 
-<?php
-    $list_root = $departments->filter(function ($value) {
-        return $value->parent_id == null;
-    });
-?>
 <?php $__env->startSection('title'); ?>
-  Quản lý phòng ban
+  Quản lý người dùng
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('custom-css'); ?>
-  <link rel="stylesheet" href="<?php echo e(asset('template/css/nestable.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>

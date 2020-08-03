@@ -12,7 +12,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Quản lý người dùng'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Thống kê cá nhân'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -20,14 +20,21 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách người dùng</h3>
-                <a href="<?php echo e(route('admin.usermanage.create')); ?>" class="btn btn-success float-right">
-                  <i class="fas fa-user-plus nav-icon"> Thên mới</i>
-                </a>
+                <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <?php echo $__env->make('admin.pages.user_manage.table', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <table id="test-table" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Đợt khảo sát</th>
+                        <th>Tên bài test</th>
+                        <th>Tổng số điểm</th>
+                        <th>Thao tác</th>
+                      </tr>
+                    </thead>
+                  </table>                
               </div>
               <!-- /.card-body -->
             </div>
@@ -50,20 +57,19 @@
 <script src="<?php echo e(asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
 <script>
   $(function () {
-    $("#user-table").dataTable({
+    $("#test-table").dataTable({
       processing: true,
-      serverSide: true,
       autoWidth:false,
-      ajax: "<?php echo e(route('admin.usermanage.list_user')); ?>",
+      ajax: "<?php echo e(route('result.list_test')); ?>",
       columns: [
         { "data": "id" },
-        { "data": "fullname" },
-        { "data": "email" },
-        { "data": "department_name" },
-        { "data" :"action"}
+        { "data": "survey_round_name" },
+        { "data": "test_list" },
+        { "data": "total_score" },
+        { "data": "action"},
       ]
     });
   });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/pages/user_manage/list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/pages/result/index.blade.php ENDPATH**/ ?>

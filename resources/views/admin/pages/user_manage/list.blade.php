@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Quản lý phòng ban'])
+    @include('admin.partials.content_header', ['title' => 'Quản lý người dùng'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -21,6 +21,9 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách người dùng</h3>
+                <a href="{{route('admin.usermanage.create')}}" class="btn btn-success float-right">
+                  <i class="fas fa-user-plus nav-icon"> Thên mới</i>
+                </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

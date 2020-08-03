@@ -11,7 +11,6 @@
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-
 <div class="row">
     <section class="col-12">
 

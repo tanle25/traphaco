@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Test;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fullname', 'email', 'department_id', 'position_id', 'is_admin', 'username',
+        'fullname', 'email', 'password', 'department_id', 'position_id', 'is_admin', 'username',
     ];
 
     /**
@@ -54,5 +55,20 @@ class User extends Authenticatable
     public function position()
     {
         return $this->belongsTo('App\Models\UserPosition', 'position_id', 'id');
+    }
+
+    public function getTotalScoreBySurveyRound($id)
+    {
+        $user_id = $this->id;
+        $tests = Test::where('candiate_id', '=', $user_id)
+            ->where('survey_round', '=', $id)
+            ->get();
+        $total_score = $tests->reduce(function ($carry, $item) {
+            return $carry += $item->score * $item->multiplier;
+        }, 0);
+        $total_multiplier = $tests->reduce(function ($carry, $item) {
+            return $carry += $item->multiplier;
+        }, 0);
+        return round($total_score / $total_multiplier, 2);
     }
 }

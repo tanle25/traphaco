@@ -11,7 +11,7 @@
 
 
 @section('title')
-  Chấm điểm bài test
+    Các bài khảo sát
 @endsection
 
 @section('content')
@@ -23,7 +23,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Chấm điểm bài test</h3>
+                <h3 class="card-title">{{$test->type == 1 ? 'Chấm điểm bài khảo sát' : 'Làm bài đánh giá chất lượng'}} </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="mt-3">
                             <h5>
-                                Người được khảo sát: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}} , Trọng số: {{$test->multiplier}}
+                                {{$test->type == 1 ? 'Người được khảo sát' : 'Người làm bài'}}: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}} , Trọng số: {{$test->multiplier}}
                             </h5>
                         </div>
                     </div>
@@ -49,6 +49,7 @@
                                 {{$section->title}}
                             </h3>
                         </div>
+                        
                         @foreach ($section->questions as $question)
                             <div class="mb-3 question">
                                 <div class="question-title">
@@ -59,7 +60,10 @@
                                         @foreach ($question->options as $option)
                                         <div class="form-group col-md-3 d-flex justify-center align-center">
                                             <input class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
-                                            <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}} ({{$option->score ?? 0}} điểm)</span>
+                                            <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
+                                                @if ($test->type == 1)
+                                                ({{$option->score ?? 0}} điểm)</span>
+                                                @endif 
                                         </div>
                                         @endforeach 
                                     </div>
@@ -147,7 +151,9 @@
                         if (data.msg) {
                             swalToast(data.msg);
                         }
-                        //location.reload();
+                        setTimeout(function () {
+                            location.href = "{{route('answer.index')}}";
+                        }, 300)
                     },
                     error: function (errors) {
                         swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');

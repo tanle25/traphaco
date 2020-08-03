@@ -35,6 +35,7 @@ class CreateQuestionsTable extends Migration
             $table->string('name')->nullable();
             $table->text('title')->nullable();
             $table->text('content')->nullable();
+            $table->unsignedTinyInteger('type')->default(1);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
         });
@@ -96,7 +97,6 @@ class CreateQuestionsTable extends Migration
         Schema::table('survey_section_has_questions', function (Blueprint $table) {
             $table->dropForeign(['survey_section_id']);
             $table->dropForeign(['question_id']);
-
         });
 
         Schema::table('survey_section', function (Blueprint $table) {

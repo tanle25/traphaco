@@ -216,7 +216,7 @@ textarea:focus {
 @endsection
 
 @section('content')
-@include('admin.partials.content_header', ['title' => 'Thêm mới khảo sát'])
+@include('admin.partials.content_header', ['title' => 'Quản lý khảo sát'])
 <div class="row">
     <section class="col-12" style="position: relative">
         {{-- Add new survey section --}}
@@ -255,6 +255,14 @@ textarea:focus {
                                 </strong>
                                 @enderror
                             </div>
+
+                            <div class="form-group">
+                                <label for="">Loại khảo sát</label>
+                                <select name="type" class="form-control" id="">
+                                    <option {{$survey->type == 1 ? 'selected' : ''}} value="1">Bài khảo sát</option>
+                                    <option {{$survey->type == 2 ? 'selected' : ''}} value="2">Bài đánh giá chất lượng nhân viên</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-6 col-12">
 
@@ -282,7 +290,7 @@ textarea:focus {
                     </div>
 
                     <button class="btn btn-primary">
-                        Lưu thông tin
+                        Cập nhật thông tin
                     </button>
                 </form>
             </div>

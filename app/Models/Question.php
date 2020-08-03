@@ -22,4 +22,10 @@ class Question extends Model
         return $this->belongsTo('App\User', 'create_by', 'id');
     }
 
+    public function maxScore()
+    {
+        $list_option = $this->options->sortByDesc('score');
+        return $list_option->first()->score;
+    }
+
 }

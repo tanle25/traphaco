@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Bài đánh giá'])
+    @include('admin.partials.content_header', ['title' => 'Thống kê cá nhân'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -20,7 +20,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách bài test</h3>
+                <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -30,9 +30,7 @@
                         <th>ID</th>
                         <th>Đợt khảo sát</th>
                         <th>Tên bài test</th>
-                        <th>Người được chấm</th>
-                        <th>Trọng số</th>
-                        <th>Trạng thái</th>
+                        <th>Tổng số điểm</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
@@ -61,16 +59,13 @@
   $(function () {
     $("#test-table").dataTable({
       processing: true,
-      serverSide: true,
       autoWidth:false,
-      ajax: "{{route('answer.list_test')}}",
+      ajax: "{{route('result.list_test')}}",
       columns: [
         { "data": "id" },
-        { "data": "survey_round" },
-        { "data": "survey_name" },
-        { "data": "candiate" },
-        { "data": "multiplier"},
-        { "data": "status" },
+        { "data": "survey_round_name" },
+        { "data": "test_list" },
+        { "data": "total_score" },
         { "data": "action"},
       ]
     });

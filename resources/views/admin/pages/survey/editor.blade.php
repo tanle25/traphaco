@@ -105,11 +105,6 @@
             </div>
             {{-- end section question --}}
         </div>
-        <div>
-            <button class="btn btn-primary m-3">
-                Cập nhật thông tin
-            </button>
-        </div>
         
     </div>
     {{-- Menu tool --}}

@@ -28,7 +28,6 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
-      order:true,
       ajax: "{{route('admin.survey.list_survey')}}",
       columns: [
         { "data": "id" },

@@ -21,6 +21,9 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách người dùng</h3>
+                <a href="<?php echo e(route('admin.survey_round.create')); ?>" class="btn btn-success float-right">
+                  <i class="far fa-file nav-icon">  Thêm mới</i>
+                </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

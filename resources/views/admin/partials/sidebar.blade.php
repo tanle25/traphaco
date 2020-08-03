@@ -24,45 +24,45 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
+          @if (Auth::user()->is_admin == 1)
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+            <a href="{{route('admin.department.index')}}" class="nav-link">
+              <i class="nav-icon far fa-building"></i> 
               <p>
                 Quản lý phòng ban
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            {{-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.department.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách phòng ban</p>
                 </a>
               </li>
-              
-            </ul>
+            </ul> --}}
           </li>
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Quản lý người dùng
-                <i class="fas fa-angle-left right"></i>
+                <i class="fas fa-angle-left right"></i> 
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.usermanage.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-list-ul nav-icon"></i>
                   <p>Danh sách người dùng</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('admin.usermanage.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Thêm user mới</p>
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>Thêm user mới</p> 
                 </a>
               </li>
 
@@ -71,23 +71,23 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
-                Quản lý khảo sát
+                Bài khảo sát
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.survey.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-list-ul nav-icon"></i>
                   <p>Danh sách bài khảo sát</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('admin.survey.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-file nav-icon"></i>
                   <p>Thêm bài khảo sát</p>
                 </a>
               </li>
@@ -97,33 +97,35 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon far fa-calendar-minus"></i>
               <p>
-                Quản lý đợt khảo sát
+                Đợt khảo sát
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.survey_round.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-list-ul nav-icon"></i>
                   <p>Danh sách đợt khảo sát</p>
                 </a>
               </li>
               
               <li class="nav-item">
                 <a href="{{route('admin.survey_round.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-file nav-icon"></i>
                   <p>Mở đợt khảo sát</p>
                 </a>
               </li>
               
             </ul>
           </li>
+          @endif
+          
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon far fa-id-badge"></i> 
               <p>
                 Cá nhân
                 <i class="fas fa-angle-left right"></i>
@@ -132,18 +134,24 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('answer.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-list-ul nav-icon"></i>
                   <p>Danh sách bài khảo sát</p>
                 </a>
               </li>
-              
+
               <li class="nav-item">
-                <a href="{{route('admin.survey_round.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mở đợt khảo sát</p>
+                <a href="{{route('result.index')}}" class="nav-link">
+                  <i class="far fa-chart-bar nav-icon"></i>
+                  <p>Thống kê cá nhân</p>
                 </a>
               </li>
               
+              {{-- <li class="nav-item">
+                <a href="{{route('na.survey_round.result')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mở đợt khảo sát</p>
+                </a>
+              </li> --}} 
             </ul>
           </li>
         </ul>

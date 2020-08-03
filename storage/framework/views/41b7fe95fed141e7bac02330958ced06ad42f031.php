@@ -216,7 +216,7 @@ textarea:focus {
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<?php echo $__env->make('admin.partials.content_header', ['title' => 'Thêm mới khảo sát'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('admin.partials.content_header', ['title' => 'Quản lý khảo sát'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <div class="row">
     <section class="col-12" style="position: relative">
         
@@ -271,6 +271,14 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
+
+                            <div class="form-group">
+                                <label for="">Loại khảo sát</label>
+                                <select name="type" class="form-control" id="">
+                                    <option <?php echo e($survey->type == 1 ? 'selected' : ''); ?> value="1">Bài khảo sát</option>
+                                    <option <?php echo e($survey->type == 2 ? 'selected' : ''); ?> value="2">Bài đánh giá chất lượng nhân viên</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-6 col-12">
 
@@ -306,7 +314,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
 
                     <button class="btn btn-primary">
-                        Lưu thông tin
+                        Cập nhật thông tin
                     </button>
                 </form>
             </div>

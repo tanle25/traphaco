@@ -28,6 +28,7 @@ class CreateTestDeliveryTable extends Migration
             $table->unsignedBigInteger('examiner_id')->nullable(); // Người chấm
             $table->unsignedSmallInteger('multiplier')->default(1); //Hệ số nhân
             $table->unsignedBigInteger('survey_id');
+            $table->unsignedFloat('score')->default(0);
             $table->unsignedSmallInteger('status');
             $table->timestamps();
         });
