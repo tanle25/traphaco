@@ -51,7 +51,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
           </div>
         
-          <button type="submit" class="btn btn-primary ml-2">Lưu thông tin</button>
+          <button type="submit" class="btn btn-traphaco ml-2">Lưu thông tin</button>
         </form>      
         </div>
     </section>

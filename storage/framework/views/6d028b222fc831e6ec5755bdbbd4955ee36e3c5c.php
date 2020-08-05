@@ -11,6 +11,7 @@
   Chi tiết đợt khảo sát
 <?php $__env->stopSection(); ?>
 
+
 <?php $__env->startSection('content'); ?>
     <?php echo $__env->make('admin.partials.content_header', ['title' => 'Chi tiết đợt khảo sát'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Main content -->
@@ -34,7 +35,7 @@
 
                     </h5>
                     <h5>
-                        <strong>Chức vụ ban: </strong><?php echo e($candiate->porsition->name ?? 'Không rõ chức vụ'); ?>
+                        <strong>Chức vụ: </strong><?php echo e($candiate->position->name ?? 'Không rõ chức vụ'); ?>
 
                     </h5>
                 </div>
@@ -59,64 +60,63 @@
                           <!-- /. tools -->
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body pt-0">
+                        <div class="card-body pt-0" style="overflow: auto">
                           <!--The calendar -->
-                            <div class="card card-info mx-auto mt-3" style="max-width: 1024px">
-                               <div class="card-header">
-                                   <h2>
-                                       <?php echo e($test->survey->title ?? ''); ?>
+                            
 
-                                   </h2>
-                                   <div>
-                                       <h5><?php echo e($test->survey->content ?? ''); ?></h5>
-                                   </div>
-                                   <div class="mt-3">
-                                       <h5>
-                                           <?php echo e($test->type == 1 ? 'Người được khảo sát' : 'Người làm bài'); ?>: <?php echo e($test->candiate->fullname); ?> |<?php echo e($test->candiate->department->department_name ?? ''); ?> - <?php echo e($test->candiate->position->department_name ?? ''); ?> , Trọng số: <?php echo e($test->multiplier); ?>
+                           <table class="table table-bordered mx-auto mt-4" style="overflow:scrollX; max-width: 1024px; min-width: 768px">
+                            <thead>
+                              <tr>
+                                <th style="width: 5%" rowspan="2">TT</th>
+                                <th  style="width: 40%" rowspan="2">Nội dung</th>
+                                <th style="width: 40%" colspan="4">Kết quả điểm TB</th>
+                                <th style="width: 10%" rowspan="2">% Năng lực</th>
+                              </tr>
+                              <tr>
+                                <th style="width: 10%">Cấp trên đánh giá</th>
+                                <th style="width: 10%">Ngang cấp đánh giá</th>
+                                <th style="width: 10%">Cấp dưới đánh giá</th>
+                                <th style="width: 10%">Bình quân chung</th>
+                              </tr>
+                              <tr>
+                                <th></th>
+                                <th>Điểm TB</th>
+                                <th><?php echo e($test->survey->getScoreFromLevel($test->survey_round, $candiate->id, 3)); ?></th>
+                                <th><?php echo e($test->survey->getScoreFromLevel($test->survey_round, $candiate->id, 2)); ?></th>
+                                <th><?php echo e($test->survey->getScoreFromLevel($test->survey_round, $candiate->id, 1)); ?></th>
+                                <th><?php echo e($test->survey->getAvgScore($test->survey_round, $candiate->id)); ?></th>
+                                <th><?php echo e($test->survey->getScoreByPercent($test->survey_round, $candiate->id)); ?></th>
+                              </tr>
 
-                                       </h5>
-                                   </div>
-                               </div>
-           
-                               <div class="card-body">
-                                   <?php $__currentLoopData = $test->survey->section; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                   <div class="section-header mb-3">
-                                       <h3>
-                                           <?php echo e($section->title); ?>
+                              <?php $__currentLoopData = $test->survey->section; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              <tr>
+                                <th></th>
+                                <th><?php echo e($section->title ?? ''); ?></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                              <?php $__currentLoopData = $section->questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              
 
-                                       </h3>
-                                   </div>
-                                   
-                                   <?php $__currentLoopData = $section->questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                       <div class="mb-3 question">
-                                           <div class="question-title">
-                                               <h5> <strong> Câu hỏi:</strong><?php echo e($question->content ?? ''); ?></h5>
-                                           </div>
-                                           <div class="question-option pt-2">
-                                               <div class="row" style="font-size: 18px">  
-                                                   <?php $__currentLoopData = $question->options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                   <div class="form-group col-md-3 d-flex justify-center align-center">
-                                                       <input class="option-input" type="radio" style="height:23px; width:23px" data-question-id="<?php echo e($question->id); ?>" name="question-<?php echo e($question->id); ?>" value="<?php echo e($option->id); ?>">
-                                                       <span class="pl-2" style="line-height: 23px"><?php echo e($option->content ?? ''); ?>
+                              <tr>
+                                <td><?php echo e($index+1); ?></td>
+                                <td><?php echo e($question->content ?? ''); ?></td>
+                                <td><?php echo e($question->getScoreFromLevel($test->survey_round, $candiate->id, 3)); ?></td>
+                                <td><?php echo e($question->getScoreFromLevel($test->survey_round, $candiate->id, 2)); ?></td>
+                                <td><?php echo e($question->getScoreFromLevel($test->survey_round, $candiate->id, 1)); ?></td>
+                                <td><?php echo e($question->getAvgScore($test->survey_round, $candiate->id)); ?></td>
+                                <td><?php echo e($question->getScoreByPercent($test->survey_round, $candiate->id)); ?></td>
+                              </tr>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                                           <?php if($test->type == 1): ?>
-                                                           (<?php echo e($option->score ?? 0); ?> điểm)</span>
-                                                           <?php endif; ?> 
-                                                   </div>
-                                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
-                                               </div>
-                                               <div class="form-group">
-                                                   <textarea class="form-control comment" value="" oninput="auto_grow(this)" rows="1" placeholder="Nhận xét"></textarea>
-                                               </div>
-                                           </div>
-                                       </div>  
-                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>           
-                               </div> 
-           
-           
-                           </div>
-           
+                              
+
+                            </thead>
+                           </table>
                         </div>
                         <!-- /.card-body -->
                     </div>

@@ -78,7 +78,7 @@
                             </div>  
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <button href="<?php echo e(route('answer.store')); ?>" class="btn btn-primary send-result">Gửi kết quả</button>
+                        <button href="<?php echo e(route('answer.store')); ?>" class="btn btn-traphaco send-result">Gửi kết quả</button>
 
                     </div> 
 

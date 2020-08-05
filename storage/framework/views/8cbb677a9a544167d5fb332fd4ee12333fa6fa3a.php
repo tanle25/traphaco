@@ -1,9 +1,15 @@
 
+<?php
+    $list_root = $departments->filter(function ($value) {
+        return $value->parent_id == null;
+    });
+?>
 <?php $__env->startSection('title'); ?>
-  Quản lý người dùng
+  Quản lý phòng ban
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('custom-css'); ?>
+  <link rel="stylesheet" href="<?php echo e(asset('template/css/nestable.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -15,19 +21,21 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    Tạo mới User
+                    Chỉnh sửa User
                 </div>
             </div>
 
             <div class="card-body">
-                <form action="<?php echo e(route('admin.usermanage.store')); ?>" method="post">
+                <form action="<?php echo e(route('admin.usermanage.update', $user->id)); ?>" method="post">
                     <?php echo csrf_field(); ?>
+                    <input type="hidden" name="old_user" value="<?php echo e($user->id); ?>">
+
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="">Họ và tên</label>
                                 <input name="fullname" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên người dùng mới (Bắt buộc)" value="<?php echo e(old('fullname')); ?>">
+                                    placeholder="Nhập tên người dùng mới (Bắt buộc)" value="<?php echo e($user->fullname); ?>">
                                 <?php $__errorArgs = ['fullname'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -46,7 +54,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="form-group">
                                 <label for="">Username</label>
                                 <input name="username" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên đăng nhập (Bắt buộc)" value="<?php echo e(old('username')); ?>">
+                                    placeholder="Nhập tên đăng nhập (Bắt buộc)" value="<?php echo e($user->username); ?>">
                                 <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -64,7 +72,7 @@ unset($__errorArgs, $__bag); ?>
 
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input name="email" type="text" class="form-control" id="" placeholder="Nhập Email" value="<?php echo e(old('email')); ?>">
+                                <input name="email" type="text" class="form-control" id="" placeholder="Nhập Email" value="<?php echo e($user->email); ?>">
                                 <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -82,8 +90,8 @@ unset($__errorArgs, $__bag); ?>
 
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input name="password" type="text" class="form-control" id=""
-                                    placeholder="Nhập password (Bắt buộc)">
+                                <input name="password" type="text" class="form-control" id="" value=''
+                                    placeholder="Nhập pass nếu muốn thay đổi">
                                 <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -106,7 +114,7 @@ unset($__errorArgs, $__bag); ?>
                                 <label>Phòng ban trực thuộc</label>
                                 <select name="department_id" class="form-control select2" id="department-select">
                                     <?php $__currentLoopData = $departments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $department): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($department->id); ?>"><?php echo e($department->department_name); ?></option>
+                                    <option <?php echo e($department->id == $user->department_id ? 'selected' : ''); ?> value="<?php echo e($department->id); ?>"><?php echo e($department->department_name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <?php $__errorArgs = ['parent_id'];
@@ -128,7 +136,7 @@ unset($__errorArgs, $__bag); ?>
                                 <label>Chức vụ</label>
                                 <select name="position_id" class="form-control " id="position-select">
                                     <?php $__currentLoopData = $user_positions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user_position): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($user_position->id); ?>" data-department-id=<?php echo e($user_position->department->id ?? ''); ?>><?php echo e($user_position->name); ?></option>
+                                    <option <?php echo e($user_position->id == $user->position_id ? 'selected' : ''); ?> value="<?php echo e($user_position->id); ?>" data-department-id=<?php echo e($user_position->department->id ?? ''); ?>><?php echo e($user_position->name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <?php $__errorArgs = ['parent_id'];
@@ -148,7 +156,7 @@ unset($__errorArgs, $__bag); ?>
 
                             <div class="form-group">
                                 <label class="d-block">Quyền Admin</label>
-                                <input type="checkbox" class="form-control" name="is_admin" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                <input <?php echo e($user->is_admin == 1 ? 'checked' : ''); ?> type="checkbox" class="form-control" name="is_admin" data-bootstrap-switch data-off-color="danger" data-on-color="success">
                             </div>
                         </div>
                     </div>
@@ -221,8 +229,6 @@ $("input[data-bootstrap-switch]").each(function(){
             }
         });
     }
-    
-    getPostion($('#department-select').val());
 </script>
 
 
@@ -230,4 +236,4 @@ $("input[data-bootstrap-switch]").each(function(){
 <?php $__env->stopSection(); ?>
 
 
-<?php echo $__env->make('admin.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/pages/user_manage/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/pages/user_manage/edit.blade.php ENDPATH**/ ?>

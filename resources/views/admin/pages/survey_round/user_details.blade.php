@@ -11,6 +11,7 @@
   Chi tiết đợt khảo sát
 @endsection
 
+
 @section('content')
     @include('admin.partials.content_header', ['title' => 'Chi tiết đợt khảo sát'])
     <!-- Main content -->
@@ -32,7 +33,7 @@
                         <strong>Phòng ban: </strong>{{$candiate->department->department_name ?? 'Không rõ phòng ban'}}
                     </h5>
                     <h5>
-                        <strong>Chức vụ ban: </strong>{{$candiate->porsition->name ?? 'Không rõ chức vụ'}}
+                        <strong>Chức vụ: </strong>{{$candiate->position->name ?? 'Không rõ chức vụ'}}
                     </h5>
                 </div>
                 <div>
@@ -55,9 +56,9 @@
                           <!-- /. tools -->
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body pt-0">
+                        <div class="card-body pt-0" style="overflow: auto">
                           <!--The calendar -->
-                            <div class="card card-info mx-auto mt-3" style="max-width: 1024px">
+                            {{-- <div class="card card-info mx-auto mt-3" style="max-width: 1024px">
                                <div class="card-header">
                                    <h2>
                                        {{$test->survey->title ?? ''}}
@@ -67,7 +68,7 @@
                                    </div>
                                    <div class="mt-3">
                                        <h5>
-                                           {{$test->type == 1 ? 'Người được khảo sát' : 'Người làm bài'}}: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}} , Trọng số: {{$test->multiplier}}
+                                           {{$test->type == 1 ? 'Người được khảo sát' : 'Người làm bài'}}: {{$candiate->fullname}} |{{$candiate->department->department_name ?? ''}} - {{$candiate->position->name ?? ''}}
                                        </h5>
                                    </div>
                                </div>
@@ -88,12 +89,15 @@
                                            <div class="question-option pt-2">
                                                <div class="row" style="font-size: 18px">  
                                                    @foreach ($question->options as $option)
-                                                   <div class="form-group col-md-3 d-flex justify-center align-center">
+                                                   <div class="form-group row col-12 d-flex justify-center align-center">
                                                        <input class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
-                                                       <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
+                                                       <span  class="pl-2 col-md-4" style="line-height: 23px">{{$option->content ?? ''}}
                                                            @if ($test->type == 1)
                                                            ({{$option->score ?? 0}} điểm)</span>
                                                            @endif 
+                                                        <span class="col-md-3">
+                                                          Điểm trung bình:
+                                                        </span>
                                                    </div>
                                                    @endforeach 
                                                </div>
@@ -107,8 +111,61 @@
                                </div> 
            
            
-                           </div>
-           
+                           </div> --}}
+
+                           <table class="table table-bordered mx-auto mt-4" style="overflow:scrollX; max-width: 1024px; min-width: 768px">
+                            <thead>
+                              <tr>
+                                <th style="width: 5%" rowspan="2">TT</th>
+                                <th  style="width: 40%" rowspan="2">Nội dung</th>
+                                <th style="width: 40%" colspan="4">Kết quả điểm TB</th>
+                                <th style="width: 10%" rowspan="2">% Năng lực</th>
+                              </tr>
+                              <tr>
+                                <th style="width: 10%">Cấp trên đánh giá</th>
+                                <th style="width: 10%">Ngang cấp đánh giá</th>
+                                <th style="width: 10%">Cấp dưới đánh giá</th>
+                                <th style="width: 10%">Bình quân chung</th>
+                              </tr>
+                              <tr>
+                                <th></th>
+                                <th>Điểm TB</th>
+                                <th>{{$test->survey->getScoreFromLevel($test->survey_round, $candiate->id, 3)}}</th>
+                                <th>{{$test->survey->getScoreFromLevel($test->survey_round, $candiate->id, 2)}}</th>
+                                <th>{{$test->survey->getScoreFromLevel($test->survey_round, $candiate->id, 1)}}</th>
+                                <th>{{$test->survey->getAvgScore($test->survey_round, $candiate->id)}}</th>
+                                <th>{{$test->survey->getScoreByPercent($test->survey_round, $candiate->id)}}</th>
+                              </tr>
+
+                              @foreach ($test->survey->section as $index => $section)
+                              <tr>
+                                <th></th>
+                                <th>{{$section->title ?? ''}}</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                              @foreach ($section->questions as $index => $question)
+                              
+
+                              <tr>
+                                <td>{{$index+1}}</td>
+                                <td>{{$question->content ?? ''}}</td>
+                                <td>{{$question->getScoreFromLevel($test->survey_round, $candiate->id, 3)}}</td>
+                                <td>{{$question->getScoreFromLevel($test->survey_round, $candiate->id, 2)}}</td>
+                                <td>{{$question->getScoreFromLevel($test->survey_round, $candiate->id, 1)}}</td>
+                                <td>{{$question->getAvgScore($test->survey_round, $candiate->id)}}</td>
+                                <td>{{$question->getScoreByPercent($test->survey_round, $candiate->id)}}</td>
+                              </tr>
+                              @endforeach
+                              @endforeach
+
+                              
+
+                            </thead>
+                           </table>
                         </div>
                         <!-- /.card-body -->
                     </div>

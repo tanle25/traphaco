@@ -202,12 +202,14 @@ class RoundSurveyController extends Controller
             return abort(404);
         }
 
-        $tests = Test::leftJoin('answers', 'answers.test_id', '=', 'tests.id')
+        $tests = Test::with('survey')->leftJoin('answers', 'answers.test_id', '=', 'tests.id')
+            ->join('survey', 'tests.survey_id', '=', 'survey.id')
             ->where('tests.survey_round', $id)
             ->where('tests.candiate_id', $candiate_id)
             ->select('*')
-            ->groupBy('tests.id')
+            ->groupBy('survey.id')
             ->get();
+        // dd($tests[0]->survey);
 
         return view('admin.pages.survey_round.user_details', compact('tests', 'candiate'));
     }

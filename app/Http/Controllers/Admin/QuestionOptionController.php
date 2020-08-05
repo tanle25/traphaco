@@ -42,7 +42,7 @@ class QuestionOptionController extends Controller
             $new_option = QuestionOption::create([
                 'content' => null,
                 'question_id' => $request->question_id,
-                'score' => null,
+                'score' => 0,
             ]);
             DB::commit();
         } catch (Exception $e) {
@@ -97,7 +97,7 @@ class QuestionOptionController extends Controller
         }
 
         if ($request->has('score')) {
-            if ($request->score) {
+            if ($request->score || $request->score == 0) {
                 $section->update(['score' => $request->score]);
             }
         }

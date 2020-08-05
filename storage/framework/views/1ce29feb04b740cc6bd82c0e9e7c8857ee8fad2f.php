@@ -99,7 +99,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary">Thêm bài test</button>
+                <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
             </div>
         </form>
     </div>
@@ -171,7 +171,7 @@ unset($__errorArgs, $__bag); ?>
      
 
             <div class="form-group col-12">
-                <button type="submit" class="btn btn-primary">Thêm bài test</button>
+                <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
             </div>
         </form>   
     </div>
