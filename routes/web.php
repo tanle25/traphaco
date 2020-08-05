@@ -80,9 +80,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/round-survey/update/{id}', 'RoundSurveyController@update')->name('admin.survey_round.update');
     Route::post('/round-survey/destroy/{id}', 'RoundSurveyController@destroy')->name('admin.survey_round.destroy');
     Route::get('/round-survey/list-survey-round', 'RoundSurveyController@getList')->name('admin.survey_round.list');
+    Route::get('/round-survey/details/{id}', 'RoundSurveyController@details')->name('admin.survey_round.details');
+    Route::get('/round-survey/details/{id}/get-table', 'RoundSurveyController@getSurveyRoundResultTable')->name('admin.survey_round.details_table');
+    Route::get('/round-survey/details/{id}/candiate/{candiate_id}', 'RoundSurveyController@getUserDetails')->name('admin.survey_round.candiate_details');
 
     Route::get('/test/candiate/get-list', 'TestController@getCandiate')->name('admin.test.get_candiate');
     Route::get('/test/examiner/get-list', 'TestController@getExaminer')->name('admin.test.get_examiner');
+
+    //export excel
+    Route::get('user/export', 'UserManageController@export')->name('admin.usermanage.export');
 });
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {

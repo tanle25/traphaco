@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Survey;
 use App\Models\SurveyRound;
+use App\Models\Test;
 use App\User;
 use DataTables;
+use DB;
 use Illuminate\Http\Request;
 
 class RoundSurveyController extends Controller
@@ -28,7 +30,8 @@ class RoundSurveyController extends Controller
 
         return DataTables::eloquent($survey_rounds)
             ->addColumn('action', function (SurveyRound $surveyround) {
-                return '<a href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success"><i class="fas fa-edit"></i></a>
+                return '<a href="' . route('admin.survey_round.details', $surveyround->id) . '"class="btn text-success"><i class="far fa-chart-bar"></i></a>
+                        <a href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success"><i class="fas fa-edit"></i></a>
                         <span href="' . route('admin.survey_round.destroy', $surveyround->id) . '" class="btn text-danger round-survey-delete"><i class="far fa-trash-alt"></i></span>';
             })
             ->editColumn('created_by', function (SurveyRound $surveyround) {
@@ -137,4 +140,76 @@ class RoundSurveyController extends Controller
         SurveyRound::findOrFail($id)->delete();
         return ['msg' => 'Xóa thành công'];
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function details($id)
+    {
+        if (!$id) {
+            return '';
+        }
+        $survey_round = SurveyRound::findOrFail($id);
+        return view('admin.pages.survey_round.details', compact('survey_round'));
+    }
+
+    public function getSurveyRoundResultTable($id)
+    {
+        if (!$id) {
+            return '';
+        }
+        $list_candiate = SurveyRound::join('tests', 'tests.survey_round', '=', 'survey_round.id')
+            ->join('users', 'tests.candiate_id', '=', 'users.id')
+            ->join('survey', 'survey.id', '=', 'tests.survey_id')
+            ->where('survey_round.id', $id)
+            ->where('tests.status', '<>', 1)
+            ->groupBy('users.id')
+            ->select([
+                'users.id as candiate_id',
+                'survey_round.name as survey_round_name',
+                'survey_round.id as survey_round_id',
+                'tests.score',
+                DB::raw('GROUP_CONCAT( DISTINCT survey.name) as survey_name'),
+                'users.fullname as candiate_name',
+            ]);
+        return DataTables::eloquent($list_candiate)
+            ->addColumn('action', function ($candiate) {
+                $link = route('admin.survey_round.candiate_details', ['candiate_id' => $candiate->candiate_id, 'id' => $candiate->survey_round_id]);
+                return '<a href="' . $link . '"class="btn text-success"><i class="far fa-chart-bar"></i></a>';
+            })
+            ->editColumn('candiate_id', function ($candiate) {
+                return $candiate->candiate_id;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @param  int  $candiate_id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function getUserDetails($id, $candiate_id)
+    {
+        $candiate = User::find($candiate_id);
+        if (!$candiate) {
+            return abort(404);
+        }
+
+        $tests = Test::leftJoin('answers', 'answers.test_id', '=', 'tests.id')
+            ->where('tests.survey_round', $id)
+            ->where('tests.candiate_id', $candiate_id)
+            ->select('*')
+            ->groupBy('tests.id')
+            ->get();
+
+        return view('admin.pages.survey_round.user_details', compact('tests', 'candiate'));
+    }
+
 }

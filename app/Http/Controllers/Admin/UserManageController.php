@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserManage\CreateUserRequest;
 use App\Http\Requests\Admin\UserManage\UpdateUserRequest;
@@ -10,6 +11,7 @@ use App\Models\UserPosition;
 use App\User;
 use DataTables;
 use DB;
+use Excel;
 use Hash;
 use Illuminate\Http\Request;
 
@@ -151,5 +153,10 @@ class UserManageController extends Controller
         User::findOrFail($id)->delete();
 
         return redirect()->back()->with(['success' => 'Xóa user thành công']);
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }
