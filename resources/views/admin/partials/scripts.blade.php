@@ -12,10 +12,10 @@
 <!-- ChartJS -->
 <script src="{{asset('template/AdminLTE/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
-<script src="{{asset('template/AdminLTE/plugins/sparklines/sparkline.js')}}"></script>
+{{-- <script src="{{asset('template/AdminLTE/plugins/sparklines/sparkline.js')}}"></script> --}}
 <!-- JQVMap -->
-<script src="{{asset('template/AdminLTE/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('template/AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+{{-- <script src="{{asset('template/AdminLTE/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{asset('template/AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script> --}}
 <!-- jQuery Knob Chart -->
 <script src="{{asset('template/AdminLTE/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->
@@ -30,9 +30,9 @@
 <!-- AdminLTE App -->
 <script src="{{asset('template/AdminLTE/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('template/AdminLTE/dist/js/pages/dashboard.js')}}"></script>
+{{-- <script src="{{asset('template/AdminLTE/dist/js/pages/dashboard.js')}}"></script> --}}
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('template/AdminLTE/dist/js/demo.js')}}"></script>
+{{-- <script src="{{asset('template/AdminLTE/dist/js/demo.js')}}"></script> --}}
 <!-- SWAL2 -->
 <script src="{{asset('template\AdminLTE\plugins\sweetalert2\sweetalert2.all.min.js')}}"></script>
 <!-- Select 2 -->

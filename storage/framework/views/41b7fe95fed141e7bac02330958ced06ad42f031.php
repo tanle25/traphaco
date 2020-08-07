@@ -277,6 +277,7 @@ unset($__errorArgs, $__bag); ?>
                                 <select name="type" class="form-control" id="">
                                     <option <?php echo e($survey->type == 1 ? 'selected' : ''); ?> value="1">Bài khảo sát</option>
                                     <option <?php echo e($survey->type == 2 ? 'selected' : ''); ?> value="2">Bài đánh giá chất lượng nhân viên</option>
+                                    <option <?php echo e($survey->type == 3 ? 'selected' : ''); ?> value="3">Bài khảo sát khách hàng</option>
                                 </select>
                             </div>
                         </div>

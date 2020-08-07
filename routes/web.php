@@ -89,6 +89,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     //export excel
     Route::get('user/export', 'UserManageController@export')->name('admin.usermanage.export');
+
+    //customer
+    Route::get('customer/index', 'CustomerController@index')->name('admin.customer.index');
+    Route::post('customer/create-survey', 'CustomerController@createTestAndSend')->name('admin.customer.create_and_send_test');
+    Route::post('customer/store-answer', 'CustomerController@storeCustomerAnswer')->name('admin.customer.store_customer_answer');
+    Route::get('customer/list', 'CustomerController@list')->name('admin.customer.list');
+    Route::post('customer/store', 'CustomerController@store')->name('admin.customer.store');
+    Route::post('customer/update', 'CustomerController@update')->name('admin.customer.update');
+
+    Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('admin.customer.edit');
+    Route::post('/customer/destroy/{id}', 'CustomerController@destroy')->name('admin.customer.destroy');
+    Route::post('customer/import', 'CustomerController@importExcel')->name('admin.customer.import');
+
 });
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {

@@ -42,12 +42,6 @@ class CreateTestDeliveryTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('option_choices', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('answer_id');
-            $table->unsignedBigInteger('option_id')->nullable(); // Chú ý xét kỹ trường hợp null
-        });
-
         Schema::table('tests', function (Blueprint $table) {
             $table->foreign('examiner_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('candiate_id')->references('id')->on('users')->onDelete('set null');
@@ -58,12 +52,6 @@ class CreateTestDeliveryTable extends Migration
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('set null');
         });
-
-        Schema::table('option_choices', function (Blueprint $table) {
-            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
-            $table->foreign('option_id')->references('id')->on('questions')->onDelete('set null');
-        });
-
     }
 
     /**
@@ -83,13 +71,9 @@ class CreateTestDeliveryTable extends Migration
             $table->dropForeign(['test_id']);
             $table->dropForeign(['question_id']);
         });
-        Schema::table('option_choices', function (Blueprint $table) {
-            $table->dropForeign(['answer_id']);
-            $table->dropForeign(['option_id']);
-        });
+
         Schema::dropIfExists('tests');
         Schema::dropIfExists('answers');
-        Schema::dropIfExists('option_choices');
         Schema::dropIfExists('survey_round');
     }
 }

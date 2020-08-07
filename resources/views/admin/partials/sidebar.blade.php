@@ -120,6 +120,37 @@
               
             </ul>
           </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-id-badge"></i> 
+              <p>
+                Khách hàng
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.customer.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-marker"></i> 
+                  <p>
+                    Quản lý khách hàng
+                  </p>
+                </a>
+              </li>
+
+
+
+              <li class="nav-item">
+                <a href="{{route('result.index')}}" class="nav-link">
+                  <i class="far fa-chart-bar nav-icon"></i>
+                  <p>Thống kê cá nhân</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-id-badge"></i> 

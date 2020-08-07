@@ -169,6 +169,8 @@ class TestController extends Controller
 
     }
 
+    // Dùng để lưu bài test loại 2
+
     public function storeTestType2(Request $request)
     {
         $request->validate([

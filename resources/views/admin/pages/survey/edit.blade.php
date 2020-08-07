@@ -261,6 +261,7 @@ textarea:focus {
                                 <select name="type" class="form-control" id="">
                                     <option {{$survey->type == 1 ? 'selected' : ''}} value="1">Bài khảo sát</option>
                                     <option {{$survey->type == 2 ? 'selected' : ''}} value="2">Bài đánh giá chất lượng nhân viên</option>
+                                    <option {{$survey->type == 3 ? 'selected' : ''}} value="3">Bài khảo sát khách hàng</option>
                                 </select>
                             </div>
                         </div>

@@ -65,9 +65,9 @@
       autoWidth:false,
       ajax: "{{route('admin.survey_round.details_table', $survey_round->id)}}",
       columns: [
-        { "data": "candiate_id", },
-        { "data": "candiate_name" },
-        { "data": "survey_name" },
+        { "data": "candiate_id", "name": 'users.id' },
+        { "data": "candiate_name", 'name':'users.fullname' },
+        { "data": "survey_name", 'name':'survey.name' },
         { "data" :"action"}
       ]
     });
