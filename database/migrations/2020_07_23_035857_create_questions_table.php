@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->text('content')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedInteger('order')->nullable();
+            $table->unsignedTinyInteger('can_comment')->nullable();
             $table->timestamps();
         });
 

@@ -17,6 +17,8 @@ class CreateCustomerTable extends Migration
             $table->id();
             $table->string('DMS_code')->nullable();
             $table->string('CRM_code')->nullable();
+            $table->string('contract_code')->nullable();
+            $table->string('pharmacy_name')->nullable();
             $table->string('fullname')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();

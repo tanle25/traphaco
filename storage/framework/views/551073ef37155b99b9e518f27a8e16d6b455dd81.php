@@ -43,9 +43,12 @@
                     </div>
                     <div class="sortable options-wraper">
                     </div>
-                    <div class="col-8 add-option">
+                    <div class="can-comment"></div>
+                    <div class="col-8 add-option  d-flex">
                         <input readonly type="text" class="question-option-add" id=""
                             placeholder="Thêm câu trả lời">
+                        <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
+
                     </div>
                 </div>
             </div>
@@ -231,8 +234,10 @@
                 </div>
             </div>
             <div class="sortable options-wraper ui-sortable"></div>
-            <div class="col-8 add-option">
+            <div class="can-comment"></div>
+            <div class="col-8 add-option d-flex">
                 <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
+                <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
             </div>
         </div>
         `;
@@ -478,5 +483,75 @@
             swalToast('Câu trả lời không tồn tại', 'error');
         }
     });
+
+    function appendComment(questionId, commentWraper){
+        var comment =`<div class="form-group question-option row" data-question-id="${questionId}">
+                                        <label class="question-option-label">
+                                            <i class="far fa-circle"></i>
+                                        </label>
+                                        <div class="col-10">
+                                            <input readonly type="text" class="question-comment" placeholder="Khác">
+                                        </div>
+                                        
+                                        <div class="question-comment-remove">
+                                            <i class="far fa-trash-alt" style="font-size: 20px; cursor:pointer"></i>
+                                        </div>
+                                    </div>
+                                    `;
+        $('.sortable').sortable('destroy');
+        commentWraper.html(comment);
+        $('.sortable').sortable({
+            forcePlaceholderSize: true,
+            zIndex              : 999999,
+            animation: 150,
+        });
+    }
+
+    $(document).on('click', '.question-comment-add', function(e){
+        var commentWraper = $(this).closest('.question-wraper').children('.can-comment');
+        var questionId = $(this).closest('.question-wraper').data('question-id');
+        var btn = $(this);
+        $.ajax({
+            url: "<?php echo e(route('admin.question.can_comment')); ?>",
+            data : {
+                question_id: questionId,
+                can_comment: 1,
+            },
+            type: 'POST',
+            success: function(data){
+                swalToast('Cập nhật thành công câu hỏi');
+                appendComment(questionId, commentWraper);
+                btn.hide();
+
+            },
+            error: function(errors){
+                swalToast('Lỗi tạo đáp án!', 'error');
+            }
+        });
+    })
+
+    $(document).on('click','.question-comment-remove', function(){
+        var wraper = $(this).closest('.can-comment');
+        var btn = $(this).closest('.question-wraper').find('.question-comment-add');
+        var questionId = $(this).closest('.question-wraper').data('question-id');
+        $.ajax({
+            url: "<?php echo e(route('admin.question.can_comment')); ?>",
+            data : {
+                question_id: questionId,
+                can_comment: 0,
+            },
+            type: 'POST',
+            success: function(data){
+                swalToast('Xóa thành công câu trả lời');
+                wraper.html('');
+                btn.show();
+
+            },
+            error: function(errors){
+                swalToast('Lỗi tạo đáp án!', 'error');
+            }
+        });
+    })
+
 
 </script><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/pages/survey/script.blade.php ENDPATH**/ ?>

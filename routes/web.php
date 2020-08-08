@@ -55,6 +55,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/question/store', 'QuestionController@store')->name('admin.question.store');
     Route::post('/question/update', 'QuestionController@update')->name('admin.question.update');
     Route::post('/question/destroy', 'QuestionController@destroy')->name('admin.question.destroy');
+    Route::post('/question/can-comment', 'QuestionController@canComment')->name('admin.question.can_comment');
 
     Route::get('/question-option', 'QuestionOptionController@index')->name('admin.question_option.index');
     Route::post('/question-option/store', 'QuestionOptionController@store')->name('admin.question_option.store');

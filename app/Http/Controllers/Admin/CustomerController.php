@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Imports\CustomerImport;
 use App\Models\Customer;
+use App\Models\CustomerAnswer;
 use App\Models\CustomerTest;
 use App\Models\Survey;
 use Auth;
@@ -132,11 +133,14 @@ class CustomerController extends Controller
             'address' => 'max:255',
             'phone' => 'max:20',
             'zone' => 'max:255',
+            'pharmacy_name' => 'max:255',
+
         ], [
             'fullname.required' => 'Không được để trống tên',
             'address.max' => 'Địa chỉ tối đa 255 ký tự',
             'phone.max' => 'Số điện thoại tối đa 20 ký tự',
             'zone.max' => 'Đại bàn tối đa 255 ký tự',
+            'pharmacy_name.max' => 'Tên tối đa 255 ký tự',
         ]);
 
         $customer->update($validated_data);
@@ -181,7 +185,7 @@ class CustomerController extends Controller
 
         $new_test->save();
 
-        return view('admin.pages.customers.test', compact('survey', 'customer'));
+        return view('admin.pages.customers.test', compact('survey', 'customer', 'new_test'));
     }
 
     /**
@@ -196,24 +200,24 @@ class CustomerController extends Controller
             'test_id' => 'required|numeric',
         ]);
 
-        $test = Test::findOrFail($request->test_id);
+        $test = CustomerTest::findOrFail($request->test_id);
 
         if (empty($request->answer)) {
             return ['error' => 'Không tìm thấy câu trả lời!'];
         };
 
         foreach ($request->answer as $answer) {
-            Answer::create([
+            CustomerAnswer::create([
                 'option_choice' => $answer['option_id'],
                 'comment' => $answer['comment'],
-                'test_id' => $request->test_id,
+                'customer_test_id' => $request->test_id,
                 'question_id' => $answer['question_id'],
             ]);
             $test->status = 2;
             $test->save();
         }
 
-        return ['msg' => 'Cập nhật thành công kết quả!', 'score' => $total_score];
+        return ['msg' => 'Cập nhật thành công kết quả!'];
     }
 
     public function importExcel(Request $request)
@@ -235,7 +239,43 @@ class CustomerController extends Controller
         return redirect()->back()->with(['success' => 'Import dữ liệu thành công']);
     }
 
-    public function editCustomerField(Request $request){
-        
+    public function editCustomerField(Request $request, $id)
+    {
+        $request->validate([
+            'phone' => 'max:20|string',
+            'zone' => 'max:50|string',
+            'fullname' => 'max:50|string',
+            'address' => 'max:255|string',
+        ], [
+            'phone.max' => 'Số điện thoại tối đa 20 ký tự',
+            'zone.max' => 'Địa bàn tốt đa 50 ký tự',
+            'fullname' => 'Tên khách hàn tối đa 50 ký tự',
+            'address.max' => 'Địa chỉ khách hàng tối đa 255 ký tự',
+        ]);
+        $customer = Customer::findOrFail($id);
+
+        if ($request->has('fullname')) {
+            $customer->update(['fullname' => $request->fullname]);
+        };
+
+        if ($request->has('zone')) {
+            $customer->update(['zone' => $request->zone]);
+        };
+
+        if ($request->has('phone')) {
+            $customer->update(['phone' => $request->phone]);
+        };
+
+        if ($request->has('address')) {
+            $customer->update(['address' => $request->address]);
+        };
+
+        if ($request->has('pharmacy_name')) {
+            $customer->update(['pharmacy_name' => $request->pharmacy_name]);
+        };
+
+        return ['success' => 'Cập nhật thành công'];
+
     }
+
 }

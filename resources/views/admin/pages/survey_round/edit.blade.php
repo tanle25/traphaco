@@ -20,7 +20,9 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Thông tin đợt khảo sát</h3>
-        </div>
+                <a class="btn btn-success d-block float-right" href="{{route('admin.survey_round.index')}}">Back</a>
+
+          </div>
         <form action="{{route('admin.survey_round.update', $survey_round->id)}}" class="row card-body" method="post">
           @csrf
           <div class="col-md-6 col-12">

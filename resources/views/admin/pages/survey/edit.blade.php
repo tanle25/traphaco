@@ -1,7 +1,7 @@
 @extends('admin.main_layout')
 
 @section('title')
-  Chỉnh sửa cuộc khảo sát
+  Chỉnh sửa bài khảo sát
 @endsection
 
 @section('custom-css')
@@ -235,9 +235,9 @@ textarea:focus {
 
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="">Tên cuộc khảo sát</label>
+                                <label for="">Tên bài khảo sát</label>
                                 <input name="name" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên cuộc khảo sát (bắt buộc)" value="{{ $survey->name }}">
+                                    placeholder="Nhập tên bài khảo sát (bắt buộc)" value="{{ $survey->name }}">
                                 @error('name')
                                 <strong class="text-red">
                                     {{$message}}
@@ -248,7 +248,7 @@ textarea:focus {
                             <div class="form-group">
                                 <label for="">Tiêu đề</label>
                                 <input name="title" type="text" class="form-control" id=""
-                                    placeholder="Nhập tiêu đề cuộc khảo sát" value="{{ $survey->title }}">
+                                    placeholder="Nhập tiêu đề bài khảo sát" value="{{ $survey->title }}">
                                 @error('username')
                                 <strong class="title">
                                     {{$message}}
@@ -275,9 +275,9 @@ textarea:focus {
                             </div>
 
                             <div class="form-group">
-                                <label for="">Nội dung cuộc khảo sát</label>
+                                <label for="">Nội dung bài khảo sát</label>
                                 <textarea name="content" type="text" class="form-control" id=""
-                                    placeholder="Nhập nội dung cuộc khảo sát" value="" cols="30"
+                                    placeholder="Nhập nội dung bài khảo sát" value="" cols="30"
                                     rows="5">{{ $survey->content }}</textarea>
                                 @error('content')
                                 <strong class="text-red">

@@ -77,6 +77,22 @@
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <input type="hidden" name="id">
                     <div class="form-group">
+                        <label>Mã DMS</label>
+                        <input type="test" class="form-control" name="DMS_code" placeholder="Nhập mã DMS">
+                    </div>
+                    <div class="form-group">
+                        <label>Mã CRM</label>
+                        <input type="test" class="form-control" name="CRM_code" placeholder="Nhập mã CRM">
+                    </div>
+                    <div class="form-group">
+                        <label>Mã hợp đồng</label>
+                        <input type="test" class="form-control" name="contract_code" placeholder="Nhập mã Hợp đồng">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên nhà thuốc</label>
+                        <input type="test" class="form-control" name="pharmacy_name" placeholder="Nhập tên nhà thuốc">
+                    </div>
+                    <div class="form-group">
                         <label>Tên khách hàng</label>
                         <input type="test" class="form-control" name="fullname" placeholder="Nhập tên khách hàng">
                     </div>
@@ -254,11 +270,20 @@
                     swalToast(data.error, 'error');
                     return;
                 }
-                $('#customer-form input[name="fullname"]').val(data.fullname)
-                $('#customer-form input[name="address"]').val(data.address)
-                $('#customer-form input[name="phone"]').val(data.phone)
-                $('#customer-form input[name="zone"]').val(data.zone)
-                $('#customer-form input[name="id"]').val(data.id)
+                $('#customer-form input[name="fullname"]').val(data.fullname);
+                $('#customer-form input[name="address"]').val(data.address);
+                $('#customer-form input[name="phone"]').val(data.phone);
+                $('#customer-form input[name="zone"]').val(data.zone);
+                $('#customer-form input[name="id"]').val(data.id);
+                $('#customer-form input[name="pharmacy_name"]').val(data.pharmacy_name);
+
+                $('#customer-form input[name="CRM_code"]').val(data.CRM_code);
+                $('#customer-form input[name="DMS_code"]').val(data.DMS_code);
+                $('#customer-form input[name="contract_code"]').val(data.contract_code);
+
+                $('#customer-form input[name="CRM_code"]').attr('readonly', true);
+                $('#customer-form input[name="DMS_code"]').attr('readonly', true);
+                $('#customer-form input[name="contract_code"]').attr('readonly', true);
 
             },
             error: function (errors) {
@@ -284,8 +309,8 @@
                 swalToast('Lỗi không xác định vui lòng kiểm tra lại các trường', 'error');
             }
 		})
-	};
-
+    }
+    
 	$(document).on('click', '.customer-survey', function(e){
 		var customerId = $(this).data('customer-id');
 		$('#test-container').html('');
@@ -317,6 +342,7 @@
             obj[item.name] = item.value;
             return obj;
         }, {});
+        console.log(data);
         if (url == '{{route("admin.customer.store")}}') {
             storeCustomer(url, data);
             $("#customer-table").DataTable().ajax.reload();
@@ -331,11 +357,21 @@
 
     $(document).on('click', '.customer-create', function (e) {
         var url = "{{route('admin.customer.store')}}";
-        $('#customer-form input[name="fullname"]').val('')
-        $('#customer-form input[name="address"]').val('')
-        $('#customer-form input[name="phone"]').val('')
-        $('#customer-form input[name="zone"]').val('')
-        $('#customer-form input[name="id"]').val('')
+        $('#customer-form input[name="fullname"]').val('');
+        $('#customer-form input[name="address"]').val('');
+        $('#customer-form input[name="phone"]').val('');
+        $('#customer-form input[name="zone"]').val('');
+        $('#customer-form input[name="id"]').val('');
+        $('#customer-form input[name="pharmacy_name"]').val('');
+
+        $('#customer-form input[name="CRM_code"]').val('');
+        $('#customer-form input[name="DMS_code"]').val('');
+        $('#customer-form input[name="contract_code"]').val('');
+
+        $('#customer-form input[name="CRM_code"]').attr('readonly', false);
+        $('#customer-form input[name="DMS_code"]').attr('readonly', false);
+        $('#customer-form input[name="contract_code"]').attr('readonly', false);
+
         $('#customer-form').attr('action', '{{route("admin.customer.store")}}')
     })
 
@@ -379,81 +415,7 @@
 // survey logic
 </script>
 
-<script>
-    $(document).on('click', '.send-result', function (e) {
-        var url = $(this).attr('href');
-        var questionCount = $('.question').length;
-        var answer = [];
-        $('.option-input:checked').each(function(){
-            answer.push({
-                question_id: $(this).data('question-id'),
-                option_id: $(this).attr('value'),
-                comment: $(this).closest('.question-option').find('.comment').val(),
-            });     
-        })
-        if(questionCount !== answer.length){
-            Swal.fire({
-                title: 'Bạn chưa hoàn thành bài test!',
-                text: "Vui lòng hoàn thành bài test trước khi gửi!",
-                icon: 'warning',
-                showCancelButton: true,
-                showConfirmButton: false,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Tôi hiểu',
-            })
-            return
-        }
 
-        Swal.fire({
-            title: 'Hoàn thành bài test!',
-            text: "Gửi kết quả!",
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Gửi kết quả!',
-        })
-        .then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        answer: answer,
-                        test_id: 1,
-                    },
-                    success: function (data) {
-                        if (data.error) {
-                            swalToast(data.error, 'error');
-                        }
-                        if (data.msg) {
-                            swalToast(data.msg);
-                        }
-                        setTimeout(function () {
-                            location.href = "{{route('answer.index', ['marked' => 0])}}";
-                        }, 300)
-                    },
-                    error: function (errors) {
-                        swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
-                    }
-                });
-            }
-        });
-    })
-    $(document).on('blur', '#customer-test-form input',function(e){
-        var url = $('#customer-test-form').attr('action');
-        var data = {
-            `${$(this).attr('name')}` : `${$(this).val()}`,
-        }
-        console.log('data');
-        $.ajax({
-            url: url,
-            data: 
-        })
-    });
-</script>
 
 @error('customer_list')
 <script>

@@ -27,101 +27,6 @@
 
           @if (Auth::user()->is_admin == 1)
           <li class="nav-item has-treeview">
-            <a href="{{route('admin.department.index')}}" class="nav-link">
-              <i class="nav-icon far fa-building"></i> 
-              <p>
-                Quản lý phòng ban
-              </p>
-            </a>
-            {{-- <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.department.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách phòng ban</p>
-                </a>
-              </li>
-            </ul> --}}
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-tie"></i>
-              <p>
-                Quản lý người dùng
-                <i class="fas fa-angle-left right"></i> 
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.usermanage.index')}}" class="nav-link">
-                  <i class="fas fa-list-ul nav-icon"></i>
-                  <p>Danh sách người dùng</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="{{route('admin.usermanage.create')}}" class="nav-link">
-                  <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Thêm user mới</p> 
-                </a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Bài khảo sát
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.survey.index')}}" class="nav-link">
-                  <i class="fas fa-list-ul nav-icon"></i>
-                  <p>Danh sách bài khảo sát</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="{{route('admin.survey.create')}}" class="nav-link">
-                  <i class="far fa-file nav-icon"></i>
-                  <p>Thêm bài khảo sát</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-calendar-minus"></i>
-              <p>
-                Đợt khảo sát
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.survey_round.index')}}" class="nav-link">
-                  <i class="fas fa-list-ul nav-icon"></i>
-                  <p>Danh sách đợt khảo sát</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="{{route('admin.survey_round.create')}}" class="nav-link">
-                  <i class="far fa-file nav-icon"></i>
-                  <p>Mở đợt khảo sát</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-id-badge"></i> 
               <p>
@@ -134,20 +39,87 @@
                 <a href="{{route('admin.customer.index')}}" class="nav-link">
                   <i class="nav-icon fas fa-marker"></i> 
                   <p>
-                    Quản lý khách hàng
+                    Danh sách khách hàng
                   </p>
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="{{route('result.index')}}" class="nav-link">
+                  <i class="far fa-chart-bar nav-icon"></i>
+                  <p>Báo cáo khảo sát</p>
+                </a>
+              </li>
+              
 
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Quản lý đánh giá
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.survey_round.index')}}" class="nav-link">
+                  <i class="fas fa-list-ul nav-icon"></i>
+                  <p>Đợt đánh giá</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('admin.survey.index')}}" class="nav-link">
+                  <i class="far fa-file nav-icon"></i>
+                  <p>Bài đánh giá</p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="{{route('result.index')}}" class="nav-link">
                   <i class="far fa-chart-bar nav-icon"></i>
-                  <p>Thống kê cá nhân</p>
+                  <p>Báo cáo đánh giá</p>
                 </a>
               </li>
               
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user-tie"></i>
+              <p>
+                Quản lý hệ thống
+                <i class="fas fa-angle-left right"></i> 
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{{route('admin.department.index')}}" class="nav-link">
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>Quản lý phòng ban</p> 
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('admin.usermanage.index')}}" class="nav-link">
+                  <i class="fas fa-list-ul nav-icon"></i>
+                  <p>Quản lý người dùng</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('admin.usermanage.index')}}" class="nav-link">
+                  <i class="fas fa-list-ul nav-icon"></i>
+                  <p>Quản lý phân quyền</p>
+                </a>
+              </li>
             </ul>
           </li>
 

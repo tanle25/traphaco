@@ -199,9 +199,9 @@
 
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="">Tên cuộc khảo sát</label>
+                                <label for="">Tên bài khảo sát</label>
                                 <input name="name" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên cuộc khảo sát (bắt buộc)" value="<?php echo e(old('name')); ?>">
+                                    placeholder="Nhập tên bài khảo sát (bắt buộc)" value="<?php echo e(old('name')); ?>">
                                 <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -220,7 +220,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="form-group">
                                 <label for="">Tiêu đề</label>
                                 <input name="title" type="text" class="form-control" id=""
-                                    placeholder="Nhập tiêu đề cuộc khảo sát" value="<?php echo e(old('title')); ?>">
+                                    placeholder="Nhập tiêu đề bài khảo sát" value="<?php echo e(old('title')); ?>">
                                 <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -255,9 +255,9 @@ unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Nội dung cuộc khảo sát</label>
+                                <label for="">Nội dung bài khảo sát</label>
                                 <textarea name="content" type="text" class="form-control" id=""
-                                    placeholder="Nhập nội dung cuộc khảo sát" value="<?php echo e(old('content')); ?>" cols="30"
+                                    placeholder="Nhập nội dung bài khảo sát" value="<?php echo e(old('content')); ?>" cols="30"
                                     rows="5"></textarea>
                                 <?php $__errorArgs = ['content'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

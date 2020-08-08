@@ -109,5 +109,16 @@ class QuestionController extends Controller
      */
     public function destroy(Request $request)
     {
+        $question = Question::findOrFail($request->question_id)->delete();
+        return ['msg' => 'Xóa thành công câu hỏi'];
+    }
+
+    public function canComment(Request $request)
+    {
+        $question = Question::findOrFail($request->question_id);
+        $question->can_comment = $request->can_comment;
+        $question->save();
+
+        return ['success' => 'Cập nhật câu trả lời thành công'];
     }
 }

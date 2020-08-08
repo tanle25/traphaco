@@ -199,9 +199,9 @@
 
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="">Tên cuộc khảo sát</label>
+                                <label for="">Tên bài khảo sát</label>
                                 <input name="name" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên cuộc khảo sát (bắt buộc)" value="{{ old('name') }}">
+                                    placeholder="Nhập tên bài khảo sát (bắt buộc)" value="{{ old('name') }}">
                                 @error('name')
                                 <strong class="text-red">
                                     {{$message}}
@@ -212,7 +212,7 @@
                             <div class="form-group">
                                 <label for="">Tiêu đề</label>
                                 <input name="title" type="text" class="form-control" id=""
-                                    placeholder="Nhập tiêu đề cuộc khảo sát" value="{{ old('title') }}">
+                                    placeholder="Nhập tiêu đề bài khảo sát" value="{{ old('title') }}">
                                 @error('username')
                                 <strong class="title">
                                     {{$message}}
@@ -239,9 +239,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="">Nội dung cuộc khảo sát</label>
+                                <label for="">Nội dung bài khảo sát</label>
                                 <textarea name="content" type="text" class="form-control" id=""
-                                    placeholder="Nhập nội dung cuộc khảo sát" value="{{ old('content') }}" cols="30"
+                                    placeholder="Nhập nội dung bài khảo sát" value="{{ old('content') }}" cols="30"
                                     rows="5"></textarea>
                                 @error('content')
                                 <strong class="text-red">

@@ -8,7 +8,7 @@ class Customer extends Model
 {
     protected $table = "customers";
 
-    protected $fillable = ['DMS_code', 'CRM_code', 'fullname', 'address', 'phone', 'zone', 'sale_chanel'];
+    protected $fillable = ['DMS_code', 'CRM_code', 'contract_code', 'fullname', 'address', 'phone', 'zone', 'sale_chanel', 'pharmacy_name'];
 
     public $timestamps = true;
 

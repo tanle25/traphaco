@@ -89,9 +89,31 @@
                                     </div>
                                     @endforeach
                                 </div>
+                                <div class="can-comment">
+
+                                    @if ($question->can_comment == 1)
+                                    <div class="form-group question-option row" data-question-id="{{$question->id}}">
+                                        <label class="question-option-label">
+                                            <i class="far fa-circle"></i>
+                                        </label>
+                                        <div class="col-10">
+                                            <input readonly type="text" class="question-comment" placeholder="Khác">
+                                        </div>
+                                        
+                                        <div class="question-comment-remove">
+                                            <i class="far fa-trash-alt" style="font-size: 20px; cursor:pointer"></i>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
                                 {{-- question add --}}
-                                <div class="col-8 add-option">
+                                <div class="col-8 add-option d-flex">
                                     <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
+                                    @if ($question->can_comment == 1)
+                                    <input readonly type="text" class="question-comment-add" style="display:none" id="" placeholder="Thêm khác">
+                                    @else
+                                    <input readonly type="text" class="question-comment-add" style="display:block" id="" placeholder="Thêm khác">
+                                    @endif
                                 </div>
 
                             </div>
