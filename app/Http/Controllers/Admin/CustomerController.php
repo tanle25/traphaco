@@ -235,4 +235,7 @@ class CustomerController extends Controller
         return redirect()->back()->with(['success' => 'Import dữ liệu thành công']);
     }
 
+    public function editCustomerField(Request $request){
+        
+    }
 }

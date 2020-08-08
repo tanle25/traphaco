@@ -3,7 +3,60 @@
         resize: none;
         overflow: hidden;
     }
+    .no-border {
+        border: 0;
+        box-shadow: none;
+        background: white;
+    }
+
+    input:-moz-read-only { /* For Firefox */
+    background-color: white !important;
+    }
+
+    input:read-only {
+    background-color: white !important;
+    }
+
 </style>
+
+<div class="card card-info mx-auto mt-3" style="max-width: 1024px">
+    <div class="card-header">
+       Thông tin khách hàng
+    </div>
+
+    <div class="card-body">
+        <form action="" method="post" id="customer-test-form">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+            <input type="hidden" name="id">
+            <div class="form-inline">
+                <label class="col-md-2 d-inline-block text-left">Mã DMS:</label>
+                <input type="test" class="col-md-10 form-control no-border" readonly  name="" value="{{$customer->DMS_code}}">
+            </div>
+            <div class="form-inline">
+                <label class="col-md-2 d-inline-block text-left">Mã CRM:</label>
+                <input type="test" class="col-md-10 form-control no-border" readonly name="" value="{{$customer->CRM_code}}">
+            </div>
+
+            <div class="form-inline">
+                <label class="col-md-2 d-inline-block text-left">Tên khách hàng:</label>
+                <input type="test" class="col-md-10 form-control  no-border" name="fullname" value="{{$customer->fullname}}" placeholder="Nhập tên khách hàng">
+            </div>
+            <div class="form-inline">
+                <label class="col-md-2 d-inline-block text-left">Địa chỉ:</label>
+                <input type="test" class="col-md-10 form-control  no-border" value="{{$customer->address}}" name="address" placeholder="Nhập địa chỉ khách hàng">
+            </div>
+            <div class="form-inline">
+                <label class="col-md-2 d-inline-block text-left">Số điện thoại:</label>
+                <input type="test" class="col-md-10 form-control no-border" value="{{$customer->phone}}" name="phone" placeholder="Nhập số điện thoại">
+            </div>
+            <div class="form-inline">
+                <label class="col-md-2 d-inline-block text-left">Địa bàn:</label>
+                <input type="test" class="col-md-10 form-control no-border" value="{{$customer->zone}}" name="zone" placeholder="Nhập tên địa bàn">
+            </div>
+    </div> 
+</div>
+</div>
+
 
 <div class="card card-info mx-auto mt-3" style="max-width: 1024px">
        <div class="card-header">

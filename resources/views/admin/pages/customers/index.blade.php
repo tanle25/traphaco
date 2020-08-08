@@ -442,6 +442,17 @@
             }
         });
     })
+    $(document).on('blur', '#customer-test-form input',function(e){
+        var url = $('#customer-test-form').attr('action');
+        var data = {
+            `${$(this).attr('name')}` : `${$(this).val()}`,
+        }
+        console.log('data');
+        $.ajax({
+            url: url,
+            data: 
+        })
+    });
 </script>
 
 @error('customer_list')

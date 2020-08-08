@@ -101,6 +101,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('admin.customer.edit');
     Route::post('/customer/destroy/{id}', 'CustomerController@destroy')->name('admin.customer.destroy');
     Route::post('customer/import', 'CustomerController@importExcel')->name('admin.customer.import');
+    Route::get('/customer/edit-field/{id}', 'CustomerController@editCustomerField')->name('admin.customer.edit_field');
 
 });
 
