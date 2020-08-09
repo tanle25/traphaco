@@ -32,9 +32,9 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        // foreach ($user as $key => $value) {
-        //     User::create($value);
-        // }
+        foreach ($user as $key => $value) {
+            User::create($value);
+        }
 
         // for ($i = 0; $i < $limit; $i++) {
         //     DB::table('users')->insert([
