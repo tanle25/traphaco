@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,9 +33,9 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        // foreach ($user as $key => $value) {
-        //     User::create($value);
-        // }
+        foreach ($user as $key => $value) {
+            User::create($value);
+        }
 
         // for ($i = 0; $i < $limit; $i++) {
         //     DB::table('users')->insert([
