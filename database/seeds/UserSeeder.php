@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,8 +12,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-        $limit = 200;
+        // $faker = Faker\Factory::create();
+        // $limit = 200;
 
         $user = [
             [
@@ -33,19 +32,19 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        foreach ($user as $key => $value) {
-            User::create($value);
-        }
+        // foreach ($user as $key => $value) {
+        //     User::create($value);
+        // }
 
-        for ($i = 0; $i < $limit; $i++) {
-            DB::table('users')->insert([
-                'fullname' => $faker->name,
-                'email' => $faker->unique()->email,
-                'username' => $faker->unique()->username,
-                'password' => Hash::make($faker->password),
-                'is_admin' => '0',
-            ]);
-        }
+        // for ($i = 0; $i < $limit; $i++) {
+        //     DB::table('users')->insert([
+        //         'fullname' => $faker->name,
+        //         'email' => $faker->unique()->email,
+        //         'username' => $faker->unique()->username,
+        //         'password' => Hash::make($faker->password),
+        //         'is_admin' => '0',
+        //     ]);
+        // }
 
     }
 }
