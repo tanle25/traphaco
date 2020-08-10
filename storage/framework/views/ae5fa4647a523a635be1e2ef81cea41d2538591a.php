@@ -4,6 +4,10 @@
 ##parent-placeholder-990972ed184ed228c47a5b9f7df38ea8328b55c4##
 <link rel="stylesheet" href="<?php echo e(asset('template/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')); ?>">
+<style>
+.modal { overflow: auto !important; }
+
+</style>
 <?php $__env->stopSection(); ?>
 
 
@@ -231,7 +235,6 @@
             success: function (data) {
                 if (data.error) {
                     swalToast(data.error, 'error');
-                    return;
                 }
                 swalToast(data.msg, 'success');
                 $('#customer-model').modal('hide');
@@ -357,9 +360,6 @@
         }
     })
 
-    async function createAndGetsurvey(url, data){
-        storeCustomer(url, data);
-    }
 
     $(document).on('click', '.customer-create-and-get-survey', function (e) {
         var url = $('#customer-form').attr('action');
@@ -369,10 +369,26 @@
             return obj;
         }, {});
         if (url == '<?php echo e(route("admin.customer.store")); ?>') {
-            storeCustomer(url, data);
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (data) {
+                    if (data.error) {
+                        swalToast(data.error, 'error');
+                    }
+                    swalToast(data.msg, 'success');
+                    $('#customer-model').modal('hide');
+                    $('#test-container').html('');
+                    $('#survey-form input[name="customer_id"]').val(data.customer.id);  
+                    $('#customer-survey-model').modal('show');
+                },
+                error: function (errors) {
+                    swalToast('Lỗi không xác định vui lòng kiểm tra lại các trường', 'error');
+                }
+            });
             $("#customer-table").DataTable().ajax.reload();
         }
-
     })
 
     $(document).on('click', '.customer-create', function (e) {

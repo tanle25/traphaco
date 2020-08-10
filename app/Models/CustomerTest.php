@@ -22,9 +22,14 @@ class CustomerTest extends Model
         return $this->belongsTo('App\Models\Survey', 'survey_id');
     }
 
-    public function answer()
+    public function answers()
     {
         return $this->hasMany('App\Models\CustomerAnswer', 'customer_test_id', 'id');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo('App\User', 'created_by');
     }
 
 }

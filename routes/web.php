@@ -104,6 +104,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('customer/import', 'CustomerController@importExcel')->name('admin.customer.import');
     Route::get('/customer/edit-field/{id}', 'CustomerController@editCustomerField')->name('admin.customer.edit_field');
 
+    Route::get('/customer/tests/index', 'CustomerTestController@index')->name('admin.customer_test.index');
+    Route::get('/customer/tests/list-test', 'CustomerTestController@listTest')->name('admin.customer_test.list_test');
+    Route::get('/customer/tests/details{survey_id}', 'CustomerTestController@details')->name('admin.customer_test.details');
+
+    Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');
+
 });
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
