@@ -8,34 +8,54 @@ use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class CustomerImport implements ToModel, WithChunkReading, ShouldQueue, SkipsOnFailure, WithValidation
+/**
+ *
+ *
+ *
+ *
+ */
+class CustomerImport implements ToModel, WithChunkReading, SkipsOnFailure, WithValidation, WithStartRow, ShouldQueue
 {
     use SkipsFailures;
+
     /**
      * @param array $row
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+
     public function model(array $row)
     {
-
-        return new Customer([
+        return Customer::firstOrCreate([
             'DMS_code' => $row[1],
             'CRM_code' => $row[2],
-            'fullname' => $row[3],
-            'address' => $row[4],
-            'phone' => $row[5],
-            'zone' => $row[6],
-            'sale_chanel' => $row[7],
+        ], [
+            'DMS_code' => $row[1],
+            'CRM_code' => $row[2],
+            'contract_code' => $row[3],
+            'pharmacy_name' => $row[4],
+            'fullname' => $row[5],
+            'address' => $row[6],
+            'phone' => $row[7],
+            'zone' => $row[8],
+            'sale_chanel' => $row[9],
         ]);
-
     }
 
     public function chunkSize(): int
     {
         return 1000;
+    }
+
+    /**
+     * @return int
+     */
+    public function startRow(): int
+    {
+        return 4;
     }
 
     public function rules(): array
