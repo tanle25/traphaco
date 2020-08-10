@@ -50,8 +50,7 @@ class CustomerController extends Controller
                 } else {
                     $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
 
-                    <span href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger
-                    customer-delete"><i class="far fa-file-alt"></i></span>';
+                    <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>';
                 }
 
                 return $tools;
@@ -90,8 +89,8 @@ class CustomerController extends Controller
             'zone.max' => 'Đại bàn tối đa 255 ký tự',
         ]);
 
-        Customer::create($request->all());
-        return ['msg' => 'Tạo mới thành công'];
+        $customer = Customer::create($request->all());
+        return ['msg' => 'Tạo mới thành công', 'customer' => $customer];
     }
 
     /**
@@ -229,11 +228,10 @@ class CustomerController extends Controller
         ]);
 
         $file = $request->file('customer_list');
-        Excel::queueImport(new CustomerImport, $file);
-
+        Excel::import(new CustomerImport, $file);
         try {
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            return redirect()->back()->with(['error' => 'Import dữ liệu không thành công  <br> Ban kiem tra lai dinh dang']);
+            return redirect()->back()->with(['error' => 'Import dữ liệu không thành công ']);
 
         }
         return redirect()->back()->with(['success' => 'Import dữ liệu thành công']);

@@ -85,7 +85,7 @@ class UserManageController extends Controller
         }
         $data['password'] = Hash::make($data['password']);
         $newUser = User::create($data);
-        return redirect()->back()->with(['success' => 'Tạo user mới thành công']);
+        return redirect()->route('admin.usermanage.index')->with(['success' => 'Tạo user mới thành công']);
     }
 
     /**

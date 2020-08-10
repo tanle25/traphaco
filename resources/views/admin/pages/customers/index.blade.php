@@ -21,15 +21,15 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Danh sách khách hàng</h3>
-
-                        @if (Auth::user()->is_admin == 1)
                         <span class="btn btn-success float-right customer-create" data-toggle="modal"
                             data-target="#customer-model">
-                            <i class="far fa-file nav-icon"> Thêm mới</i>
+                            <i class="far fa-file nav-icon"></i> Thêm mới
                         </span>
+                        @if (Auth::user()->is_admin == 1)
+                        
                         <a href="#" class="btn btn-success float-right mr-4" data-toggle="modal"
                         data-target="#import-model">
-                            <i class="far fa-file nav-icon"> Import Excel</i>
+                            <i class="far fa-file-excel"></i> </i> Import Excel
                         </a>
                         @endif
 
@@ -39,9 +39,11 @@
                         <table id="customer-table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>STT</th>
+                                    <th>S T T</th>
                                     <th>Mã DMS</th>
                                     <th>Mã CRM</th>
+                                    <th>Mã hợp đồng</th>
+                                    <th>Tên nhà thuốc</th>
                                     <th>Tên khách hàng</th>
                                     <th>Địa chỉ</th>
                                     <th>Số điện thoại</th>
@@ -113,6 +115,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success customer-form-btn">Lưu thay đổi</button>
+                <button type="button" class="btn btn-success customer-create-and-get-survey ">Lưu và tải khảo sát</button>
             </div>
         </div>
     </div>
@@ -135,13 +138,13 @@
 					<input type="hidden" name="created_by" value="{{Auth::user()->id}}">
 					<input type="hidden" name="customer_id" value="">
 					<div class="form-inline ">
-						<label class="mr-3" for="test-list">Chọn bài test</label>
+						<label class="mr-3" for="test-list">Chọn bài khảo sát</label>
 						<select id="test-list" name="survey_id" class="form-control col-md-7" >
 							@foreach ($survey as $item)
 							<option value="{{$item->id}}">{{$item->name}}</option>
 							@endforeach
 						</select>
-						<button class="ml-3 btn btn-success">Lấy bài test</button>
+						<button class="ml-3 btn btn-success">Lấy bài khảo sát</button>
 					</div>
 				</form>
 				<div id="test-container">
@@ -170,11 +173,11 @@
 				<form action="{{route('admin.customer.import')}}" id="import-form" method="post" enctype="multipart/form-data">
 					@csrf
                     <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
+                        <label for="exampleInputFile">Chọn file xlsx</label>
                         <div class="input-group">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" name="customer_list" id="exampleInputFile">
-                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            <label class="custom-file-label" for="exampleInputFile">Chọn file...</label>
                           </div>
                           <div class="input-group-append">
                             <button class="input-group-text" id="">Upload</button>
@@ -205,11 +208,14 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
+            scrollX: true,
             ajax: "{{route('admin.customer.list')}}",
             columns: [
                 { "data": "id" },
                 { "data": "DMS_code" },
                 { "data": "CRM_code" },
+                { "data": "contract_code" },
+                { "data": "pharmacy_name" },
                 { "data": "fullname" },
                 { "data": "address" },
                 { "data": "phone" },
@@ -342,7 +348,6 @@
             obj[item.name] = item.value;
             return obj;
         }, {});
-        console.log(data);
         if (url == '{{route("admin.customer.store")}}') {
             storeCustomer(url, data);
             $("#customer-table").DataTable().ajax.reload();
@@ -353,6 +358,24 @@
                 $("#customer-table").DataTable().ajax.reload();
             }, 500);
         }
+    })
+
+    async function createAndGetsurvey(url, data){
+        storeCustomer(url, data);
+    }
+
+    $(document).on('click', '.customer-create-and-get-survey', function (e) {
+        var url = $('#customer-form').attr('action');
+        var data = $('#customer-form').serializeArray();
+        data = data.reduce(function (obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+        if (url == '{{route("admin.customer.store")}}') {
+            storeCustomer(url, data);
+            $("#customer-table").DataTable().ajax.reload();
+        }
+
     })
 
     $(document).on('click', '.customer-create', function (e) {
@@ -374,6 +397,7 @@
 
         $('#customer-form').attr('action', '{{route("admin.customer.store")}}')
     })
+
 
 
     $(document).on('click', '.customer-delete', function (e) {

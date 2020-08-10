@@ -50,8 +50,6 @@
                   <p>Báo cáo khảo sát</p>
                 </a>
               </li>
-              
-
             </ul>
           </li>
 
@@ -160,6 +158,27 @@
           </li>
           <?php endif; ?>
           <?php if(Auth::user()->is_admin !== 1): ?>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-id-badge"></i> 
+              <p>
+                Khách hàng
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.customer.index')); ?>" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i> 
+                  <p>
+                    Danh sách khách hàng
+                  </p>
+                </a>
+              </li>
+
+              
+            </ul>
+          </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo e(route('answer.index', ['marked' => 0])); ?>" class="nav-link">
               <i class="nav-icon fas fa-marker"></i> 

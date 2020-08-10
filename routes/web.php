@@ -119,4 +119,14 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/result/index', 'ResultController@index')->name('result.index');
     Route::get('/result/list-test', 'ResultController@listResult')->name('result.list_test');
 
+    Route::get('customer/index', 'Admin\CustomerController@index')->name('admin.customer.index');
+    Route::post('customer/create-survey', 'Admin\CustomerController@createTestAndSend')->name('admin.customer.create_and_send_test');
+    Route::post('customer/store-answer', 'Admin\CustomerController@storeCustomerAnswer')->name('admin.customer.store_customer_answer');
+    Route::get('customer/list', 'Admin\CustomerController@list')->name('admin.customer.list');
+    Route::post('customer/store', 'Admin\CustomerController@store')->name('admin.customer.store');
+    Route::post('customer/update', 'Admin\CustomerController@update')->name('admin.customer.update');
+
+    Route::get('/customer/edit/{id}', 'Admin\CustomerController@edit')->name('admin.customer.edit');
+    Route::get('/customer/edit-field/{id}', 'Admin\CustomerController@editCustomerField')->name('admin.customer.edit_field');
+
 });
