@@ -45,7 +45,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="<?php echo e(route('result.index')); ?>" class="nav-link">
+                <a href="<?php echo e(route('admin.customer_test.index')); ?>" class="nav-link">
                   <i class="far fa-chart-bar nav-icon"></i>
                   <p>Báo cáo khảo sát</p>
                 </a>

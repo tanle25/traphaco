@@ -12,4 +12,9 @@ class CustomerAnswer extends Model
 
     public $timestamps = true;
 
+    public function option_choice_model()
+    {
+        return $this->belongsTo('App\Models\QuestionOption', 'option_choice', 'id');
+    }
+
 }

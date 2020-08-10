@@ -1,0 +1,148 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Exports\CustomerTestExport;
+use App\Http\Controllers\Controller;
+use App\Models\CustomerTest;
+use DataTables;
+use DB;
+use Excel;
+use Illuminate\Http\Request;
+
+class CustomerTestController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.pages.customer_tests.index');
+    }
+
+    public function listTest()
+    {
+        $tests = CustomerTest::join('survey', 'customer_tests.survey_id', '=', 'survey.id')
+            ->join('customers', 'customers.id', '=', 'customer_tests.customer_id')
+            ->select([
+                'survey.id as survey_id',
+                'survey.name as survey_name',
+                DB::raw('COUNT(distinct customers.id) as customer_count'),
+            ])
+            ->groupBy('survey.id');
+
+        return DataTables::eloquent($tests)
+            ->addColumn('action', function ($test) {
+                // if (Auth::user()->is_admin == 1) {
+                //     $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
+
+                //     <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>
+
+                //     <a href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger customer-delete"><i class="far fa-trash-alt"></i></a>';
+                // } else {
+                //     $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
+
+                //     <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>';
+                // }
+
+                $tools = '<span href="' . route('admin.customer_test.details', $test->survey_id) . '"class="btn text-success customer-edit"><i class="fas fa-chart-pie" data-toggle="modal" data-target="#customer-model" ></i></span>
+                    <a href="' . route('admin.customer_test.details.export', $test->survey_id) . '" class="btn text-danger customer-delete"><i class="far fa-file-excel"></i></a>';
+
+                return $tools;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param $survey_id
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return  null
+     */
+    public function exportAll($survey_id)
+    {
+
+        return Excel::download(new CustomerTestExport($survey_id), 'thong_ke.xlsx');
+
+        $tests = CustomerTest::join('survey', 'customer_tests.survey_id', '=', 'survey.id')
+            ->join('customers', 'customers.id', '=', 'customer_tests.customer_id')
+            ->where()
+            ->select([
+                'survey.id as survey_id',
+                'survey.name as survey_name',
+                DB::raw('COUNT(distinct customers.id) as customer_count'),
+            ])
+            ->groupBy('survey.id');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

@@ -163,7 +163,7 @@ return [
         | storing reading or downloading. Here you can customize that path.
         |
          */
-        'local_path' => storage_path(),
+        'local_path' => storage_path('temp'),
 
         /*
         |--------------------------------------------------------------------------

@@ -45,7 +45,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{route('result.index')}}" class="nav-link">
+                <a href="{{route('admin.customer_test.index')}}" class="nav-link">
                   <i class="far fa-chart-bar nav-icon"></i>
                   <p>Báo cáo khảo sát</p>
                 </a>
