@@ -46,6 +46,7 @@
                           </h3>
                           <!-- tools card -->
                           <div class="card-tools">
+                            <a class="btn btn-info" href="{{route('admin.survey_round.details.export', ['id' => $test->survey_round, 'candiate_id' => $candiate->id, 'survey_id' => $test->survey->id])}}">Xuất excel</a>
                             <button type="button" class="btn btn-info btn-sm" data-card-widget="collapse">
                               <i class="fas fa-minus"></i> Xem chi tiết
                             </button>
@@ -141,11 +142,11 @@
                               <tr>
                                 <th></th>
                                 <th>{{$section->title ?? ''}}</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th>{{$section->getScoreFromLevel($test->survey_round, $candiate->id, 3)}}</th>
+                                <th>{{$section->getScoreFromLevel($test->survey_round, $candiate->id, 2)}}</th>
+                                <th>{{$section->getScoreFromLevel($test->survey_round, $candiate->id, 1)}}</th>
+                                <th>{{$section->getAvgScore($test->survey_round, $candiate->id)}}</th>
+                                <th>{{$section->getScoreByPercent($test->survey_round, $candiate->id)}}</th>
                               </tr>
                               @foreach ($section->questions as $index => $question)
                               
@@ -161,8 +162,6 @@
                               </tr>
                               @endforeach
                               @endforeach
-
-                              
 
                             </thead>
                            </table>

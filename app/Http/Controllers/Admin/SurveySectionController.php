@@ -129,4 +129,5 @@ class SurveySectionController extends Controller
         return ['msg' => 'Xóa thành công section'];
 
     }
+
 }

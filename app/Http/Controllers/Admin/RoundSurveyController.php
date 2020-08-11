@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SurveyRoundExport;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Survey;
@@ -10,6 +11,7 @@ use App\Models\Test;
 use App\User;
 use DataTables;
 use DB;
+use Excel;
 use Illuminate\Http\Request;
 
 class RoundSurveyController extends Controller
@@ -209,9 +211,21 @@ class RoundSurveyController extends Controller
             ->select('*')
             ->groupBy('survey.id')
             ->get();
-        // dd($tests[0]->survey);
 
         return view('admin.pages.survey_round.user_details', compact('tests', 'candiate'));
+    }
+
+    public function exportUserTestDetails($id, $candiate_id, $survey_id)
+    {
+        return Excel::download(new SurveyRoundExport($id, $candiate_id, $survey_id), 'thong_ke_danh_gia.xlsx');
+
+        $tests = Test::with('survey')
+            ->where('tests.survey_round', $id)
+            ->where('tests.candiate_id', $candiate_id)
+            ->where('tests.survey_id', $survey_id)
+            ->select('*')
+            ->get();
+        dd($tests);
     }
 
 }

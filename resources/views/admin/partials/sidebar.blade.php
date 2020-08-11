@@ -134,7 +134,7 @@
                 <a href="{{route('answer.index', ['marked' => 0])}}" class="nav-link">
                   <i class="nav-icon fas fa-marker"></i> 
                   <p>
-                    Bài khảo sát chưa làm
+                    Bài đánh giá chưa làm
                   </p>
                 </a>
               </li>
@@ -143,7 +143,7 @@
                 <a href="{{route('answer.index', ['marked' => 1])}}" class="nav-link">
                   <i class="nav-icon fas fa-tasks"></i> 
                   <p>
-                    Bài khảo sát đã làm
+                    Bài đánh giá đã làm
                   </p>
                 </a>
               </li>
@@ -179,7 +179,7 @@
               {{-- <li class="nav-item">
                 <a href="{{route('result.index')}}" class="nav-link">
                   <i class="far fa-chart-bar nav-icon"></i>
-                  <p>Báo cáo khảo sát</p>
+                  <p>Báo cáo đánh giá</p>
                 </a>
               </li> --}}
             </ul>
@@ -188,7 +188,7 @@
             <a href="{{route('answer.index', ['marked' => 0])}}" class="nav-link">
               <i class="nav-icon fas fa-marker"></i> 
               <p>
-                Bài khảo sát chưa làm
+                Bài đánh giá chưa làm
               </p>
             </a>
           </li>
@@ -197,7 +197,7 @@
             <a href="{{route('answer.index', ['marked' => 1])}}" class="nav-link">
               <i class="nav-icon fas fa-tasks"></i> 
               <p>
-                Bài khảo sát đã làm
+                Bài đánh giá đã làm
               </p>
             </a>
           </li>

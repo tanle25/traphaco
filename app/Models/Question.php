@@ -54,6 +54,7 @@ class Question extends Model
         $score = round(($sum / $test->count()), 2);
         return $score;
     }
+
     public function getAvgScore($survey_round, $candiate)
     {
         $high_score = $this->getScoreFromLevel($survey_round, $candiate, 3);

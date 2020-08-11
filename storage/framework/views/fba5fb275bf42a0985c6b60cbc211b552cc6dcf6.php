@@ -134,7 +134,7 @@
                 <a href="<?php echo e(route('answer.index', ['marked' => 0])); ?>" class="nav-link">
                   <i class="nav-icon fas fa-marker"></i> 
                   <p>
-                    Bài khảo sát chưa làm
+                    Bài đánh giá chưa làm
                   </p>
                 </a>
               </li>
@@ -143,7 +143,7 @@
                 <a href="<?php echo e(route('answer.index', ['marked' => 1])); ?>" class="nav-link">
                   <i class="nav-icon fas fa-tasks"></i> 
                   <p>
-                    Bài khảo sát đã làm
+                    Bài đánh giá đã làm
                   </p>
                 </a>
               </li>
@@ -183,7 +183,7 @@
             <a href="<?php echo e(route('answer.index', ['marked' => 0])); ?>" class="nav-link">
               <i class="nav-icon fas fa-marker"></i> 
               <p>
-                Bài khảo sát chưa làm
+                Bài đánh giá chưa làm
               </p>
             </a>
           </li>
@@ -192,7 +192,7 @@
             <a href="<?php echo e(route('answer.index', ['marked' => 1])); ?>" class="nav-link">
               <i class="nav-icon fas fa-tasks"></i> 
               <p>
-                Bài khảo sát đã làm
+                Bài đánh giá đã làm
               </p>
             </a>
           </li>

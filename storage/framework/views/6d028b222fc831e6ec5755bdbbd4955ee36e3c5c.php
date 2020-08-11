@@ -50,6 +50,7 @@
                           </h3>
                           <!-- tools card -->
                           <div class="card-tools">
+                            <a class="btn btn-info" href="<?php echo e(route('admin.survey_round.details.export', ['id' => $test->survey_round, 'candiate_id' => $candiate->id, 'survey_id' => $test->survey->id])); ?>">Xuất excel</a>
                             <button type="button" class="btn btn-info btn-sm" data-card-widget="collapse">
                               <i class="fas fa-minus"></i> Xem chi tiết
                             </button>
@@ -92,11 +93,11 @@
                               <tr>
                                 <th></th>
                                 <th><?php echo e($section->title ?? ''); ?></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th><?php echo e($section->getScoreFromLevel($test->survey_round, $candiate->id, 3)); ?></th>
+                                <th><?php echo e($section->getScoreFromLevel($test->survey_round, $candiate->id, 2)); ?></th>
+                                <th><?php echo e($section->getScoreFromLevel($test->survey_round, $candiate->id, 1)); ?></th>
+                                <th><?php echo e($section->getAvgScore($test->survey_round, $candiate->id)); ?></th>
+                                <th><?php echo e($section->getScoreByPercent($test->survey_round, $candiate->id)); ?></th>
                               </tr>
                               <?php $__currentLoopData = $section->questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               
@@ -112,8 +113,6 @@
                               </tr>
                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                              
 
                             </thead>
                            </table>
