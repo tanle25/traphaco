@@ -68,16 +68,6 @@ class CustomerTestController extends Controller
     {
 
         return Excel::download(new CustomerTestExport($survey_id), 'thong_ke.xlsx');
-
-        $tests = CustomerTest::join('survey', 'customer_tests.survey_id', '=', 'survey.id')
-            ->join('customers', 'customers.id', '=', 'customer_tests.customer_id')
-            ->where()
-            ->select([
-                'survey.id as survey_id',
-                'survey.name as survey_name',
-                DB::raw('COUNT(distinct customers.id) as customer_count'),
-            ])
-            ->groupBy('survey.id');
     }
 
     /**

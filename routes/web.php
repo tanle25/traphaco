@@ -84,6 +84,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/round-survey/details/{id}', 'RoundSurveyController@details')->name('admin.survey_round.details');
     Route::get('/round-survey/details/{id}/get-table', 'RoundSurveyController@getSurveyRoundResultTable')->name('admin.survey_round.details_table');
     Route::get('/round-survey/details/{id}/candiate/{candiate_id}', 'RoundSurveyController@getUserDetails')->name('admin.survey_round.candiate_details');
+    Route::get('/round-survey/details/{id}/candiate/{candiate_id}/survey/{survey_id}', 'RoundSurveyController@exportUserTestDetails')->name('admin.survey_round.details.export');
 
     Route::get('/test/candiate/get-list', 'TestController@getCandiate')->name('admin.test.get_candiate');
     Route::get('/test/examiner/get-list', 'TestController@getExaminer')->name('admin.test.get_examiner');
@@ -108,6 +109,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/customer/tests/list-test', 'CustomerTestController@listTest')->name('admin.customer_test.list_test');
     Route::get('/customer/tests/details{survey_id}', 'CustomerTestController@details')->name('admin.customer_test.details');
 
+    //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');
 
 });
