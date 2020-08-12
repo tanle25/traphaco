@@ -135,4 +135,31 @@ class CustomerTestController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $customer_id
+     * @return \Illuminate\Http\Response
+     */
+    public function getTestsByCustomer($customer_id)
+    {
+        $customer_tests = CustomerTest::where('customer_id', $customer_id)->get()->sortByDesc('id');
+
+        return view('admin.pages.customer_tests.tests_by_customer', compact('customer_tests'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getTestDetails($id)
+    {
+        $test = CustomerTest::findOrFail($id);
+
+        return view('admin.pages.customer_tests.test_details', compact('test'));
+    }
+
 }
