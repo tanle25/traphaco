@@ -84,6 +84,6 @@ class Question extends Model
         $answer = CustomerAnswer::where('customer_test_id', $custom_test_id)
             ->where('question_id', $this->id)
             ->first();
-        return $answer->option_choice_model->id ?? null;
+        return $answer ?? [];
     }
 }

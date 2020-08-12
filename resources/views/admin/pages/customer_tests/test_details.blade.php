@@ -98,26 +98,36 @@
                        <h5> <strong> Câu hỏi:</strong>{{$question->content ?? ''}}</h5>
                    </div>
                    <div class="question-option pt-2">
+                       @if ($question->getAnswerByCustomerTest($test->id) && $question->getAnswerByCustomerTest($test->id)->comment == '' )
                        <div class="row option-wraper" style="font-size: 18px">  
-                           @foreach ($question->options as $option)
-                            @if ($question->comment == '')
+                            @foreach ($question->options as $option)
                             <div class="form-group col-md-3 d-flex justify-center align-center">
-                                @if ($question->getAnswerByCustomerTest($test->id) == $option->id)
+                                @if ($question->getAnswerByCustomerTest($test->id)->option_choice_model->id == $option->id)
                                 <input checked  class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                 @else
                                 <input disabled class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                 @endif
-
-
                                 <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                             </div>
-                            @endif
-                           @endforeach 
-                       </div>
-
+                            @endforeach
+                        </div>
+                        @else
+                        <div class="row option-wraper" style="font-size: 18px">  
+                            @foreach ($question->options as $option)
+                            <div class="form-group col-md-3 d-flex justify-center align-center">
+                                <input disabled class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                                <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
+                            </div>
+                            @endforeach 
+                        </div>
+                        @endif
+                      
                         @if ($question->can_comment == 1)
                         <div class="form-group">
-                            <textarea class="form-control comment" value="{{$question->comment}}" oninput="auto_grow(this)" rows="1" placeholder="Ý kiến khác"></textarea>
+                            <label for="">Ý kiến khác</label>
+                            <textarea readonly class="form-control comment" value="" oninput="auto_grow(this)" rows="1" placeholder="Ý kiến khác">@if ($question->getAnswerByCustomerTest($test->id)){{$question->getAnswerByCustomerTest($test->id)->comment}}
+                            @endif
+                            </textarea>
                         </div>
                         @endif
                    </div>

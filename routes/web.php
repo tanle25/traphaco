@@ -111,6 +111,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/customer/tests/{id}/details', 'CustomerTestController@getTestDetails')->name('admin.customer_test.details');
     Route::get('/customer/{customer_id}/tests', 'CustomerTestController@getTestsByCustomer')->name('admin.customer_test.get_test_by_customer');
+    Rotue::get('/customer/get-result-by-survey/{survey_id}', 'CustomerTestController@getTestsBySurvey')->name('admin.customer_test.get_result_by_survey');
 
     //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');
