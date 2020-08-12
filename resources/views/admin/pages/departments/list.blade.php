@@ -17,7 +17,7 @@
 @section('content')
   @include('admin.partials.content_header', ['title' => 'Quản lý phòng ban'])
   <div class="row">
-    <section class="col-lg-4 col-12">
+    <section class="col-lg-5 col-12">
       <div class="card">
 
         <div class="card-header">
@@ -83,7 +83,7 @@
       </div>
     </section>
     <!-- ./col -->
-    <section class="col-lg-8 col-12">
+    <section class="col-lg-7 col-12">
       <div class="card">
 
         <div class="card-header">

@@ -122,7 +122,7 @@
       </li> --}}
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-user"></i>
+          <i class="fas fa-user-circle"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           {{-- <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -141,7 +141,7 @@
           {{-- <div class="dropdown-divider"></div> --}}
           <form action="{{route('logout')}}" method="post">
             @csrf
-            <button type="submit" class="dropdown-item text-center">Đăng xuất</button>
+            <button type="submit" class="dropdown-item text-center"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
           </form>
         </div>
       </li>

@@ -120,9 +120,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success customer-form-btn">Lưu thay đổi</button>
-                <button type="button" class="btn btn-success customer-create-and-get-survey ">Lưu và tải khảo sát</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                <button type="button" class="btn btn-success customer-form-btn"><i class="fas fa-check-circle"></i> Lưu thay đổi</button>
+                <button type="button" class="btn btn-warning customer-create-and-get-survey "><i class="fas fa-download"></i> Lưu và tải khảo sát</button>
             </div>
         </div>
     </div>
