@@ -1,3 +1,25 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url('../fonts/opensans.woff') format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url('../fonts/opensans-bold.woff') format('woff');
+}
+html,body{
+    background-color:#e5e9ec;
+    color: #000;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    overflow: hidden;
+    overflow-x: hidden
+}
 .swal2-popup {
     display: none;
     position: relative;
@@ -12,4 +34,35 @@
     background: #fff;
     font-family: inherit;
     font-size: 1rem;
+}
+.layout-fixed .main-sidebar{
+    background-color: #1E202D;
+}
+.sidebar .os-content{
+    padding: 0 !important;
+}
+.sidebar .nav-pills .nav-link{
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 10px 15px;
+    line-height: 20px;
+}
+.sidebar .nav-sidebar .nav-item:hover>.nav-link, .sidebar .nav-sidebar .nav-item.menu-open>.nav-link, .sidebar .nav-sidebar .nav-item>.nav-link:focus{
+    background-color: #1B1B28;
+}
+.sidebar .nav-sidebar .nav-item.menu-open>.nav-link{
+    border-left: 2px solid #fff;
+}
+.nav-sidebar .menu-open>.nav-link i.right{
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.sidebar .nav-sidebar .nav-treeview li a{
+    padding-left: 45px;
+}
+#customer-model .modal-dialog{
+    max-width: 600px;
+}
+#customer-form .form-group{
+    padding: 0 15px;
 }

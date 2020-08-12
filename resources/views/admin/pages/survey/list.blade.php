@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Bài khỏa sát'])
+    @include('admin.partials.content_header', ['title' => 'Bài khảo sát'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -16,7 +16,7 @@
               <div class="card-header">
                 <h3 class="card-title">Danh sách bài khảo sát</h3>
                 <a href="{{route('admin.survey.create')}}" class="btn float-right btn-success">
-                  <i class="far fa-file nav-icon"> Thêm mới</i>
+                  <i class="fas fa-plus-circle nav-icon"></i> Thêm mới
                 </a>
               </div>
               <!-- /.card-header -->
