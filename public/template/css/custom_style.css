@@ -17,8 +17,7 @@ html,body{
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     height: 100%;
-    overflow: hidden;
-    overflow-x: hidden
+    overflow-x: hidden;
 }
 .swal2-popup {
     display: none;
@@ -35,6 +34,21 @@ html,body{
     font-family: inherit;
     font-size: 1rem;
 }
+.navbar-expand .navbar-nav li a{
+    font-size: 16px;
+}
+.navbar-expand .navbar-nav .dropdown-menu{
+    overflow: visible;
+    min-width: 160px;
+    -webkit-box-shadow: 0 7px 14px 0 rgba(59, 65, 94, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: 0 7px 14px 0 rgba(59, 65, 94, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+}
+.navbar-expand .navbar-nav .dropdown-menu .dropdown-item:hover,
+.navbar-expand .navbar-nav .dropdown-menu .dropdown-item:focus{
+    background-color: #fff0;
+    color: #ff0000;
+    outline: none;
+}
 .layout-fixed .main-sidebar{
     background-color: #1E202D;
 }
@@ -48,7 +62,7 @@ html,body{
     line-height: 20px;
 }
 .sidebar .nav-sidebar .nav-item:hover>.nav-link, .sidebar .nav-sidebar .nav-item.menu-open>.nav-link, .sidebar .nav-sidebar .nav-item>.nav-link:focus{
-    background-color: #1B1B28;
+    background-color: #14141b;
 }
 .sidebar .nav-sidebar .nav-item.menu-open>.nav-link{
     border-left: 2px solid #fff;
@@ -62,7 +76,26 @@ html,body{
 }
 #customer-model .modal-dialog{
     max-width: 600px;
+    margin: 30px auto;
 }
 #customer-form .form-group{
     padding: 0 15px;
+    display: flex;
+}
+#customer-form label{
+    width: 25%;
+    float: left;
+    line-height: 30px;
+}
+#customer-form .form-control{
+    width: 75%;
+    float: left;
+    border-color: #f6f8f9;
+    background-color: #f6f8f9;
+    transition: background .5s;
+}
+.table th, .table td{
+    font-size: 13px;
+    padding: 8px 10px;
+    vertical-align: inherit;
 }

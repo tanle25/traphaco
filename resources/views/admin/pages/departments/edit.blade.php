@@ -142,8 +142,8 @@
 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-traphaco">Thêm mới</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                  <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Thêm mới</button>
                 </div>
               </form>
             </div>
