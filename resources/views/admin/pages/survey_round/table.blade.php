@@ -169,7 +169,7 @@
 			}
       	},
       	columns: [
-			{ "data": "id", "name": "id"  },
+            { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
 			{ "data": "survey_name", "name": "survey_name" },
 			{ "data": "candiate", "name": "candiate" },
 			{ "data" :"examiner", "name": "examiner"},

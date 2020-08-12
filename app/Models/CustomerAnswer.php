@@ -17,4 +17,9 @@ class CustomerAnswer extends Model
         return $this->belongsTo('App\Models\QuestionOption', 'option_choice', 'id');
     }
 
+    public function customer_test()
+    {
+        return $this->belongsTo('App\Models\CustomerTest', 'customer_test_id', 'id');
+    }
+
 }

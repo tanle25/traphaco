@@ -86,4 +86,17 @@ class Question extends Model
             ->first();
         return $answer ?? [];
     }
+
+    public function getAllAnswer()
+    {
+        return CustomerAnswer::where('question_id', $this->id)->get();
+    }
+
+    public function getAnswerCount()
+    {
+        $count = CustomerAnswer::where('question_id', $this->id)->get()->count();
+
+        return $count;
+    }
+
 }

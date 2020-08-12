@@ -43,6 +43,7 @@ class UserManageController extends Controller
         // Đoạn code này dùng để setup dữ liệu data table
         // Link tham khảo: https://yajrabox.com/docs/laravel-datatables/master/filter-column
         return DataTables::eloquent($users)
+            ->addIndexColumn()
             ->filterColumn('department_name', function ($query, $keyword) {
                 $sql = "CONCAT(departments.department_name,' - ',user_position.name) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);

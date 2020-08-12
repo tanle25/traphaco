@@ -40,6 +40,7 @@ class CustomerController extends Controller
         $customers = Customer::query();
 
         return DataTables::eloquent($customers)
+            ->addIndexColumn()
             ->addColumn('action', function ($customer) {
                 if (Auth::user()->is_admin == 1) {
                     $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>

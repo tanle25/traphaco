@@ -70,7 +70,7 @@
         }
       } ,
       columns: [
-        { "data": "id" },
+        { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
         { "data": "survey_round" },
         { "data": "survey_name" },
         { "data": "candiate" },

@@ -32,6 +32,7 @@ class SurveyController extends Controller
         // Đoạn code này dùng để setup dữ liệu data table
         // Link tham khảo: https://yajrabox.com/docs/laravel-datatables/master/filter-column
         return DataTables::eloquent($survey)
+            ->addIndexColumn()
             ->addColumn('action', function ($survey) {
                 return '<a href="' . route('admin.survey.edit', $survey->id) . '"class="btn text-success"><i class="fas fa-edit"></i></a>
                         <span href="' . route('admin.survey.destroy', $survey->id) . '" class="btn text-danger remove-survey-btn"><i class="far fa-trash-alt"></i></span>';

@@ -59,16 +59,34 @@
                    <div class="question-option pt-2">
                        <div class="row option-wraper" style="font-size: 18px">  
                            @foreach ($question->options as $option)
-                           <div class="form-group col-md-3 d-flex justify-center align-center">
-                               <input class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
-                               <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
+                           <div class="form-group col-md-12 d-flex justify-center align-center">
+                                <input class="option-input" type="radio" style="height:23px; flex: 0 0 23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                                <span class="pl-2" style="line-height: 23px" >{{$option->content ?? ''}}
+                                <span>{{$option->countCustomerChosen()}}</span>
+
+                                @if ($question->getAnswerCount() !== 0)
+                                {{ round($option->countCustomerChosen() / $question->getAnswerCount() * 100, 2)}}%
+                                @endif
                            </div>
                            @endforeach 
                        </div>
 
                        @if ($question->can_comment == 1)
-                       <div class="form-group">
-                            <textarea class="form-control comment" value="" oninput="auto_grow(this)" rows="1" placeholder="Ý kiến khác"></textarea>
+                       <div class="form-group d-flex align-items-center ">
+                            <input class="option-input  align-middle" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                            <span class="d-block ml-2 mr-2" style="font-size: 18px">Khác</span>
+                            <div class="btn-group dropright">
+                                <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Chi tiết
+                                </button>
+                                <div class="dropdown-menu p-3 ">
+                                    @foreach ($question->getAllAnswer() as $answer)
+                                        @if ($answer->comment)
+                                        <span>{{$answer->customer_test->customer->fullname}} : {{$answer->comment}}</span> 
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>                           
                         </div>
                        @endif
                    </div>
