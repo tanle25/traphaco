@@ -22,7 +22,7 @@
               <div class="card-header">
                 <h3 class="card-title">Danh sách người dùng</h3>
                 <a href="{{route('admin.survey_round.create')}}" class="btn btn-success float-right">
-                  <i class="far fa-file nav-icon">  Thêm mới</i>
+                  <i class="fas fa-plus-circle nav-icon"></i> Thêm mới
                 </a>
               </div>
               <!-- /.card-header -->
