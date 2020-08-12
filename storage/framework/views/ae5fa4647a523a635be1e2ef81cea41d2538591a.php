@@ -6,7 +6,9 @@
 <link rel="stylesheet" href="<?php echo e(asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')); ?>">
 <style>
 .modal { overflow: auto !important; }
-
+.dataTables_scrollBody{
+    cursor:move;
+}
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -43,15 +45,16 @@
                         <table id="customer-table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>S T T</th>
-                                    <th>Mã DMS</th>
-                                    <th>Mã CRM</th>
-                                    <th>Mã hợp đồng</th>
-                                    <th>Tên nhà thuốc</th>
-                                    <th>Tên khách hàng</th>
+                                    <th >STT</th>
+                                    <th >Mã DMS</th>
+                                    <th >Mã CRM</th>
+                                    <th >Mã hợp đồng</th>
+                                    <th >Tên nhà thuốc</th>
+                                    <th >Tên khách hàng</th>
                                     <th>Địa chỉ</th>
                                     <th>Số điện thoại</th>
                                     <th>Địa bàn</th>
+                                    <th>Kênh bán hàng</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
@@ -205,14 +208,15 @@
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
     $(function () {
+
         $("#customer-table").dataTable({
             processing: true,
             serverSide: true,
-            autoWidth: false,
             scrollX: true,
+            //autoWidth:true,
             ajax: "<?php echo e(route('admin.customer.list')); ?>",
             columns: [
-                { "data": "id" },
+                { "data": "id",  },
                 { "data": "DMS_code" },
                 { "data": "CRM_code" },
                 { "data": "contract_code" },
@@ -221,7 +225,21 @@
                 { "data": "address" },
                 { "data": "phone" },
                 { "data": "zone" },
+                { "data": "sale_chanel"},
                 { "data": "action" },
+            ],
+            columnDefs: [
+                {width: "30px", targets: [0]},
+                {width: "57px", targets: [1,2]},
+                {width: "93px", targets: [3]},
+                {width: "150px", targets: [4]},
+                {width: "120px", targets: [5]},
+                {width: "120px", targets: [6]},
+                {width: "100px", targets: [7]},
+                {width: "70px", targets: [8]},
+                {width: "117px", targets: [9]},
+                {width: "117px", targets: [9]},
+                {width: "90px", targets: [10]},
             ]
         });
     });
@@ -257,6 +275,7 @@
                 }
                 swalToast(data.msg, 'success');
                 $('#customer-model').modal('hide');
+                $('#test-container').html('');
             },
             error: function (errors) {
                 swalToast('Lỗi không xác định vui lòng kiểm tra lại các trường', 'error');
@@ -296,6 +315,7 @@
                 swalToast('Không tìm thấy khách hàng', 'error');
             }
         });
+
     }
 
 	function getSurvey(url, data){
@@ -389,6 +409,18 @@
             });
             $("#customer-table").DataTable().ajax.reload();
         }
+
+        if (url == '<?php echo e(route("admin.customer.update")); ?>') {
+            updateCustomer(url, data);
+            setTimeout(function () {
+                $("#customer-table").DataTable().ajax.reload();
+            }, 500);
+            var customer_id = $('#customer-form input[name="id"]').val();
+            //open survey popup
+            $('#survey-form input[name="customer_id"]').val(customer_id);  
+            $('#customer-survey-model').modal('show');
+        }
+
     })
 
     $(document).on('click', '.customer-create', function (e) {
@@ -450,7 +482,36 @@
             });
     })
 // survey logic
+    //drag table
+    const slider = document.querySelector('.dataTables_scrollBody');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    $(document).on('mousedown', '.dataTables_scrollBody', function(e){
+        isDown = true;
+        startX = e.pageX - $(this).get(0).offsetLeft;
+        scrollLeft = $(this).get(0).scrollLeft;
+    });
+    $(document).on('mouseleave', '.dataTables_scrollBody', function(e){
+        isDown = false;
+    });
+    $(document).on('mouseup', '.dataTables_scrollBody', function(e){
+        isDown = false;
+    });
+    $(document).on('mousemove', '.dataTables_scrollBody', function(e){
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - $(this).get(0).offsetLeft;
+        const walk = (x - startX) * 1; //scroll-fast
+        console.log(x, walk);
+        //console.log($(this).get(0).scrollLeft);
+        $(this).get(0).scrollLeft = scrollLeft - walk;
+    });
+    
+    
 </script>
+
 
 
 

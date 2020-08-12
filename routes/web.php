@@ -107,7 +107,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/customer/tests/index', 'CustomerTestController@index')->name('admin.customer_test.index');
     Route::get('/customer/tests/list-test', 'CustomerTestController@listTest')->name('admin.customer_test.list_test');
-    Route::get('/customer/tests/details{survey_id}', 'CustomerTestController@details')->name('admin.customer_test.details');
+    Route::get('/customer/tests/index', 'CustomerTestController@index')->name('admin.customer_test.index');
+
+    Route::get('/customer/tests/{id}/details', 'CustomerTestController@getTestDetails')->name('admin.customer_test.details');
+    Route::get('/customer/{customer_id}/tests', 'CustomerTestController@getTestsByCustomer')->name('admin.customer_test.get_test_by_customer');
 
     //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');

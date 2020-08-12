@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\CustomerAnswer;
+use App\Models\CustomerTest;
 use App\Models\Test;
 use Illuminate\Database\Eloquent\Model;
 
@@ -74,5 +76,14 @@ class Question extends Model
     {
         $score = $this->getAvgScore($survey_round, $candiate) / 3 * 100;
         return round($score, 2);
+    }
+
+    public function getAnswerByCustomerTest($custom_test_id)
+    {
+        $custom_test = CustomerTest::findOrFail($custom_test_id);
+        $answer = CustomerAnswer::where('customer_test_id', $custom_test_id)
+            ->where('question_id', $this->id)
+            ->first();
+        return $answer->option_choice_model->id ?? null;
     }
 }
