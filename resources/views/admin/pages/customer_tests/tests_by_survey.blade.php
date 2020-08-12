@@ -4,6 +4,26 @@
 @parent
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<style>
+    textarea {
+        resize: none;
+        overflow: hidden;
+    }
+    .no-border {
+        border: 0;
+        box-shadow: none;
+        background: white;
+    }
+
+    input:-moz-read-only { /* For Firefox */
+    background-color: white !important;
+    }
+
+    input:read-only {
+    background-color: white !important;
+    }
+</style>
+
 @endsection
 
 
@@ -36,7 +56,7 @@
                         <div class="icon">
                           <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" data-toggle="modal" data-target="#result-model" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#result-model" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 
@@ -125,8 +145,8 @@
                   </button>
               </div>
               <div class="modal-body">
-                <div class="test-container">
-                    hello
+                <div class="result-container">
+                    @include('admin.pages.customer_tests.result', ['survey' => $customer_tests[0]->survey])
                 </div>
               </div>
           </div>
