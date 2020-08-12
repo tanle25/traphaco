@@ -1,6 +1,6 @@
 <table>
     <thead>
-        <tr style="tesxt-transform:upercase">
+        <tr>
             <th>STT</th>
             <th>MÃ DMS</th>
             <th>MÃ CRM</th>

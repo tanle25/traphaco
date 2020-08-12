@@ -47,7 +47,7 @@ class CustomerTestController extends Controller
                 //     <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>';
                 // }
 
-                $tools = '<span href="' . route('admin.customer_test.details', $test->survey_id) . '"class="btn text-success customer-edit"><i class="fas fa-chart-pie" data-toggle="modal" data-target="#customer-model" ></i></span>
+                $tools = '<a target="_blank" href="' . route('admin.customer_test.get_result_by_survey', $test->survey_id) . '"class="btn text-success customer-edit"><i class="fas fa-chart-pie" data-toggle="modal" data-target="#customer-model" ></i></a>
                     <a href="' . route('admin.customer_test.details.export', $test->survey_id) . '" class="btn text-danger customer-delete"><i class="far fa-file-excel"></i></a>';
 
                 return $tools;
@@ -144,7 +144,9 @@ class CustomerTestController extends Controller
      */
     public function getTestsByCustomer($customer_id)
     {
-        $customer_tests = CustomerTest::where('customer_id', $customer_id)->get()->sortByDesc('id');
+        $customer_tests = CustomerTest::where('customer_id', $customer_id)
+            ->get()
+            ->sortByDesc('id');
 
         return view('admin.pages.customer_tests.tests_by_customer', compact('customer_tests'));
     }
@@ -153,13 +155,26 @@ class CustomerTestController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsef
      */
     public function getTestDetails($id)
     {
         $test = CustomerTest::findOrFail($id);
 
         return view('admin.pages.customer_tests.test_details', compact('test'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getTestsBySurvey($survey_id)
+    {
+        $customer_tests = CustomerTest::where('survey_id', $survey_id)->get()->sortByDesc('id');
+
+        return view('admin.pages.customer_tests.tests_by_survey', compact('customer_tests'));
     }
 
 }
