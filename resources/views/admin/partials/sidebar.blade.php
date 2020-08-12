@@ -31,13 +31,12 @@
               <i class="nav-icon far fa-id-badge"></i> 
               <p>
                 Khách hàng
-                <i class="fas fa-angle-left right"></i>
+                <i class="fa fa-angle-right right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.customer.index')}}" class="nav-link">
-                  <i class="nav-icon fas fa-marker"></i> 
                   <p>
                     Danh sách khách hàng
                   </p>
@@ -46,7 +45,6 @@
 
               <li class="nav-item">
                 <a href="{{route('admin.customer_test.index')}}" class="nav-link">
-                  <i class="far fa-chart-bar nav-icon"></i>
                   <p>Báo cáo khảo sát</p>
                 </a>
               </li>
@@ -58,27 +56,24 @@
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Quản lý đánh giá
-                <i class="fas fa-angle-left right"></i>
+                <i class="fa fa-angle-right right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.survey_round.index')}}" class="nav-link">
-                  <i class="fas fa-list-ul nav-icon"></i>
                   <p>Đợt đánh giá</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('admin.survey.index')}}" class="nav-link">
-                  <i class="far fa-file nav-icon"></i>
                   <p>Bài đánh giá</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('result.index')}}" class="nav-link">
-                  <i class="far fa-chart-bar nav-icon"></i>
                   <p>Báo cáo đánh giá</p>
                 </a>
               </li>
@@ -89,10 +84,10 @@
           <li class="nav-item has-treeview">
             
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-tie"></i>
+              <i class="nav-icon fas fa-cogs"></i>
               <p>
                 Quản lý hệ thống
-                <i class="fas fa-angle-left right"></i> 
+                <i class="fa fa-angle-right right"></i> 
               </p>
             </a>
 
@@ -100,21 +95,18 @@
 
               <li class="nav-item">
                 <a href="{{route('admin.department.index')}}" class="nav-link">
-                  <i class="fas fa-user-plus nav-icon"></i>
                   <p>Quản lý phòng ban</p> 
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('admin.usermanage.index')}}" class="nav-link">
-                  <i class="fas fa-list-ul nav-icon"></i>
                   <p>Quản lý người dùng</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('admin.usermanage.index')}}" class="nav-link">
-                  <i class="fas fa-list-ul nav-icon"></i>
                   <p>Quản lý phân quyền</p>
                 </a>
               </li>
@@ -123,16 +115,15 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-id-badge"></i> 
+              <i class="nav-icon fas fa-user"></i> 
               <p>
                 Cá nhân
-                <i class="fas fa-angle-left right"></i>
+                <i class="fa fa-angle-right right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('answer.index', ['marked' => 0])}}" class="nav-link">
-                  <i class="nav-icon fas fa-marker"></i> 
                   <p>
                     Bài đánh giá chưa làm
                   </p>
@@ -141,7 +132,6 @@
 
               <li class="nav-item">
                 <a href="{{route('answer.index', ['marked' => 1])}}" class="nav-link">
-                  <i class="nav-icon fas fa-tasks"></i> 
                   <p>
                     Bài đánh giá đã làm
                   </p>
@@ -150,7 +140,6 @@
 
               <li class="nav-item">
                 <a href="{{route('result.index')}}" class="nav-link">
-                  <i class="far fa-chart-bar nav-icon"></i>
                   <p>Thống kê cá nhân</p>
                 </a>
               </li>
@@ -163,7 +152,7 @@
               <i class="nav-icon far fa-id-badge"></i> 
               <p>
                 Khách hàng
-                <i class="fas fa-angle-left right"></i>
+                <i class="fa fa-angle-right right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">

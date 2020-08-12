@@ -29,13 +29,13 @@
                         <h3 class="card-title">Danh sách khách hàng</h3>
                         <span class="btn btn-success float-right customer-create" data-toggle="modal"
                             data-target="#customer-model">
-                            <i class="far fa-file nav-icon"></i> Thêm mới
+                            <i class="fas fa-plus-circle"></i> Thêm mới
                         </span>
                         @if (Auth::user()->is_admin == 1)
                         
                         <a href="#" class="btn btn-success float-right mr-4" data-toggle="modal"
                         data-target="#import-model">
-                            <i class="far fa-file-excel"></i> </i> Import Excel
+                            <i class="fas fa-file-excel"></i> Import Excel
                         </a>
                         @endif
 
