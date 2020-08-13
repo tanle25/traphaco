@@ -219,7 +219,7 @@
             autoWidth:false,
             ajax: "{{route('admin.customer.list')}}",
             columns: [
-                { "data": "id",  },
+                { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
                 { "data": "DMS_code" },
                 //{ "data": "CRM_code" },
                 { "data": "contract_code" },

@@ -24,7 +24,7 @@ function getExaminerList(testId) {
     }
       },
       columns: [
-    { "data": "id" },
+    { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
     { "data": "name" },
     { "data": "department_name" },
     { "data" :"status"},

@@ -62,7 +62,7 @@
       autoWidth:false,
       ajax: "{{route('result.list_test')}}",
       columns: [
-        { "data": "id" },
+        { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
         { "data": "survey_round_name" },
         { "data": "test_list" },
         { "data": "total_score" },

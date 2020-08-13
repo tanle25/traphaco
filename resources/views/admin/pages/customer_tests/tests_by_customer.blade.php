@@ -32,7 +32,9 @@
                       <tr>
                         <th>ID</th>
                         <th>Tên bài khảo sát</th>
-                        <th>Người tạo</th>
+                        <th>Người được khảo sát</th>
+                        <th>Người khảo sát</th>
+                        <th>Ngày khảo sát</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
@@ -40,8 +42,10 @@
                       @foreach ($customer_tests as $index => $test)
                         <tr>
                           <td>{{$index + 1}}</td>
-                          <td>{{$test->survey->name}}</td>
-                          <td>{{$test->author->fullname}}</td>
+                          <td>{{$test->survey->name ?? ''}}</td>
+                          <td>{{$test->customer->fullname ?? ''}}</td>
+                          <td>{{$test->author->fullname ?? ''}}</td>
+                          <td>{{Carbon\Carbon::parse($test->created_at)->format('d/m/Y H:s:a')   }}</td>
                           <td>
                             <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
                             <a href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></a>

@@ -61,7 +61,7 @@
       autoWidth:false,
       ajax: "{{route('admin.customer_test.list_test')}}",
       columns: [
-        { "data": "survey_id" },
+        { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
         { "data": "survey_name" },
         { "data": "customer_count" },
         { "data": "action"},

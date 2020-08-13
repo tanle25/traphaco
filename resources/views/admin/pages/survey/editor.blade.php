@@ -56,6 +56,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-10 question-title">
                                         <textarea oninput="auto_grow(this)" name="" id="" cols="30" rows="1" placeholder="Câu hỏi">{{$question->content}}</textarea>
+                                        <div class="focus-line"></div>
                                         {{-- <input type="te" class="" id="" placeholder="Câu hỏi"> --}}
                                     </div>
                                     <div class="question-remove">
@@ -131,12 +132,13 @@
     </div>
     {{-- Menu tool --}}
     <div class="question-tool-menu card" data-csstransition="false">
-        <div class="question-tool-menu-btn add-section-btn" data-toggle="tooltip" data-placement="right" title="Tạo mới section">   
+        <div class="tooltip">
             <i class="far fa-file" ></i>
+            <span class="tooltiptext">Tạo mới section</span>
         </div>
-
-        <div class="question-tool-menu-btn add-question-btn" data-toggle="tooltip" data-placement="right" title="Tạo mới câu hỏi">   
-            <i class="far fa-edit"></i>
+        <div class="tooltip">
+            <i class="fas fa-plus-circle"></i>
+            <span class="tooltiptext">Tạo mới câu hỏi</span>
         </div>
     </div>
 </div> 

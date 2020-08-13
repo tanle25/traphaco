@@ -46,6 +46,7 @@ class TestController extends Controller
         // Đoạn code này dùng để setup dữ liệu data table
         // Link tham khảo: https://yajrabox.com/docs/laravel-datatables/master/filter-column
         return DataTables::eloquent($tests)
+            ->addIndexColumn()
             ->filterColumn('candiate', function ($query, $keyword) {
                 $sql = "CONCAT(c.fullname, '   ',  COALESCE(d1.department_name, ''),'  ',COALESCE(p1.name, '')) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);

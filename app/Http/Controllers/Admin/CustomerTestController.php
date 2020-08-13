@@ -34,6 +34,7 @@ class CustomerTestController extends Controller
             ->groupBy('survey.id');
 
         return DataTables::eloquent($tests)
+            ->addIndexColumn()
             ->addColumn('action', function ($test) {
                 // if (Auth::user()->is_admin == 1) {
                 //     $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>

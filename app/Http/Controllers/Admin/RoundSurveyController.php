@@ -31,6 +31,7 @@ class RoundSurveyController extends Controller
         $survey_rounds = SurveyRound::query();
 
         return DataTables::eloquent($survey_rounds)
+            ->addIndexColumn()
             ->addColumn('action', function (SurveyRound $surveyround) {
                 return '<a href="' . route('admin.survey_round.details', $surveyround->id) . '"class="btn text-success"><i class="far fa-chart-bar"></i></a>
                         <a href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success"><i class="fas fa-edit"></i></a>
@@ -178,6 +179,7 @@ class RoundSurveyController extends Controller
                 'users.fullname as candiate_name',
             ]);
         return DataTables::eloquent($list_candiate)
+            ->addIndexColumn()
             ->addColumn('action', function ($candiate) {
                 $link = route('admin.survey_round.candiate_details', ['candiate_id' => $candiate->candiate_id, 'id' => $candiate->survey_round_id]);
                 return '<a href="' . $link . '"class="btn text-success"><i class="far fa-chart-bar"></i></a>';

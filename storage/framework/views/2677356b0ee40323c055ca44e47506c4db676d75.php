@@ -23,14 +23,14 @@
       
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-user"></i>
+          <i class="fas fa-user-circle"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           
           
           <form action="<?php echo e(route('logout')); ?>" method="post">
             <?php echo csrf_field(); ?>
-            <button type="submit" class="dropdown-item text-center">Đăng xuất</button>
+            <button type="submit" class="dropdown-item text-center"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
           </form>
         </div>
       </li>

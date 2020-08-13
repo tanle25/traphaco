@@ -30,7 +30,7 @@
       autoWidth:false,
       ajax: "{{route('admin.survey.list_survey')}}",
       columns: [
-        { "data": "id" },
+        { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
         { "data": "name" },
         { "data": "created_by" },
         { "data" :"action"}

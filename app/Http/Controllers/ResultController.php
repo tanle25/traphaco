@@ -31,6 +31,7 @@ class ResultController extends Controller
             ->groupBy('survey_round.id');
 
         return DataTables::eloquent($survey_rounds)
+            ->addIndexColumn()
             ->addColumn('test_list', function (SurveyRound $survey_round) {
                 $candiate = Auth::user();
                 $tests = Test::where('candiate_id', '=', $candiate->id)
