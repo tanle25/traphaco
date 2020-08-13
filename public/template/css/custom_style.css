@@ -63,8 +63,19 @@ html,body{
     transform: rotate(90deg);
 }
 .sidebar .nav-sidebar .nav-treeview li a{
+    position: relative;
     display: block;
     padding-left: 45px;
+}
+.sidebar .nav-sidebar .nav-treeview li a:before{
+    position: absolute;
+    content: "\f111";
+    left: 25px;
+    display: inline-block;
+    font-size: 8px;
+    top: auto;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
 }
 #customer-model .modal-dialog{
     max-width: 600px;
@@ -103,6 +114,9 @@ html,body{
     background: #008a43;
     color: white;
 }
+.section-wraper.active .callout{
+    border-color: #008a43;
+}
 .section-title input {
     height: 60px;
     font-size: 28px;
@@ -139,7 +153,7 @@ html,body{
 }
 .question-title .focus-line{
     top: auto;
-    bottom: 0;
+    bottom: 5px;
 }
 
 .section-title{
@@ -214,7 +228,8 @@ textarea:focus{
     width: 30px;
     line-height: 45px;
     color: #757575;
-    font-size: 23px;
+    font-size: 18px;
+    text-align: center;
 
 }
 .question-title input::placeholder{
@@ -321,6 +336,15 @@ textarea:focus{
 .question-option-add:hover{
     color: #000;
 }
+#result-model .card-header, #test-model .card-header{
+    background-color: #28a745;
+}
+#result-model .card-header h2, #test-model .card-header h2{
+    font-size: 24px;
+}
+#result-model .card-header h5, #test-model .card-header h5{
+    font-size: 14px;
+}
 #result-model .section-header h3, #test-model .section-header h3{
     font-size: 20px;
     font-weight: 700;
@@ -333,23 +357,35 @@ textarea:focus{
     flex: 0 0 18px;
 }
 #result-model .question-option span.pl-2{
-    display: block;
+    display: flex;
     position: relative;
     width: 100%;
 }
 #result-model .question-option span.pl-2 span{
     display: inline-block;
-    width: 20%;
+    width: 10%;
     text-align: center;
 }
+#result-model .question-option span.pl-2 span:first-child{
+    text-align: left;
+    display: inline-block;
+    width: 80%;
+}
 #result-model .question-option span.number{
-    position: absolute;
-    right: 20%;
     color: #f00;
 }
-#result-model .question-option span.percent{
-    float: right;
-}
 #result-model .question-option .btn-group .dropdown-menu{
-
+    min-width: 600px;
+    height: 200px;
+    overflow-y: scroll;
+    padding: 0 !important;
+}
+#result-model .question-option .btn-group .dropdown-menu span{
+    display: block;
+    line-height: 30px;
+    background-color: #eee;
+    padding-left: 10px;
+}
+#result-model .question-option .btn-group .dropdown-menu span:nth-child(odd){
+    background-color: #fff;
 }
