@@ -54,18 +54,19 @@
            @foreach ($section->questions as $question)
                <div class="mb-3 question" data-question-id="{{$question->id}}">
                    <div class="question-title">
-                       <h5> <strong> Câu hỏi:</strong>{{$question->content ?? ''}}</h5>
+                       <h5> <strong> Câu hỏi: </strong>{{$question->content ?? ''}}</h5>
                    </div>
                    <div class="question-option pt-2">
-                       <div class="row option-wraper" style="font-size: 18px">  
+                       <div class="row option-wraper">  
                            @foreach ($question->options as $option)
                            <div class="form-group col-md-12 d-flex justify-center align-center">
-                                <input class="option-input" type="radio" style="height:23px; flex: 0 0 23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
-                                <span class="pl-2" style="line-height: 23px" >{{$option->content ?? ''}}
-                                <span>{{$option->countCustomerChosen()}}</span>
-
+                                <input class="option-input" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                                <span class="pl-2" >{{$option->content ?? ''}}
+                                <span class="number">{{$option->countCustomerChosen()}}</span>
+                                <span class="percent">
                                 @if ($question->getAnswerCount() !== 0)
                                 {{ round($option->countCustomerChosen() / $question->getAnswerCount() * 100, 2)}}%
+                                </span>
                                 @endif
                            </div>
                            @endforeach 
@@ -73,8 +74,8 @@
 
                        @if ($question->can_comment == 1)
                        <div class="form-group d-flex align-items-center ">
-                            <input class="option-input  align-middle" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
-                            <span class="d-block ml-2 mr-2" style="font-size: 18px">Khác</span>
+                            <input class="option-input  align-middle" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                            <span class="d-block ml-2 mr-2">Khác</span>
                             <div class="btn-group dropright">
                                 <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Chi tiết

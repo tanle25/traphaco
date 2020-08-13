@@ -1,19 +1,10 @@
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url('../fonts/opensans.woff') format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url('../fonts/opensans-bold.woff') format('woff');
-}
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
 html,body{
     background-color:#e5e9ec;
-    color: #000;
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333;
+    font-family: "Open Sans","Helvetica Neue", sans-serif;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     height: 100%;
@@ -72,6 +63,7 @@ html,body{
     transform: rotate(90deg);
 }
 .sidebar .nav-sidebar .nav-treeview li a{
+    display: block;
     padding-left: 45px;
 }
 #customer-model .modal-dialog{
@@ -90,12 +82,274 @@ html,body{
 #customer-form .form-control{
     width: 75%;
     float: left;
-    border-color: #f6f8f9;
-    background-color: #f6f8f9;
+    border-color: #ced4da;
+    background-color: #ffffff;
     transition: background .5s;
 }
 .table th, .table td{
     font-size: 13px;
     padding: 8px 10px;
     vertical-align: inherit;
+}
+#department-list .remove-department{
+    margin-left: 10px;
+}
+.section-wraper .sortable-handle{
+    background-color: #e9ecef;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.section-wraper.active .sortable-handle{
+    background: #008a43;
+    color: white;
+}
+.section-title input {
+    height: 60px;
+    font-size: 28px;
+    border-width: 0 0 1px 0;
+    padding-left: 0;
+    border-color: rgb(148, 143, 143); 
+    position: relative;
+    width: 100%;
+    position: relative;
+}
+.section-title input:focus, .question-title textarea:focus{
+    border: none;
+}
+.section-title input:focus + .focus-line, .question-title textarea:focus + .focus-line{
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+.focus-line{
+    position: absolute;
+    display: block;
+    left: 8px;
+    top: 100%;
+    width: 0%;
+    border-bottom: 1px solid #008a43;
+    opacity: 0;
+    transition: all 0.4s;
+    z-index: 100;
+}
+.question-title .focus-line{
+    top: auto;
+    bottom: 0;
+}
+
+.section-title{
+    position: relative;
+    margin-bottom: 20px;
+}
+.section-title input:focus{
+    outline: none;
+}
+
+.section-title:focus::before{
+    width: 100%;
+}
+
+.section-title input ::placeholder{
+    font-size: 40px;
+}
+
+.section-remove, .question-remove{
+    text-align: center;
+    line-height: 60px;
+    height: 60px;
+    width: 60px;
+}
+.question-remove{
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+}
+.section-header textarea {
+    border-width: 0 0 1px 0;
+    padding-left: 0;
+    border-color: rgb(148, 143, 143); 
+    position: relative;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    height: auto;
+}
+textarea{
+    resize: none;
+    overflow: hidden;
+}
+
+textarea:focus{
+    outline: none;
+}
+
+.question-wraper input{
+    height: 45px;
+    font-size: 14px;
+    padding-left: 0;
+    border-color: #008a43;
+    position: relative;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    border-width: 0 0 0 0;
+}
+
+.question-wraper input:focus{
+    outline: none;
+    border-width: 0 0 1px 0;
+}
+
+.question-option:hover input {
+    border-width: 0 0 1px 0;
+}
+
+.question-option-label{
+    height: 45px;
+    width: 30px;
+    line-height: 45px;
+    color: #757575;
+    font-size: 23px;
+
+}
+.question-title input::placeholder{
+    font-size: 25px;
+}
+
+.question-title input, {
+    font-size: 25px;
+    background-color: #F8F9FA;
+}
+.question-title textarea{
+    line-height: 45px;
+    font-size: 18px;
+    border-width: 0 0 1px 0;
+    padding-left: 0;
+    border-color: rgb(148, 143, 143); 
+    position: relative;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.question-title{
+    position: relative;
+    margin-right: 15px;
+}
+
+.question-tool{
+    position: relative;
+}
+.question-tool .editor-body .card{
+    box-shadow: none;
+}
+.question-tool .callout{
+    box-shadow: 0 1px 3px -1px rgba(0,0,0,.12), 0 1px 2px -1px rgba(0,0,0,.24);
+}
+.question-tool .section-header.callout{
+    border-top-left-radius: 0;
+}
+.question-tool-menu{
+    position: absolute;
+    left:101%;
+    margin-top: 50px; 
+    padding: 20px 10px;
+}
+.question-tool-menu-btn{
+    margin-bottom: 20px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+
+}
+.question-tool-menu i {
+    display: block;
+    font-size: 20px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+}
+.question-tool-menu i:hover{
+    background-color: #e9ecef;
+}
+.sortable-handle{
+    cursor: move;
+}
+.tooltip {
+    color: #5f6368;
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 105%;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #000 transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+.question-option-add:hover{
+    color: #000;
+}
+#result-model .section-header h3, #test-model .section-header h3{
+    font-size: 20px;
+    font-weight: 700;
+}
+#result-model .question .question-title h5, #test-model .question .question-title h5{
+    font-size: 16px;
+}
+#result-model .option-input, #test-model .option-input{
+    height: 18px;
+    flex: 0 0 18px;
+}
+#result-model .question-option span.pl-2{
+    display: block;
+    position: relative;
+    width: 100%;
+}
+#result-model .question-option span.pl-2 span{
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+}
+#result-model .question-option span.number{
+    position: absolute;
+    right: 20%;
+    color: #f00;
+}
+#result-model .question-option span.percent{
+    float: right;
+}
+#result-model .question-option .btn-group .dropdown-menu{
+
 }
