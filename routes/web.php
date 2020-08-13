@@ -144,4 +144,6 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/customer/tests/list-test', 'Admin\CustomerTestController@listTest')->name('admin.customer_test.list_test');
     Route::get('/customer/tests/index', 'Admin\CustomerTestController@index')->name('admin.customer_test.index');
 
+    Route::post('/customer/tests/delete/{id}', 'Admin\CustomerTestController@destroy')->name('admin.customer_test.destroy');
+
 });

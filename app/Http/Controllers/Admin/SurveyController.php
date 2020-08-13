@@ -39,7 +39,7 @@ class SurveyController extends Controller
             })
             ->addColumn('created_by', function ($survey) {
                 if ($survey->author) {
-                    return $survey->author->fullname;
+                    return $survey->author->fullname ?? '';
                 }
                 return null;
             })

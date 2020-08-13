@@ -137,7 +137,7 @@
             var questionId = $(this).data('question-id');
             answer.push({
                 question_id: questionId,
-                option_id: $(this).find('.option-input:checked').attr('value') ?? '',
+                option_id: $(this).find('.option-input:checked').attr('value') ? $(this).find('.option-input:checked').attr('value') :  '',
                 comment: $(this).find('.comment').val() ?? '',
             });     
         })

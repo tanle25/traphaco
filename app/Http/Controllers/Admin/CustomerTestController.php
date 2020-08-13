@@ -134,7 +134,9 @@ class CustomerTestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CustomerTest::findOrFail($id)->delete();
+
+        return ['success' => 'Xóa bài khảo sát thành công'];
     }
 
     /**
