@@ -105,14 +105,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('customer/import', 'CustomerController@importExcel')->name('admin.customer.import');
     Route::get('/customer/edit-field/{id}', 'CustomerController@editCustomerField')->name('admin.customer.edit_field');
 
-    Route::get('/customer/tests/index', 'CustomerTestController@index')->name('admin.customer_test.index');
-    Route::get('/customer/tests/list-test', 'CustomerTestController@listTest')->name('admin.customer_test.list_test');
-    Route::get('/customer/tests/index', 'CustomerTestController@index')->name('admin.customer_test.index');
-
-    Route::get('/customer/tests/{id}/details', 'CustomerTestController@getTestDetails')->name('admin.customer_test.details');
-    Route::get('/customer/{customer_id}/tests', 'CustomerTestController@getTestsByCustomer')->name('admin.customer_test.get_test_by_customer');
-    Route::get('/customer/get-result-by-survey/{survey_id}', 'CustomerTestController@getTestsBySurvey')->name('admin.customer_test.get_result_by_survey');
-
     //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');
 
@@ -142,5 +134,14 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
 
     Route::get('/customer/edit/{id}', 'Admin\CustomerController@edit')->name('admin.customer.edit');
     Route::get('/customer/edit-field/{id}', 'Admin\CustomerController@editCustomerField')->name('admin.customer.edit_field');
+
+    //customer test
+    Route::get('/customer/tests/{id}/details', 'Admin\CustomerTestController@getTestDetails')->name('admin.customer_test.details');
+    Route::get('/customer/{customer_id}/tests', 'Admin\CustomerTestController@getTestsByCustomer')->name('admin.customer_test.get_test_by_customer');
+    Route::get('/customer/get-result-by-survey/{survey_id}', 'Admin\CustomerTestController@getTestsBySurvey')->name('admin.customer_test.get_result_by_survey');
+
+    Route::get('/customer/tests/index', 'Admin\CustomerTestController@index')->name('admin.customer_test.index');
+    Route::get('/customer/tests/list-test', 'Admin\CustomerTestController@listTest')->name('admin.customer_test.list_test');
+    Route::get('/customer/tests/index', 'Admin\CustomerTestController@index')->name('admin.customer_test.index');
 
 });
