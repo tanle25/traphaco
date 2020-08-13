@@ -40,6 +40,9 @@
                     </thead>
                     <tbody>
                       @foreach ($customer_tests as $index => $test)
+                        @if (Auth::user()->is_admin !== 1 && Auth::user()->id !== $test->author->id )
+                          @break                           
+                        @endif
                         <tr>
                           <td>{{$index + 1}}</td>
                           <td>{{$test->survey->name ?? ''}}</td>
