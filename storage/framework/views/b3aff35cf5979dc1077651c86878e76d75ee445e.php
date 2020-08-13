@@ -51,27 +51,27 @@
 
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Tên khách hàng:</label>
-                <input type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="fullname" value="<?php echo e($customer->fullname); ?>" placeholder="Nhập tên khách hàng">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="fullname" value="<?php echo e($customer->fullname); ?>" placeholder="Nhập tên khách hàng">
                 <label for="test-fullname-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Tên nhà thuốc:</label>
-                <input type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="pharmacy_name" value="<?php echo e($customer->pharmacy_name); ?>" placeholder="Nhập tên hiệu thuốc">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="pharmacy_name" value="<?php echo e($customer->pharmacy_name); ?>" placeholder="Nhập tên hiệu thuốc">
                 <label for="test-fullname-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 col-12 d-inline-block text-left">Địa chỉ:</label>
-                <input type="test" id="test-address-value" class="col-md-9 col-11 form-control  no-border" value="<?php echo e($customer->address); ?>" name="address" placeholder="Nhập địa chỉ khách hàng">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-address-value" class="col-md-9 col-11 form-control  no-border" value="<?php echo e($customer->address); ?>" name="address" placeholder="Nhập địa chỉ khách hàng">
                 <label for="test-address-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Số điện thoại:</label>
-                <input type="test" id="test-phone-value" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->phone); ?>" name="phone" placeholder="Nhập số điện thoại">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-phone-value" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->phone); ?>" name="phone" placeholder="Nhập số điện thoại">
                 <label for="test-phone-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Địa bàn:</label>
-                <input id="test-zone-value" type="test" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->zone); ?>" name="zone" placeholder="Nhập tên địa bàn">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> id="test-zone-value" type="test" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->zone); ?>" name="zone" placeholder="Nhập tên địa bàn">
                 <label for="test-zone-value" class="col-1">...</label>
             </div>
     </div> 
@@ -193,7 +193,13 @@
             url: url,
             data: data,
             success: function(data){
-                swalToast(data.success, 'success');
+                if (data.error) {
+                    swalToast(data.error, 'error');
+                }
+                if (data.success) {
+                    swalToast(data.success);
+                }
+
                 setTimeout(function () {
                     $("#customer-table").DataTable().ajax.reload();
                 }, 500);

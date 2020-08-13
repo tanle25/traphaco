@@ -51,7 +51,9 @@ class CustomerController extends Controller
 
                     <a href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger customer-delete"><i class="far fa-trash-alt"></i></a>';
                 } else {
-                    $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
+                    // $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
+
+                    $tools = '<a target="_blank" href="' . route('admin.customer_test.get_test_by_customer', $customer->id) . '" class="btn text-primary"><i class="far fa-chart-bar"></i></i></a>
 
                     <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>';
                 }
@@ -242,6 +244,9 @@ class CustomerController extends Controller
 
     public function editCustomerField(Request $request, $id)
     {
+        if (Auth::user()->is_admin !== 1) {
+            return ['error' => 'Bạn không có quyền sửa'];
+        }
         $request->validate([
             'phone' => 'max:20|string',
             'zone' => 'max:50|string',
@@ -253,6 +258,7 @@ class CustomerController extends Controller
             'fullname' => 'Tên khách hàn tối đa 50 ký tự',
             'address.max' => 'Địa chỉ khách hàng tối đa 255 ký tự',
         ]);
+
         $customer = Customer::findOrFail($id);
 
         if ($request->has('fullname')) {

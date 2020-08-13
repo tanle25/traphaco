@@ -116,6 +116,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');
 
+    Route::get('/history', 'HistoryLogController@index')->name('history.index');
+
 });
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
