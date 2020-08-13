@@ -89,6 +89,7 @@
                     </thead>
                     <tbody>
                       @foreach ($customer_tests as $index => $test)
+                        @if (Auth::user()->is_admin == 1)
                         <tr>
                           <td>{{$index + 1}}</td>
                           <td>{{$test->survey->name}}</td>
@@ -97,7 +98,9 @@
                             <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
                             <a href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></a>
                           </td>
-                        </tr>
+                        </tr> 
+                        @endif
+                        
                       @endforeach
                     </tbody>
                 </table>

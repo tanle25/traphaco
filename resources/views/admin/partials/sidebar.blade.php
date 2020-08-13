@@ -48,6 +48,7 @@
                   <p>Báo cáo khảo sát</p>
                 </a>
               </li>
+
             </ul>
           </li>
 
@@ -158,12 +159,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('admin.customer.index')}}" class="nav-link">
-                  <i class="nav-icon fas fa-list"></i> 
                   <p>
                     Danh sách khách hàng
                   </p>
                 </a>
               </li>
+
+              {{-- <li class="nav-item">
+                <a href="{{route('admin.customer_test.index')}}" class="nav-link">
+                  <p>Báo cáo khảo sát</p>
+                </a>
+              </li> --}}
+
+
 
               {{-- <li class="nav-item">
                 <a href="{{route('result.index')}}" class="nav-link">
