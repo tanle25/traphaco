@@ -5,10 +5,12 @@ namespace App;
 use App\Models\Test;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\CausesActivity;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use CausesActivity;
 
     /**
      * The attributes that are mass assignable.
