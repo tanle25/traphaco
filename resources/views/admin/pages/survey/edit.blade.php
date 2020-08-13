@@ -63,8 +63,8 @@
                             <div class="form-group">
                                 <label for="">Người tạo</label>
                                 <input name="" type="text" class="form-control" id="" readonly
-                                    placeholder="Nhập password (Bắt buộc)" value="{{ $survey->author->fullname }}">
-                                <input type="hidden" name="created_by" value="{{$survey->author->id}}">
+                                    placeholder="Nhập password (Bắt buộc)" value="{{ $survey->author->fullname ?? 'Không rõ' }}">
+                                <input type="hidden" name="created_by" value="{{$survey->author->id ?? null}}">
                             </div>
 
                             <div class="form-group">

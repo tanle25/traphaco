@@ -96,7 +96,7 @@
                           <td>{{$test->author->fullname}}</td>
                           <td>
                             <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
-                            <a href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></a>
+                            <span href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>
                           </td>
                         </tr> 
                         @endif
@@ -221,6 +221,42 @@
       });
   })
 
+  $(document).on('click', '.test-delete', function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        Swal.fire({
+            title: 'Xóa khách hàng này?',
+            text: "Bạn không thể hoàn tác!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Vẫn xóa!',
+        })
+            .then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            if (data.error) {
+                                swalToast(data.error, 'error');
+                            }
+                            if (data.msg) {
+                                swalToast(data.msg);
+                            }
+                            location.reload();
+                        },
+                        error: function (errors) {
+                            swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
+                        }
+                    });
+                }
+            });
+    })
 
 </script>
 

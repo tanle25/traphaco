@@ -38,7 +38,7 @@ class RoundSurveyController extends Controller
                         <span href="' . route('admin.survey_round.destroy', $surveyround->id) . '" class="btn text-danger round-survey-delete"><i class="far fa-trash-alt"></i></span>';
             })
             ->editColumn('created_by', function (SurveyRound $surveyround) {
-                return $surveyround->author->fullname;
+                return $surveyround->author->fullname ?? '';
             })
             ->rawColumns(['action'])
             ->make(true);
