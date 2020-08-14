@@ -61,7 +61,10 @@
                            @foreach ($question->options as $option)
                            <div class="form-group col-md-12 d-flex justify-center align-center">
                                 <input class="option-input" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
-                                <span class="pl-2" >{{$option->content ?? ''}}
+                                <span class="pl-2" >
+                                 <span>
+                                    {{$option->content ?? ''}}
+                                 </span>
                                 <span class="number">{{$option->countCustomerChosen()}}</span>
                                 <span class="percent">
                                 @if ($question->getAnswerCount() !== 0)
@@ -87,7 +90,7 @@
                                         @endif
                                     @endforeach
                                 </div>
-                            </div>                           
+                            </div>
                         </div>
                        @endif
                    </div>
