@@ -214,6 +214,14 @@
             serverSide: true,
             scrollX: true,
             autoWidth:false,
+            
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    autoFilter: true,
+
+                }
+            ],
             ajax: "<?php echo e(route('admin.customer.list')); ?>",
             columns: [
                 { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
