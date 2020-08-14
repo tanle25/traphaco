@@ -108,7 +108,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');
 
+    //history
     Route::get('/history', 'HistoryLogController@index')->name('history.index');
+
+    Route::get('/history/customer_test', 'HistoryLogController@customerTestHistory')->name('history.customer_test_history');
 
 });
 

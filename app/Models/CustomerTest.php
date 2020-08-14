@@ -3,14 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class CustomerTest extends Model
 {
+    use LogsActivity;
+
     protected $table = "customer_tests";
 
     protected $fillable = ['survey_id', 'customer_id', 'created_by'];
 
     public $timestamps = true;
+
+    protected static $logOnlyDirty = true;
 
     public function customer()
     {

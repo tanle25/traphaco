@@ -49,6 +49,14 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="{{route('history.customer_test_history')}}" class="nav-link">
+                  <p>Lịch sử</p></p>
+                </a>
+              </li>
+
+
+
             </ul>
           </li>
 

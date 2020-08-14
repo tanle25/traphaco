@@ -130,6 +130,14 @@ class TestController extends Controller
                                 continue;
                             }
                             if ($candiate_id == $examiner_id) {
+                                Test::create([
+                                    'survey_round' => $survey_round_id,
+                                    'candiate_id' => $candiate_id,
+                                    'examiner_id' => $candiate_id,
+                                    'survey_id' => $survey_id,
+                                    'status' => 1,
+                                    'multiplier' => 1,
+                                ]);
                                 continue;
                             }
                             $examiner = User::find($examiner_id);
