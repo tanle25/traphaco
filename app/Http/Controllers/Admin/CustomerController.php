@@ -10,6 +10,7 @@ use App\Models\CustomerTest;
 use App\Models\Survey;
 use Auth;
 use DataTables;
+use DB;
 use Excel;
 use Illuminate\Http\Request;
 
@@ -210,17 +211,26 @@ class CustomerController extends Controller
             return ['error' => 'Không tìm thấy câu trả lời!'];
         };
 
+        $test_id = $request->test_id;
+
+        $result = 1;
+        DB::connection()->enableQueryLog();
+
         foreach ($request->answer as $answer) {
+
             CustomerAnswer::create([
                 'option_choice' => $answer['option_id'],
                 'comment' => $answer['comment'],
-                'customer_test_id' => $request->test_id,
+                'customer_test_id' => $test_id,
                 'question_id' => $answer['question_id'],
             ]);
-            $test->status = 2;
-            $test->save();
-        }
 
+        }
+        $test->status = 2;
+        $test->save();
+        $queries = DB::getQueryLog();
+
+        return $queries;
         return ['msg' => 'Cập nhật thành công kết quả!'];
     }
 

@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
+//use Spatie\Activitylog\Traits\LogsActivity;
 
 class Customer extends Model
 {
-    use LogsActivity;
+    //use LogsActivity;
 
     protected $table = "customers";
 
@@ -15,9 +16,9 @@ class Customer extends Model
 
     public $timestamps = true;
 
-    protected static $logAttributes = ['DMS_code', 'CRM_code', 'contract_code', 'fullname', 'address', 'phone', 'zone', 'sale_chanel', 'pharmacy_name'];
+    //protected static $logAttributes = ['DMS_code', 'CRM_code', 'contract_code', 'fullname', 'address', 'phone', 'zone', 'sale_chanel', 'pharmacy_name'];
 
-    protected static $logOnlyDirty = true;
+    //protected static $logOnlyDirty = true;
 
     public function list_tests()
     {
