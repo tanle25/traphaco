@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Imports\CustomerImport;
 use App\Models\Customer;
-use App\Models\CustomerAnswer;
 use App\Models\CustomerTest;
 use App\Models\Survey;
 use Auth;
@@ -216,16 +215,24 @@ class CustomerController extends Controller
         $result = 1;
         DB::connection()->enableQueryLog();
 
+        $data = [];
         foreach ($request->answer as $answer) {
 
-            CustomerAnswer::create([
+            // CustomerAnswer::create([
+            //     'option_choice' => $answer['option_id'],
+            //     'comment' => $answer['comment'],
+            //     'customer_test_id' => $test_id,
+            //     'question_id' => $answer['question_id'],
+            // ]);
+
+            $data[] = [
                 'option_choice' => $answer['option_id'],
                 'comment' => $answer['comment'],
                 'customer_test_id' => $test_id,
                 'question_id' => $answer['question_id'],
-            ]);
-
+            ];
         }
+        //CustomerAnswer::insert($data);
         $test->status = 2;
         $test->save();
         $queries = DB::getQueryLog();

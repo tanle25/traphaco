@@ -70,15 +70,15 @@ class LoginController extends Controller
         $remember = isset($request->remember) ? true : false;
 
         if (Auth::viaRemember()) {
-            return redirect()->route('admin.home');
+            return redirect()->route('admin.home')->with(['success' => 'Chào mừng ' . Auth::user()->fullname]);
         }
 
         if (Auth::attempt([$this->username => $request->username, 'password' => $request->password], $remember)) {
 
             if (auth()->user()->is_admin == 1) {
-                return redirect()->route('admin.home');
+                return redirect()->route('admin.home')->with(['success' => 'Chào mừng ' . Auth::user()->fullname]);
             } else {
-                return redirect()->route('home');
+                return redirect()->route('home')->with(['success' => 'Chào mừng ' . Auth::user()->fullname]);
             }
         }
 

@@ -116,12 +116,9 @@
                                     <input readonly type="text" class="question-comment-add" style="display:block" id="" placeholder="Thêm khác">
                                     @endif
                                 </div>
-
                             </div>
                             @endforeach
-
                         </div>
-
                 </div>
                 @endforeach
                 
@@ -132,11 +129,11 @@
     </div>
     {{-- Menu tool --}}
     <div class="question-tool-menu card" data-csstransition="false">
-        <div class="tooltip">
+        <div class="tooltip question-tool-menu-btn add-section-btn">
             <i class="far fa-file" ></i>
             <span class="tooltiptext">Tạo mới section</span>
         </div>
-        <div class="tooltip">
+        <div class="tooltip question-tool-menu-btn add-question-btn">
             <i class="fas fa-plus-circle"></i>
             <span class="tooltiptext">Tạo mới câu hỏi</span>
         </div>
