@@ -9,7 +9,6 @@ use App\Models\CustomerTest;
 use App\Models\Survey;
 use Auth;
 use DataTables;
-use DB;
 use Excel;
 use Illuminate\Http\Request;
 
@@ -213,7 +212,6 @@ class CustomerController extends Controller
         $test_id = $request->test_id;
 
         $result = 1;
-        DB::connection()->enableQueryLog();
 
         $data = [];
         foreach ($request->answer as $answer) {
@@ -232,12 +230,10 @@ class CustomerController extends Controller
                 'question_id' => $answer['question_id'],
             ];
         }
-        //CustomerAnswer::insert($data);
+        CustomerAnswer::insert($data);
         $test->status = 2;
         $test->save();
-        $queries = DB::getQueryLog();
 
-        return $queries;
         return ['msg' => 'Cập nhật thành công kết quả!'];
     }
 
