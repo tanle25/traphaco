@@ -67,7 +67,7 @@ class Survey extends Model
 
         $avg_score = ($high_score * 3 + $equal_score * 2 + $lower_score) / (($high_score != 0 ? 3 : 0) + ($equal_score != 0 ? 2 : 0) + ($lower_score != 0 ? 1 : 0));
 
-        return $avg_score;
+        return round($avg_score, 2);
     }
 
     public function getMaxScore()
