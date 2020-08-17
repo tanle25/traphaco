@@ -158,7 +158,7 @@ class CustomerTestController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Responsef
+     * @return \Illuminate\Http\Response
      */
     public function getTestDetails($id)
     {
@@ -178,6 +178,26 @@ class CustomerTestController extends Controller
         $customer_tests = CustomerTest::where('survey_id', $survey_id)->get()->sortByDesc('id');
 
         return view('admin.pages.customer_tests.tests_by_survey', compact('customer_tests'));
+    }
+
+    public function removeAllEmpty()
+    {
+        $tests = CustomerTest::all();
+        foreach ($tests as $test) {
+            $answers = $test->answers;
+            $validate = $answers->filter(function ($answer) {
+                if ($answer->option_choice !== null || $answer->comment !== null) {
+                    return true;
+                }
+                return false;
+            });
+
+            if ($validate->isEmpty()) {
+                CustomerTest::where('id', $test->id)->delete();
+            }
+        }
+
+        return 'hello';
     }
 
 }

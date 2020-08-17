@@ -294,9 +294,7 @@ class CustomerController extends Controller
         if ($request->has('pharmacy_name')) {
             $customer->update(['pharmacy_name' => $request->pharmacy_name]);
         };
-
         return ['success' => 'Cập nhật thành công'];
-
     }
 
 }

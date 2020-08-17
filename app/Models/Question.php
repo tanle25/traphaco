@@ -95,7 +95,6 @@ class Question extends Model
     public function getAnswerCount()
     {
         $count = CustomerAnswer::where('question_id', $this->id)->get()->count();
-
         return $count;
     }
 
