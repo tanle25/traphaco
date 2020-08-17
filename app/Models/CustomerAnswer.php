@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
+//use Spatie\Activitylog\Traits\LogsActivity;
 
 class CustomerAnswer extends Model
 {
-    use LogsActivity;
+    //use LogsActivity;
 
-    protected static $logAttributes = ['question_option', 'question_id', 'option_choice', 'comment'];
+    //protected static $logAttributes = ['question_option', 'question_id', 'option_choice', 'comment'];
 
-    protected static $logOnlyDirty = true;
+    // protected static $logOnlyDirty = true;
 
     protected $table = "customer_answers";
 

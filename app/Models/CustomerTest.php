@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+
+//use Spatie\Activitylog\Traits\LogsActivity;
 
 class CustomerTest extends Model
 {
-    use LogsActivity;
+    // use LogsActivity;
 
     protected $table = "customer_tests";
 
@@ -15,7 +16,7 @@ class CustomerTest extends Model
 
     public $timestamps = true;
 
-    protected static $logOnlyDirty = true;
+    //protected static $logOnlyDirty = true;
 
     public function customer()
     {

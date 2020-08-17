@@ -14,9 +14,4 @@ class HistoryLogController extends Controller
         return \Auth::user()->actions;
     }
 
-    public function customerTestHistory()
-    {
-        return 'hello';
-    }
-
 }
