@@ -99,6 +99,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('customer/list', 'CustomerController@list')->name('admin.customer.list');
     Route::post('customer/store', 'CustomerController@store')->name('admin.customer.store');
     Route::post('customer/update', 'CustomerController@update')->name('admin.customer.update');
+    Route::get('customer-test/remove-all-empty', 'CustomerTestController@removeAllEmpty');
 
     Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('admin.customer.edit');
     Route::post('/customer/destroy/{id}', 'CustomerController@destroy')->name('admin.customer.destroy');
