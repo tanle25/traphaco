@@ -108,14 +108,24 @@
                                     @endif
                                 </div>
                                 {{-- question add --}}
-                                <div class="col-8 add-option d-flex">
-                                    <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
-                                    @if ($question->can_comment == 1)
-                                    <input readonly type="text" class="question-comment-add" style="display:none" id="" placeholder="Thêm khác">
-                                    @else
-                                    <input readonly type="text" class="question-comment-add" style="display:block" id="" placeholder="Thêm khác">
-                                    @endif
+                                
+                                <div class="add-question row ">
+                                    <div class="col-8 add-option d-flex">
+                                        <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
+                                        @if ($question->can_comment == 1)
+                                        <input readonly type="text" class="question-comment-add" style="display:none" id="" placeholder="Thêm khác">
+                                        @else
+                                        <input readonly type="text" class="question-comment-add" style="display:block" id="" placeholder="Thêm khác">
+                                        @endif
+                                    </div>
+                                    <div class="" style="margin-left: 30px" >
+                                        <div class="question-duplicate ">
+                                            <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
+                                        </div>
+
+                                    </div>
                                 </div>
+                                
                             </div>
                             @endforeach
                         </div>
@@ -138,5 +148,6 @@
             <span class="tooltiptext">Tạo mới câu hỏi</span>
         </div>
     </div>
+
 </div> 
 <!--=========================================================-->

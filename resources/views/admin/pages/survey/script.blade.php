@@ -554,4 +554,13 @@
     })
 
 
+/**
+Order question
+*/
+
+$(document).on('sortupdate',  '.sortable', function(e){  
+    
+    console.log($(this));
+})
+
 </script>

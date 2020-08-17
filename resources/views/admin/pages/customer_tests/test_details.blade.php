@@ -99,12 +99,16 @@
                    </div>
                    <div class="question-option pt-2">
                        @if ($question->getAnswerByCustomerTest($test->id) && $question->getAnswerByCustomerTest($test->id)->comment == '' )
+
                        <div class="row option-wraper">  
                             @foreach ($question->options as $option)
                             <div class="form-group col-md-3 d-flex justify-center align-center">
                                 @if ( $question->getAnswerByCustomerTest($test->id)->option_choice_model && $question->getAnswerByCustomerTest($test->id)->option_choice_model->id == $option->id)
+
                                 <input checked  class="option-input" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                 @else
+                                <span>sadflasdfkasfjldfjsldak</span>
+
                                 <input disabled class="option-input" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                 @endif
                                 <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
@@ -115,7 +119,7 @@
                         <div class="row option-wraper">  
                             @foreach ($question->options as $option)
                             <div class="form-group col-md-3 d-flex justify-center align-center">
-                                <input disabled class="option-input" type="radio" ata-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                                <input disabled class="option-input" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                 <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                             </div>
                             @endforeach 
