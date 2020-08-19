@@ -44,11 +44,16 @@
                     <div class="sortable options-wraper">
                     </div>
                     <div class="can-comment"></div>
-                    <div class="col-8 add-option  d-flex">
-                        <input readonly type="text" class="question-option-add" id=""
-                            placeholder="Thêm câu trả lời">
-                        <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
-
+                    <div class="add-question row ">
+                        <div class="col-8 add-option d-flex">
+                            <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
+                            <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
+                        </div>
+                        <div class="" style="margin-left: 30px" >
+                            <div class="question-duplicate ">
+                                <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -235,10 +240,20 @@
             </div>
             <div class="sortable options-wraper ui-sortable"></div>
             <div class="can-comment"></div>
-            <div class="col-8 add-option d-flex">
-                <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
-                <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
+
+            <div class="add-question row ">
+
+                <div class="col-8 add-option d-flex">
+                    <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
+                    <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
+                </div>
+                <div class="" style="margin-left: 30px" >
+                    <div class="question-duplicate ">
+                        <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
+                    </div>
+                </div>
             </div>
+            
         </div>
         `;
         $('.sortable').sortable('destroy');
@@ -248,6 +263,8 @@
             zIndex              : 999999,
             animation: 150,
         });
+
+        return $(questiontemplate);
     }
 
     function createQuestion(section = null){
@@ -555,12 +572,98 @@
 
 
 /**
-Order question
+duplicate question
 */
 
-$(document).on('sortupdate',  '.sortable', function(e){  
-    
-    console.log($(this));
+
+function duplicateQuestion(question_id, section_id){
+    $.ajax({
+        url: "{{route('admin.question.duplicate')}}",
+        data: {
+            question_id: question_id, 
+            section_id: section_id
+        },
+        type:'post',
+        success: function(data){
+            location.reload(true);            
+        }
+    })
+
+}
+
+$(document).on('click', '.question-duplicate', function(){
+    var question = $(this).closest('.question-wraper');
+    var section = $(this).closest('.section-wraper');
+    var question_id = question.data('question-id'); 
+    var section_id = section.data('section-id');
+    duplicateQuestion(question_id, section_id);
 })
+
+/*
+    Order question
+*/
+
+function orderOptions(dataOptions){
+    $.ajax({
+        url: "{{route('admin.question_option.update_order')}}",
+        type: 'post',
+        data: {
+            options: dataOptions,
+        },
+        success: function(data){
+            swalToast(data.success);
+        },
+        error: function(errors){
+            swalToast('Lỗi không xác định phát sinh trong quá trình cập nhật', 'error');
+        }
+    })
+}
+
+
+function orderQuestions(dataQuestion){
+    $.ajax({
+        url: "{{route('admin.question.update_order')}}",
+        type: 'post',
+        data: {
+            questions: dataQuestion,
+        },
+        success: function(data){
+            swalToast(data.success);
+        },
+        error: function(errors){
+            swalToast('Lỗi không xác định phát sinh trong quá trình cập nhật', 'error');
+        }
+    })
+}
+
+
+$(document).on('sortbeforestop', '.sortable', function(e){
+
+    if(e.target.classList.contains('options-wraper')){
+        var dataOptions = $(this).sortable('toArray', {attribute: 'data-question-option-id'});
+        if (dataOptions[0] == '') {
+            return;
+        }
+        orderOptions(dataOptions);
+    }
+
+
+    if(e.target.classList.contains('question-container')){
+        var dataQuestion = $(this).sortable('toArray', {attribute: 'data-question-id'});
+        if(dataQuestion[0] == ''){
+            return;
+        }
+        console.log(dataQuestion)
+        orderQuestions(dataQuestion)
+    }
+
+    if(e.target.classList.contains('editor-body')){
+        var dataSection = $(this).sortable('toArray', {attribute: 'data-section-id'});
+        if(dataSection[0] == ''){
+            return;
+        }
+        console.log(dataSection);
+    }
+});
 
 </script>

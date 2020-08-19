@@ -11,13 +11,13 @@ class Question extends Model
 {
     protected $table = 'questions';
 
-    protected $fillable = ['content', 'created_by'];
+    protected $fillable = ['content', 'created_by', 'can_comment', 'order'];
 
     public $timestamps = true;
 
     public function options()
     {
-        return $this->hasMany('App\Models\QuestionOption', 'question_id', 'id');
+        return $this->hasMany('App\Models\QuestionOption', 'question_id', 'id')->orderBy('order');
     }
 
     public function created_by()

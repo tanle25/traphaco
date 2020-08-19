@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\QuestionOption;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -120,5 +121,69 @@ class QuestionController extends Controller
         $question->save();
 
         return ['success' => 'Cập nhật câu trả lời thành công'];
+    }
+
+    public function duplicateQuestion(Request $request)
+    {
+        if ($request->question_id && $request->section_id) {
+            $question = Question::with('options')->findOrFail($request->question_id);
+        } else {
+            return;
+        };
+
+        $options = $question->options;
+        $section_id = $request->section_id;
+
+        DB::beginTransaction();
+
+        try {
+            $new_question = Question::create([
+                'content' => $question->content,
+                'created_by' => Auth::user()->id,
+                'can_comment' => $question->can_comment,
+            ]);
+            DB::table('survey_section_has_questions')->insert([
+                'survey_section_id' => $section_id,
+                'question_id' => $new_question->id,
+            ]);
+
+            foreach ($options as $option) {
+                QuestionOption::create([
+                    'content' => $option->content,
+                    'question_id' => $new_question->id,
+                    'score' => $option->score,
+                ]);
+            }
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new Exception($e->getMessage());
+        }
+
+        return ['question' => $question];
+
+    }
+
+    public function updateQuestionOrder(Request $request)
+    {
+        if (!empty($request->questions)) {
+            $questions = $request->questions;
+        } else {
+            return;
+        }
+
+        DB::beginTransaction();
+        try {
+            foreach ($questions as $order => $question) {
+                Question::where('id', $question)->update(['order' => $order]);
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new Exception($e->getMessage());
+        }
+
+        return ['success' => 'Cập nhật thành công!'];
     }
 }
