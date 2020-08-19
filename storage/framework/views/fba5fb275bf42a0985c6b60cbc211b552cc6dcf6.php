@@ -115,7 +115,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="<?php echo e(route('admin.usermanage.index')); ?>" class="nav-link">
+                <a href="<?php echo e(route('admin.permission.index')); ?>" class="nav-link">
                   <p>Quản lý phân quyền</p>
                 </a>
               </li>
@@ -173,11 +173,6 @@
                 </a>
               </li>
 
-              
-
-
-
-              
             </ul>
           </li>
           <li class="nav-item has-treeview">

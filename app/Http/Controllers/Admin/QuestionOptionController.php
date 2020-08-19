@@ -121,4 +121,26 @@ class QuestionOptionController extends Controller
         $question->delete();
         return ['msg' => 'Xóa thành công câu trả lời'];
     }
+
+    public function updateOptionOrder(Request $request)
+    {
+        if (!empty($request->options)) {
+            $options = $request->options;
+        } else {
+            return;
+        }
+
+        DB::beginTransaction();
+        try {
+            foreach ($options as $order => $option) {
+                QuestionOption::where('id', $option)->update(['order' => $order]);
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new Exception($e->getMessage());
+        }
+
+        return ['success' => 'Cập nhật thành công!'];
+    }
 }

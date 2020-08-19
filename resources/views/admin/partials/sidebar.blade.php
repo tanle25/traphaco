@@ -115,7 +115,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{route('admin.usermanage.index')}}" class="nav-link">
+                <a href="{{route('admin.permission.index')}}" class="nav-link">
                   <p>Quản lý phân quyền</p>
                 </a>
               </li>
@@ -173,20 +173,6 @@
                 </a>
               </li>
 
-              {{-- <li class="nav-item">
-                <a href="{{route('admin.customer_test.index')}}" class="nav-link">
-                  <p>Báo cáo khảo sát</p>
-                </a>
-              </li> --}}
-
-
-
-              {{-- <li class="nav-item">
-                <a href="{{route('result.index')}}" class="nav-link">
-                  <i class="far fa-chart-bar nav-icon"></i>
-                  <p>Báo cáo đánh giá</p>
-                </a>
-              </li> --}}
             </ul>
           </li>
           <li class="nav-item has-treeview">

@@ -130,6 +130,10 @@ document.querySelectorAll('textarea').forEach(function(item){
         forcePlaceholderSize: true,
         zIndex              : 999999,
         animation: 150,
+        scrollSpeed: 40,
+        delay: 150
+
+
     })
 
   if ( jQuery('.rt-ads-right').length ) {

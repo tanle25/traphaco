@@ -15,19 +15,19 @@ class AddAttributeToSurveyTable extends Migration
     {
         Schema::table('questions', function (Blueprint $table) {
             if (!Schema::hasColumn('questions', 'order')) {
-                $table->unsignedTinyInteger('order');
+                $table->unsignedTinyInteger('order')->nullable();
             }
         });
 
         Schema::table('question_options', function (Blueprint $table) {
             if (!Schema::hasColumn('question_options', 'order')) {
-                $table->unsignedTinyInteger('order');
+                $table->unsignedTinyInteger('order')->nullable();
             }
         });
 
         Schema::table('survey_section', function (Blueprint $table) {
             if (!Schema::hasColumn('survey_section', 'order')) {
-                $table->unsignedTinyInteger('order');
+                $table->unsignedTinyInteger('order')->nullable();
             }
         });
     }

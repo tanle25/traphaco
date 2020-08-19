@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/user-position/update', 'UserPositionController@update')->name('admin.user_position.update');
     Route::post('/user-position/destroy', 'UserPositionController@destroy')->name('admin.user_position.destroy');
 
+    //user manager
     Route::get('/usermanage', 'UserManageController@index')->name('admin.usermanage.index');
     Route::get('/usermanage/create', 'UserManageController@create')->name('admin.usermanage.create');
     Route::post('/usermanage/store', 'UserManageController@store')->name('admin.usermanage.store');
@@ -37,6 +38,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/usermanage/update/{id}', 'UserManageController@update')->name('admin.usermanage.update');
     Route::get('/usermanage/destroy/{id}', 'UserManageController@destroy')->name('admin.usermanage.destroy');
     Route::get('/usermanage/list-user', 'UserManageController@listUser')->name('admin.usermanage.list_user');
+
+    //permission
+    Route::get('/permission', 'PermissionController@index')->name('admin.permission.index');
+    Route::post('/permission/srote', 'PermissionController@store')->name('admin.permission.store');
+    Route::get('/permission/edit/{id}', 'PermissionController@edit')->name('admin.permission.edit');
+    Route::post('/permission/update/{id}', 'PermissionController@update')->name('admin.permission.update');
+    Route::post('/permission/destroy/{id}', 'PermissionController@destroy')->name('admin.permission.destroy');
 
     Route::get('/survey', 'SurveyController@index')->name('admin.survey.index');
     Route::get('/survey/create', 'SurveyController@create')->name('admin.survey.create');
@@ -56,11 +64,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/question/update', 'QuestionController@update')->name('admin.question.update');
     Route::post('/question/destroy', 'QuestionController@destroy')->name('admin.question.destroy');
     Route::post('/question/can-comment', 'QuestionController@canComment')->name('admin.question.can_comment');
+    Route::post('/question/duplicate', 'QuestionController@duplicateQuestion')->name('admin.question.duplicate');
+    Route::post('/question/update-order', 'QuestionController@updateQuestionOrder')->name('admin.question.update_order');
 
     Route::get('/question-option', 'QuestionOptionController@index')->name('admin.question_option.index');
     Route::post('/question-option/store', 'QuestionOptionController@store')->name('admin.question_option.store');
     Route::post('/question-option/update', 'QuestionOptionController@update')->name('admin.question_option.update');
     Route::post('/question-option/destroy', 'QuestionOptionController@destroy')->name('admin.question_option.destroy');
+    Route::post('/question-option/update-order', 'QuestionOptionController@updateOptionOrder')->name('admin.question_option.update_order');
 
     Route::get('/test/index', 'TestController@index')->name('admin.test.index');
     Route::get('/test/create', 'TestController@create')->name('admin.test.create');
