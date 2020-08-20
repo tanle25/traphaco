@@ -1,15 +1,25 @@
 <table>
     <thead>
+        <tr></tr>
+        <tr></tr>
         <tr>
-            <th>STT</th>
-            <th>MÃ DMS</th>
-            <th>MÃ CRM</th>
-            <th>MÃ HỢP ĐỒNG</th>
-            <th>TÊN NHÀ THUỐC</th>
-            <th>TÊN KHÁCH HÀNG</th>
-            <th>TÊN NGƯỜI LÀM KHẢO SÁT</th>
+            <td colspan="14">BÁO CÁO CHƯƠNG TRÌNH KHẢO SÁT KHÁCH HÀNG</td>
+        </tr>
+        <tr>
+            <td colspan="14">TÊN CHƯƠNG TRÌNH: {{$survey->name}}</td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr>
+            <th><strong>STT</strong></th>
+            <th><strong>MÃ DMS</strong></th>
+            <th><strong>MÃ CRM</strong></th>
+            <th><strong>MÃ HỢP ĐỒNG</strong></th>
+            <th><strong>TÊN NHÀ THUỐC</strong></th>
+            <th><strong>TÊN KHÁCH HÀNG</strong></th>
+            <th><strong>TÊN NGƯỜI LÀM KHẢO SÁT</strong></th>
             @foreach ($survey->getQuestions() as $item)
-            <th>{{ strtoupper($item->content)}}</th>
+            <th><strong>{{ strtoupper($item->content)}}</strong></th>
             @endforeach
         </tr>
     </thead>
@@ -20,7 +30,7 @@
             <td>{{$test->customer->DMS_code}}</td>
             <td>{{$test->customer->CRM_code}}</td>
             <td>{{$test->customer->contract_code}}</td>
-            <td>{{$test->customer->pharmacy_code}}</td>
+            <td>{{$test->customer->pharmacy_name}}</td>
             <td>{{$test->customer->fullname}}</td>
             <td>{{$test->author->fullname}}</td>
             @foreach ($survey->getQuestions() as $question)

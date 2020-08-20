@@ -161,4 +161,8 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
 
     Route::post('/customer/tests/delete/{id}', 'Admin\CustomerTestController@destroy')->name('admin.customer_test.destroy');
 
+    // normal user edit
+    Route::get('/user/edit', 'Admin\UserManageController@editNormalUser')->name('user.edit_normal_user');
+    Route::post('/user/update/{id}', 'Admin\UserManageController@updateNormalUser')->name('user.update_normal_user');
+
 });

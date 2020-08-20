@@ -6,11 +6,13 @@ use App\Models\Test;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use CausesActivity;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.

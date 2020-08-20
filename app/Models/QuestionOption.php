@@ -21,4 +21,9 @@ class QuestionOption extends Model
         $count = CustomerAnswer::where('option_choice', $this->id)->where('comment', null)->get()->count();
         return $count;
     }
+
+    public function getCustomerChoosen()
+    {
+        return CustomerAnswer::where('option_choice', $this->id)->where('comment', null)->get();
+    }
 }
