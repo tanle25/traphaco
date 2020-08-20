@@ -29,4 +29,12 @@ class CustomerAnswer extends Model
         return $this->belongsTo('App\Models\CustomerTest', 'customer_test_id', 'id');
     }
 
+    public function getAuthor()
+    {
+        if ($this->customer_test) {
+            return $this->customer_test->author;
+        }
+        return null;
+    }
+
 }

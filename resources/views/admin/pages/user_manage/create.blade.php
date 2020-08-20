@@ -66,9 +66,6 @@
                                 </strong>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
 
                             <div class="form-group">
                                 <label>Phòng ban trực thuộc</label>
@@ -102,6 +99,12 @@
                                 <label class="d-block">Quyền Admin</label>
                                 <input type="checkbox" class="form-control" name="is_admin" data-bootstrap-switch data-off-color="danger" data-on-color="success">
                             </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+
+                            @include('admin.pages.user_manage.role_form')
+
                         </div>
                     </div>
                     <button class="btn btn-traphaco">

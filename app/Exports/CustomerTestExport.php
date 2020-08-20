@@ -1,29 +1,29 @@
 <?php
 namespace App\Exports;
 
-use App\Models\CustomerTest;
-use App\Models\Survey;
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
+use App\Exports\Sheets\CustomerTestDetails;
+use App\Exports\Sheets\CustomerTestResult;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class CustomerTestExport implements FromView
+class CustomerTestExport implements WithMultipleSheets
 {
+    use Exportable;
+
     public function __construct($survey_id)
     {
         $this->survey_id = $survey_id;
     }
 
-    public function view(): View
+    public function sheets(): array
     {
-        $tests = CustomerTest::with('answers')
-            ->where('survey_id', $this->survey_id)
-            ->orderBy('customer_id')
-            ->get();
-        $survey = Survey::findOrFail($this->survey_id);
+        $sheets = [];
 
-        return view('excel.customer_test_details', [
-            'tests' => $tests,
-            'survey' => $survey,
-        ]);
+        $sheets[] = new CustomerTestDetails($this->survey_id);
+
+        $sheets[] = new CustomerTestResult($this->survey_id);
+
+        return $sheets;
     }
+
 }

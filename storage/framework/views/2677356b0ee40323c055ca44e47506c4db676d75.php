@@ -28,9 +28,12 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           
           
+          <a href="<?php echo e(route('user.edit_normal_user')); ?>" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> Thông tin cá nhân
+          </a>
           <form action="<?php echo e(route('logout')); ?>" method="post">
             <?php echo csrf_field(); ?>
-            <button type="submit" class="dropdown-item text-center"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
           </form>
         </div>
       </li>

@@ -127,9 +127,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           {{-- <span class="dropdown-item dropdown-header">15 Notifications</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> Thông tin cá nhân
-          </a>
+          
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <i class="fas fa-users mr-2"></i> 8 friend requests
@@ -139,9 +137,12 @@
             <i class="fas fa-file mr-2"></i> 3 new reports
           </a> --}}
           {{-- <div class="dropdown-divider"></div> --}}
+          <a href="{{route('user.edit_normal_user')}}" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> Thông tin cá nhân
+          </a>
           <form action="{{route('logout')}}" method="post">
             @csrf
-            <button type="submit" class="dropdown-item text-center"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
           </form>
         </div>
       </li>

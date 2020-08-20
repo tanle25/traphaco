@@ -98,4 +98,18 @@ class Question extends Model
         return $count;
     }
 
+    public function getEmptyCustomerAnswer()
+    {
+        return CustomerAnswer::where('question_id', $this->id)
+            ->where('option_choice', null)
+            ->where('comment', null)
+            ->get();
+    }
+
+    public function getAnswerWithComment()
+    {
+        return CustomerAnswer::where('question_id', $this->id)
+            ->where('comment', '<>', null)
+            ->get();
+    }
 }

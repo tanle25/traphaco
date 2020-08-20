@@ -61,7 +61,7 @@
                     <div class="card">
                       <div class="card-header d-flex align-item-center">
                         <div class="card-title ">
-                          Quản lý vai trò
+                          Cập nhật thông tin
                         </div>
                         {{-- <a href="" class="btn btn-success ml-auto">Tạo mới</a> --}}
                       </div>

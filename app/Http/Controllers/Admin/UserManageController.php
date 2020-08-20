@@ -9,11 +9,14 @@ use App\Http\Requests\Admin\UserManage\UpdateUserRequest;
 use App\Models\Department;
 use App\Models\UserPosition;
 use App\User;
+use Auth;
 use DataTables;
 use DB;
 use Excel;
 use Hash;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserManageController extends Controller
 {
@@ -64,10 +67,12 @@ class UserManageController extends Controller
      */
     public function create()
     {
+        $permissions = Permission::all();
+        $roles = Role::all();
         $departments = Department::all()->sortBy('id');
         $user_positions = UserPosition::all()->sortBy('level');
 
-        return view('admin.pages.user_manage.create', compact('departments', 'user_positions'));
+        return view('admin.pages.user_manage.create', compact('departments', 'user_positions', 'permissions', 'roles'));
     }
 
     /**
@@ -84,8 +89,23 @@ class UserManageController extends Controller
         } else {
             $data['is_admin'] = 0;
         }
+        if (!$request->has('roles')) {
+            $data['roles'] = [];
+        }
+        if (!$request->has('permissions')) {
+            $data['permissions'] = [];
+        }
+
         $data['password'] = Hash::make($data['password']);
         $newUser = User::create($data);
+
+        foreach ($data['roles'] as $role) {
+            $newUser->assignRole($role);
+        }
+
+        foreach ($data['permissions'] as $permission) {
+            $newUser->givePermissionTo($permission);
+        }
         return redirect()->route('admin.usermanage.index')->with(['success' => 'Tạo user mới thành công']);
     }
 
@@ -108,11 +128,13 @@ class UserManageController extends Controller
      */
     public function edit($id)
     {
+        $permissions = Permission::all();
+        $roles = Role::all();
         $user = User::findOrFail($id);
         $departments = Department::all()->sortBy('id');
         $user_positions = UserPosition::all()->sortBy('level');
 
-        return view('admin.pages.user_manage.edit', compact('departments', 'user_positions', 'user'));
+        return view('admin.pages.user_manage.edit', compact('departments', 'user_positions', 'user', 'permissions', 'roles'));
     }
 
     /**
@@ -128,11 +150,19 @@ class UserManageController extends Controller
 
         $data = $request->all();
 
+        if (!$request->has('roles')) {
+            $data['roles'] = [];
+        }
+        if (!$request->has('permissions')) {
+            $data['permissions'] = [];
+        }
+
         if ($request->has('is_admin') && $data['is_admin'] == 'on') {
             $data['is_admin'] = 1;
         } else {
             $data['is_admin'] = 0;
         }
+
         if ($request->has('password')) {
             if ($request->password == null) {
                 $data['password'] = $user->password;
@@ -140,7 +170,24 @@ class UserManageController extends Controller
                 $data['password'] = Hash::make($data['password']);
             }
         }
+
         $user->update($data);
+
+        foreach ($user->roles as $role) {
+            $user->removeRole($role->name);
+        }
+        foreach ($user->permissions as $permission) {
+            $user->revokePermissionTo($permission->name);
+        }
+
+        foreach ($data['roles'] as $role) {
+            $user->assignRole($role);
+        }
+
+        foreach ($data['permissions'] as $permission) {
+            $user->givePermissionTo($permission);
+        }
+
         return redirect()->back()->with(['success' => 'Cập nhật user thành công']);
     }
 
@@ -159,5 +206,43 @@ class UserManageController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function editNormalUser()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return abort(404);
+        }
+
+        return view('admin.pages.user_manage.edit_normal_user', compact('user'));
+    }
+
+    public function updateNormalUser(UpdateUserRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (Auth::user()->id != $id) {
+            return abort(404);
+        }
+
+        $data = $request->all();
+        if ($request->has('password')) {
+            if ($request->password == null) {
+                $data['password'] = $user->password;
+            } else {
+                $data['password'] = Hash::make($data['password']);
+            }
+        }
+
+        $new_data = [];
+
+        $new_data['username'] = $data['username'];
+        $new_data['fullname'] = $data['fullname'];
+        $new_data['email'] = $data['email'];
+        $new_data['password'] = $data['password'];
+
+        $user->update($data);
+        return redirect()->back()->with(['success' => 'Cập nhật thông tin thành công']);
     }
 }

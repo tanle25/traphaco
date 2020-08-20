@@ -21,9 +21,6 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách vai trò</h3>
-                {{-- <a href="{{route('admin.survey_round.create')}}" class="btn btn-success float-right">
-                  <i class="far fa-file nav-icon">Thêm mới</i>
-                </a> --}}
               </div>
               <!-- /.card-header -->
               <div class="card-body row">
@@ -56,12 +53,11 @@
                     </tbody>
                 </table>
                  </div>
-
                  <div class="col-12 col-md-6 pl-4">
                     <div class="card">
                       <div class="card-header d-flex align-item-center">
                         <div class="card-title ">
-                          Quản lý vai trò
+                          Tạo mới vai trò
                         </div>
                         {{-- <a href="" class="btn btn-success ml-auto">Tạo mới</a> --}}
                       </div>

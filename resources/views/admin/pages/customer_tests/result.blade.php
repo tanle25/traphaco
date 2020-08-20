@@ -69,8 +69,8 @@
                                 <span class="percent">
                                 @if ($question->getAnswerCount() !== 0)
                                 {{ round($option->countCustomerChosen() / $question->getAnswerCount() * 100, 2)}}%
-                                </span>
                                 @endif
+                                </span>
                            </div>
                            @endforeach 
                        </div>

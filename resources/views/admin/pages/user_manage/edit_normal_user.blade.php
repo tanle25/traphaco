@@ -1,11 +1,7 @@
 @extends('admin.main_layout')
-@php
-    $list_root = $departments->filter(function ($value) {
-        return $value->parent_id == null;
-    });
-@endphp
+
 @section('title')
-  Quản lý phòng ban
+  Thông tin cá nhân
 @endsection
 
 @section('custom-css')
@@ -21,12 +17,12 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    Chỉnh sửa User
+                    Chỉnh sửa thông tin
                 </div>
             </div>
 
             <div class="card-body">
-                <form action="{{route('admin.usermanage.update', $user->id)}}" method="post">
+                <form action="{{route('user.update_normal_user', $user->id)}}" method="post">
                     @csrf
                     <input type="hidden" name="old_user" value="{{$user->id}}">
 
@@ -44,7 +40,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="">Username</label>
+                                <label for="">Tên đăng nhập</label>
                                 <input name="username" type="text" class="form-control" id=""
                                     placeholder="Nhập tên đăng nhập (Bắt buộc)" value="{{ $user->username}}">
                                 @error('username')
@@ -65,54 +61,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="">Password</label>
+                                <label for="">Mật khẩu</label>
                                 <input name="password" type="text" class="form-control" id="" value=''
-                                    placeholder="Nhập pass nếu muốn thay đổi">
+                                    placeholder="Nhập mật khẩu nếu muốn thay đổi">
                                 @error('password')
                                 <strong class="text-red">
                                     {{$message}}
                                 </strong>
                                 @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label>Phòng ban trực thuộc</label>
-                                <select name="department_id" class="form-control select2" id="department-select">
-                                    @foreach ($departments as $department )
-                                    <option {{$department->id == $user->department_id ? 'selected' : ''}} value="{{$department->id}}">{{$department->department_name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('parent_id')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
-							</div>
-							
-							<div class="form-group">
-                                <label>Chức vụ</label>
-                                <select name="position_id" class="form-control " id="position-select">
-                                    @foreach ($user_positions as $user_position )
-                                    <option {{$user_position->id == $user->position_id ? 'selected' : ''}} value="{{$user_position->id}}" data-department-id={{$user_position->department->id ?? ''}}>{{$user_position->name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('parent_id')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label class="d-block">Quyền Admin</label>
-                                <input {{$user->is_admin == 1 ? 'checked' : ''}} type="checkbox" class="form-control" name="is_admin" data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                            </div>
+                            </div>						
+						
                         </div>
 
-                        <div class="col-md-6 col-12">
-                            @include('admin.pages.user_manage.role_form_edit')
-                            
-                        </div>
+
                     </div>
                     <button class="btn btn-traphaco">
                         Lưu thông tin
@@ -184,8 +145,6 @@ $("input[data-bootstrap-switch]").each(function(){
         });
     }
 </script>
-
-
 
 @endsection
 
