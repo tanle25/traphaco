@@ -17,6 +17,7 @@ class AddAttributeToSurveyTable extends Migration
             if (!Schema::hasColumn('questions', 'order')) {
                 $table->unsignedTinyInteger('order')->nullable();
             }
+
         });
 
         Schema::table('question_options', function (Blueprint $table) {
@@ -41,6 +42,7 @@ class AddAttributeToSurveyTable extends Migration
     {
         Schema::table('questions', function (Blueprint $table) {
             $table->dropColumn('order');
+            $table->dropColumn('must_mask');
         });
 
         Schema::table('question_options', function (Blueprint $table) {

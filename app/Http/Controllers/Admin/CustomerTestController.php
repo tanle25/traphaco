@@ -36,18 +36,6 @@ class CustomerTestController extends Controller
         return DataTables::eloquent($tests)
             ->addIndexColumn()
             ->addColumn('action', function ($test) {
-                // if (Auth::user()->is_admin == 1) {
-                //     $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
-
-                //     <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>
-
-                //     <a href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger customer-delete"><i class="far fa-trash-alt"></i></a>';
-                // } else {
-                //     $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
-
-                //     <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>';
-                // }
-
                 $tools = '<a target="_blank" href="' . route('admin.customer_test.get_result_by_survey', $test->survey_id) . '"class="btn text-success customer-edit"><i class="fas fa-chart-pie" data-toggle="modal" data-target="#customer-model" ></i></a>
                     <a href="' . route('admin.customer_test.details.export', $test->survey_id) . '" class="btn text-danger customer-delete"><i class="far fa-file-excel"></i></a>';
 

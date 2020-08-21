@@ -22,16 +22,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        // show list customer
-
-        // show button add customer
-
-        //show btn edit customer
-
-        //show btn import excel
         $survey = Survey::where('type', 3)->get();
-        //return view
-
         return view('admin.pages.customers.index', compact('survey'));
 
     }

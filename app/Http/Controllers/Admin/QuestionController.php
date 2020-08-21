@@ -186,4 +186,21 @@ class QuestionController extends Controller
 
         return ['success' => 'Cập nhật thành công!'];
     }
+
+    /**
+     * Lưu các câu hỏi bắt buộc phải trả lời
+     * @param Request  $request
+     *
+     */
+    public function chageQuestionMustMaskStatus(Request $request)
+    {
+        if (!$request->has('question_id') || !$request->has('value')) {
+            return ['error' => 'Không tìm thấy câu hỏi'];
+        }
+        $question = Question::findOrFail($request->question_id);
+        $question->must_mark = $request->value;
+        $question->save();
+
+        return ['success' => 'Cập nhật thành công'];
+    }
 }

@@ -19,7 +19,7 @@
             <th><strong>TÊN KHÁCH HÀNG</strong></th>
             <th><strong>TÊN NGƯỜI LÀM KHẢO SÁT</strong></th>
             @foreach ($survey->getQuestions() as $item)
-            <th><strong>{{ strtoupper($item->content)}}</strong></th>
+            <th><strong>{{$item->content}}</strong></th>
             @endforeach
         </tr>
     </thead>
@@ -33,10 +33,9 @@
             <td>{{$test->customer->pharmacy_name}}</td>
             <td>{{$test->customer->fullname}}</td>
             <td>{{$test->author->fullname}}</td>
+
             @foreach ($survey->getQuestions() as $question)
-
                 @foreach ($test->answers as $answer)
-
                     @if ($answer->question_id == $question->id)
                         @if ($answer->comment)
                         <td>{{$answer->comment}}</td>
@@ -47,9 +46,9 @@
                         @endif
                         @break
                     @endif  
-
                 @endforeach
             @endforeach
+            
         </tr>   
         @endforeach
     </tbody>

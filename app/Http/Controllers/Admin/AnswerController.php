@@ -149,9 +149,7 @@ class AnswerController extends Controller
             };
         }
 
-        $total_score = $test->getScore();
-
-        return ['msg' => 'Cập nhật thành công kết quả!', 'score' => $total_score];
+        return ['msg' => 'Cập nhật thành công kết quả!'];
 
     }
 

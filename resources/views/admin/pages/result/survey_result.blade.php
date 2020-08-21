@@ -27,28 +27,30 @@
                 <table id="user-result-table" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th >STT</th>
-                        <th>Tên đợt khảo sát</th>
-                        <th >Số được đánh giá</th>
-                        <th >Các bài khảo sát</th>
-                        <th >Thao tác</th>
+                        <th rowspan="2">STT</th>
+                        <th rowspan="2">Người được khảo sát</th>
+                        <th colspan="4">Kết quả điểm TB</th>
+                        <th rowspan="2">% năng lực</th>
+                        <th rowspan="2">Thao tác</th>
+                      </tr>
+                      <tr>
+                        <th>Trọng số 3</th>
+                        <th>Trọng số 2</th>
+                        <th>Trọng số 1</th>
+                        <th style="border-right-width: 1px !important">Bình quân chung</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($survey_round as $index => $item)
-                        <tr>
-                          <td>{{$index + 1}}</td>
-                          <td>{{$item->survey_round_name}}</td>
-                          <td>{{$item->user_count}}</td>
-                          <td>{{$item->survey_list}}</td>
-                          <td>
-                            <a href="{{route('admin.user_result.show', $item->survey_round_id)}}"> Xem chi tiết </a>
-                          </td>
-                        </tr>
-                      @endforeach
-
-
-                    
+                      <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                      </tr>
                     </tbody>
                   </table>                
               </div>

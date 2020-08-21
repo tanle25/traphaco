@@ -28,7 +28,7 @@ class Question extends Model
     public function maxScore()
     {
         $list_option = $this->options->sortByDesc('score');
-        return $list_option->first()->score;
+        return $list_option->first()->score ?? 0;
     }
 
     public function getScoreFromLevel($survey_round, $candiate, $level)
