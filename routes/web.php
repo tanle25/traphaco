@@ -66,7 +66,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/question/can-comment', 'QuestionController@canComment')->name('admin.question.can_comment');
     Route::post('/question/duplicate', 'QuestionController@duplicateQuestion')->name('admin.question.duplicate');
     Route::post('/question/update-order', 'QuestionController@updateQuestionOrder')->name('admin.question.update_order');
-
+    Route::post('/question/update-must-mask', 'QuestionController@chageQuestionMustMaskStatus')->name('admin.question.save_question_must_mask');
     Route::get('/question-option', 'QuestionOptionController@index')->name('admin.question_option.index');
     Route::post('/question-option/store', 'QuestionOptionController@store')->name('admin.question_option.store');
     Route::post('/question-option/update', 'QuestionOptionController@update')->name('admin.question_option.update');
@@ -85,6 +85,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/test/send-survey/{id}', 'TestController@sendTest')->name('admin.test.send_survey');
     Route::post('/test/destroy/{id}', 'TestController@destroy')->name('admin.test.destroy');
 
+    //survey round
     Route::get('/round-survey', 'RoundSurveyController@index')->name('admin.survey_round.index');
     Route::get('/round-survey/create', 'RoundSurveyController@create')->name('admin.survey_round.create');
     Route::post('/round-survey/store', 'RoundSurveyController@store')->name('admin.survey_round.store');
@@ -124,6 +125,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/history', 'HistoryLogController@index')->name('history.index');
 
     Route::get('/history/customer_test', 'HistoryLogController@customerTestHistory')->name('history.customer_test_history');
+
+    // result for admin
+    Route::get('/result/details/{survey_round_id}', 'UserResultController@show')->name('admin.user_result.show');
 
 });
 

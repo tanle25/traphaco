@@ -8,6 +8,8 @@
     }
 @endphp
 
+
+
 <div class="question-tool mx-auto d-flex" style="max-width: 768px">
     <div class="card col-12 " >
         {{-- section edit --}}
@@ -110,7 +112,7 @@
                                 {{-- question add --}}
                                 
                                 <div class="add-question row ">
-                                    <div class="col-8 add-option d-flex">
+                                    <div class="col-12 add-option d-flex">
                                         <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
                                         @if ($question->can_comment == 1)
                                         <input readonly type="text" class="question-comment-add" style="display:none" id="" placeholder="Thêm khác">
@@ -119,9 +121,15 @@
                                         @endif
                                     </div>
                                     
-                                    <div class="" style="margin-left: 30px" >
+                                    <div class="mt-3 d-flex justify-content-end col-12 question-footer " >
                                         <div class="question-duplicate ">
                                             <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input {{$question->must_mark == 1 ? 'checked' : '' }} type="checkbox" class="d-none custom-control-input" data-question-id="{{$question->id}}" id="must-mark-{{$question->id}}">
+                                                <label class="ml-3 custom-control-label" for="must-mark-{{$question->id}}">Bắt buộc</label>
+                                            </div>
                                         </div>
                                     </div>
 

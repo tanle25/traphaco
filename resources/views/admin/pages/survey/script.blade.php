@@ -45,15 +45,24 @@
                     </div>
                     <div class="can-comment"></div>
                     <div class="add-question row ">
-                        <div class="col-8 add-option d-flex">
+
+                        <div class="col-12 add-option d-flex">
                             <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
                             <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
                         </div>
-                        <div class="" style="margin-left: 30px" >
+
+                        <div class="mt-3 d-flex justify-content-end col-12 question-footer " >
                             <div class="question-duplicate ">
                                 <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
                             </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="d-none custom-control-input"  data-question-id="${newQuestion}" id="must-mark-${newQuestion}">
+                                    <label class="ml-3 custom-control-label" for="must-mark-${newQuestion}">Bắt buộc</label>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -242,14 +251,19 @@
             <div class="can-comment"></div>
 
             <div class="add-question row ">
-
-                <div class="col-8 add-option d-flex">
+                <div class="col-12 add-option d-flex">
                     <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
                     <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
                 </div>
-                <div class="" style="margin-left: 30px" >
+                <div class="mt-3 d-flex justify-content-end col-12 question-footer " >
                     <div class="question-duplicate ">
                         <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="d-none custom-control-input" data-question-id="${questionId}" id="must-mark-${questionId}">
+                            <label class="ml-3 custom-control-label" for="must-mark-${questionId}">Bắt buộc</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -665,5 +679,34 @@ $(document).on('sortbeforestop', '.sortable', function(e){
         console.log(dataSection);
     }
 });
+
+function saveQuestionMustMask(questionId, value){
+    $.ajax({
+        url: "{{route('admin.question.save_question_must_mask')}}",
+        type: 'post',
+        data: {
+            question_id: questionId,
+            value: value
+        },
+        success: function(data){
+            if(data.success){
+                swalToast(data.success);
+            }
+            if(data.errors){
+                swalToast(data.errors);
+            }
+        },
+        error: function(error){
+            swalToast("Lỗi không rõ phía server", "error");
+
+        }
+    })
+}
+
+$(document).on('change', '.question-footer .custom-switch input', function(){
+    var questionId = $(this).data('question-id');
+    var value = $(this).prop("checked") ? 1 : 0;
+    saveQuestionMustMask(questionId, value);
+})
 
 </script>

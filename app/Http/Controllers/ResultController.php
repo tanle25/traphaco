@@ -6,6 +6,7 @@ use App\Models\SurveyRound;
 use App\Models\Test;
 use Auth;
 use DataTables;
+use DB;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -17,7 +18,19 @@ class ResultController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.result.index');
+        $survey_round = Test::join('survey_round', 'tests.survey_round', '=', 'survey_round.id')
+            ->join('users', 'users.id', '=', 'tests.candiate_id')
+            ->join('survey', 'survey.id', '=', 'tests.survey_id')
+            ->select([
+                'survey_round.id as survey_round_id',
+                'survey_round.name as survey_round_name',
+                DB::raw('COUNT(distinct users.id) as user_count'),
+                DB::raw('GROUP_CONCAT(distinct survey.name) as survey_list'),
+            ])
+            ->groupBy('survey_round.id')
+            ->get();
+
+        return view('admin.pages.result.index', compact('survey_round'));
     }
 
     public function listResult()

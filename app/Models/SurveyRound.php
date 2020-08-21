@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Test;
 use Illuminate\Database\Eloquent\Model;
 
 class SurveyRound extends Model
@@ -13,5 +14,14 @@ class SurveyRound extends Model
     public function author()
     {
         return $this->belongsTo('App\User', 'created_by', 'id');
+    }
+    public function getSurveyList()
+    {
+        return Test::join('survey_round', 'survey_round.id', '=', 'test.survey_round')
+            ->join('survey', 'survey.id', '=', 'test.survey_id')
+            ->where('survey_round.id', $this->id)
+            ->select('survey.*')
+            ->groupBy('survey.id')
+            ->get();
     }
 }

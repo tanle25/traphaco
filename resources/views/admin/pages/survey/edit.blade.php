@@ -5,7 +5,22 @@
 @endsection
 
 @section('custom-css')
+    <style>
+        .question-footer{
+            border-top: 1px solid rgb(211, 211, 211);
+            padding-top: 20px;
+        }
+        .question-footer .form-group{
+            border-left: 1px solid rgb(211, 211, 211);
+            margin-left: 30px; 
+        }
 
+        .question-footer .form-group label{
+            
+        }
+
+
+    </style>
 @endsection
 
 @section('content')

@@ -140,4 +140,5 @@ class SurveyController extends Controller
         Survey::findOrFail($id)->delete();
         return ['msg' => 'Xóa thành công'];
     }
+
 }
