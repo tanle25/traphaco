@@ -17,8 +17,8 @@ class SurveyRound extends Model
     }
     public function getSurveyList()
     {
-        return Test::join('survey_round', 'survey_round.id', '=', 'test.survey_round')
-            ->join('survey', 'survey.id', '=', 'test.survey_id')
+        return Test::join('survey_round', 'survey_round.id', '=', 'tests.survey_round')
+            ->join('survey', 'survey.id', '=', 'tests.survey_id')
             ->where('survey_round.id', $this->id)
             ->select('survey.*')
             ->groupBy('survey.id')

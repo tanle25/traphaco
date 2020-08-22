@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 
+@php
+  $survey_list = $survey_round->getSurveyList();
+@endphp
 
 @section('title')
   Quản lý user
@@ -28,27 +31,22 @@
                     <thead>
                       <tr>
                         <th >STT</th>
-                        <th>Tên đợt khảo sát</th>
-                        <th >Số được đánh giá</th>
-                        <th >Các bài khảo sát</th>
+                        <th>Tên bài khảo sát</th>
+                        <th >Số người được đánh giá</th>
                         <th >Thao tác</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($survey_round as $index => $item)
+                      @foreach ($survey_list as $index => $item)
                         <tr>
                           <td>{{$index + 1}}</td>
-                          <td>{{$item->survey_round_name}}</td>
+                          <td>{{$item->name}}</td>
                           <td>{{$item->user_count}}</td>
-                          <td>{{$item->survey_list}}</td>
                           <td>
-                            <a href="{{route('admin.user_result.show', $item->survey_round_id)}}"> Xem chi tiết </a>
+                            <a href="{{route('admin.user_result.show_result_by_survey',['survey_round_id' => $survey_round->id, 'survey_id' => $item->id] )}}"> Xem chi tiết </a>
                           </td>
                         </tr>
                       @endforeach
-
-
-                    
                     </tbody>
                   </table>                
               </div>

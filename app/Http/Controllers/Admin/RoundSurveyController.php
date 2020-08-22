@@ -42,7 +42,6 @@ class RoundSurveyController extends Controller
             })
             ->rawColumns(['action'])
             ->make(true);
-
     }
 
     /**
@@ -178,7 +177,7 @@ class RoundSurveyController extends Controller
                 DB::raw('GROUP_CONCAT( DISTINCT survey.name) as survey_name'),
                 'users.fullname as candiate_name',
             ]);
-            
+
         return DataTables::eloquent($list_candiate)
             ->addIndexColumn()
             ->addColumn('action', function ($candiate) {

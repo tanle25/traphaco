@@ -21,6 +21,9 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách người dùng</h3>
+                <a href="{{route('admin.usermanage.import')}}" class="ml-3 btn btn-success float-right">
+                  <i class="fas fa-plus-circle nav-icon">Import</i>
+                </a>
                 <a href="{{route('admin.usermanage.create')}}" class="btn btn-success float-right">
                   <i class="fas fa-plus-circle nav-icon"> Thên mới</i>
                 </a>

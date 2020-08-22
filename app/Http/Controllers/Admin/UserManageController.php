@@ -6,6 +6,7 @@ use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserManage\CreateUserRequest;
 use App\Http\Requests\Admin\UserManage\UpdateUserRequest;
+use App\Imports\UserImport;
 use App\Models\Department;
 use App\Models\UserPosition;
 use App\User;
@@ -244,5 +245,18 @@ class UserManageController extends Controller
 
         $user->update($data);
         return redirect()->back()->with(['success' => 'Cập nhật thông tin thành công']);
+    }
+
+    public function importExcel(Request $request)
+    {
+        // $request->validate([
+        //     'customer_list' => 'mimes:xls,xlsx',
+        // ], [
+        //     'customer_list.mimes' => 'File phải có định dạng xls hoặc xlsx',
+        // ]);
+
+        Excel::import(new UserImport, 'DS Username.xlsx');
+
+        return redirect()->back()->with(['success' => 'Import dữ liệu thành công']);
     }
 }

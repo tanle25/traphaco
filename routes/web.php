@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/usermanage/update/{id}', 'UserManageController@update')->name('admin.usermanage.update');
     Route::get('/usermanage/destroy/{id}', 'UserManageController@destroy')->name('admin.usermanage.destroy');
     Route::get('/usermanage/list-user', 'UserManageController@listUser')->name('admin.usermanage.list_user');
+    Route::get('/usermanage/import', 'UserManageController@importExcel')->name('admin.usermanage.import');
 
     //permission
     Route::get('/permission', 'PermissionController@index')->name('admin.permission.index');
@@ -95,7 +96,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/round-survey/list-survey-round', 'RoundSurveyController@getList')->name('admin.survey_round.list');
     Route::get('/round-survey/details/{id}', 'RoundSurveyController@details')->name('admin.survey_round.details');
     Route::get('/round-survey/details/{id}/get-table', 'RoundSurveyController@getSurveyRoundResultTable')->name('admin.survey_round.details_table');
-    Route::get('/round-survey/details/{id}/candiate/{candiate_id}', 'RoundSurveyController@getUserDetails')->name('admin.survey_round.candiate_details');
     Route::get('/round-survey/details/{id}/candiate/{candiate_id}/survey/{survey_id}', 'RoundSurveyController@exportUserTestDetails')->name('admin.survey_round.details.export');
 
     Route::get('/test/candiate/get-list', 'TestController@getCandiate')->name('admin.test.get_candiate');
@@ -120,6 +120,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')->name('admin.customer_test.details.export');
+    Route::get('/customer/result/{survey_round_id}/survey/{survey_id}/export', 'UserResultController@exportAll')->name('admin.export.user_result');
 
     //history
     Route::get('/history', 'HistoryLogController@index')->name('history.index');
@@ -128,6 +129,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     // result for admin
     Route::get('/result/details/{survey_round_id}', 'UserResultController@show')->name('admin.user_result.show');
+    Route::get('/result/details/{survey_round_id}/survey/{survey_id}', 'UserResultController@showResultBySurvey')->name('admin.user_result.show_result_by_survey');
 
 });
 
@@ -168,5 +170,8 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     // normal user edit
     Route::get('/user/edit', 'Admin\UserManageController@editNormalUser')->name('user.edit_normal_user');
     Route::post('/user/update/{id}', 'Admin\UserManageController@updateNormalUser')->name('user.update_normal_user');
+
+    // Result
+    Route::get('/round-survey/details/{id}/candiate/{candiate_id}', 'Admin\RoundSurveyController@getUserDetails')->name('admin.survey_round.candiate_details');
 
 });

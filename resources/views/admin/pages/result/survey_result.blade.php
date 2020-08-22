@@ -21,6 +21,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
+                <a href="{{route('admin.export.user_result', ['survey_round_id' => $survey_round->id, 'survey_id' => $survey->id])}}">Xuất excel</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -41,18 +42,23 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($list_candiate as $index => $candiate)
                       <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
+                        <td>{{$index + 1}}</td>
+                        <td>{{$candiate->fullname}}</td>
+                        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 3)}}</td>
+                        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 2)}}</td>
+                        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 1)}}</td>
+                        <td>{{$survey->getAvgScore($survey_round->id, $candiate->id)}}</td>
+                        <td>{{$survey->getScoreByPercent($survey_round->id, $candiate->id)}}</td>
+                        <td>
+                          <a class="text-info" href="{{route('admin.survey_round.candiate_details', ['id' => $survey_round->id, 'candiate_id' => $candiate->id])}}"> <i class="fas fa-eye    "></i> </a>
+                          <a class="text-danger ml-2" href="#"><i class="far fa-file-excel"></i> </a>
+                        </td>
                       </tr>
+                      @endforeach
                     </tbody>
-                  </table>                
+                </table>                
               </div>
               <!-- /.card-body -->
             </div>
