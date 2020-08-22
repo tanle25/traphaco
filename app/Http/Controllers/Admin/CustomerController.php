@@ -239,11 +239,7 @@ class CustomerController extends Controller
 
         $file = $request->file('customer_list');
         Excel::import(new CustomerImport, $file);
-        try {
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            return redirect()->back()->with(['error' => 'Import dữ liệu không thành công ']);
 
-        }
         return redirect()->back()->with(['success' => 'Import dữ liệu thành công']);
     }
 
