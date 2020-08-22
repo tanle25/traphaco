@@ -37,4 +37,12 @@ class CustomerAnswer extends Model
         return null;
     }
 
+    public function getCustomer()
+    {
+        if ($this->customer_test) {
+            return $this->customer_test->customer;
+        }
+        return null;
+    }
+
 }

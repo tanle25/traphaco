@@ -21,7 +21,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
-                <a href="{{route('admin.export.user_result', ['survey_round_id' => $survey_round->id, 'survey_id' => $survey->id])}}">Xuất excel</a>
+                <a class="btn btn-success float-right" href="{{route('admin.export.user_result', ['survey_round_id' => $survey_round->id, 'survey_id' => $survey->id])}}">Xuất excel</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

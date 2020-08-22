@@ -3,10 +3,10 @@
         <tr></tr>
         <tr></tr>
         <tr>
-            <td colspan="14">BÁO CÁO CHƯƠNG TRÌNH KHẢO SÁT KHÁCH HÀNG</td>
+            <td colspan="14"><strong>BÁO CÁO CHƯƠNG TRÌNH KHẢO SÁT KHÁCH HÀNG</strong> </td>
         </tr>
         <tr>
-            <td colspan="14">TÊN CHƯƠNG TRÌNH: {{$survey->name}}</td>
+            <td colspan="14"><strong>TÊN CHƯƠNG TRÌNH: {{$survey->name}}</strong> </td>
         </tr>
         <tr></tr>
         <tr></tr>

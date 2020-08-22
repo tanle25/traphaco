@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class UserResult2 implements FromView, WithEvents, WithDrawings
+class UserResult3 implements FromView, WithEvents, WithDrawings
 {
     public function __construct($survey_round_id, $survey_id)
     {
@@ -43,7 +43,7 @@ class UserResult2 implements FromView, WithEvents, WithDrawings
             ->groupBy('users.id')
             ->get();
 
-        return view('excel.user_result_sheet_2', compact('list_candiate', 'survey_round', 'survey'));
+        return view('excel.user_result_sheet_3', compact('list_candiate', 'survey_round', 'survey'));
 
     }
 
@@ -64,6 +64,7 @@ class UserResult2 implements FromView, WithEvents, WithDrawings
         // Các tài liệu về xử lý worksheet tra trên trang https://phpspreadsheet.readthedocs.io
         $worksheet = $event->sheet->getDelegate();
         $max_row = $event->sheet->getDelegate()->getHighestRow();
+        $max_col_name = $worksheet->getHighestColumn(7);
         $styleArray = [
             'borders' => [
                 'outline' => [
@@ -76,7 +77,8 @@ class UserResult2 implements FromView, WithEvents, WithDrawings
                 ],
             ],
         ];
-        $worksheet->getStyle('A7:H' . $max_row)->applyFromArray($styleArray);
+
+        $worksheet->getStyle('A7:' . $max_col_name . $max_row)->applyFromArray($styleArray);
         $worksheet->getColumnDimension('A')->setWidth(4);
         $worksheet->getColumnDimension('B')->setWidth(25);
         $worksheet->getColumnDimension('C')->setWidth(12);
@@ -84,14 +86,14 @@ class UserResult2 implements FromView, WithEvents, WithDrawings
         $worksheet->getColumnDimension('E')->setWidth(12);
         $worksheet->getColumnDimension('F')->setWidth(18);
         $worksheet->getColumnDimension('G')->setWidth(11);
-        $worksheet->getStyle('C8')->getFont()->setBold(true);
 
-        $worksheet->getStyle('A7:H' . $max_row)->getAlignment()->setWrapText(true);
+        $worksheet->getRowDimension('7')->setRowHeight(150);
 
-        $worksheet->getStyle('A7:H' . $max_row)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $worksheet->getStyle('A3:H7')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $worksheet->getStyle('A7:' . $max_col_name . $max_row)->getAlignment()->setWrapText(true);
+        $worksheet->getStyle('A7:' . $max_col_name . $max_row)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $worksheet->getStyle('A3:' . $max_col_name . $max_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $worksheet->getStyle('A7:A' . $max_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-        $worksheet->getStyle('C7:H' . $max_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $worksheet->getStyle('B8:B' . $max_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
 
         $worksheet->getRowDimension('5')->setRowHeight(40);
         $worksheet->getStyle('B5')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);

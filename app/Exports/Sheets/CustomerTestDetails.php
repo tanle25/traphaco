@@ -61,9 +61,9 @@ class CustomerTestDetails implements FromView, WithEvents, WithDrawings
         // Các tài liệu về xử lý worksheet tra trên trang https://phpspreadsheet.readthedocs.io
         $worksheet = $event->sheet->getDelegate();
         $max_row = $worksheet->getHighestRow();
-        $max_col = intval($worksheet->getHighestColumn());
+        $max_col_name = $worksheet->getHighestColumn();
+        $max_col = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($max_col_name);
 
-        $max_col_name = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($max_col);
         $styleArray = [
             'borders' => [
                 'outline' => [
@@ -78,7 +78,7 @@ class CustomerTestDetails implements FromView, WithEvents, WithDrawings
         ];
         $worksheet->getStyle('A7:' . $max_col_name . $max_row)->applyFromArray($styleArray);
 
-        for ($i = 8; $i < $max_col; $i++) {
+        for ($i = 8; $i <= $max_col; $i++) {
             $col_name = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($i);
             $worksheet->getColumnDimension($col_name)->setWidth(40);
         }
