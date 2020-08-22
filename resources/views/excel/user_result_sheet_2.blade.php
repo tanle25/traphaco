@@ -1,4 +1,3 @@
-
 <table id="user-result-table" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -9,7 +8,7 @@
             <th></th>
             <th></th>
             <th></th>
-            <th>BM 01</th>
+            <th>BM 02</th>
         </tr>
         <tr></tr>
         <tr>
@@ -18,7 +17,13 @@
         <tr>
             <th colspan="8">Ngày tổng hợp báo cáo {{Carbon\Carbon::now()->format('d/m/Y')}}</th>
         </tr>
-        <tr></tr>
+        <tr>
+            <th></th>
+            <th colspan="7">
+                Đợt đánh giá: {{$survey_round->name}} <br>
+                Bài đánh giá: {{$survey->name}}
+            </th>
+        </tr>
         <tr></tr>
         <tr>
             <th rowspan="2"><strong>TT</strong> </th>
@@ -35,20 +40,29 @@
         </tr>
     </thead>
     <tbody>
-      @foreach ($list_candiate as $index => $candiate)
-      
-      <tr>
-        <td>{{$index + 1}}</td>
-        <td>{{$candiate->fullname}}</td>
-        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 3)}}</td>
-        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 2)}}</td>
-        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 1)}}</td>
-        <td><strong>{{$survey->getAvgScore($survey_round->id, $candiate->id)}}</strong></td>
-        <td><strong>{{$survey->getScoreByPercent($survey_round->id, $candiate->id)}}%</strong></td>
-        <td>
-
-        </td>
+    @foreach ($list_candiate as $index => $candiate)
+    <tr>
+    <td><strong> {{$index + 1}}</strong> </td>
+    <td><strong>{{$candiate->fullname}}</strong></td>
+    <td><strong>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 3)}}</strong></td>
+    <td><strong>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 2)}}</strong></td>
+    <td><strong>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 1)}}</strong></td>
+    <td><strong>{{$survey->getAvgScore($survey_round->id, $candiate->id)}}</strong></td>
+    <td><strong>{{$survey->getScoreByPercent($survey_round->id, $candiate->id)}}%</strong></td>
+    <td>
+    </td>
+    </tr>
+    @foreach ($survey->getQuestions() as $index => $question)
+    <tr>
+        <td>{{$index+1}}</td>
+        <td>{{$question->content ?? ''}}</td>
+        <td>{{$question->getScoreFromLevel($survey_round->id, $candiate->id, 3)}}</td>
+        <td>{{$question->getScoreFromLevel($survey_round->id, $candiate->id, 2)}}</td>
+        <td>{{$question->getScoreFromLevel($survey_round->id, $candiate->id, 1)}}</td>
+        <td>{{$question->getAvgScore($survey_round->id, $candiate->id)}}</td>
+        <td>{{$question->getScoreByPercent($survey_round->id, $candiate->id)}}</td>
       </tr>
-      @endforeach
+    @endforeach
+    @endforeach
     </tbody>
 </table> 

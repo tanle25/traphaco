@@ -85,6 +85,7 @@ class UserResult1 implements FromView, WithEvents, WithDrawings
         $worksheet->getColumnDimension('F')->setWidth(18);
         $worksheet->getColumnDimension('G')->setWidth(11);
 
+        $worksheet->getStyle('C8')->getFont()->setBold(true);
         $worksheet->getStyle('A7:H' . $max_row)->getAlignment()->setWrapText(true);
 
         $worksheet->getStyle('A7:H' . $max_row)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
@@ -92,6 +93,8 @@ class UserResult1 implements FromView, WithEvents, WithDrawings
         $worksheet->getStyle('A7:A' . $max_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $worksheet->getStyle('C7:H' . $max_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
+        $worksheet->getRowDimension('5')->setRowHeight(40);
+        $worksheet->getStyle('B5')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
     }
 
 }

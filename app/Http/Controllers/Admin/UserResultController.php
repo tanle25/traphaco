@@ -110,6 +110,7 @@ class UserResultController extends Controller
 
     public function exportAll($survey_round_id, $survey_id)
     {
+        ini_set('max_execution_time', '300');
         return Excel::download(new UserResultExport($survey_round_id, $survey_id), 'Kết_quả_đánh_giá.xlsx');
     }
 }

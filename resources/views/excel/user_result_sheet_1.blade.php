@@ -18,7 +18,13 @@
         <tr>
             <th colspan="8">Ngày tổng hợp báo cáo {{Carbon\Carbon::now()->format('d/m/Y')}}</th>
         </tr>
-        <tr></tr>
+        <tr>
+            <th></th>
+            <th colspan="7">
+                Đợt đánh giá: {{$survey_round->name}} <br>
+                Bài đánh giá: {{$survey->name}}
+            </th>
+        </tr>
         <tr></tr>
         <tr>
             <th rowspan="2"><strong>TT</strong> </th>

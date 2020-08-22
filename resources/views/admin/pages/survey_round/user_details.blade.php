@@ -149,8 +149,6 @@
                                 <th>{{$section->getScoreByPercent($test->survey_round, $candiate->id)}}</th>
                               </tr>
                               @foreach ($section->questions as $index => $question)
-                              
-
                               <tr>
                                 <td>{{$index+1}}</td>
                                 <td>{{$question->content ?? ''}}</td>

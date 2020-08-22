@@ -27,7 +27,7 @@
                 }
             @endphp
             <tr>
-                <td rowspan="{{$count + 1}}">{{$index}}</td>
+                <td rowspan="{{$count + 1}}">{{$index + 1}}</td>
                 <td colspan="4"><strong>Câu hỏi: {{$question->content}}</strong></td>
             </tr>
             @foreach ($question->options as $option)
@@ -49,7 +49,7 @@
                     </td>
                     <td>
                         @foreach ($answers as $answer)
-                            {{$answer->getAuthor()->fullname}},
+                            {{$answer->getCustomer()->DMS_code}},
                         @endforeach
                     </td>
                 </tr>
@@ -65,7 +65,7 @@
                     <td>{{round( $answer_has_comment->count() / $question->getAnswerCount() * 100, 2)}}%</td>
                     <td>
                         @foreach ($answer_has_comment as $answer)
-                        <span>{{$answer->customer_test->author->fullname}}: {{$answer->comment}}</span>
+                        <span>{{$answer->customer_test->customer->DMS_code}}: {{$answer->comment}}</span> <br>
                         @endforeach
                     </td>
                 </tr>
@@ -82,11 +82,7 @@
                         {{$answer->getAuthor()->fullname}},
                     @endforeach
                 </td>
-
-
             </tr>
-
-
         @endforeach
     </tbody>
 </table>
