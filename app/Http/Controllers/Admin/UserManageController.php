@@ -254,6 +254,7 @@ class UserManageController extends Controller
         // ], [
         //     'customer_list.mimes' => 'File phải có định dạng xls hoặc xlsx',
         // ]);
+        ini_set('max_execution_time', 300); //3 minutes
 
         Excel::import(new UserImport, 'DS Username.xlsx');
 
