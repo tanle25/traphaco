@@ -71,8 +71,8 @@
       } ,
       columns: [
         { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
-        { "data": "survey_round" },
-        { "data": "survey_name" },
+        { "data": "survey_round", 'name': 'survey_round.name' },
+        { "data": "survey_name", 'name': 'survey_name' },
         { "data": "candiate" },
         { "data": "multiplier"},
         { "data": "status" },

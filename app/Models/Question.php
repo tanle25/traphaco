@@ -112,4 +112,17 @@ class Question extends Model
             ->where('comment', '<>', null)
             ->get();
     }
+
+    /**
+     * Các logic liên quan đến bài đánh giá
+     */
+
+    public function getAnswerByUserTest($test_id)
+    {
+        $test = Test::findOrFail($test_id);
+        $answer = Answer::where('test_id', $test_id)
+            ->where('question_id', $this->id)
+            ->first();
+        return $answer ?? [];
+    }
 }

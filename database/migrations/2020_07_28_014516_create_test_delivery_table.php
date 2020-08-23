@@ -50,7 +50,7 @@ class CreateTestDeliveryTable extends Migration
 
         Schema::table('answers', function (Blueprint $table) {
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('set null');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

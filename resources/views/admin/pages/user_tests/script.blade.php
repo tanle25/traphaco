@@ -108,7 +108,12 @@
                             swalToast(data.msg);
                         }
                         setTimeout(function () {
-                            location.href = "{{route('answer.index', ['marked' => 0])}}";
+                            //Kiểm tra location nếu có edit thì trả về những bài đã làm
+                            if(location.href.indexOf('edit') == - 1){
+                                location.href = "{{route('answer.index', ['marked' => 0])}}";
+                            }else{
+                                location.href = "{{route('answer.index', ['marked' => 1])}}";
+                            }
                         }, 300)
                     },
                     error: function (errors) {
