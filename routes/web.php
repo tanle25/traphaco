@@ -138,9 +138,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('answer/mark/{test_id}', 'Admin\AnswerController@showTest')->name('answer.mark');
     Route::post('answer/store', 'Admin\AnswerController@store')->name('answer.store');
     Route::get('answer/list-test', 'Admin\AnswerController@listTest')->name('answer.list_test');
-
-    Route::get('answer/{id}/edit', 'Admin\AnswerController@edit')->name('answer.show.re_ans');
-
+    Route::get('answer/{id}/edit', 'Admin\AnswerController@edit')->name('answer.re_ans');
     Route::get('answer/list', 'Admin\AnswerController@index')->name('answer.index');
 
     Route::get('/result/index', 'ResultController@index')->name('result.index');

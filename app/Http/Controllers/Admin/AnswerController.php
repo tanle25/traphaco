@@ -77,7 +77,7 @@ class AnswerController extends Controller
         return DataTables::eloquent($tests)
             ->addIndexColumn()
             ->filterColumn('candiate', function ($query, $keyword) {
-                $sql = "CONCAT(c.fullname, '   ',  COALESCE(d1.department_name, ''),'  ',COALESCE(p1.name, '')) like ?";
+                $sql = "CONCAT(c.fullname, '   ',  COALESCE(d1.department_name, ''),'  ',COALESCE(d2.name, '')) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->filterColumn('survey_name', function ($query, $keyword) {
@@ -101,9 +101,9 @@ class AnswerController extends Controller
             })
             ->addColumn('action', function (Test $test) {
                 if ($test->status == 3) {
-                    return '';
+                    return '<a href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
                 }
-                return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-success send-test"><i class="far fa-edit">Làm bài</i></a>';
+                return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])
             ->make(true);
@@ -127,28 +127,34 @@ class AnswerController extends Controller
             return ['error' => 'Không tìm thấy câu trả lời!'];
         };
 
-        foreach ($request->answer as $answer) {
-            $oldAns = Answer::where([
-                ['test_id', '=', $request->test_id],
-                ['question_id', '=', $answer['question_id']],
-            ])->first();
-            if ($oldAns) {
-                $oldAns->update([
-                    'option_choice' => $answer['option_id'],
-                    'comment' => $answer['comment'],
-                ]);
-            } else {
-                Answer::create([
-                    'option_choice' => $answer['option_id'],
-                    'comment' => $answer['comment'],
-                    'test_id' => $request->test_id,
-                    'question_id' => $answer['question_id'],
-                ]);
-                $test->status = 3;
-                $test->save();
-            };
-        }
+        DB::beginTransaction();
 
+        try {
+            foreach ($request->answer as $answer) {
+                $oldAns = Answer::where([
+                    ['test_id', '=', $request->test_id],
+                    ['question_id', '=', $answer['question_id']],
+                ])->first();
+                if ($oldAns) {
+                    $oldAns->update([
+                        'option_choice' => $answer['option_id'],
+                        'comment' => $answer['comment'],
+                    ]);
+                } else {
+                    Answer::create([
+                        'option_choice' => $answer['option_id'],
+                        'comment' => $answer['comment'],
+                        'test_id' => $request->test_id,
+                        'question_id' => $answer['question_id'],
+                    ]);
+                    $test->status = 3;
+                    $test->save();
+                };
+            }
+            DB::commit();
+        } catch (Exception $th) {
+            DB::rollback();
+        }
         return ['msg' => 'Cập nhật thành công kết quả!'];
 
     }
@@ -180,7 +186,15 @@ class AnswerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $test = Test::findOrFail($id);
+
+        if (Auth::user()->id !== $test->examiner->id || $test->examiner->status == 1) {
+            return abort(404);
+        }
+
+        $survey = $test->survey;
+
+        return view('admin.pages.user_tests.edit', compact('test', 'survey'));
     }
 
     /**
