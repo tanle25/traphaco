@@ -49,7 +49,7 @@
                     </td>
                     <td>
                         @foreach ($answers as $answer)
-                            {{$answer->getCustomer()->DMS_code}},
+                        {{$answer->getCustomer()->contract_code}}-{{$answer->getCustomer()->pharmacy_name}},
                         @endforeach
                     </td>
                 </tr>
@@ -65,7 +65,7 @@
                     <td>{{round( $answer_has_comment->count() / $question->getAnswerCount() * 100, 2)}}%</td>
                     <td>
                         @foreach ($answer_has_comment as $answer)
-                        <span>{{$answer->customer_test->customer->DMS_code}}: {{$answer->comment}}</span> <br>
+                        <span>{{$answer->getCustomer()->contract_code}}-{{$answer->getCustomer()->pharmacy_name}}: {{$answer->comment}}</span> <br>
                         @endforeach
                     </td>
                 </tr>
@@ -79,7 +79,7 @@
                 <td>{{round( $empty_answer->count() / $question->getAnswerCount() * 100, 2)}}%</td>
                 <td>
                     @foreach ($empty_answer as $answer)
-                        {{$answer->getAuthor()->fullname}},
+                    {{$answer->getCustomer()->contract_code}}-{{$answer->getCustomer()->pharmacy_name}}, 
                     @endforeach
                 </td>
             </tr>
