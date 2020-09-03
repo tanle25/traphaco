@@ -50,13 +50,10 @@
               </li>
 
               <li class="nav-item">
-                <a href="<?php echo e(route('history.customer_test_history')); ?>" class="nav-link">
+                <a href="<?php echo e(route('history.customer_info_history')); ?>" class="nav-link">
                   <p>Lịch sử</p></p>
                 </a>
               </li>
-
-
-
             </ul>
           </li>
 
