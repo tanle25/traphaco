@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'])
+    @include('admin.partials.content_header', ['title' => 'Quản lý phân quyền'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">

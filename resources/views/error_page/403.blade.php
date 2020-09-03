@@ -11,6 +11,10 @@
         body {
             height: 100%;
             overflow: hidden;
+            background-image: url({{asset('images/screen-8.jpg')}});
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;        
         }
 
         .error-page {
@@ -23,7 +27,7 @@
         }
 
         .error-page h1 {
-            font-size: 30vh;
+            font-size: 250px;
             font-weight: bold;
             position: relative;
             margin: -8vh 0 0;
@@ -48,7 +52,7 @@
 
         .error-page h1+p {
             color: #d6d6d6;
-            font-size: 8vh;
+            font-size: 30px;
             font-weight: bold;
             line-height: 10vh;
             max-width: 600px;
@@ -142,15 +146,15 @@
             <!--p(data-p='UNAUTHORIZED') UNAUTHORIZED-->
             <!--h1(data-h1='403') 403-->
             <!--p(data-p='FORBIDDEN') FORBIDDEN-->
-            <h1 data-h1="404">404</h1>
-            <p data-p="NOT FOUND">NOT FOUND</p>
+            <h1 data-h1="403">403</h1>
+            <p data-p="BẠN KHÔNG CÓ QUYỀN TRUY CẬP">BẠN KHÔNG CÓ QUYỀN TRUY CẬP</p>
             <!--h1(data-h1='500') 500-->
             <!--p(data-p='SERVER ERROR') SERVER ERROR-->
         </div>
     </div>
     <div id="particles-js"></div>
     <!--a(href="#").back GO BACK-->
-    <script src=""></script>
+    <script src="{{asset('template/js/particles.min.js')}}"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {

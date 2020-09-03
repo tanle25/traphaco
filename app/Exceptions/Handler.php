@@ -50,6 +50,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            return response()->view('error_page.403', ['error' => "Bạn không có quyền truy cập"], 403);
+        }
+
         return parent::render($request, $exception);
     }
 }

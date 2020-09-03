@@ -13,7 +13,7 @@
                 <strong class="text-red">
                     {{$message}}
                 </strong>
-                @enderror      
+                @enderror
             </div> 
           </th>
       </tr>
@@ -47,7 +47,10 @@
             <td>
               <div class="form-group">
                 @foreach ($permissions as $item)
-                  @if (strpos($item, $page) !== -1 )
+                  @php
+                    $first_space = strpos($item->name, ' ');
+                  @endphp
+                  @if (substr($item->name, $first_space + 1) === $page)
                   <div class="form-check mt-1">
                       <input value="{{$item->name}}" id="permission-{{$item->id}}" name="permissions[]" class="form-check-input" type="checkbox">
                       <label for="permission-{{$item->id}}" class="form-check-label">{{$item->name}}</label>

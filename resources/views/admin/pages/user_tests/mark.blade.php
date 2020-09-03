@@ -29,7 +29,15 @@
                     <div>
                         <h5>{{$test->survey->content ?? ''}}</h5>
                     </div>
-                    <div class="mt-3">
+                    <div>
+                        <h5 class="mt-4">
+                            Thời gian làm bài: Từ {{ Carbon\Carbon::parse( $test->getStartTime())->format('d/m/Y H:i') ?? ''}} đến {{ Carbon\Carbon::parse( $test->getEndTime())->format('d/m/Y H:i') ?? ''}}
+                            @if ( Carbon\Carbon::parse( $test->getEndTime())->format('d/m/Y H:i') < Carbon\Carbon::now() )
+                                (Đã hết thời gian làm bài)
+                            @endif
+                        </h5>
+                    </div>
+                    <div class="mt-2">
                         <h5>
                             {{$test->survey->type == 1 ? 'Người được đánh giá' : 'Người làm bài'}}: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}} , Trọng số: {{$test->multiplier}}
                         </h5>

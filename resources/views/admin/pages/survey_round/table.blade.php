@@ -1,159 +1,62 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Bài khảo sát</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bài đánh giá năng lực</a>
-    </li>
 
-</ul>
-<div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <form action="{{route('admin.test.store')}}" class="row mb-3" method="post">
-            @csrf
-            <input type="hidden" name="survey_round_id" value="{{$survey_round->id}}">
-            <input type="hidden" name="test_type" value="1">
-            <div class="form-group col-md-4">
-                <label>Chọn bài khảo sát</label>
-                <select name="survey_id[]" multiple="multiple" class="form-control select2" id="survey-select">
-                    @foreach ($survey as $item )
-                        @if ($item->type == 1)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('survey_id')
-                <strong class="text-red">
-                    {{$message}}
-                </strong>
-                @enderror
-            </div>    
-            
-            <div class="form-group col-md-4">
-                <label>Chọn người được chấm</label>
-                <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select">
-                    @foreach ($departments as $department)
-                        <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
-                        @foreach ($department->users as $user)
-                        <option department-holder="{{$department->id}}"  value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
-                        @endforeach
-                    @endforeach
-                    <option value="1"  class="department" department-holder="x">Khong ro phong ban</option>
-                    @foreach ($users as $user)
-                        @if ($user->department == null)
-                        <option data-department="1000" department-holder="x"  value="{{$user->id}}">{{$user->fullname ?? ''}} </option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('candiate_id')
-                <strong class="text-red">
-                    {{$message}}
-                </strong>
-                @enderror
+
+<div class="card">
+    <div class="card-header">
+
+        <div>
+            <div class="mb-3">
+                THỜI GIAN LÀM BÀI KIỂM TRA
             </div>
-        
-            <div class="form-group col-md-4">
-                <label>Chọn người chấm</label>
-                <select name="examiner_id[]" multiple="multiple" class="form-control select2" id="examiner-select">
-                    @foreach ($departments as $department)
-                        <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
-                        @foreach ($department->users as $user)
-                        <option department-holder="{{$department->id}}"  value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
-                        @endforeach
-                    @endforeach
-                    <option value="1"  class="department" department-holder="x">Khong ro phong ban</option>
-                    @foreach ($users as $user)
-                        @if ($user->department == null)
-                        <option data-department="1000" department-holder="x"  value="{{$user->id}}">{{$user->fullname ?? ''}} </option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('examiner_id')
-                <strong class="text-red">
-                    {{$message}}
-                </strong>
-                @enderror
-            </div>
-            <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
-            </div>
-        </form>
-    </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <form action="{{route('admin.test.store2')}}" class="row mb-3" method="post">
-            @csrf
-            <input type="hidden" name="survey_round_id" value="{{$survey_round->id}}">
-            <input type="hidden" name="test_type" value="2">
+            <form method="post" action="{{route('admin.survey_round.update_time')}}">
+                @csrf
+                <input type="hidden" name="survey_round_id" value="{{$survey_round->id}}">
 
-            <div class="form-group col-md-4">
-                <label>Chọn bài đánh giá</label>
-                <select name="survey_id[]" multiple="multiple" class="form-control select2" id="survey-select2">
-                    @foreach ($survey as $item )
-                        @if ($item->type == 2)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('survey_id')
-                <strong class="text-red">
-                    {{$message}}
-                </strong>
-                @enderror
+                @foreach ($survey_round->getSurveyListAndTime() as $index => $survey)
+                    <div class="row pt-2">
+                        <div class="col-md-6"> <strong> {{$survey->name}}</strong></div>
+                        <div class="col-md-6 row" style="align-items: center">
+                            <input type="hidden" name="time[{{$index}}][survey]" value="{{$survey->id}}">
+                            <div class="form-group row col-md-6 col-12">
+                                <label for="staticEmail" class="col-form-label col-12 col-lg-2">Từ:</label>
+                                <div class="col-12 col-lg-9">
+                                    <input  style="border:none" id="date-picker" class="date-picker form-control" type="text" name="time[{{$index}}][start_at]" value="{{Carbon\Carbon::parse( $survey->start_at)->format('d/m/Y H:i') ?? '01/01/2000 10:00'}}"> 
+                                </div>
+                            </div>
 
-            </div>    
-            
-            <div class="form-group col-md-4">
-
-                <label>Chọn người được chấm</label>
-                <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select2">
-                    @foreach ($departments as $department)
-                        <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
-                        @foreach ($department->users as $user)
-                        <option department-holder="{{$department->id}}"  value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
-                        @endforeach
-                    @endforeach
-                    <option value="1"  class="department" department-holder="x">Khong ro phong ban</option>
-                    @foreach ($users as $user)
-                        @if ($user->department == null)
-                        <option data-department="1000" department-holder="x"  value="{{$user->id}}">{{$user->fullname ?? ''}} </option>
-                        @endif
-                    @endforeach
-                </select>
+                            <div class="form-group row col-md-6 col-12">
+                                <label for="staticEmail" class="col-12 col-lg-2 col-form-label">đến:</label>
+                                <div class="col-12 col-lg-9" >
+                                    <input  style="border:none" class="date-picker form-control" type="text" name="time[{{$index}}][end_at]" value="{{ Carbon\Carbon::parse( $survey->end_at)->format('d/m/Y H:i') ?? '01/01/2100 10:00'}}">
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                @endforeach
                 
-                @error('candiate_id')
-                <strong class="text-red">
-                    {{$message}}
-                </strong>
-                @enderror
+                <button type="submit" class="btn btn-success">Cập nhật thời gian làm bài</button>
+            </form>
 
-            </div>
+            
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="tests-table" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                    <th>ID</th>
+                    <th>Bộ đề</th>
+                    <th>Người được chấm</th>
+                    <th>Người chấm</th> {{--Chưa gửi, đã gửi--}}
+                    <th>Trọng số</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+            </tr>
+            </thead>
 
-     
-
-            <div class="form-group col-12">
-                <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
-            </div>
-        </form>   
+        </table>
+        <a class="btn btn-success" href="{{route('admin.test.send_all', $survey_round->id)}}">Gửi tất cả</a>
     </div>
 </div>
-
-
-<table id="tests-table" class="table table-bordered table-hover">
-    <thead>
-      <tr>
-			<th>ID</th>
-			<th>Bộ đề</th>
-			<th>Người được chấm</th>
-			<th>Người chấm</th> {{--Chưa gửi, đã gửi--}}
-            <th>Trọng số</th>
-            <th>Trạng thái</th>
-            <th>Thao tác</th>
-      </tr>
-    </thead>
-
-</table>
-
-<a class="btn btn-success" href="{{route('admin.test.send_all', $survey_round->id)}}">Gửi tất cả</a>
 @section('custom-js')
 @parent
 <script>
@@ -179,5 +82,17 @@
       	]
     });
   })
+
+$('.date-picker').each(function(){
+    $(this).daterangepicker({
+        singleDatePicker: true,
+        timePicker24Hour: true,
+        locale: {
+            format: 'DD/MM/YYYY HH:mm'
+        },
+        timePicker: true,
+    })
+}) 
+
 </script>
 @endsection

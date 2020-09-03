@@ -10,6 +10,7 @@ use Auth;
 use DataTables;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AnswerController extends Controller
 {
@@ -54,7 +55,6 @@ class AnswerController extends Controller
             } else {
                 $test = Test::query();
             }
-
         }
         $examiner = Auth::user();
 
@@ -63,6 +63,10 @@ class AnswerController extends Controller
             ->leftJoin('departments as d1', 'c.department_id', '=', 'd1.id')
             ->leftJoin('user_position as d2', 'c.position_id', '=', 'd2.id')
             ->join('survey_round', 'tests.survey_round', '=', 'survey_round.id')
+            ->join('test_time', function ($join) {
+                $join->on('test_time.survey_id', '=', 'survey.id')
+                    ->on('test_time.survey_round_id', '=', 'survey_round.id');
+            })
             ->where('examiner_id', '=', $examiner->id)
             ->where('status', '<>', 1)
             ->select([
@@ -72,6 +76,8 @@ class AnswerController extends Controller
                 'tests.id as id',
                 'survey.name as survey_name',
                 DB::raw("CONCAT(c.fullname, '   ',  COALESCE(d1.department_name, ''),'  ',COALESCE(d2.name, '')) as candiate"),
+                'test_time.start_at as start_at',
+                'test_time.end_at as end_at',
             ]);
 
         return DataTables::eloquent($tests)
@@ -85,24 +91,34 @@ class AnswerController extends Controller
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('status', function (Test $test) {
+
                 if ($test->status == 1) {
                     return '<span class="badge badge-primary">Mới tạo</span>';
                 };
-                if ($test->status == 2) {
-                    return '<span class="badge badge-info">Chưa chấm</span>';
-                };
                 if ($test->status == 3) {
                     return '<span class="badge badge-success">Đã chấm xong</span>';
+                };
+                if ($test->end_at < Carbon::now()) {
+                    return '<span class="badge badge-danger">Quá thời gian</span>';
+                };
+                if ($test->status == 2) {
+                    return '<span class="badge badge-info">Chưa chấm</span>';
                 };
             })
             ->editColumn('multiplier', function (Test $test) {
                 $href = route('admin.test.update', $test->id);
                 return $test->multiplier;
             })
+            ->editColumn('end_at', function (Test $test) {
+                return Carbon::parse($test->end_at)->format('d/m/Y H:i:s');
+            })
             ->addColumn('action', function (Test $test) {
                 if ($test->status == 3) {
                     return '<a href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
                 }
+                if ($test->end_at < Carbon::now()) {
+                    return '';
+                };
                 return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])
@@ -122,6 +138,10 @@ class AnswerController extends Controller
         ]);
 
         $test = Test::findOrFail($request->test_id);
+
+        if ($test->getEndTime() < Carbon::now()) {
+            return ['error' => "Đã quá thời gian làm bài T.T"];
+        }
 
         if (empty($request->answer)) {
             return ['error' => 'Không tìm thấy câu trả lời!'];

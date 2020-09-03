@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\TestTime;
 use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
@@ -45,6 +46,22 @@ class Test extends Model
 
         $this->save();
         return $total_score;
+    }
+
+    public function getStartTime()
+    {
+        $time = TestTime::where('survey_round_id', $this->survey_round)
+            ->where('survey_id', $this->survey_id)
+            ->first();
+        return $time->start_at;
+    }
+
+    public function getEndTime()
+    {
+        $time = TestTime::where('survey_round_id', $this->survey_round)
+            ->where('survey_id', $this->survey_id)
+            ->first();
+        return $time->end_at;
     }
 
 }
