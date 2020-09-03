@@ -47,32 +47,32 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/permission/update/{id}', 'PermissionController@update')->name('admin.permission.update');
     Route::post('/permission/destroy/{id}', 'PermissionController@destroy')->name('admin.permission.destroy');
 
-    Route::get('/survey', 'SurveyController@index')->name('admin.survey.index');
-    Route::get('/survey/create', 'SurveyController@create')->name('admin.survey.create');
-    Route::post('/survey/store', 'SurveyController@store')->name('admin.survey.store');
-    Route::get('/survey/edit/{id}', 'SurveyController@edit')->name('admin.survey.edit');
-    Route::post('/survey/update/{id}', 'SurveyController@update')->name('admin.survey.update');
-    Route::post('/survey/destroy/{id}', 'SurveyController@destroy')->name('admin.survey.destroy');
-    Route::get('/survey/list', 'SurveyController@listSurvey')->name('admin.survey.list_survey');
+    Route::get('/survey', 'SurveyController@index')->name('admin.survey.index')->middleware('permission:xem bộ đề');
+    Route::get('/survey/create', 'SurveyController@create')->name('admin.survey.create')->middleware('permission:thêm bộ đề');
+    Route::post('/survey/store', 'SurveyController@store')->name('admin.survey.store')->middleware('permission:thêm bộ đề');
+    Route::get('/survey/edit/{id}', 'SurveyController@edit')->name('admin.survey.edit')->middleware('permission:xem bộ đề');
+    Route::post('/survey/update/{id}', 'SurveyController@update')->name('admin.survey.update')->middleware('permission:sửa bộ đề');
+    Route::post('/survey/destroy/{id}', 'SurveyController@destroy')->name('admin.survey.destroy')->middleware('permission:xóa bộ đề');
+    Route::get('/survey/list', 'SurveyController@listSurvey')->name('admin.survey.list_survey')->middleware('permission:xem bộ đề');
 
-    Route::get('/survey-section', 'SurveySectionController@index')->name('admin.survey_section.index');
-    Route::post('/survey-section/store', 'SurveySectionController@store')->name('admin.survey_section.store');
-    Route::post('/survey-section/update', 'SurveySectionController@update')->name('admin.survey_section.update');
-    Route::post('/survey-section/destroy', 'SurveySectionController@destroy')->name('admin.survey_section.destroy');
+    Route::get('/survey-section', 'SurveySectionController@index')->name('admin.survey_section.index')->middleware('permission:sửa bộ đề');
+    Route::post('/survey-section/store', 'SurveySectionController@store')->name('admin.survey_section.store')->middleware('permission:sửa bộ đề');
+    Route::post('/survey-section/update', 'SurveySectionController@update')->name('admin.survey_section.update')->middleware('permission:sửa bộ đề');
+    Route::post('/survey-section/destroy', 'SurveySectionController@destroy')->name('admin.survey_section.destroy')->middleware('permission:sửa bộ đề');
 
-    Route::get('/question', 'QuestionController@index')->name('admin.question.index');
-    Route::post('/question/store', 'QuestionController@store')->name('admin.question.store');
-    Route::post('/question/update', 'QuestionController@update')->name('admin.question.update');
-    Route::post('/question/destroy', 'QuestionController@destroy')->name('admin.question.destroy');
-    Route::post('/question/can-comment', 'QuestionController@canComment')->name('admin.question.can_comment');
-    Route::post('/question/duplicate', 'QuestionController@duplicateQuestion')->name('admin.question.duplicate');
-    Route::post('/question/update-order', 'QuestionController@updateQuestionOrder')->name('admin.question.update_order');
-    Route::post('/question/update-must-mask', 'QuestionController@chageQuestionMustMaskStatus')->name('admin.question.save_question_must_mask');
-    Route::get('/question-option', 'QuestionOptionController@index')->name('admin.question_option.index');
-    Route::post('/question-option/store', 'QuestionOptionController@store')->name('admin.question_option.store');
-    Route::post('/question-option/update', 'QuestionOptionController@update')->name('admin.question_option.update');
-    Route::post('/question-option/destroy', 'QuestionOptionController@destroy')->name('admin.question_option.destroy');
-    Route::post('/question-option/update-order', 'QuestionOptionController@updateOptionOrder')->name('admin.question_option.update_order');
+    Route::get('/question', 'QuestionController@index')->name('admin.question.index')->middleware('permission:sửa bộ đề');
+    Route::post('/question/store', 'QuestionController@store')->name('admin.question.store')->middleware('permission:sửa bộ đề');
+    Route::post('/question/update', 'QuestionController@update')->name('admin.question.update')->middleware('permission:sửa bộ đề');
+    Route::post('/question/destroy', 'QuestionController@destroy')->name('admin.question.destroy')->middleware('permission:sửa bộ đề');
+    Route::post('/question/can-comment', 'QuestionController@canComment')->name('admin.question.can_comment')->middleware('permission:sửa bộ đề');
+    Route::post('/question/duplicate', 'QuestionController@duplicateQuestion')->name('admin.question.duplicate')->middleware('permission:sửa bộ đề');
+    Route::post('/question/update-order', 'QuestionController@updateQuestionOrder')->name('admin.question.update_order')->middleware('permission:sửa bộ đề');
+    Route::post('/question/update-must-mask', 'QuestionController@chageQuestionMustMaskStatus')->name('admin.question.save_question_must_mask')->middleware('permission:sửa bộ đề');
+    Route::get('/question-option', 'QuestionOptionController@index')->name('admin.question_option.index')->middleware('permission:sửa bộ đề');
+    Route::post('/question-option/store', 'QuestionOptionController@store')->name('admin.question_option.store')->middleware('permission:sửa bộ đề');
+    Route::post('/question-option/update', 'QuestionOptionController@update')->name('admin.question_option.update')->middleware('permission:sửa bộ đề');
+    Route::post('/question-option/destroy', 'QuestionOptionController@destroy')->name('admin.question_option.destroy')->middleware('permission:sửa bộ đề');
+    Route::post('/question-option/update-order', 'QuestionOptionController@updateOptionOrder')->name('admin.question_option.update_order')->middleware('permission:sửa bộ đề');
 
     Route::get('/test/index', 'TestController@index')->name('admin.test.index');
     Route::get('/test/create', 'TestController@create')->name('admin.test.create');
@@ -126,7 +126,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //history
     Route::get('/history', 'HistoryLogController@index')->name('history.index');
 
-    Route::get('/history/customer_test', 'HistoryLogController@customerTestHistory')->name('history.customer_test_history');
+    Route::get('/history/customer-info', 'HistoryLogController@customerInfoHistory')->name('history.customer_info_history');
 
     // result for admin
     Route::get('/result/details/{survey_round_id}', 'UserResultController@show')->name('admin.user_result.show');
