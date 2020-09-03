@@ -8,11 +8,13 @@ use App\Models\Department;
 use App\Models\Survey;
 use App\Models\SurveyRound;
 use App\Models\Test;
+use App\Models\TestTime;
 use App\User;
 use DataTables;
 use DB;
 use Excel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class RoundSurveyController extends Controller
 {
@@ -221,13 +223,34 @@ class RoundSurveyController extends Controller
     {
         return Excel::download(new SurveyRoundExport($id, $candiate_id, $survey_id), 'thong_ke_danh_gia.xlsx');
 
-        $tests = Test::with('survey')
-            ->where('tests.survey_round', $id)
-            ->where('tests.candiate_id', $candiate_id)
-            ->where('tests.survey_id', $survey_id)
-            ->select('*')
-            ->get();
-        dd($tests);
+    }
+
+    public function updateTime(Request $request)
+    {
+        $data = [];
+        foreach ($request->time as $item) {
+            $start = Carbon::createFromFormat('d/m/Y H:i', $item['start_at'])->format('Y-m-d H:i');
+            $end = Carbon::createFromFormat('d/m/Y H:i', $item['end_at'])->format('Y-m-d H:i');
+
+            $data[] = [
+                'survey_round_id' => $request->survey_round_id,
+                'survey_id' => $item['survey'],
+                'start_at' => $start,
+                'end_at' => $end,
+            ];
+        }
+        foreach ($data as $item) {
+            TestTime::updateOrCreate([
+                'survey_round_id' => $item['survey_round_id'],
+                'survey_id' => $item['survey_id'],
+            ], [
+                'start_at' => $item['start_at'],
+                'end_at' => $item['end_at'],
+            ]);
+        }
+
+        return back()->with('success', 'Cập nhật thành công');
+
     }
 
 }

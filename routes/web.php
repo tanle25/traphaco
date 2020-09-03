@@ -19,11 +19,11 @@ Auth::routes();
 Route::get('', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'is_admin']], function () {
-    Route::get('/department', 'DepartmentController@index')->name('admin.department.index');
-    Route::post('/department/store', 'DepartmentController@store')->name('admin.department.store');
-    Route::get('/department/edit/{id}', 'DepartmentController@edit')->name('admin.department.edit');
-    Route::post('/department/update/{id}', 'DepartmentController@update')->name('admin.department.update');
-    Route::post('/department/destroy', 'DepartmentController@destroy')->name('admin.department.destroy');
+    Route::get('/department', 'DepartmentController@index')->name('admin.department.index')->middleware('permission:xem phòng ban');
+    Route::post('/department/store', 'DepartmentController@store')->name('admin.department.store')->middleware('permission:thêm phòng ban');
+    Route::get('/department/edit/{id}', 'DepartmentController@edit')->name('admin.department.edit')->middleware('permission:sửa phòng ban');
+    Route::post('/department/update/{id}', 'DepartmentController@update')->name('admin.department.update')->middleware('permission:sửa phòng ban');
+    Route::post('/department/destroy', 'DepartmentController@destroy')->name('admin.department.destroy')->middleware('permission:xóa phòng ban');
     Route::post('/department/savetree', 'DepartmentController@saveTree')->name('admin.department.savetree');
 
     Route::post('/user-position/store', 'UserPositionController@store')->name('admin.user_position.store');
@@ -97,6 +97,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/round-survey/details/{id}', 'RoundSurveyController@details')->name('admin.survey_round.details');
     Route::get('/round-survey/details/{id}/get-table', 'RoundSurveyController@getSurveyRoundResultTable')->name('admin.survey_round.details_table');
     Route::get('/round-survey/details/{id}/candiate/{candiate_id}/survey/{survey_id}', 'RoundSurveyController@exportUserTestDetails')->name('admin.survey_round.details.export');
+    Route::post('/round-survey/time/update', 'RoundSurveyController@updateTime')->name('admin.survey_round.update_time');
 
     Route::get('/test/candiate/get-list', 'TestController@getCandiate')->name('admin.test.get_candiate');
     Route::get('/test/examiner/get-list', 'TestController@getExaminer')->name('admin.test.get_examiner');

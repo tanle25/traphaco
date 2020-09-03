@@ -6,7 +6,7 @@
             <th colspan="5"><strong>BÁO CÁO CHƯƠNG TRÌNH KHẢO SÁT KHÁCH HÀNG</strong> </th>
         </tr>
         <tr>
-            <th colspan="5"><strong style="text-align:centerN">TÊN CHƯƠNG TRÌNH:</strong>{{$survey->name}}</th>
+            <th colspan="5"><strong>TÊN CHƯƠNG TRÌNH:</strong>{{$survey->name}}</th>
         </tr>
         <tr></tr>
         <tr></tr>

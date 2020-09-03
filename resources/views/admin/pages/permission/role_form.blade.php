@@ -29,7 +29,6 @@
       <tbody style="text-transform: capitalize">
         @php
           $page_list = [];
-
           foreach ($permissions as $item) {
             $name = $item->name;
             $pos = strpos($name, ' ');
@@ -47,7 +46,11 @@
               <td>
                 <div class="form-group">
                   @foreach ($permissions as $item)
-                    @if (strpos($item, $page) !== -1 )
+                    @php
+                        $first_space = strpos($item->name, ' ');
+                    @endphp
+                    {{--Check if position of page == first space then return true--}}
+                    @if (substr($item->name, $first_space + 1) === $page)
                     <div class="form-check mt-1">
                         <input value="{{$item->name}}" id="permission-{{$item->id}}" name="permissions[]" class="form-check-input" type="checkbox">
                         <label for="permission-{{$item->id}}" class="form-check-label">{{$item->name}}</label>

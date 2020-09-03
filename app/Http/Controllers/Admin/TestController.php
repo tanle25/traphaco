@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Survey;
 use App\Models\Test;
+use App\Models\TestTime;
 use App\User;
 use DataTables;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class TestController extends Controller
 {
@@ -120,6 +122,15 @@ class TestController extends Controller
         $survey_round_id = $request->survey_round_id;
 
         foreach ($survey_ids as $survey_id) {
+
+            $test_time = TestTime::firstOrCreate([
+                'survey_round_id' => $survey_round_id,
+                'survey_id' => $survey_id,
+            ], [
+                'start_at' => Carbon::now()->format('Y-m-d H:i'),
+                'end_at' => Carbon::now()->format('Y-m-d H:i'),
+            ]);
+
             $survey = Survey::find($survey_id);
             if ($survey) {
                 foreach ($list_candiate as $candiate_id) {
@@ -196,6 +207,10 @@ class TestController extends Controller
         $survey_round_id = $request->survey_round_id;
 
         foreach ($survey_id_list as $survey_id) {
+            $test_time = TestTime::firstOrCreate([
+                'survey_round_id' => $survey_round_id,
+                'survey_id' => $survey_id,
+            ]);
             $survey = Survey::find($survey_id);
             if ($survey) {
                 foreach ($list_candiate as $candiate_id) {
