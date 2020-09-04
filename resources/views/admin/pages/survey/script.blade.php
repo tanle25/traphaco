@@ -116,7 +116,11 @@
                 }
             },
             error: function(errors){
-                swalToast('Lỗi cập nhật tiêu đề sectio quá 255 ký tự', 'error');
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }
+                swalToast('Lỗi cập nhật tiêu đề section quá 255 ký tự', 'error');
             }
         });
     }
@@ -591,6 +595,7 @@ duplicate question
 
 
 function duplicateQuestion(question_id, section_id){
+    localStorage.setItem('scrollpos', window.scrollY);
     $.ajax({
         url: "{{route('admin.question.duplicate')}}",
         data: {
@@ -599,13 +604,19 @@ function duplicateQuestion(question_id, section_id){
         },
         type:'post',
         success: function(data){
-            location.reload(true);            
+            location.reload();            
         }
     })
 
 }
 
-$(document).on('click', '.question-duplicate', function(){
+document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+
+$(document).on('click', '.question-duplicate', function(e){
     var question = $(this).closest('.question-wraper');
     var section = $(this).closest('.section-wraper');
     var question_id = question.data('question-id'); 
