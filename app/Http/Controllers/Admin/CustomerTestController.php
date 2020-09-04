@@ -185,7 +185,7 @@ class CustomerTestController extends Controller
             }
         }
 
-        return 'hello';
+        return redirect()->route('admin.customer.index');
     }
 
 }

@@ -53,7 +53,7 @@
                         <td>{{$survey->getScoreByPercent($survey_round->id, $candiate->id)}}</td>
                         <td>
                           <a class="text-info" href="{{route('admin.survey_round.candiate_details', ['id' => $survey_round->id, 'candiate_id' => $candiate->id])}}"> <i class="fas fa-eye    "></i> </a>
-                          <a class="text-danger ml-2" href="#"><i class="far fa-file-excel"></i> </a>
+                          {{-- <a class="text-danger ml-2" href="#"><i class="far fa-file-excel"></i> </a> --}}
                         </td>
                       </tr>
                       @endforeach

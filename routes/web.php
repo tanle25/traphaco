@@ -112,7 +112,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('customer/list', 'CustomerController@list')->name('admin.customer.list');
     Route::post('customer/store', 'CustomerController@store')->name('admin.customer.store');
     Route::post('customer/update', 'CustomerController@update')->name('admin.customer.update');
-    Route::get('customer-test/remove-all-empty', 'CustomerTestController@removeAllEmpty');
+    Route::get('customer-test/remove-all-empty', 'CustomerTestController@removeAllEmpty')->name('admin.customer.remove_all_empty');
 
     Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('admin.customer.edit');
     Route::post('/customer/destroy/{id}', 'CustomerController@destroy')->name('admin.customer.destroy');
@@ -125,7 +125,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     //history
     Route::get('/history', 'HistoryLogController@index')->name('history.index');
-
     Route::get('/history/customer-info', 'HistoryLogController@customerInfoHistory')->name('history.customer_info_history');
 
     // result for admin
