@@ -35,6 +35,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem khách hàng')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.customer.index')); ?>" class="nav-link">
                   <p>
@@ -42,12 +43,16 @@
                   </p>
                 </a>
               </li>
-
+              <?php endif; ?>
+              
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem thống kê khách hàng')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.customer_test.index')); ?>" class="nav-link">
                   <p>Báo cáo khảo sát</p>
                 </a>
-              </li>
+              </li>  
+              <?php endif; ?>
+              
 
               <li class="nav-item">
                 <a href="<?php echo e(route('history.customer_info_history')); ?>" class="nav-link">
@@ -66,23 +71,31 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem đợt đánh giá')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.survey_round.index')); ?>" class="nav-link">
                   <p>Đợt đánh giá</p>
                 </a>
-              </li>
-
+              </li>  
+              <?php endif; ?>
+              
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem bộ đề')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.survey.index')); ?>" class="nav-link">
                   <p>Bài đánh giá</p>
                 </a>
-              </li>
-
+              </li>  
+              <?php endif; ?>
+              
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem báo cáo đợt đánh giá')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('result.index')); ?>" class="nav-link">
                   <p>Báo cáo đánh giá</p>
                 </a>
-              </li>
+              </li>  
+              <?php endif; ?>
+              
               
             </ul>
           </li>
@@ -98,24 +111,31 @@
             </a>
 
             <ul class="nav nav-treeview">
-
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem phòng ban')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.department.index')); ?>" class="nav-link">
                   <p>Quản lý phòng ban</p> 
                 </a>
-              </li>
-
+              </li>  
+              <?php endif; ?>
+              
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem người dùng')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.usermanage.index')); ?>" class="nav-link">
                   <p>Quản lý người dùng</p>
                 </a>
-              </li>
-
+              </li>  
+              <?php endif; ?>
+              
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem người dùng')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.permission.index')); ?>" class="nav-link">
                   <p>Quản lý phân quyền</p>
                 </a>
-              </li>
+              </li>  
+              <?php endif; ?>
+              
+
             </ul>
           </li>
 

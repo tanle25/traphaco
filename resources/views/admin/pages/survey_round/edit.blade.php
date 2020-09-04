@@ -112,7 +112,7 @@
                         </div>
                     
                         <div class="form-group col-md-4">
-                            <label>Chọn người đanh giá</label>
+                            <label>Chọn người đánh giá</label>
                             <select name="examiner_id[]" multiple="multiple" class="form-control select2" id="examiner-select">
                                 @foreach ($departments as $department)
                                     <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
@@ -282,6 +282,9 @@ $("input[data-bootstrap-switch]").each(function(){
 				//location.reload();
 			},
 			error: function (errors) {
+                if(errors.status == 403 ){
+                    return swalToast('Bạn không có quyền truy cập', 'error')
+                }
 				swalToast(errors.responseJSON.errors.value[0], 'error');
 			}
 		});
@@ -306,6 +309,9 @@ $("input[data-bootstrap-switch]").each(function(){
 				location.reload();
 			},
 			error: function (errors) {
+                if(errors.status == 403 ){
+                    return swalToast('Bạn không có quyền truy cập', 'error')
+                }
 				swalToast('Lỗi không rõ phát sinh trong quá trình gửi', 'error');
 			}
 		});
@@ -341,6 +347,9 @@ $("input[data-bootstrap-switch]").each(function(){
                             location.reload();
                         },
                         error: function (errors) {
+                            if(errors.status == 403 ){
+                                return swalToast('Bạn không có quyền truy cập', 'error')
+                            }
                             swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
                         }
                     });
