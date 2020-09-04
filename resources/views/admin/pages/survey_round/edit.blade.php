@@ -89,7 +89,7 @@
                         </div>    
                         
                         <div class="form-group col-md-4">
-                            <label>Chọn người được chấm</label>
+                            <label>Chọn người được đánh giá</label>
                             <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select">
                                 @foreach ($departments as $department)
                                     <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
@@ -112,7 +112,7 @@
                         </div>
                     
                         <div class="form-group col-md-4">
-                            <label>Chọn người chấm</label>
+                            <label>Chọn người đanh giá</label>
                             <select name="examiner_id[]" multiple="multiple" class="form-control select2" id="examiner-select">
                                 @foreach ($departments as $department)
                                     <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
@@ -163,7 +163,7 @@
                         
                         <div class="form-group col-md-4">
             
-                            <label>Chọn người được chấm</label>
+                            <label>Chọn người làm bài</label>
                             <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select2">
                                 @foreach ($departments as $department)
                                     <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
