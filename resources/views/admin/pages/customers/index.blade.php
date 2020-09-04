@@ -27,17 +27,20 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Danh sách khách hàng</h3>
-                        <span class="btn btn-success float-right customer-create" data-toggle="modal"
+                        @can('thêm user')
+                            <span class="btn btn-success float-right customer-create" data-toggle="modal"
                             data-target="#customer-model">
                             <i class="fas fa-plus-circle"></i> Thêm mới
-                        </span>
-                        @if (Auth::user()->is_admin == 1)
+                            </span>
+                            @if (Auth::user()->is_admin == 1 )
+                            <a href="#" class="btn btn-success float-right mr-4" data-toggle="modal"
+                            data-target="#import-model">
+                                <i class="fas fa-file-excel"></i> Import Excel
+                            </a>
+                            @endif
+                        @endcan
+
                         
-                        <a href="#" class="btn btn-success float-right mr-4" data-toggle="modal"
-                        data-target="#import-model">
-                            <i class="fas fa-file-excel"></i> Import Excel
-                        </a>
-                        @endif
 
                     </div>
                     <!-- /.card-header -->
@@ -269,6 +272,9 @@
                 $('#customer-model').modal('hide');
             },
             error: function (errors) {
+                if(errors.status == 403){
+                    return swalToast('Bạn không có quyền truy cập', 'error');
+                }
                 swalToast('Lỗi không xác định vui lòng kiểm tra lại các trường', 'error');
             }
         });
@@ -289,6 +295,9 @@
                 $('#test-container').html('');
             },
             error: function (errors) {
+                if(errors.status == 403){
+                    return swalToast('Bạn không có quyền truy cập', 'error');
+                }
                 swalToast('Lỗi không xác định vui lòng kiểm tra lại các trường', 'error');
             }
         });
@@ -323,6 +332,9 @@
 
             },
             error: function (errors) {
+                if(errors.status == 403){
+                    return swalToast('Bạn không có quyền truy cập', 'error');
+                }
                 swalToast('Không tìm thấy khách hàng', 'error');
             }
         });
@@ -343,6 +355,9 @@
 				$('#test-container').html(data);
             },
             error: function (errors) {
+                if(errors.status == 403){
+                    return swalToast('Bạn không có quyền truy cập', 'error');
+                }
                 swalToast('Lỗi không xác định vui lòng kiểm tra lại các trường', 'error');
             }
 		})
@@ -415,6 +430,9 @@
                     $('#customer-survey-model').modal('show');
                 },
                 error: function (errors) {
+                    if(errors.status == 403){
+                        return swalToast('Bạn không có quyền truy cập', 'error');
+                    }
                     swalToast('Lỗi không xác định vui lòng kiểm tra lại các trường', 'error');
                 }
             });
@@ -486,6 +504,9 @@
                             location.reload();
                         },
                         error: function (errors) {
+                            if(errors.status == 403){
+                                return swalToast('Bạn không có quyền truy cập', 'error');
+                            }
                             swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
                         }
                     });

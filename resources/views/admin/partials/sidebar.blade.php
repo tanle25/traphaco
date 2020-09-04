@@ -35,6 +35,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('xem khách hàng')
               <li class="nav-item">
                 <a href="{{route('admin.customer.index')}}" class="nav-link">
                   <p>
@@ -42,12 +43,16 @@
                   </p>
                 </a>
               </li>
-
+              @endcan
+              
+              @can('xem thống kê khách hàng')
               <li class="nav-item">
                 <a href="{{route('admin.customer_test.index')}}" class="nav-link">
                   <p>Báo cáo khảo sát</p>
                 </a>
-              </li>
+              </li>  
+              @endcan
+              
 
               <li class="nav-item">
                 <a href="{{route('history.customer_info_history')}}" class="nav-link">
@@ -66,23 +71,31 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              @can('xem đợt đánh giá')
               <li class="nav-item">
                 <a href="{{route('admin.survey_round.index')}}" class="nav-link">
                   <p>Đợt đánh giá</p>
                 </a>
-              </li>
-
+              </li>  
+              @endcan
+              
+              @can('xem bộ đề')
               <li class="nav-item">
                 <a href="{{route('admin.survey.index')}}" class="nav-link">
                   <p>Bài đánh giá</p>
                 </a>
-              </li>
-
+              </li>  
+              @endcan
+              
+              @can('xem báo cáo đợt đánh giá')
               <li class="nav-item">
                 <a href="{{route('result.index')}}" class="nav-link">
                   <p>Báo cáo đánh giá</p>
                 </a>
-              </li>
+              </li>  
+              @endcan
+              
               
             </ul>
           </li>
@@ -98,24 +111,31 @@
             </a>
 
             <ul class="nav nav-treeview">
-
+              @can('xem phòng ban')
               <li class="nav-item">
                 <a href="{{route('admin.department.index')}}" class="nav-link">
                   <p>Quản lý phòng ban</p> 
                 </a>
-              </li>
-
+              </li>  
+              @endcan
+              
+              @can('xem người dùng')
               <li class="nav-item">
                 <a href="{{route('admin.usermanage.index')}}" class="nav-link">
                   <p>Quản lý người dùng</p>
                 </a>
-              </li>
-
+              </li>  
+              @endcan
+              
+              @can('xem người dùng')
               <li class="nav-item">
                 <a href="{{route('admin.permission.index')}}" class="nav-link">
                   <p>Quản lý phân quyền</p>
                 </a>
-              </li>
+              </li>  
+              @endcan
+              
+
             </ul>
           </li>
 

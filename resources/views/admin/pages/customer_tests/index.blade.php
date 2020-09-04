@@ -21,7 +21,9 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
+                @can('xóa bài khảo sát')
                 <a href="{{route('admin.customer.remove_all_empty')}}" class="btn btn-success float-right">Xóa bài khảo sát trắng</a>
+                @endcan
               </div>
               <!-- /.card-header -->
               <div class="card-body">

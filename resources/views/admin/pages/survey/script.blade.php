@@ -93,6 +93,10 @@
                 appendSurveySectionFrontend(data.newSection, data.newQuestion);
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }                
                 swalToast('Lỗi tạo section', 'error');
             }
         });
@@ -300,6 +304,10 @@
                 appendQuestionFrontEnd(data.newQuestion);
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo câu hỏi', 'error');
             }
         });
@@ -322,6 +330,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi cập nhật nội dung câu hỏi', 'error');
             }
         });
@@ -354,6 +366,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
             }
         });
@@ -420,6 +436,10 @@
                 appendQuestionOptionFrontEnd(questionWraper, data.newOption);
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo đáp án!', 'error');
             }
         });
@@ -452,6 +472,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi cập nhật nội dung câu trả lời', 'error');
             }
         });
@@ -484,6 +508,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
             }
         });
@@ -560,6 +588,10 @@
 
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo đáp án!', 'error');
             }
         });
@@ -583,6 +615,10 @@
 
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo đáp án!', 'error');
             }
         });
@@ -605,6 +641,12 @@ function duplicateQuestion(question_id, section_id){
         type:'post',
         success: function(data){
             location.reload();            
+        },
+        error: function(errors){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
         }
     })
 
@@ -639,6 +681,10 @@ function orderOptions(dataOptions){
             swalToast(data.success);
         },
         error: function(errors){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
             swalToast('Lỗi không xác định phát sinh trong quá trình cập nhật', 'error');
         }
     })
@@ -656,6 +702,10 @@ function orderQuestions(dataQuestion){
             swalToast(data.success);
         },
         error: function(errors){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
             swalToast('Lỗi không xác định phát sinh trong quá trình cập nhật', 'error');
         }
     })
@@ -708,6 +758,10 @@ function saveQuestionMustMask(questionId, value){
             }
         },
         error: function(error){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
             swalToast("Lỗi không rõ phía server", "error");
 
         }
