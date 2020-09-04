@@ -119,7 +119,7 @@
               </li>  
               @endcan
               
-              @can('xem người dùng')
+              @can('xem user')
               <li class="nav-item">
                 <a href="{{route('admin.usermanage.index')}}" class="nav-link">
                   <p>Quản lý người dùng</p>
@@ -127,7 +127,7 @@
               </li>  
               @endcan
               
-              @can('xem người dùng')
+              @can('xem user')
               <li class="nav-item">
                 <a href="{{route('admin.permission.index')}}" class="nav-link">
                   <p>Quản lý phân quyền</p>
