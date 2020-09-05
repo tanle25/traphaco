@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('admin.main_layout')
 
 @section('custom-css')
@@ -10,6 +13,7 @@
     cursor:move;
 }
 </style>
+
 @endsection
 
 
@@ -27,7 +31,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Danh sách khách hàng</h3>
-                        @can('thêm user')
+
+                        @can('thêm khách hàng')
                             <span class="btn btn-success float-right customer-create" data-toggle="modal"
                             data-target="#customer-model">
                             <i class="fas fa-plus-circle"></i> Thêm mới
@@ -39,8 +44,6 @@
                             </a>
                             @endif
                         @endcan
-
-                        
 
                     </div>
                     <!-- /.card-header -->

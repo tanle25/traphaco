@@ -77,7 +77,7 @@ class TestController extends Controller
                 return "<input type='number' href='{$href}' class='multipiler-input' data-test-id='{$test->id}' value='{$test->multiplier}' id=''>";
             })
             ->addColumn('action', function (Test $test) {
-                return '<span href="' . route('admin.test.send_survey', $test->id) . '"class="btn text-success send-test"><i class="far fa-paper-plane"></i></span>
+                return '<span href="' . route('admin.test.send_survey', $test->id) . '"class="btn text-success send-test send-test-to-user"><i class="far fa-paper-plane"></i></span>
                         <span href="' . route('admin.test.destroy', $test->id) . '" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])

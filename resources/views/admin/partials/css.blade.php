@@ -40,4 +40,131 @@
     }
 </style>
 
+{{-- Hide all by permission style --}}
+
+@php
+    $user = Auth::user();
+@endphp
+@if (!$user->can('sửa khách hàng'))
+<style>
+    .customer-edit{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xóa khách hàng'))
+<style>
+    .customer-delete{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xóa khách hàng'))
+<style>
+    .customer-delete{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xem bài khảo sát khách hàng'))
+<style>
+    .customer-result{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('thêm bài khảo sát khách hàng'))
+<style>
+    .customer-survey{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xóa bài khảo sát khách hàng'))
+<style>
+    .test-delete{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xem bài khảo sát khách hàng'))
+<style>
+    .test-details{
+        display: none;
+    }
+</style>
+@endif
+
+
+@if (!$user->can('xuất_excel thống kê khách hàng'))
+<style>
+    .customer-result-excel{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xóa bộ đề'))
+<style>
+    .remove-survey-btn{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('sửa bộ đề'))
+<style>
+    .edit-survey-btn{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xem báo cáo đợt đánh giá'))
+<style>
+    .survey-round-result{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('sửa đợt đánh giá'))
+<style>
+    .survey-round-edit{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xóa đợt đánh giá'))
+<style>
+    .round-survey-delete{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('gửi bài đánh giá'))
+<style>
+    .send-test-to-user{
+        display: none;
+    }
+</style>
+@endif
+
+@if (!$user->can('xóa bài đánh giá'))
+<style>
+    .test-delete{
+        display: none;
+    }
+</style>
+@endif
+
+{{-- Hide all by permission style --}}
 @yield('custom-css')

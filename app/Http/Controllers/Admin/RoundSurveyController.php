@@ -35,8 +35,8 @@ class RoundSurveyController extends Controller
         return DataTables::eloquent($survey_rounds)
             ->addIndexColumn()
             ->addColumn('action', function (SurveyRound $surveyround) {
-                return '<a href="' . route('admin.survey_round.details', $surveyround->id) . '"class="btn text-success"><i class="far fa-chart-bar"></i></a>
-                        <a href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success"><i class="fas fa-edit"></i></a>
+                return '<a href="' . route('admin.survey_round.details', $surveyround->id) . '"class="btn text-primary survey-round-result"><i class="far fa-chart-bar "></i></a>
+                        <a href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success survey-round-edit"><i class="fas fa-edit"></i></a>
                         <span href="' . route('admin.survey_round.destroy', $surveyround->id) . '" class="btn text-danger round-survey-delete"><i class="far fa-trash-alt"></i></span>';
             })
             ->editColumn('created_by', function (SurveyRound $surveyround) {

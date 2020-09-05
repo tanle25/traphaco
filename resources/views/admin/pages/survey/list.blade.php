@@ -15,9 +15,11 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách bài khảo sát</h3>
+                @if (Auth::user()->can('thêm bộ đề'))
                 <a href="{{route('admin.survey.create')}}" class="btn float-right btn-success">
                   <i class="fas fa-plus-circle nav-icon"></i> Thêm mới
-                </a>
+                </a>    
+                @endif
               </div>
               <!-- /.card-header -->
               <div class="card-body">
