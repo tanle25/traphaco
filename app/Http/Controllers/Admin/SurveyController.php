@@ -34,7 +34,7 @@ class SurveyController extends Controller
         return DataTables::eloquent($survey)
             ->addIndexColumn()
             ->addColumn('action', function ($survey) {
-                return '<a href="' . route('admin.survey.edit', $survey->id) . '"class="btn text-success"><i class="fas fa-edit"></i></a>
+                return '<a href="' . route('admin.survey.edit', $survey->id) . '"class="btn text-success edit-survey-btn"><i class="fas fa-edit"></i></a>
                         <span href="' . route('admin.survey.destroy', $survey->id) . '" class="btn text-danger remove-survey-btn"><i class="far fa-trash-alt"></i></span>';
             })
             ->addColumn('created_by', function ($survey) {

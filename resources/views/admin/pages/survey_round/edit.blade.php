@@ -50,7 +50,7 @@
           <button type="submit" class="btn btn-traphaco ml-2">Lưu thông tin</button>
         </form>      
         </div>
-
+        @if (Auth::user()->can('thêm bài đánh giá'))
         <div class="card">
             <div class="card-header">
               <h3 class="card-title">Quản lý bài test</h3>
@@ -195,7 +195,9 @@
             
             </div>
             <!-- /.card-body -->
-        </div>
+        </div>    
+        @endif
+
         @include('admin.pages.survey_round.table')
 
     </section>

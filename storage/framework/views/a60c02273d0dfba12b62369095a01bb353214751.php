@@ -40,4 +40,131 @@
     }
 </style>
 
+
+
+<?php
+    $user = Auth::user();
+?>
+<?php if(!$user->can('sửa khách hàng')): ?>
+<style>
+    .customer-edit{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xóa khách hàng')): ?>
+<style>
+    .customer-delete{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xóa khách hàng')): ?>
+<style>
+    .customer-delete{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xem bài khảo sát khách hàng')): ?>
+<style>
+    .customer-result{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('thêm bài khảo sát khách hàng')): ?>
+<style>
+    .customer-survey{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xóa bài khảo sát khách hàng')): ?>
+<style>
+    .test-delete{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xem bài khảo sát khách hàng')): ?>
+<style>
+    .test-details{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+
+<?php if(!$user->can('xuất_excel thống kê khách hàng')): ?>
+<style>
+    .customer-result-excel{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xóa bộ đề')): ?>
+<style>
+    .remove-survey-btn{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('sửa bộ đề')): ?>
+<style>
+    .edit-survey-btn{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xem báo cáo đợt đánh giá')): ?>
+<style>
+    .survey-round-result{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('sửa đợt đánh giá')): ?>
+<style>
+    .survey-round-edit{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xóa đợt đánh giá')): ?>
+<style>
+    .round-survey-delete{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('gửi bài đánh giá')): ?>
+<style>
+    .send-test-to-user{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+<?php if(!$user->can('xóa bài đánh giá')): ?>
+<style>
+    .test-delete{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+
 <?php echo $__env->yieldContent('custom-css'); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/css.blade.php ENDPATH**/ ?>

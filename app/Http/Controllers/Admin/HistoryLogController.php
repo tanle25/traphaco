@@ -12,13 +12,13 @@ class HistoryLogController extends Controller
     public function index()
     {
         //activity()->log('Look mum, I logged something');
-
         return \Auth::user()->actions;
     }
 
     public function customerInfoHistory()
     {
-        $history_list = Activity::where('subject_type', Customer::class)->get();
+        $history_list = Activity::with('subject')->where('subject_type', Customer::class)->orderByDesc('id')->get();
+        return view('admin.pages.history.customer_info', compact('history_list'));
         return $history_list;
     }
 

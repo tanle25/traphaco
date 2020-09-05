@@ -8,11 +8,11 @@
 
 
 @section('title')
-  Quản lý đợt khảo sát
+  Lịch sử khách hàng
 @endsection
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'])
+    @include('admin.partials.content_header', ['title' => 'Lịch sử khách hàng'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -20,24 +20,70 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách người dùng</h3>
-                @can('thêm đợt đánh giá')
-                <a href="{{route('admin.survey_round.create')}}" class="btn btn-success float-right">
-                  <i class="fas fa-plus-circle nav-icon"></i> Thêm mới
-                </a>
-                @endcan
+                <h3 class="card-title">Danh sách</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="round-table" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>Tên đợt khảo sát</th>
-                        <th>Người tao</th>
-                        <th>Thao tác</th>
+                        <th>STT</th>
+                        <th>Thời gian</th>
+                        <th>Đối tượng</th>
+                        <th>Mô tả</th>
+                        <th>Dữ liệu cũ</th>
+                        <th>Dữ liệu mới</th>
                       </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($history_list as $index => $item)
+                        <tr>
+                            <td>{{$index + 1}}</td>
+                            <td>{{Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') }}</td>
+                            <td>Khách hàng:{{$item->subject->contract_code ?? ''}}</td>
+                            <td>{{$item->description}}</td>
+                            <td>
+                                
+                            @switch($item->description)
+                                @case('created')
+                                    <p>N/A</p>
+                                    @break
+                                @case('deleted')
+                                    @foreach ($item->properties['attributes'] ?? [] as $key => $value)
+                                    <p>{{$key}}: {{$value}}</p>
+                                    @endforeach
+                                    @break
+                                @case('updated')
+                                    @foreach ($item->properties['old'] ?? [] as $key => $value)
+                                    <p>{{$key}}: {{$value}}</p>
+                                    @endforeach
+                                    @break
+                                @default  
+                            @endswitch
+
+                            </td>
+                            <td>
+
+                            @switch($item->description)
+                                @case('created')
+                                    @foreach ($item->properties['attributes'] ?? [] as $key => $value)
+                                    <p>{{$key}}: {{$value}}</p>
+                                    @endforeach
+                                    @break
+                                @case('deleted')
+                                    <p>N/A</p>
+                                    @break
+                                @case('updated')
+                                    @foreach ($item->properties['attributes'] ?? [] as $key => $value)
+                                    <p>{{$key}}: {{$value}}</p>
+                                    @endforeach
+                                    @break
+                                @default  
+                            @endswitch
+                          </td>
+                        </tr>    
+                        @endforeach
+                    </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -62,16 +108,7 @@
 <script>
   $(function () {
     $("#round-table").dataTable({
-      processing: true,
-      serverSide: true,
-      autoWidth:false,
-      ajax: "{{route('admin.survey_round.list')}}",
-      columns: [
-        { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
-        { "data": "name" },
-        { "data": "created_by" },
-        { "data" :"action"}
-      ]
+       autoWidth:false,
     });
   });
 

@@ -36,8 +36,8 @@ class CustomerTestController extends Controller
         return DataTables::eloquent($tests)
             ->addIndexColumn()
             ->addColumn('action', function ($test) {
-                $tools = '<a target="_blank" href="' . route('admin.customer_test.get_result_by_survey', $test->survey_id) . '"class="btn text-success customer-edit"><i class="fas fa-chart-pie" data-toggle="modal" data-target="#customer-model" ></i></a>
-                    <a href="' . route('admin.customer_test.details.export', $test->survey_id) . '" class="btn text-danger customer-delete"><i class="far fa-file-excel"></i></a>';
+                $tools = '<a target="_blank" href="' . route('admin.customer_test.get_result_by_survey', $test->survey_id) . '"class="btn text-success customer-result-show"><i class="fas fa-chart-pie" data-toggle="modal" data-target="#customer-model" ></i></a>
+                    <a href="' . route('admin.customer_test.details.export', $test->survey_id) . '" class="btn text-danger customer-result-excel"><i class="far fa-file-excel"></i></a>';
 
                 return $tools;
             })

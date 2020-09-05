@@ -2,7 +2,6 @@
 
 <div class="card">
     <div class="card-header">
-
         <div>
             <div class="mb-3">
                 THỜI GIAN LÀM BÀI KIỂM TRA
@@ -19,24 +18,23 @@
                             <div class="form-group row col-md-6 col-12">
                                 <label for="staticEmail" class="col-form-label col-12 col-lg-2">Từ:</label>
                                 <div class="col-12 col-lg-9">
-                                    <input  style="border:none" id="date-picker" class="date-picker form-control" type="text" name="time[{{$index}}][start_at]" value="{{Carbon\Carbon::parse( $survey->start_at)->format('d/m/Y H:i') ?? '01/01/2000 10:00'}}"> 
+                                    <input @if(!Auth::user()->can('sửa bài đánh giá')) readonly @endif  style="border:none" id="date-picker" class="date-picker form-control" type="text" name="time[{{$index}}][start_at]" value="{{Carbon\Carbon::parse( $survey->start_at)->format('d/m/Y H:i') ?? '01/01/2000 10:00'}}"> 
                                 </div>
                             </div>
 
                             <div class="form-group row col-md-6 col-12">
                                 <label for="staticEmail" class="col-12 col-lg-2 col-form-label">đến:</label>
                                 <div class="col-12 col-lg-9" >
-                                    <input  style="border:none" class="date-picker form-control" type="text" name="time[{{$index}}][end_at]" value="{{ Carbon\Carbon::parse( $survey->end_at)->format('d/m/Y H:i') ?? '01/01/2100 10:00'}}">
+                                    <input @if(!Auth::user()->can('sửa bài đánh giá')) readonly @endif  style="border:none" class="date-picker form-control" type="text" name="time[{{$index}}][end_at]" value="{{ Carbon\Carbon::parse( $survey->end_at)->format('d/m/Y H:i') ?? '01/01/2100 10:00'}}">
                                 </div>
                             </div>
                         </div> 
                     </div>
                 @endforeach
-                
-                <button type="submit" class="btn btn-success">Cập nhật thời gian làm bài</button>
-            </form>
-
-            
+                @if (Auth::user()->can('sửa bài đánh giá'))
+                    <button type="submit" class="btn btn-success">Cập nhật thời gian làm bài</button>
+                @endif
+            </form>  
         </div>
     </div>
     <div class="card-body">
@@ -54,7 +52,9 @@
             </thead>
 
         </table>
+        @if (Auth::user()->can('gửi bài đánh giá'))
         <a class="btn btn-success" href="{{route('admin.test.send_all', $survey_round->id)}}">Gửi tất cả</a>
+        @endif
     </div>
 </div>
 @section('custom-js')
