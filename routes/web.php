@@ -278,8 +278,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //history
     Route::get('/history', 'HistoryLogController@index')
         ->name('history.index');
+    // custonmer history
     Route::get('/history/customer-info', 'HistoryLogController@customerInfoHistory')
         ->name('history.customer_info_history');
+    Route::get('/history/customer-info/list', 'HistoryLogController@customerInfoHistoryList')
+        ->name('history.customer_info_history_list');
 
     // result for admin
     Route::get('/result/details/{survey_round_id}', 'UserResultController@show')

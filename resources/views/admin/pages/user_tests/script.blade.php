@@ -48,12 +48,12 @@
                     }
                 });
                 if(comment){
-                    if(temp == false && comment.val() != ''){
+                    if(temp == false && comment.val() != '' && typeof(comment.val()) == 'string'){
                         temp = true;
                     }
                 }
             }else{
-                if(temp == false && comment.val() != ''){
+                if(temp == false && comment.val() != '' && typeof(comment.val()) == 'string'){
                     temp = true;
                 }
             }

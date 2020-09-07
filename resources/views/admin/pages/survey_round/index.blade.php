@@ -34,7 +34,7 @@
                       <tr>
                         <th>ID</th>
                         <th>Tên đợt khảo sát</th>
-                        <th>Người tao</th>
+                        <th>Người tạo</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
