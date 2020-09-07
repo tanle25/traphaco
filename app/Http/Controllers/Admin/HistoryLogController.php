@@ -17,9 +17,13 @@ class HistoryLogController extends Controller
 
     public function customerInfoHistory()
     {
-        $history_list = Activity::with('subject')->where('subject_type', Customer::class)->orderByDesc('id')->get();
+        $history_list = Activity::with('subject')
+            ->with('causer')
+            ->where('subject_type', Customer::class)
+            ->orderByDesc('id')
+            ->get();
         return view('admin.pages.history.customer_info', compact('history_list'));
-        return $history_list;
+        //return $history_list;
     }
 
 }

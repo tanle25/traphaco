@@ -33,13 +33,14 @@
                         <th>Mô tả</th>
                         <th>Dữ liệu cũ</th>
                         <th>Dữ liệu mới</th>
+                        <th>Nguời thực hiện</th>
                       </tr>
                     </thead>
                     <tbody>
                         @foreach ($history_list as $index => $item)
                         <tr>
                             <td>{{$index + 1}}</td>
-                            <td>{{Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') }}</td>
+                            <td>{{Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s A') }}</td>
                             <td>Khách hàng:{{$item->subject->contract_code ?? ''}}</td>
                             <td>{{$item->description}}</td>
                             <td>
@@ -60,10 +61,8 @@
                                     @break
                                 @default  
                             @endswitch
-
                             </td>
                             <td>
-
                             @switch($item->description)
                                 @case('created')
                                     @foreach ($item->properties['attributes'] ?? [] as $key => $value)
@@ -80,6 +79,9 @@
                                     @break
                                 @default  
                             @endswitch
+                          </td>
+                          <td>
+                            <p>{{$item->causer->username ?? '' }}</p>
                           </td>
                         </tr>    
                         @endforeach
@@ -113,41 +115,42 @@
   });
 
   $(document).on('click', '.round-survey-delete', function(e){
-            e.preventDefault();
-            var url = $(this).attr('href');
-            Swal.fire({
-                title: 'Xóa đợt khảo sát này?',
-                text: "Bạn không thể hoàn tác!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Vẫn xóa nó!',
-            })
-            .then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        url: url,
-                        type: "POST",
-                        data: {
-                          _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(data){
-                            if(data.error){
-                                swalToast(data.error, 'error');
-                            }
-                            if(data.msg){
-                                swalToast(data.msg);
-                            }
-                            location.reload();
-                        },
-                        error: function(errors){
-                            swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
-                        }
-                    });
+    e.preventDefault();
+    var url = $(this).attr('href');
+    Swal.fire({
+        title: 'Xóa đợt khảo sát này?',
+        text: "Bạn không thể hoàn tác!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Vẫn xóa nó!',
+    })
+    .then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                  _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data){
+                    if(data.error){
+                        swalToast(data.error, 'error');
+                    }
+                    if(data.msg){
+                        swalToast(data.msg);
+                    }
+                    location.reload();
+                },
+                error: function(errors){
+                    swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
                 }
             });
-        })
+        }
+    });
+})
+
 
 
 </script>
