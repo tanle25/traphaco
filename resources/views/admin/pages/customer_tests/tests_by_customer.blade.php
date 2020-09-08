@@ -100,7 +100,8 @@
 <script>
   $(function () {
     $("#round-table").dataTable({
-      autoWidth:false,      
+      autoWidth:false,     
+      scrollX:true, 
     });
   });
 

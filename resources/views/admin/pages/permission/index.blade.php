@@ -110,6 +110,7 @@
   $(function () {
     $("#permission-table").dataTable({
       autoWidth:false,      
+      scrollX:true,
     });
   });
 

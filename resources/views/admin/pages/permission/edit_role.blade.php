@@ -113,7 +113,8 @@
 <script>
   $(function () {
     $("#permission-table").dataTable({
-      autoWidth:false,      
+      autoWidth:false,   
+      scrollX:true,   
     });
   });
 

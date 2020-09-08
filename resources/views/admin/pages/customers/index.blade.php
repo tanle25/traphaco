@@ -223,7 +223,6 @@
             serverSide: true,
             scrollX: true,
             autoWidth:false,
-            
             buttons: [
                 {
                     extend: 'excelHtml5',

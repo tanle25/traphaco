@@ -283,7 +283,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         ->name('history.customer_info_history');
     Route::get('/history/customer-info/list', 'HistoryLogController@customerInfoHistoryList')
         ->name('history.customer_info_history_list');
-
+    // user test history
+    Route::get('/history/user-test/{test_id}', 'HistoryLogController@getUserTestHistory')
+        ->name('history.user_test');
     // result for admin
     Route::get('/result/details/{survey_round_id}', 'UserResultController@show')
         ->name('admin.user_result.show');
@@ -302,7 +304,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
         ->name('answer.list_test');
     Route::get('answer/{id}/edit', 'Admin\AnswerController@edit')
         ->name('answer.re_ans')
-        ->middleware('permission:sửa đợt đánh giá đã làm');
+        ->middleware('permission:sửa bài đánh giá đã làm');
     Route::get('answer/list', 'Admin\AnswerController@index')
         ->name('answer.index');
 
@@ -340,6 +342,11 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/customer/tests/{id}/details', 'Admin\CustomerTestController@getTestDetails')
         ->name('admin.customer_test.details')
         ->middleware('permission:xem bài khảo sát khách hàng');
+
+    Route::post('/customer/tests/{id}/update', 'Admin\CustomerTestController@update')
+        ->name('admin.customer_test.update')
+        ->middleware('permission:sửa bài khảo sát khách hàng');
+
     Route::get('/customer/{customer_id}/tests', 'Admin\CustomerTestController@getTestsByCustomer')
         ->name('admin.customer_test.get_test_by_customer');
     Route::get('/customer/get-result-by-survey/{survey_id}', 'Admin\CustomerTestController@getTestsBySurvey')

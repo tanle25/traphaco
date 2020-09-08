@@ -65,6 +65,7 @@
 		processing: true,
 		serverSide: true,
 		autoWidth:false,
+        scrollX:true,
 		ajax: {
 			url: "{{route('admin.test.get_list')}}",
 			data: {
