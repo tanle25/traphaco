@@ -111,6 +111,7 @@
   $(function () {
     $("#round-table").dataTable({
        autoWidth:false,
+       scrollX:true,
     });
   });
 

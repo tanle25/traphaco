@@ -78,12 +78,12 @@ class TestController extends Controller
             })
             ->addColumn('action', function (Test $test) {
                 return '<span href="' . route('admin.test.send_survey', $test->id) . '"class="btn text-success send-test send-test-to-user"><i class="far fa-paper-plane"></i></span>
+                        <span href="' . route('history.user_test', $test->id) . '"  data-toggle="modal" data-target="#survey_history_modal" class="btn text-info test-history"><i class="fas fa-history"></i></span>
                         <span href="' . route('admin.test.destroy', $test->id) . '" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])
             ->make(true);
     }
-
     /**
      * Show the form for creating a new resource.
      *

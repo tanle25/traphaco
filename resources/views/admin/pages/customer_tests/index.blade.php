@@ -62,6 +62,7 @@
     $("#test-table").dataTable({
       processing: true,
       autoWidth:false,
+      scrollX:true,
       ajax: "{{route('admin.customer_test.list_test')}}",
       columns: [
         { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},

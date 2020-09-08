@@ -28,6 +28,7 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
+      scrollX:true,
       ajax: "{{route('admin.survey.list_survey')}}",
       columns: [
         { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},

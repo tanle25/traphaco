@@ -17,6 +17,7 @@ function getExaminerList(testId) {
   serverSide: true,
   autoWidth:false,
   order:true,
+  scrollX:true,
   ajax: {
     url: "{{route('admin.test.get_candiate')}}",
     data: {

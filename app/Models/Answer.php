@@ -3,14 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Answer extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['question_id', 'option_choice', 'comment'];
+
+    protected static $logOnlyDirty = true;
+
+    protected static $submitEmptyLogs = false;
+
     protected $table = 'answers';
 
     protected $fillable = ['test_id', 'question_id', 'option_choice', 'comment'];
 
     public $timestamps = true;
+
+    protected static $recordEvents = ['created', 'updated', 'deleted'];
 
     public function test()
     {

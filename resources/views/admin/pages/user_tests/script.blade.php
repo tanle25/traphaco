@@ -1,7 +1,7 @@
 <script>
     function alertMustMarkQuestion(){
         Swal.fire({
-                title: 'Bạn chưa hoàn thành bài test!',
+                title: 'Bạn chưa hoàn thành bài đánh giá!',
                 text: "Vui lòng hoàn thành các câu hỏi bắt buộc!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -114,8 +114,7 @@
                                     location.href = "{{route('answer.index', ['marked' => 1])}}";
                                 }
                             }, 300)
-                        }
-                        
+                        } 
                     },
                     error: function (errors) {
                         swalToast('Lỗi không rõ phát sinh trong quá trình gửi', 'error');

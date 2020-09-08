@@ -98,6 +98,11 @@ class AnswerController extends Controller
                 if ($test->status == 3) {
                     return '<span class="badge badge-success">Đã chấm xong</span>';
                 };
+
+                if ($test->start_at > Carbon::now()) {
+                    return '<span class="badge badge-danger">Chưa đến giờ</span>';
+                };
+
                 if ($test->end_at < Carbon::now()) {
                     return '<span class="badge badge-danger">Quá thời gian</span>';
                 };

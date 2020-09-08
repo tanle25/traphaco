@@ -178,6 +178,7 @@
             }
         });
     })
+    
     $(document).on('blur', '#customer-test-form input',function(e){
         var url = $('#customer-test-form').attr('action');
         var key = $(this).attr('name');

@@ -203,7 +203,24 @@
     </section>
 </div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="survey_history_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4>
+                Lịch sử bài khảo sát
+            </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Trống
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection 
 
 @section('custom-js')
@@ -231,7 +248,6 @@ if(e.params.data.element.classList.contains('department')){
   });
   $(".select2").trigger("change");
 }
-
 
 
 });
@@ -359,6 +375,22 @@ $("input[data-bootstrap-switch]").each(function(){
             });
     })
 
+    function getHistoryByUrl(url){
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data){
+                $('#survey_history_modal .modal-body').html(data);
+            },
+            error: function(error){
+                swalToast(error, 'error');
+            }
+        })
+    }
+
+    $(document).on('click', '.test-history', function(){
+        getHistoryByUrl($(this).attr('href'));
+    });
 </script>
 
 @endsection

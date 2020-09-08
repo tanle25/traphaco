@@ -64,6 +64,7 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
+      scrollX:true,
       ajax:{
         url: "{{route('answer.list_test')}}",
         data: {

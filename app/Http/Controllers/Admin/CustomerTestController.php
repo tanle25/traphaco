@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\CustomerTestExport;
 use App\Http\Controllers\Controller;
+use App\Models\CustomerAnswer;
 use App\Models\CustomerTest;
+use Auth;
 use DataTables;
 use DB;
 use Excel;
@@ -111,7 +113,35 @@ class CustomerTestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'test_id' => 'required|numeric',
+        ]);
+
+        $test = CustomerTest::findOrFail($id);
+
+        if (empty($request->answer)) {
+            return ['error' => 'Không tìm thấy câu trả lời!'];
+        };
+
+        $test_id = $id;
+        DB::beginTransaction();
+        try {
+            foreach ($request->answer as $answer) {
+                CustomerAnswer::updateOrCreate([
+                    'customer_test_id' => $test_id,
+                    'question_id' => $answer['question_id'],
+                ], [
+                    'option_choice' => $answer['option_id'],
+                    'comment' => $answer['comment'],
+                ]);
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+        }
+
+        return ['msg' => 'Cập nhật thành công kết quả!'];
+
     }
 
     /**
@@ -135,10 +165,14 @@ class CustomerTestController extends Controller
      */
     public function getTestsByCustomer($customer_id)
     {
-        $customer_tests = CustomerTest::where('customer_id', $customer_id)
+        $customer_tests = CustomerTest::with(['author', 'customer', 'survey'])
+            ->where('customer_id', $customer_id)
             ->get()
             ->sortByDesc('id');
 
+        if (Auth::user()->cannot('sửa bài khảo sát khách hàng')) {
+            $customer_tests->where('created_by', Auth::user()->id);
+        }
         return view('admin.pages.customer_tests.tests_by_customer', compact('customer_tests'));
     }
 
@@ -152,7 +186,7 @@ class CustomerTestController extends Controller
     {
         $test = CustomerTest::findOrFail($id);
 
-        return view('admin.pages.customer_tests.test_details', compact('test'));
+        return view('admin.pages.customer_tests.test_details', compact('test'))->render();
     }
 
     /**

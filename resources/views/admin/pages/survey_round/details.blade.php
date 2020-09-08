@@ -63,6 +63,7 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
+      scrollX:true,
       ajax: "{{route('admin.survey_round.details_table', $survey_round->id)}}",
       columns: [
         { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},

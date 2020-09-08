@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Customer;
+use App\Models\Test;
 use Spatie\Activitylog\Models\Activity;
 
 class HistoryLogController extends Controller
@@ -26,4 +28,27 @@ class HistoryLogController extends Controller
         //return $history_list;
     }
 
+    /**
+     * @param Test $test_id
+     *
+     * @return history of test
+     */
+    public function getUserTestHistory($test_id)
+    {
+        $test = Test::with('survey')->findOrFail($test_id);
+
+        $history_list = Activity::with('causer')
+            ->with('subject')
+            ->join('answers', 'activity_log.subject_id', '=', 'answers.id')
+            ->join('tests', 'answers.test_id', '=', 'tests.id')
+            ->where('tests.id', $test_id)
+            ->where('subject_type', Answer::class)
+            ->select('activity_log.*')
+            ->get();
+
+        //return $history_list;
+
+        return view('admin.pages.history.test_history_ajax', compact('test', 'history_list'));
+        $test = Test::findOrfail($test_id);
+    }
 }
