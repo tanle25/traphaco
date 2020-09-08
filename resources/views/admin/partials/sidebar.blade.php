@@ -173,7 +173,7 @@
           </li>
           @endif
           @if (Auth::user()->is_admin !== 1)
-          <li class="nav-item has-treeview">
+          {{-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-id-badge"></i> 
               <p>
@@ -191,7 +191,7 @@
               </li>
 
             </ul>
-          </li>
+          </li> --}}
           <li class="nav-item has-treeview">
             <a href="{{route('answer.index', ['marked' => 0])}}" class="nav-link">
               <i class="nav-icon fas fa-marker"></i> 
@@ -219,7 +219,6 @@
           </li>
           @endif
 
-          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
