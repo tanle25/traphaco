@@ -28,7 +28,7 @@ class UserManageController extends Controller
      */
     public function index()
     {
-        
+
         //$users = User::paginate(10, ['*'], 'page', 15);
         return view('admin.pages.user_manage.list');
     }
@@ -135,6 +135,11 @@ class UserManageController extends Controller
         $user = User::findOrFail($id);
         $departments = Department::all()->sortBy('id');
         $user_positions = UserPosition::all()->sortBy('level');
+        $permissions_via_role = $user->getPermissionsViaRoles()->pluck('id')->toArray();
+
+        $permissions = $permissions->filter(function ($item) use ($permissions_via_role) {
+            return !in_array($item->id, $permissions_via_role);
+        });
 
         return view('admin.pages.user_manage.edit', compact('departments', 'user_positions', 'user', 'permissions', 'roles'));
     }

@@ -26,6 +26,7 @@
                with font-awesome or any other icon font library -->
                
           <li class="nav-item has-treeview">
+            @canany(['xem khách hàng','xem thống kê khách hàng'])
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-id-badge"></i> 
               <p>
@@ -33,6 +34,9 @@
                 <i class="fa fa-angle-right right"></i>
               </p>
             </a>
+            @endcanany
+            
+
             <ul class="nav nav-treeview">
               @can('xem khách hàng')
               <li class="nav-item">
@@ -51,8 +55,6 @@
                 </a>
               </li>  
               @endcan
-              
-
               <li class="nav-item">
                 <a href="{{route('history.customer_info_history')}}" class="nav-link">
                   <p>Lịch sử</p></p>
@@ -62,13 +64,15 @@
           </li>
 
           <li class="nav-item has-treeview">
+            @canany(['xem đợt đánh giá','xem bộ đề','xem báo cáo đợt đánh giá'])
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Quản lý đánh giá
                 <i class="fa fa-angle-right right"></i>
               </p>
-            </a>
+            </a>  
+            @endcanany
             <ul class="nav nav-treeview">
 
               @can('xem đợt đánh giá')
@@ -100,7 +104,7 @@
           </li>
 
           <li class="nav-item has-treeview">
-            
+            @canany(['xem phòng ban', 'xem user', 'xem quyền'])
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
@@ -108,6 +112,8 @@
                 <i class="fa fa-angle-right right"></i> 
               </p>
             </a>
+            @endcanany
+            
 
             <ul class="nav nav-treeview">
               @can('xem phòng ban')
@@ -138,14 +144,17 @@
             </ul>
           </li>
 
+          @if (Auth::user()->hasAnyPermission(['xem khách hàng','xem thống kê khách hàng','xem phòng ban', 'xem user', 'xem đợt đánh giá','xem bộ đề','xem báo cáo đợt đánh giá']))
           <li class="nav-item has-treeview">
+            
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i> 
               <p>
                 Cá nhân
                 <i class="fa fa-angle-right right"></i>
               </p>
-            </a>
+            </a>    
+
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('answer.index', ['marked' => 0])}}" class="nav-link">
@@ -170,6 +179,36 @@
               </li>
             </ul>
           </li>
+          @else
+          <li class="nav-item has-treeview">
+            <a href="{{route('answer.index', ['marked' => 0])}}" class="nav-link">
+              <i class="nav-icon fas fa-marker"></i> 
+              <p>
+                Bài đánh giá chưa làm
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="{{route('answer.index', ['marked' => 1])}}" class="nav-link">
+              <i class="nav-icon fas fa-tasks"></i> 
+              <p>
+                Bài đánh giá đã làm
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{route('result.index')}}" class="nav-link">
+              <i class="nav-icon far fa-id-badge"></i> 
+              <p>
+                Thống kế cá nhân
+              </p>
+            </a>
+          </li>
+          @endif
+
+
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
