@@ -56,9 +56,16 @@
                                 <h5> <strong> Câu hỏi:</strong>{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}</h5>
                             </div>
                             <div class="question-option pt-2">
-                                <div class="row" style="font-size: 18px">  
+                                <div class="row" style="font-size: 18px"> 
+                                    @php
+                                        $question_options = $question->options;
+                                        $option_length = $question_options->reduce(function($length, $item){
+                                            return $length + strlen($item->content);
+                                        }, 0);
+                                    @endphp
+
                                     @foreach ($question->options as $option)
-                                    <div class="form-group col-md-3 d-flex justify-center align-center">
+                                    <div class="form-group  @if ($option_length <= 72) col-md-3 @else col-12 @endif d-flex justify-center align-center">
                                         <input {{$answer->option_choice == $option->id ? 'checked' : ''}} class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                         <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                                             @if ($test->survey->type == 1)
