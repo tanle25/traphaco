@@ -24,8 +24,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
-          <?php if(Auth::user()->is_admin == 1): ?>
+               
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-id-badge"></i> 
@@ -171,35 +170,6 @@
               </li>
             </ul>
           </li>
-          <?php endif; ?>
-          <?php if(Auth::user()->is_admin !== 1): ?>
-          
-          <li class="nav-item has-treeview">
-            <a href="<?php echo e(route('answer.index', ['marked' => 0])); ?>" class="nav-link">
-              <i class="nav-icon fas fa-marker"></i> 
-              <p>
-                Bài đánh giá chưa làm
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="<?php echo e(route('answer.index', ['marked' => 1])); ?>" class="nav-link">
-              <i class="nav-icon fas fa-tasks"></i> 
-              <p>
-                Bài đánh giá đã làm
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="<?php echo e(route('result.index')); ?>" class="nav-link">
-              <i class="nav-icon far fa-id-badge"></i> 
-              <p>
-                Thống kế cá nhân
-              </p>
-            </a>
-          </li>
-          <?php endif; ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
