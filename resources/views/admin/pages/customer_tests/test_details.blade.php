@@ -172,10 +172,10 @@
      $(document).on('submit', '#test_form', function (e) {
         e.preventDefault();
         var url = $(this).attr('action');
-        var questionCount = $('.question').length;
+        var questionCount = $('#test_form .question').length;
         var answer = [];
 
-        $('.question').each(function(){
+        $('#test_form .question').each(function(){
             var questionId = $(this).data('question-id');
             answer.push({
                 question_id: questionId,
@@ -220,80 +220,5 @@
             }
         });
     })
-
-    // Customer Answer logic
-    // $(document).on('click', '.send-result', function (e) {
-    //     var url = $(this).attr('href');
-    //     var questionCount = $('.question').length;
-    //     var answer = [];
-
-    //     $('.question').each(function(){
-    //         var questionId = $(this).data('question-id');
-    //         answer.push({
-    //             question_id: questionId,
-    //             option_id: $(this).find('.option-input:checked').attr('value') ?? '',
-    //             comment: $(this).find('.comment').val() ?? '',
-    //         });     
-    //     })
-
-    //     Swal.fire({
-    //         title: 'Hoàn thành bài test!',
-    //         text: "Gửi kết quả!",
-    //         icon: 'success',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Gửi kết quả!',
-    //     })
-    //     .then((result) => {
-    //         if (result.value) {
-    //             $.ajax({
-    //                 url: url,
-    //                 type: "POST",
-    //                 data: {
-    //                     _token: $('meta[name="csrf-token"]').attr('content'),
-    //                     answer: answer,
-    //                     test_id: {{$new_test->id ?? ''}},
-    //                 },
-    //                 success: function (data) {
-    //                     if (data.error) {
-    //                         swalToast(data.error, 'error');
-    //                     }
-    //                     if (data.msg) {
-    //                         swalToast(data.msg);
-    //                     }
-    //                     $('#customer-survey-model').modal('hide');
-                        
-    //                 },
-    //                 error: function (errors) {
-    //                     swalToast('Lỗi không rõ phát sinh trong quá trình gửi', 'error');
-    //                 }
-    //             });
-    //         }
-    //     });
-    // })
-    // $(document).on('blur', '#customer-test-form input',function(e){
-    //     var url = $('#customer-test-form').attr('action');
-    //     var key = $(this).attr('name');
-    //     var value = $(this).val();
-    //     var data = {
-    //         [key]: value,
-    //         _token: $('meta[name="csrf-token"]').attr('content'),
-    //     }
-    //     $.ajax({
-    //         url: url,
-    //         data: data,
-    //         success: function(data){
-    //             swalToast(data.success, 'success');
-    //             setTimeout(function () {
-    //                 $("#customer-table").DataTable().ajax.reload();
-    //             }, 500);
-    //         },
-    //         error: function(errors){
-    //             error_list = errors.responseJSON.errors;
-    //             swalToast(Object.values(error_list)[0], 'error');
-    //         }
-    //     })
-    // });
 
 </script>

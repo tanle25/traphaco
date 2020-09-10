@@ -4,9 +4,13 @@ namespace App\Models;
 
 use App\Models\TestTime;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Test extends Model
 {
+
+    use SoftDeletes;
+
     protected $table = 'tests';
 
     protected $fillable = ['survey_round', 'candiate_id', 'examiner_id', 'multiplier', 'survey_id', 'status'];

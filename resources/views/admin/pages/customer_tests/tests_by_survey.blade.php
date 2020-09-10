@@ -89,17 +89,16 @@
                     </thead>
                     <tbody>
                       @foreach ($customer_tests as $index => $test)
-                        @if (Auth::user()->is_admin == 1)
                         <tr>
                           <td>{{$index + 1}}</td>
                           <td>{{$test->survey->name}}</td>
                           <td>{{$test->author->fullname}}</td>
                           <td>
-                            <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
+                            <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" ></i></span>
                             <span href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>
+                            <a data-toggle="modal" data-target="#history-model" href="{{route('history.customer_test', $test->id)}}" class="btn text-info test-history"><i class="fas fa-history"></i></a>
                           </td>
                         </tr> 
-                        @endif
                         
                       @endforeach
                     </tbody>
@@ -156,6 +155,24 @@
       </div>
   </div>
 
+  <div class="modal fade"  id="history-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+      <div class="modal-dialog" style="max-width: 1024px" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Lịch sử bài khảo sát </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body history-container">
+                ...
+              </div>
+          </div>
+      </div>
+  </div>
+
+
 
 
 @endsection 
@@ -185,6 +202,19 @@
       }
     })
   });
+
+  $('.test-history').on('click', function(e){
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      type: "GET",
+      success: function(data){
+        $('.history-container').html(data);
+      }
+    })
+  });
+
+
 
   $(document).on('click', '.round-survey-delete', function(e){
       e.preventDefault();
