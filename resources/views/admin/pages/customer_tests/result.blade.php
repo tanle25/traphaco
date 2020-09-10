@@ -40,8 +40,7 @@
            @foreach ($section->questions as $question)
                <div class="mb-3 question" data-question-id="{{$question->id}}">
                    <div class="question-title">
-                       <h5>
-                            {{-- <strong> Câu hỏi: </strong>  --}}
+                       <h5 style="white-space: pre-line">
                             {{$question->content ?? ''}}
                         </h5>
                    </div>
