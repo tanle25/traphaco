@@ -165,8 +165,9 @@
         $(document).on("blur",'.section-title input',function(e) {
             var sectionId = $(this).closest('.section-wraper').data('section-id');
             var title = $(this).val();
+            var content =  $(this).closest('.section-wraper').find('.section-content').val();
             if(surveyId) {
-                updateSection(sectionId, title, null);
+                updateSection(sectionId, title, content);
             }
             else{
                 swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
@@ -175,9 +176,11 @@
 
         $(document).on("blur",'.section-content',function(e) {
             var sectionId = $(this).closest('.section-wraper').data('section-id');
+            var title = $(this).closest('.section-header').find('.section-title input').val();
+            console.log(title);
             var content = $(this).val();
             if(surveyId) {
-                updateSection(sectionId,null, content);
+                updateSection(sectionId, title, content);
             }
             else{
                 swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
@@ -203,16 +206,16 @@
             });
         });
 
-        $(document).on("blur",'.section-content',function(e) {
-            var sectionId = $(this).closest('.section-wraper').data('section-id');
-            var content = $(this).val();
-            if(surveyId) {
-                updateSection(sectionId,null, content);
-            }
-            else{
-                swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
-            }
-        });
+        // $(document).on("blur",'.section-content',function(e) {
+        //     var sectionId = $(this).closest('.section-wraper').data('section-id');
+        //     var content = $(this).val();
+        //     if(surveyId) {
+        //         updateSection(sectionId,null, content);
+        //     }
+        //     else{
+        //         swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
+        //     }
+        // });
 
 
     });
