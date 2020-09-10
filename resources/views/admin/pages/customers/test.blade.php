@@ -100,7 +100,10 @@
            @foreach ($section->questions as $question)
                <div class="mb-3 question" data-question-id="{{$question->id}}">
                    <div class="question-title">
-                       <h5> <strong> Câu hỏi:</strong>{{$question->content ?? ''}}</h5>
+                    <h5> 
+                        {{-- <strong> Câu hỏi:</strong> --}}
+                        {{$question->content ?? ''}}
+                    </h5>
                    </div>
                    <div class="question-option pt-2">
                        <div class="row option-wraper" style="font-size: 18px">  
@@ -113,7 +116,7 @@
 
                            @foreach ($question_options as $option)
                            <div class="form-group @if ($option_length <= 72) col-md-3 @else col-12 @endif d-flex justify-center align-center">
-                               <input class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                               <input class="option-input" type="radio" style="height:23px; width:23px; flex: 0 0 23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                            </div>
                            @endforeach 
