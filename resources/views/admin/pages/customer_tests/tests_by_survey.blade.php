@@ -94,7 +94,7 @@
                           <td>{{$test->survey->name}}</td>
                           <td>{{$test->author->fullname}}</td>
                           <td>
-                            <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" ></i></span>
+                            <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
                             <span href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>
                             <a data-toggle="modal" data-target="#history-model" href="{{route('history.customer_test', $test->id)}}" class="btn text-info test-history"><i class="fas fa-history"></i></a>
                           </td>
