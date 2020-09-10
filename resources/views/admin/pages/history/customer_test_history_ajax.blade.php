@@ -23,7 +23,10 @@
 
                         <div data-question-id="{{$question->id}}" class="mb-3 question {{$question->must_mark == 1 ? 'must-mark' : ''}}">
                             <div class="question-title">
-                                <h5> <strong> Câu hỏi:</strong>{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}</h5>
+                                <h5> 
+                                    {{-- <strong> Câu hỏi:</strong> --}}
+                                    {{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}
+                                </h5>
                             </div>
                             <div class="question-option pt-2">
                                 <div class="row" style="font-size: 16px">  

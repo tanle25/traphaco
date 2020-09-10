@@ -97,7 +97,10 @@
             @foreach ($section->questions as $question)
                 <div class="mb-3 question" data-question-id="{{$question->id}}">
                     <div class="question-title">
-                        <h5> <strong> Câu hỏi: </strong>{{$question->content ?? ''}}</h5>
+                        <h5>
+                             {{-- <strong> Câu hỏi: </strong> --}}
+                             {{$question->content ?? ''}}
+                        </h5>
                     </div>
                     <div class="question-option pt-2">
                         @if ($question->getAnswerByCustomerTest($test->id) && $question->getAnswerByCustomerTest($test->id)->comment == '' )

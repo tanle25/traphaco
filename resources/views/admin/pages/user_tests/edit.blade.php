@@ -53,7 +53,7 @@
                         @endphp
                         <div data-question-id="{{$question->id}}" class="mb-3 question {{$question->must_mark == 1 ? 'must-mark' : ''}}">
                             <div class="question-title">
-                                <h5> <strong> Câu hỏi:</strong>{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}</h5>
+                                <h5> <strong></strong>{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}</h5>
                             </div>
                             <div class="question-option pt-2">
                                 <div class="row" style="font-size: 18px"> 
@@ -66,10 +66,10 @@
 
                                     @foreach ($question->options as $option)
                                     <div class="form-group  @if ($option_length <= 72) col-md-3 @else col-12 @endif d-flex justify-center align-center">
-                                        <input {{$answer->option_choice == $option->id ? 'checked' : ''}} class="option-input" type="radio" style="height:23px; width:23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                                        <input {{$answer->option_choice == $option->id ? 'checked' : ''}} class="option-input" type="radio" style="height:23px; width:23px;flex: 0 0 23px " data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                         <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                                             @if ($test->survey->type == 1)
-                                            ({{$option->score ?? 0}} điểm)</span>
+                                            ({{$option->score ?? 0}} điểm)</span> 
                                             @endif 
                                     </div>
                                     @endforeach 
