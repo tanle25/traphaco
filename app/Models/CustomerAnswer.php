@@ -15,6 +15,8 @@ class CustomerAnswer extends Model
 
     protected $table = "customer_answers";
 
+    protected static $submitEmptyLogs = false;
+
     protected $fillable = ['customer_test_id', 'question_option', 'question_id', 'option_choice', 'comment'];
 
     public $timestamps = true;

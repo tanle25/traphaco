@@ -285,6 +285,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     // user test history
     Route::get('/history/user-test/{test_id}', 'HistoryLogController@getUserTestHistory')
         ->name('history.user_test');
+    // user test history
+    Route::get('/history/customer-test/{test_id}', 'HistoryLogController@getCustomerTestHistory')
+        ->name('history.customer_test');
+
     // result for admin
     Route::get('/result/details/{survey_round_id}', 'UserResultController@show')
         ->name('admin.user_result.show');

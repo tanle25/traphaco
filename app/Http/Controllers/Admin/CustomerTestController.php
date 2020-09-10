@@ -116,17 +116,17 @@ class CustomerTestController extends Controller
         $request->validate([
             'test_id' => 'required|numeric',
         ]);
-
         $test = CustomerTest::findOrFail($id);
-
         if (empty($request->answer)) {
             return ['error' => 'Không tìm thấy câu trả lời!'];
         };
 
         $test_id = $id;
         DB::beginTransaction();
+        $result = [];
         try {
             foreach ($request->answer as $answer) {
+
                 CustomerAnswer::updateOrCreate([
                     'customer_test_id' => $test_id,
                     'question_id' => $answer['question_id'],
@@ -134,6 +134,9 @@ class CustomerTestController extends Controller
                     'option_choice' => $answer['option_id'],
                     'comment' => $answer['comment'],
                 ]);
+
+                $result[] = $answer['option_id'];
+
             }
             DB::commit();
         } catch (Exception $e) {
@@ -197,7 +200,7 @@ class CustomerTestController extends Controller
      */
     public function getTestsBySurvey($survey_id)
     {
-        $customer_tests = CustomerTest::where('survey_id', $survey_id)->get()->sortByDesc('id');
+        $customer_tests = CustomerTest::with(['survey', 'author'])->where('survey_id', $survey_id)->get()->sortByDesc('id');
 
         return view('admin.pages.customer_tests.tests_by_survey', compact('customer_tests'));
     }

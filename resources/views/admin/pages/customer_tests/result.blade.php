@@ -13,21 +13,7 @@
     </div>
 
     <div class="card-body">
-        <form action="" method="post" id="customer-test-form">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <input type="hidden" name="id">
-            <div class="form-inline">
-                <label class="col-md-2 d-inline-block text-left">Mã DMS:</label>
-                <input type="test" class="col-md-10 form-control no-border" readonly  name="" value="">
-            </div>
-            <div class="form-inline">
-                <label class="col-md-2 d-inline-block text-left">Mã CRM:</label>
-                <input type="test" class="col-md-10 form-control no-border" readonly name="" value="">
-            </div>
-            <div class="form-inline">
-                <label class="col-md-2 d-inline-block text-left">Mã hợp đồng:</label>
-                <input type="test" class="col-md-10 form-control no-border" readonly name="" value="">
-            </div>
+        
     </div> 
 </div>
 </div>
@@ -65,10 +51,14 @@
                                  <span>
                                     {{$option->content ?? ''}}
                                  </span>
-                                <span class="number">{{$option->countCustomerChosen()}}</span>
+                                @php
+                                    $ans_count = $question->getAnswerCount();
+                                    $chosen = $option->countCustomerChosen();
+                                @endphp
+                                <span class="number">{{$chosen}}</span>
                                 <span class="percent">
-                                @if ($question->getAnswerCount() !== 0)
-                                {{ round($option->countCustomerChosen() / $question->getAnswerCount() * 100, 2)}}%
+                                @if ($ans_count !== 0)
+                                {{ round($chosen  / $ans_count * 100, 2)}}%
                                 @endif
                                 </span>
                            </div>
