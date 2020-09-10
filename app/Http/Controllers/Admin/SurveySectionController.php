@@ -98,15 +98,11 @@ class SurveySectionController extends Controller
         }
 
         if ($request->has('title')) {
-            if ($request->title) {
-                $section->update(['title' => $request->title]);
-            }
+            $section->update(['title' => $request->title]);
         }
 
         if ($request->has('content')) {
-            if ($request->content) {
-                $section->update(['content' => $request->content]);
-            }
+            $section->update(['content' => $request->content]);
         }
 
         return ['msg' => 'Cập nhật thành công'];
