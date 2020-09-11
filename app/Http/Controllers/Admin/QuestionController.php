@@ -97,7 +97,7 @@ class QuestionController extends Controller
 
         if ($request->has('content')) {
             if ($request->content) {
-                $question->update(['content' => $request->content]);
+                $question->update(['content' => trim($request->content)]);
             }
         }
         return ['msg' => 'Cập nhật thành công'];

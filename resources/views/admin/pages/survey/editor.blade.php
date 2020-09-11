@@ -54,12 +54,10 @@
                         <div class="sortable question-container">
                             @foreach ($questions as $question)
                             <div class="callout question-wraper" data-question-id="{{ $question->id}}">
-                                {{-- question name --}}
                                 <div class="form-group row">
                                     <div class="col-sm-10 question-title">
                                         <textarea oninput="auto_grow(this)" name="" id="" cols="30" rows="1" placeholder="Câu hỏi">{{$question->content}}</textarea>
                                         <div class="focus-line"></div>
-                                        {{-- <input type="te" class="" id="" placeholder="Câu hỏi"> --}}
                                     </div>
                                     <div class="question-remove">
                                         <i class="far fa-trash-alt" style="font-size: 20px; cursor:pointer"></i>

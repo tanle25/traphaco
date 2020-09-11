@@ -100,7 +100,7 @@ class AnswerController extends Controller
                 };
 
                 if ($test->start_at > Carbon::now()) {
-                    return '<span class="badge badge-danger">Chưa đến giờ</span>';
+                    return '<span class="badge badge-warning">Chưa đến giờ</span>';
                 };
 
                 if ($test->end_at < Carbon::now()) {
@@ -117,6 +117,9 @@ class AnswerController extends Controller
             ->editColumn('end_at', function (Test $test) {
                 return Carbon::parse($test->end_at)->format('d/m/Y H:i:s');
             })
+            ->editColumn('start_at', function (Test $test) {
+                return Carbon::parse($test->start_at)->format('d/m/Y H:i:s');
+            })
             ->addColumn('action', function (Test $test) {
                 if ($test->status == 3) {
                     return '<a href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
@@ -124,6 +127,10 @@ class AnswerController extends Controller
                 if ($test->end_at < Carbon::now()) {
                     return '';
                 };
+                if ($test->start_at > Carbon::now()) {
+                    return '';
+                };
+
                 return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])

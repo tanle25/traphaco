@@ -30,7 +30,8 @@
                         <th>ID</th>
                         <th>Đợt khảo sát</th>
                         <th>Tên bài test</th>
-                        <th>Người được chấm</th>
+                        <th>Người được đánh giá</th>
+                        <th>Thời gian bắt đầu</th>
                         <th>Thời gian kết thúc</th>
                         <th>Trọng số</th>
                         <th>Trạng thái</th>
@@ -76,6 +77,7 @@
         { "data": "survey_round", 'name': 'survey_round.name' },
         { "data": "survey_name", 'name': 'survey_name' },
         { "data": "candiate" },
+        { "data": 'start_at', 'name': 'test_time.start_at'},
         { "data": 'end_at', 'name': 'test_time.end_at'},
         { "data": "multiplier"},
         { "data": "status" },
