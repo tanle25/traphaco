@@ -40,9 +40,7 @@
            @foreach ($section->questions as $question)
                <div class="mb-3 question" data-question-id="{{$question->id}}">
                    <div class="question-title">
-                       <h5 style="white-space: pre-line">
-                            {{$question->content ?? ''}}
-                        </h5>
+                       <h5 style="white-space: pre-line">{{$question->content ?? ''}}</h5>
                    </div>
                    <div class="question-option pt-2">
                        <div class="row option-wraper">  

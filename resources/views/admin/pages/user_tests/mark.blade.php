@@ -32,7 +32,7 @@
                     <div>
                         <h5 class="mt-4">
                             Thời gian làm bài: Từ {{ Carbon\Carbon::parse( $test->getStartTime())->format('d/m/Y H:i') ?? ''}} đến {{ Carbon\Carbon::parse( $test->getEndTime())->format('d/m/Y H:i') ?? ''}}
-                            @if ( Carbon\Carbon::parse( $test->getEndTime())->format('d/m/Y H:i') < Carbon\Carbon::now() )
+                            @if ( Carbon\Carbon::parse( $test->getEndTime()) < Carbon\Carbon::now() )
                                 (Đã hết thời gian làm bài)
                             @endif
                         </h5>
@@ -58,7 +58,7 @@
                     @foreach ($section->questions as $question)
                         <div data-question-id="{{$question->id}}" class="mb-3 question {{$question->must_mark == 1 ? 'must-mark' : ''}}">
                             <div class="question-title">
-                                <h5 style="white-space: pre-line"> {{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}</h5>
+                                <h5 style="white-space: pre-line">{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}</h5>
                             </div>
                             <div class="question-option pt-2">
                                 <div class="row" style="font-size: 18px">  
