@@ -1,8 +1,10 @@
 <script>
+    var url = $('.send-result').attr('href');
+
     function alertMustMarkQuestion(){
         Swal.fire({
                 title: 'Bạn chưa hoàn thành bài đánh giá!',
-                text: "Vui lòng hoàn thành các câu hỏi bắt buộc!",
+                text: "Vui lòng hoàn thành các câu hỏi (*)!",
                 icon: 'warning',
                 showCancelButton: true,
                 showConfirmButton: false,
@@ -25,8 +27,51 @@
             })
     }
 
+    function getAnswer(){
+        var answer = [];
+        $('.question').each(function(){
+            var questionId = $(this).data('question-id');
+            answer.push({
+                question_id: questionId,
+                option_id: $(this).find('.option-input:checked').attr('value') ? $(this).find('.option-input:checked').attr('value') :  '',
+                comment: $(this).find('.comment').val() ? $(this).find('.comment').val() : '',
+            });     
+        })
+        return answer
+    }
+
+    function saveAnswer(url, answer){
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                answer: answer,
+                test_id: {{$test->id}},
+            },
+            success: function (data) {
+                if (data.error) {
+                    swalToast(data.error, 'error');
+                }
+                if (data.msg) {
+                    swalToast(data.msg);
+                    setTimeout(function () {
+                        //Kiểm tra location nếu có edit thì trả về những bài đã làm
+                        if(location.href.indexOf('edit') == - 1){
+                            location.href = "{{route('answer.index', ['marked' => 0])}}";
+                        }else{
+                            location.href = "{{route('answer.index', ['marked' => 1])}}";
+                        }
+                    }, 300)
+                } 
+            },
+            error: function (errors) {
+                swalToast('Lỗi không rõ phát sinh trong quá trình gửi', 'error');
+            }
+        });
+    }
+
     $(document).on('click', '.send-result', function (e) {
-        var url = $(this).attr('href');
         var mustMark = $('.must-mark');
         var isValidAnswer = true;
         
@@ -68,17 +113,7 @@
             return
         }
 
-        
-        var answer = [];
-
-        $('.question').each(function(){
-            var questionId = $(this).data('question-id');
-            answer.push({
-                question_id: questionId,
-                option_id: $(this).find('.option-input:checked').attr('value') ? $(this).find('.option-input:checked').attr('value') :  '',
-                comment: $(this).find('.comment').val() ? $(this).find('.comment').val() : '',
-            });     
-        })
+        var answer = getAnswer();
 
         Swal.fire({
             title: 'Hoàn thành bài test!',
@@ -90,37 +125,30 @@
             confirmButtonText: 'Gửi kết quả!',
         })
         .then((result) => {
-            console.log(answer);
             if (result.value) {
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        answer: answer,
-                        test_id: {{$test->id}},
-                    },
-                    success: function (data) {
-                        if (data.error) {
-                            swalToast(data.error, 'error');
-                        }
-                        if (data.msg) {
-                            swalToast(data.msg);
-                            setTimeout(function () {
-                                //Kiểm tra location nếu có edit thì trả về những bài đã làm
-                                if(location.href.indexOf('edit') == - 1){
-                                    location.href = "{{route('answer.index', ['marked' => 0])}}";
-                                }else{
-                                    location.href = "{{route('answer.index', ['marked' => 1])}}";
-                                }
-                            }, 300)
-                        } 
-                    },
-                    error: function (errors) {
-                        swalToast('Lỗi không rõ phát sinh trong quá trình gửi', 'error');
-                    }
-                });
+                saveAnswer(url, answer);
             }
         });
     })
+
+    // console.log(Date.now());
+    // console.log(Date.parse( "{{$test->getEndTime()}}"));
+
+    var checkTime =  setInterval(function(){
+        console.log(Date.now());
+
+        if( Date.now() >  Date.parse("{{$test->getEndTime()}}") - 10000 ){
+            clearInterval(checkTime);
+            Swal.fire({
+                title: 'Hết thời gian làm bài!',
+                text: "Kết quả sẽ được gửi ngay!",
+                icon: 'success',
+            });
+            var answer = getAnswer();
+            setTimeout(function(){
+                saveAnswer(url, answer);
+            }, 3000)
+        }
+    }, 2000)
+
 </script>

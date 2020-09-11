@@ -31,7 +31,7 @@
                     </div>
                     <div class="mt-3">
                         <h5>
-                            {{$test->survey->type == 1 ? 'Người được đánh giá' : 'Người làm bài'}}: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}} , Trọng số: {{$test->multiplier}}
+                            {{$test->survey->type == 1 ? 'Người được đánh giá' : 'Người làm bài'}}: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}}
                         </h5>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         @endphp
                         <div data-question-id="{{$question->id}}" class="mb-3 question {{$question->must_mark == 1 ? 'must-mark' : ''}}">
                             <div class="question-title">
-                                <h5 style="white-space: pre-line">{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(bắt buộc)' : ''}}</h5>
+                                <h5 style="white-space: pre-line">{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(*)' : ''}}</h5>
                             </div>
                             <div class="question-option pt-2">
                                 <div class="row" style="font-size: 18px"> 

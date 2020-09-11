@@ -2,7 +2,8 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Tên người dùng</th>
+      <th>Tên đăng nhập</th>
+      <th>Họ và tên</th>
       <th>Email</th>
       <th>Chức vụ - Bộ phận</th>
       <th>Thao tác</th>

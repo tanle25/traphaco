@@ -65,6 +65,7 @@
       ajax: "{{route('admin.usermanage.list_user')}}",
       columns: [
         { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
+        { "data": "username"},
         { "data": "fullname" },
         { "data": "email" },
         { "data": "department_name" },

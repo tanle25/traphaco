@@ -39,6 +39,7 @@ class UserManageController extends Controller
             ->leftJoin('user_position', 'users.position_id', '=', 'user_position.id')
             ->select([
                 'users.id',
+                'users.username',
                 'users.fullname',
                 'users.email',
                 DB::raw("CONCAT(departments.department_name,' - ',user_position.name) as department_name"),

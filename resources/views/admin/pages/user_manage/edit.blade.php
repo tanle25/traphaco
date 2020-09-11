@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label for="">Họ và tên</label>
                                 <input name="fullname" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên người dùng mới (Bắt buộc)" value="{{ $user->fullname }}">
+                                    placeholder="Nhập tên người dùng mới (*)" value="{{ $user->fullname }}">
                                 @error('fullname')
                                 <strong class="text-red">
                                     {{$message}}
@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <label for="">Username</label>
                                 <input name="username" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên đăng nhập (Bắt buộc)" value="{{ $user->username}}">
+                                    placeholder="Nhập tên đăng nhập (*)" value="{{ $user->username}}">
                                 @error('username')
                                 <strong class="text-red">
                                     {{$message}}
@@ -103,16 +103,17 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="d-block">Quyền Admin</label>
                                 <input {{$user->is_admin == 1 ? 'checked' : ''}} type="checkbox" class="form-control" name="is_admin" data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                            </div>
+                            </div> --}}
                         </div>
-
+                        @can('quản_lý_quyền user')
                         <div class="col-md-6 col-12">
                             @include('admin.pages.user_manage.role_form_edit')
-                            
-                        </div>
+                        </div>    
+                        @endcan
+                        
                     </div>
                     <button class="btn btn-traphaco">
                         Lưu thông tin
@@ -183,6 +184,8 @@ $("input[data-bootstrap-switch]").each(function(){
             }
         });
     }
+
+    getPostion($('#department-select').val());
 </script>
 
 

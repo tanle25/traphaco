@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <label for="">Tên bài khảo sát</label>
                                 <input name="name" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên bài khảo sát (bắt buộc)" value="{{ old('name') }}">
+                                    placeholder="Nhập tên bài khảo sát (*)" value="{{ old('name') }}">
                                 @error('name')
                                 <strong class="text-red">
                                     {{$message}}
@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label for="">Người tạo</label>
                                 <input name="" type="text" class="form-control" id="" readonly
-                                    placeholder="Nhập password (Bắt buộc)" value="{{Auth::user()->fullname}}">
+                                    placeholder="Nhập password (*)" value="{{Auth::user()->fullname}}">
                                 <input type="hidden" name="created_by" value="{{Auth::user()->id}}">
                             </div>
 
