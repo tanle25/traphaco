@@ -70,6 +70,12 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'xuất_excel thống kê cá nhân']);
 
         // Xem và chỉnh sửa quyền
+        Permission::firstOrCreate(['name' => 'xem lịch sử bài khảo sát khách hàng']);
+        Permission::firstOrCreate(['name' => 'xem lịch sử bài đánh giá user']);
+        Permission::firstOrCreate(['name' => 'xem lịch sử thông tin khách hàng']);
+
+        Permission::firstOrCreate(['name' => 'quản_lý quyền']);
+        Permission::firstOrCreate(['name' => 'quản_lý quyền']);
         Permission::firstOrCreate(['name' => 'quản_lý quyền']);
 
         // gets all permissions via Gate::before rule; see AuthServiceProvider
