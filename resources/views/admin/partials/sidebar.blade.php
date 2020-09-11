@@ -132,12 +132,12 @@
               </li>  
               @endcan
               
-              @can('xem user')
+              @can('quản_lý quyền')
               <li class="nav-item">
                 <a href="{{route('admin.permission.index')}}" class="nav-link">
                   <p>Quản lý phân quyền</p>
                 </a>
-              </li>  
+              </li>
               @endcan
               
 

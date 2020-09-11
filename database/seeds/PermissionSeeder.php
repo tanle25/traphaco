@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class PermissionSeeder extends Seeder
@@ -23,6 +22,7 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'sửa user']);
         Permission::firstOrCreate(['name' => 'xóa user']);
         Permission::firstOrCreate(['name' => 'xem user']);
+        Permission::firstOrCreate(['name' => 'quản_lý_quyền user']);
 
         //department permission
         Permission::firstOrCreate(['name' => 'xem phòng ban']);
@@ -69,7 +69,9 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'xem thống kê cá nhân']);
         Permission::firstOrCreate(['name' => 'xuất_excel thống kê cá nhân']);
 
-        $role3 = Role::firstOrCreate(['name' => 'super-admin']);
+        // Xem và chỉnh sửa quyền
+        Permission::firstOrCreate(['name' => 'quản_lý quyền']);
+
         // gets all permissions via Gate::before rule; see AuthServiceProvider
     }
 }

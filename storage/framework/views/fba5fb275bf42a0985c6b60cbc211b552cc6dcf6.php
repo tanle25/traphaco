@@ -132,12 +132,12 @@
               </li>  
               <?php endif; ?>
               
-              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem user')): ?>
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('quản_lý quyền')): ?>
               <li class="nav-item">
                 <a href="<?php echo e(route('admin.permission.index')); ?>" class="nav-link">
                   <p>Quản lý phân quyền</p>
                 </a>
-              </li>  
+              </li>
               <?php endif; ?>
               
 

@@ -74,15 +74,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     //permission
     Route::get('/permission', 'PermissionController@index')
-        ->name('admin.permission.index');
+        ->name('admin.permission.index')
+        ->middleware('permission:quản_lý quyền');
     Route::post('/permission/srote', 'PermissionController@store')
-        ->name('admin.permission.store');
+        ->name('admin.permission.store')
+        ->middleware('permission:quản_lý quyền');
     Route::get('/permission/edit/{id}', 'PermissionController@edit')
-        ->name('admin.permission.edit');
+        ->name('admin.permission.edit')
+        ->middleware('permission:quản_lý quyền');
     Route::post('/permission/update/{id}', 'PermissionController@update')
-        ->name('admin.permission.update');
+        ->name('admin.permission.update')
+        ->middleware('permission:quản_lý quyền');
     Route::post('/permission/destroy/{id}', 'PermissionController@destroy')
-        ->name('admin.permission.destroy');
+        ->name('admin.permission.destroy')
+        ->middleware('permission:quản_lý quyền');
 
     Route::get('/survey', 'SurveyController@index')
         ->name('admin.survey.index')

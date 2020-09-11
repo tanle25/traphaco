@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <label for="">Họ và tên</label>
                                 <input name="fullname" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên người dùng mới (Bắt buộc)" value="{{ $user->fullname }}">
+                                    placeholder="Nhập tên người dùng mới (*)" value="{{ $user->fullname }}">
                                 @error('fullname')
                                 <strong class="text-red">
                                     {{$message}}
@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="">Tên đăng nhập</label>
                                 <input name="username" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên đăng nhập (Bắt buộc)" value="{{ $user->username}}">
+                                    placeholder="Nhập tên đăng nhập (*)" value="{{ $user->username}}">
                                 @error('username')
                                 <strong class="text-red">
                                     {{$message}}

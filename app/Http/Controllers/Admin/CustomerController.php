@@ -33,21 +33,13 @@ class CustomerController extends Controller
         return DataTables::eloquent($customers)
             ->addIndexColumn()
             ->addColumn('action', function ($customer) {
-                if (Auth::user()->is_admin == 1) {
-                    $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
+                $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
 
                     <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>
 
                     <a target="_blank" class="customer-result" href="' . route('admin.customer_test.get_test_by_customer', $customer->id) . '" class="btn text-primary"><i class="far fa-chart-bar"></i></i></a>
 
                     <a href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger customer-delete"><i class="far fa-trash-alt"></i></a>';
-                } else {
-                    // $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
-
-                    $tools = '<a target="_blank" class="customer-result" href="' . route('admin.customer_test.get_test_by_customer', $customer->id) . '" class="btn text-primary"><i class="far fa-chart-bar"></i></i></a>
-
-                    <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>';
-                }
 
                 return $tools;
             })

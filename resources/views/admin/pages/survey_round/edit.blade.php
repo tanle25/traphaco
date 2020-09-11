@@ -29,7 +29,7 @@
             <div class="form-group">
               <label for="">Tên đợt khảo sát</label>
               <input name="name" type="text" class="form-control" id=""
-                placeholder="Nhập đợt khảo sát mới (Bắt buộc)" value="{{  $survey_round->name ?? '' }}">
+                placeholder="Nhập đợt khảo sát mới (*)" value="{{  $survey_round->name ?? '' }}">
               @error('name')
               <strong class="text-red">
                 {{$message}}
@@ -42,7 +42,7 @@
             <div class="form-group">
               <label for="">Người tạo</label>
               <input name="" type="text" class="form-control" id="" readonly
-                placeholder="Nhập password (Bắt buộc)" value="{{Auth::user()->fullname}}">
+                placeholder="Nhập password (*)" value="{{Auth::user()->fullname}}">
               <input type="hidden" name="created_by" value="{{Auth::user()->id}}">
             </div>
           </div>
