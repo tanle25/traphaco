@@ -122,6 +122,10 @@ class PermissionController extends Controller
 
         $role = Role::findOrFail($id);
 
+        $role->update([
+            'name' => $request->role_name,
+        ]);
+
         foreach ($role->permissions as $permission) {
             $role->revokePermissionTo($permission);
         }

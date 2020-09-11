@@ -122,7 +122,7 @@ class AnswerController extends Controller
             })
             ->addColumn('action', function (Test $test) {
                 if ($test->status == 3) {
-                    return '<a href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
+                    return '<a data-toggle-for="tooltip" title="Sửa kết quả" href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
                 }
                 if ($test->end_at < Carbon::now()) {
                     return '';
@@ -131,7 +131,7 @@ class AnswerController extends Controller
                     return '';
                 };
 
-                return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
+                return '<a data-toggle-for="tooltip" title="Làm bài đánh giá" href="' . route('answer.mark', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])
             ->make(true);

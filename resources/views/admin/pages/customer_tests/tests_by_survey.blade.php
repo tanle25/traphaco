@@ -94,10 +94,10 @@
                           <td>{{$test->survey->name}}</td>
                           <td>{{$test->author->fullname}}</td>
                           <td>
-                            <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
-                            <span href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>
+                            <span data-toggle-for="tooltip" title="Xem chi tiết" href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
+                            <span data-toggle-for="tooltip" title="Xóa" href="{{route('admin.customer_test.details.export', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>
                             @can('xem lịch sử bài khảo sát khách hàng')
-                            <a data-toggle="modal" data-target="#history-model" href="{{route('history.customer_test', $test->id)}}" class="btn text-info test-history"><i class="fas fa-history"></i></a>  
+                            <a data-toggle-for="tooltip" title="Xem lịch sử" data-toggle="modal" data-target="#history-model" href="{{route('history.customer_test', $test->id)}}" class="btn text-info test-history"><i class="fas fa-history"></i></a>  
                             @endcan
                           </td>
                         </tr> 

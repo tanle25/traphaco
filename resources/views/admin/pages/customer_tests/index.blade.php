@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 
-
 @section('title')
   Thống kê đợt khảo sát khách hàng
 @endsection

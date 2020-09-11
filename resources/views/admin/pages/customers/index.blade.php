@@ -217,7 +217,6 @@
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
     $(function () {
-
         $("#customer-table").dataTable({
             processing: true,
             serverSide: true,
@@ -227,7 +226,6 @@
                 {
                     extend: 'excelHtml5',
                     autoFilter: true,
-
                 }
             ],
             ajax: "{{route('admin.customer.list')}}",
@@ -259,8 +257,6 @@
             ]
         });
     });
-
-
     function storeCustomer(url, data) {
         $.ajax({
             url: url,
@@ -545,9 +541,6 @@
     
     
 </script>
-
-
-
 
 @error('customer_list')
 <script>

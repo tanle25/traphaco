@@ -55,8 +55,8 @@ class UserManageController extends Controller
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', function ($user) {
-                return '<a href="' . route('admin.usermanage.edit', $user->id) . '"class="btn text-success"><i class="fas fa-user-edit"></i></a>
-                        <a href="' . route('admin.usermanage.destroy', $user->id) . '" class="btn text-danger"><i class="far fa-trash-alt"></i></a>';
+                return '<a data-toggle-for="tooltip" title="Sửa thông tin" href="' . route('admin.usermanage.edit', $user->id) . '"class="btn text-success"><i class="fas fa-user-edit"></i></a>
+                        <a data-toggle-for="tooltip" title="Xóa" href="' . route('admin.usermanage.destroy', $user->id) . '" class="btn text-danger"><i class="far fa-trash-alt"></i></a>';
             })
             ->rawColumns(['action'])
             ->make(true);

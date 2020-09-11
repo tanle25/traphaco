@@ -9,9 +9,9 @@
                 <span>{{$item->department_name}}</span>
                 
                 <span class="float-right dd-nodrag">
-                    <a href="{{route('admin.department.edit', $item->id)}}"><i
+                    <a data-toggle-for="tooltip" title="Sửa thông tin" href="{{route('admin.department.edit', $item->id)}}"><i
                             class="fa fa-edit text-success"></i></a>
-                    <span data-id="{{$item->id}}" class="remove-department"><i class="fa fa-trash text-danger"></i></span>
+                    <span data-toggle-for="tooltip" title="Xóa" data-id="{{$item->id}}" class="remove-department"><i class="fa fa-trash text-danger"></i></span>
                 </span>
             </div>
             @if ($item->child)

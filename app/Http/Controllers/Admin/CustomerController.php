@@ -33,13 +33,13 @@ class CustomerController extends Controller
         return DataTables::eloquent($customers)
             ->addIndexColumn()
             ->addColumn('action', function ($customer) {
-                $tools = '<span href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model" ></i></span>
+                $tools = '<span data-toggle-for="tooltip" title="Sửa thông tin" href="' . route('admin.customer.edit', $customer->id) . '"class="btn text-success customer-edit"><i class="fas fa-user-edit" data-toggle="modal" data-target="#customer-model"></i></span>
 
-                    <span class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>
+                    <span data-toggle-for="tooltip" title="Tải khảo sát" class="btn text-info customer-survey" data-customer-id="' . $customer->id . '" data-toggle="modal" data-target="#customer-survey-model"><i class="far fa-file-alt"></i></span>
 
-                    <a target="_blank" class="customer-result" href="' . route('admin.customer_test.get_test_by_customer', $customer->id) . '" class="btn text-primary"><i class="far fa-chart-bar"></i></i></a>
+                    <a data-toggle-for="tooltip" title="Xem thống kê" target="_blank" class="customer-result" href="' . route('admin.customer_test.get_test_by_customer', $customer->id) . '" class="btn text-primary"><i class="far fa-chart-bar"></i></i></a>
 
-                    <a href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger customer-delete"><i class="far fa-trash-alt"></i></a>';
+                    <a data-toggle-for="tooltip" title="Xóa khách hàng" href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger customer-delete"><i class="far fa-trash-alt"></i></a>';
 
                 return $tools;
             })
