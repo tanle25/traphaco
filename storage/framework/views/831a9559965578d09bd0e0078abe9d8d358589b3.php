@@ -65,10 +65,13 @@
 
   function auto_grow(element) {
     element.style.height = "5px";
-    element.style.height = (element.scrollHeight)+"px" ;
+    element.style.height = (element.scrollHeight) + "px" ;
   }
+
+  $('.table').on('draw.dt', function(){
+    $('[data-toggle-for="tooltip"]').tooltip();
+  });
 
 </script>
 
-<?php echo $__env->yieldContent('custom-js'); ?>
-<?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/scripts.blade.php ENDPATH**/ ?>
+<?php echo $__env->yieldContent('custom-js'); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/scripts.blade.php ENDPATH**/ ?>

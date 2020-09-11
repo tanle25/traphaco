@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 
-
 @section('title')
   Thống kê đợt khảo sát khách hàng
 @endsection
@@ -69,7 +68,32 @@
         { "data": "survey_name" },
         { "data": "customer_count" },
         { "data": "action"},
-      ]
+      ],
+      language: {
+        "decimal":        "",
+        "emptyTable":     "No data available in table",
+        "info":           "Showing _START_ to _END_ of _TOTAL_ entries",
+        "infoEmpty":      "Showing 0 to 0 of 0 entries",
+        "infoFiltered":   "(filtered from _MAX_ total entries)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "Show _MENU_ entries",
+        "loadingRecords": "Loading...",
+        "processing":     "Processing...",
+        "search":         "Tìm kiếm:",
+        "zeroRecords":    "No matching records found",
+        "paginate": {
+            "first":      "First",
+            "last":       "Last",
+            "next":       "Next",
+            "previous":   "Previous"
+        },
+        "aria": {
+            "sortAscending":  ": activate to sort column ascending",
+            "sortDescending": ": activate to sort column descending"
+        }
+      }
+
     });
   });
 </script>

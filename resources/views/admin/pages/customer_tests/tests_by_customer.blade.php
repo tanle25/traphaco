@@ -50,8 +50,8 @@
                           <td>{{$test->author->fullname ?? ''}}</td>
                           <td>{{Carbon\Carbon::parse($test->created_at)->format('d/m/Y H:s:a')}} </td>
                           <td>
-                            <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle="modal" data-target="#test-model" ></i></span>
-                            <a href="{{route('admin.customer_test.destroy', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></a>
+                            <span href="{{route('admin.customer_test.details', $test->id)}}"class="btn text-success test-details"><i class="fas fa-eye" data-toggle-for="tooltip" title="Xem chi tiết" data-toggle="modal" data-target="#test-model" ></i></span>
+                            <a data-toggle-for="tooltip" title="Xóa" href="{{route('admin.customer_test.destroy', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></a>
                           </td>
                         </tr>
                           

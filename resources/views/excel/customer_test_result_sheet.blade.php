@@ -33,23 +33,27 @@
             @foreach ($question->options as $option)
             @php
                 $answers = $option->getCustomerChoosen();
-
+                $customer_chosen_count = $option->countCustomerChosen();
+                $answer_count = $question->getAnswerCount();
             @endphp
                 <tr>
                     <td>
                         {{$option->content ?? ''}}
                     </td>
                     <td>
-                        {{$option->countCustomerChosen()}}
+                        {{$customer_chosen_count}}
                     </td>
                     <td>
-                        @if ($question->getAnswerCount() !== 0)
-                        {{ round($option->countCustomerChosen() / $question->getAnswerCount() * 100, 2)}}%
+                        @if ($answer_count !== 0)
+                        {{ round($customer_chosen_count / $answer_count * 100, 2)}}%
                         @endif
                     </td>
                     <td>
                         @foreach ($answers as $answer)
-                        {{$answer->getCustomer()->contract_code}}-{{$answer->getCustomer()->pharmacy_name}},
+                        @php
+                            $customer = $answer->getCustomer();
+                        @endphp
+                        {{$customer->contract_code}}-{{$customer->pharmacy_name}},
                         @endforeach
                     </td>
                 </tr>

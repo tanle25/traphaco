@@ -35,9 +35,9 @@ class RoundSurveyController extends Controller
         return DataTables::eloquent($survey_rounds)
             ->addIndexColumn()
             ->addColumn('action', function (SurveyRound $surveyround) {
-                return '<a href="' . route('admin.survey_round.details', $surveyround->id) . '"class="btn text-primary survey-round-result"><i class="far fa-chart-bar "></i></a>
-                        <a href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success survey-round-edit"><i class="fas fa-edit"></i></a>
-                        <span href="' . route('admin.survey_round.destroy', $surveyround->id) . '" class="btn text-danger round-survey-delete"><i class="far fa-trash-alt"></i></span>';
+                return '<a data-toggle-for="tooltip" title="Xem thông tin" href="' . route('admin.survey_round.details', $surveyround->id) . '"class="btn text-primary survey-round-result"><i class="far fa-chart-bar "></i></a>
+                        <a data-toggle-for="tooltip" title="Sửa" href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success survey-round-edit"><i class="fas fa-edit"></i></a>
+                        <span data-toggle-for="tooltip" title="Xóa" href="' . route('admin.survey_round.destroy', $surveyround->id) . '" class="btn text-danger round-survey-delete"><i class="far fa-trash-alt"></i></span>';
             })
             ->editColumn('created_by', function (SurveyRound $surveyround) {
                 return $surveyround->author->fullname ?? '';
@@ -184,7 +184,7 @@ class RoundSurveyController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($candiate) {
                 $link = route('admin.survey_round.candiate_details', ['candiate_id' => $candiate->candiate_id, 'id' => $candiate->survey_round_id]);
-                return '<a href="' . $link . '"class="btn text-success"><i class="far fa-chart-bar"></i></a>';
+                return '<a data-toggle-for="tooltip" title="Xem thống kê" href="' . $link . '"class="btn text-success"><i class="far fa-chart-bar"></i></a>';
             })
             ->editColumn('candiate_id', function ($candiate) {
                 return $candiate->candiate_id;

@@ -134,6 +134,7 @@
     // console.log(Date.now());
     // console.log(Date.parse( "{{$test->getEndTime()}}"));
 
+    @if(\Request::route()->getName() === "answer.mark" )
     var checkTime =  setInterval(function(){
         console.log(Date.now());
 
@@ -149,6 +150,9 @@
                 saveAnswer(url, answer);
             }, 3000)
         }
-    }, 2000)
+    }, 2000)    
+    @endif
+    
+    
 
 </script>

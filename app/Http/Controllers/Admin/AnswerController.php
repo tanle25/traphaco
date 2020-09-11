@@ -122,7 +122,7 @@ class AnswerController extends Controller
             })
             ->addColumn('action', function (Test $test) {
                 if ($test->status == 3) {
-                    return '<a href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
+                    return '<a data-toggle-for="tooltip" title="Sửa kết quả" href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
                 }
                 if ($test->end_at < Carbon::now()) {
                     return '';
@@ -131,7 +131,7 @@ class AnswerController extends Controller
                     return '';
                 };
 
-                return '<a href="' . route('answer.mark', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
+                return '<a data-toggle-for="tooltip" title="Làm bài đánh giá" href="' . route('answer.mark', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])
             ->make(true);
@@ -152,7 +152,7 @@ class AnswerController extends Controller
         $test = Test::findOrFail($request->test_id);
 
         if ($test->getEndTime() < Carbon::now()) {
-            return ['error' => "Đã quá thời gian làm bài T.T"];
+            return ['error' => "Đã quá thời gian làm bài!"];
         }
 
         if (empty($request->answer)) {
@@ -233,12 +233,47 @@ class AnswerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'test_id' => 'required|numeric',
+        ]);
+        $test = Test::findOrFail($request->test_id);
+        if (empty($request->answer)) {
+            return ['error' => 'Không tìm thấy câu trả lời!'];
+        };
+
+        DB::beginTransaction();
+
+        try {
+            foreach ($request->answer as $answer) {
+                $oldAns = Answer::where([
+                    ['test_id', '=', $request->test_id],
+                    ['question_id', '=', $answer['question_id']],
+                ])->first();
+                if ($oldAns) {
+                    $oldAns->update([
+                        'option_choice' => $answer['option_id'],
+                        'comment' => $answer['comment'],
+                    ]);
+                } else {
+                    Answer::create([
+                        'option_choice' => $answer['option_id'],
+                        'comment' => $answer['comment'],
+                        'test_id' => $request->test_id,
+                        'question_id' => $answer['question_id'],
+                    ]);
+                    $test->status = 3;
+                    $test->save();
+                };
+            }
+            DB::commit();
+        } catch (Exception $th) {
+            DB::rollback();
+        }
+        return ['msg' => 'Cập nhật thành công kết quả!'];
     }
 
     /**
