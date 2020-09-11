@@ -44,7 +44,7 @@ class CustomerTestDetails implements FromView, WithEvents, WithDrawings
 
     public function view(): View
     {
-        $tests = CustomerTest::with(['answers', 'customer', 'answers.option_choice_model'])
+        $tests = CustomerTest::with(['answers', 'customer', 'author', 'answers.option_choice_model'])
             ->where('survey_id', $this->survey_id)
             ->orderBy('customer_id')
             ->get();

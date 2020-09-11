@@ -24,6 +24,9 @@ class QuestionOption extends Model
 
     public function getCustomerChoosen()
     {
-        return CustomerAnswer::with('customer_test.customer', 'customer_test.author')->where('option_choice', $this->id)->where('comment', null)->get();
+        return CustomerAnswer::with('customer_test.customer')
+            ->where('option_choice', $this->id)
+            ->where('comment', null)
+            ->get();
     }
 }
