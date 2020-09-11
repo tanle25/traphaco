@@ -1,5 +1,4 @@
 @extends('admin.main_layout')
-
 @section('custom-css')
 <style>
     textarea {
@@ -83,8 +82,9 @@
                         </div>  
                         @endforeach
                     @endforeach
+                    @can('sửa bài đánh giá đã làm')
                     <button href="{{route('answer.update_ans')}}" class="btn btn-traphaco send-result">Sửa kết quả</button>
-
+                    @endcan
                 </div> 
             </div>
             <!-- /.card -->
