@@ -4,18 +4,20 @@
     <a href="<?php echo e(route('home')); ?>" class="brand-link">
       <img src="<?php echo e(asset('images/favicon.ico')); ?>" alt="traphaco Logo" class="brand-image img-circle "
            style="opacity: .8">
-      <span class="brand-text font-weight-light">TRAPHACO <?php echo e(Auth::user()->is_admin == 1 ? 'ADMIN' : 'USER'); ?></span>
+      <span class="brand-text font-weight-light">TRAPHACO</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?php echo e(asset('template/AdminLTE/dist/img/user6-128x128.jpg')); ?>" class="img-circle elevation-2" alt="User Image'">
+        <div class="image d-flex align-items-center">
+          <img src="<?php echo e(asset('template/AdminLTE/dist/img/user6-128x128.jpg')); ?>" class="img-circle elevation-2 d-block" alt="User Image'">
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo e(Auth::user()->fullname); ?></a>
+          <a class="d-block"><?php echo e(Auth::user()->department->department_name); ?></a>
+          <a class="d-block"><?php echo e(Auth::user()->position->name); ?></a>
         </div>
       </div>
 

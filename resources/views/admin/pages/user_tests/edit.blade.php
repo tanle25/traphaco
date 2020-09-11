@@ -83,11 +83,9 @@
                         </div>  
                         @endforeach
                     @endforeach
-                    <button href="{{route('answer.store')}}" class="btn btn-traphaco send-result">Gửi kết quả</button>
+                    <button href="{{route('answer.update_ans')}}" class="btn btn-traphaco send-result">Sửa kết quả</button>
 
                 </div> 
-
-
             </div>
             <!-- /.card -->
           </div>

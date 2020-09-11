@@ -313,6 +313,9 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('answer/{id}/edit', 'Admin\AnswerController@edit')
         ->name('answer.re_ans')
         ->middleware('permission:sửa bài đánh giá đã làm');
+    Route::post('answer/update', 'Admin\AnswerController@update')
+        ->name('answer.update_ans')
+        ->middleware('permission:sửa bài đánh giá đã làm');
     Route::get('answer/list', 'Admin\AnswerController@index')
         ->name('answer.index');
 

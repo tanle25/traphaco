@@ -242,19 +242,30 @@
                 //{ "data": "sale_chanel"},
                 { "data": "action" },
             ],
-            columnDefs: [
-                // {width: "30px", targets: [0]},
-                // {width: "57px", targets: [1,2]},
-                // {width: "93px", targets: [3]},
-                // {width: "150px", targets: [4]},
-                // {width: "120px", targets: [5]},
-                // {width: "120px", targets: [6]},
-                // {width: "100px", targets: [7]},
-                // {width: "70px", targets: [8]},
-                // {width: "117px", targets: [9]},
-                // {width: "117px", targets: [9]},
-                // {width: "90px", targets: [10]},
-            ]
+            language: {
+                "decimal":        "",
+                "emptyTable":     "Không có dữ liệu",
+                "info":           "Danh sách từ _START_ đến _END_ trong _TOTAL_ kết quả",
+                "infoEmpty":      "Không có kết quả phù hợp",
+                "infoFiltered":   "(Lọc từ _MAX_ bản ghi)",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "Hiển thị _MENU_ kết quả",
+                "loadingRecords": "Đang tải...",
+                "processing":     "Đang tải...",
+                "search":         "Tìm kiếm nhanh:",
+                "zeroRecords":    "Không có dữ liệu",
+                "paginate": {
+                    "first":      "Đầu",
+                    "last":       "Cuối",
+                    "next":       "Sau",
+                    "previous":   "Trước"
+                },
+                "aria": {
+                    "sortAscending":  ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                }
+            }    
         });
     });
     function storeCustomer(url, data) {
