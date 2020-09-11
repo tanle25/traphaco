@@ -49,7 +49,6 @@ class CustomerTestDetails implements FromView, WithEvents, WithDrawings
             ->orderBy('customer_id')
             ->get();
         $survey = Survey::findOrFail($this->survey_id);
-
         return view('excel.customer_test_details_sheet', [
             'tests' => $tests,
             'survey' => $survey,

@@ -100,7 +100,7 @@ class Question extends Model
 
     public function getEmptyCustomerAnswer()
     {
-        return CustomerAnswer::where('question_id', $this->id)
+        return CustomerAnswer::with('customer_test.customer', 'customer_test.author')->where('question_id', $this->id)
             ->where('option_choice', null)
             ->where('comment', null)
             ->get();
@@ -108,7 +108,7 @@ class Question extends Model
 
     public function getAnswerWithComment()
     {
-        return CustomerAnswer::where('question_id', $this->id)
+        return CustomerAnswer::with('customer_test.customer', 'customer_test.author')->where('question_id', $this->id)
             ->where('comment', '<>', null)
             ->get();
     }
