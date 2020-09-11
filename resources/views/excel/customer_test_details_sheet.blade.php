@@ -1,3 +1,4 @@
+
 <table>
     <thead>
         <tr></tr>
@@ -52,4 +53,5 @@
         </tr>   
         @endforeach
     </tbody>
+
 </table>
