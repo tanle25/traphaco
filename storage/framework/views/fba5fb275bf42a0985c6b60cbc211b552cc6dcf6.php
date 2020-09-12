@@ -100,7 +100,14 @@
                 </a>
               </li>  
               <?php endif; ?>
-              
+
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem báo cáo đợt đánh giá')): ?>
+              <li class="nav-item">
+                <a href="<?php echo e(route('statistic.assessment.show_form')); ?>" class="nav-link">
+                  <p>Phân tích thống kê</p>
+                </a>
+              </li>  
+              <?php endif; ?>
               
             </ul>
           </li>

@@ -383,4 +383,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/round-survey/details/{id}/candiate/{candiate_id}', 'Admin\RoundSurveyController@getUserDetails')
         ->name('admin.survey_round.candiate_details');
 
+    Route::get('/statistic/index', 'Admin\StatisticController@showForm')->name('statistic.assessment.show_form');
+    Route::get('/statistic/assessment-user/export', 'Admin\StatisticController@exportExcelAssessmentResult')->name('statistic.assessment.export');
+
 });

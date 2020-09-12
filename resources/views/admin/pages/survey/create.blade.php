@@ -54,7 +54,7 @@
                                 <label for="">Loại khảo sát</label>
                                 <select name="type" class="form-control" id="">
                                     <option value="1">Bài đánh giá nhân viên</option>
-                                    <option value="2">Bài đánh giá chất lượng nhân viên</option>
+                                    <option value="2">Bài kiểm tra chất lượng nhân viên</option>
                                     <option value="3">Bài khảo sát khách hàng</option>
                                 </select>
                             </div>
