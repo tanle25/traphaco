@@ -8,11 +8,11 @@
 
 
 @section('title')
-  Chi tiết đợt khảo sát
+  Chi tiết đợt đánh giá
 @endsection
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Chi tiết đợt khảo sát'])
+    @include('admin.partials.content_header', ['title' => 'Chi tiết đợt đánh giá'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -20,7 +20,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách người khảo sát</h3>
+                <h3 class="card-title">Danh sách người được đánh giá</h3>
                 {{-- <a href="{{route('admin.survey_round.create')}}" class="btn btn-success float-right">
                   <i class="far fa-file nav-icon">  Thêm mới</i>
                 </a> --}}
@@ -31,8 +31,8 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Tên người khảo sát</th>
-                        <th>Các bài khảo sát</th>
+                        <th>Tên người được đánh giá</th>
+                        <th>Các bài đánh giá</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
@@ -78,7 +78,7 @@
             e.preventDefault();
             var url = $(this).attr('href');
             Swal.fire({
-                title: 'Xóa đợt khảo sát này?',
+                title: 'Xóa bài đánh giá này?',
                 text: "Bạn không thể hoàn tác!",
                 icon: 'warning',
                 showCancelButton: true,

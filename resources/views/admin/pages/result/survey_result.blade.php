@@ -8,7 +8,7 @@
 
 
 @section('title')
-  Quản lý user
+  Quản lý đợt đánh giá
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
+                <h3 class="card-title">Kết quả các đợt đánh giá</h3>
                 <a class="btn btn-success float-right" href="{{route('admin.export.user_result', ['survey_round_id' => $survey_round->id, 'survey_id' => $survey->id])}}">Xuất excel</a>
               </div>
               <!-- /.card-header -->
@@ -29,7 +29,7 @@
                     <thead>
                       <tr>
                         <th rowspan="2">STT</th>
-                        <th rowspan="2">Người được khảo sát</th>
+                        <th rowspan="2">Người được đánh giá</th>
                         <th colspan="4">Kết quả điểm TB</th>
                         <th rowspan="2">% năng lực</th>
                         <th rowspan="2">Thao tác</th>

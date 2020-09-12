@@ -4,7 +4,7 @@
     <div class="card-header">
         <div>
             <div class="mb-3">
-                THỜI GIAN LÀM BÀI KIỂM TRA
+                <h5><strong>Thời gian làm bài đánh giá</strong></h5>
             </div>
             <form method="post" action="{{route('admin.survey_round.update_time')}}">
                 @csrf

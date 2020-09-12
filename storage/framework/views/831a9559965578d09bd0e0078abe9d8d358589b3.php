@@ -69,7 +69,9 @@
   }
 
   $('.table').on('draw.dt', function(){
-    $('[data-toggle-for="tooltip"]').tooltip();
+    $('[data-toggle-for="tooltip"]').tooltip({
+      placement: 'auto',
+    });
   });
 
 </script>

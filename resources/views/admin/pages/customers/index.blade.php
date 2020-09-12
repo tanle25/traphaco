@@ -18,7 +18,7 @@
 
 
 @section('title')
-  Quản lý đợt khảo sát
+  Quản lý khách hàng
 @endsection
 
 @section('content')

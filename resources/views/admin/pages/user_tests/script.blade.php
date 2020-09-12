@@ -17,7 +17,7 @@
     function alertProblemInSurvey(){
         Swal.fire({
                 title: 'Bộ đề có câu hỏi trắng không thể hoàn thành!',
-                text: "Vui lòng báo lại người tạo bài khảo sát bổ sung thêm!",
+                text: "Vui lòng báo lại người tạo bài đánh giá bổ sung thêm!",
                 icon: 'warning',
                 showCancelButton: true,
                 showConfirmButton: false,
@@ -116,7 +116,7 @@
         var answer = getAnswer();
 
         Swal.fire({
-            title: 'Hoàn thành bài test!',
+            title: 'Hoàn thành bài đánh giá!',
             text: "Gửi kết quả!",
             icon: 'success',
             showCancelButton: true,

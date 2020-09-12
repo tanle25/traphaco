@@ -113,7 +113,7 @@ class TestController extends Controller
         ], [
             'candiate_id.required' => 'Người được chấm không được để trống',
             'examiner_id.required' => 'Người chấm không được để trống',
-            'survey_id.required' => 'Bài khảo sát không được để trống',
+            'survey_id.required' => 'Bài đánh giá không được để trống',
         ]);
 
         $list_candiate = $request->candiate_id;
@@ -189,7 +189,7 @@ class TestController extends Controller
 
     }
 
-    // Dùng để lưu bài test loại 2
+    // Dùng để lưu bài đánh gid loại 2
 
     public function storeTestType2(Request $request)
     {
@@ -199,7 +199,7 @@ class TestController extends Controller
         ], [
             'candiate_id.required' => 'Người được chấm không được để trống',
             'examiner_id.required' => 'Người chấm không được để trống',
-            'survey_id.required' => 'Bài khảo sát không được để trống',
+            'survey_id.required' => 'Bài đánh giá không được để trống',
         ]);
 
         $list_candiate = $request->candiate_id;
@@ -311,9 +311,9 @@ class TestController extends Controller
         $test = Test::findOrFail($id);
         if ($test->status == 1) {
             $test->update(['status' => 2]);
-            return ['msg' => 'Gửi thành công bài test'];
+            return ['msg' => 'Gửi thành công bài đánh giá'];
         }
-        return ['warning' => 'Bài test đã được gửi'];
+        return ['warning' => 'Bài đánh giá đã được gửi'];
 
     }
 

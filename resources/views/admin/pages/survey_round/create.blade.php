@@ -1,6 +1,6 @@
 @extends('admin.main_layout')
 @section('title')
-  Quản lý đợt khảo sát
+  Quản lý đợt đánh giá
 @endsection
 
 @section('custom-css')
@@ -10,22 +10,22 @@
 @endsection
 
 @section('content')
-@include('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'])
+@include('admin.partials.content_header', ['title' => 'Quản lý đợt đánh giá'])
 
 <div class="row">
     <section class="col-12">
 
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Thông tin đợt khảo sát</h3>
+                <h3 class="card-title">Thông tin đợt đánh giá</h3>
         </div>
         <form action="{{route('admin.survey_round.store')}}" class="row card-body" method="post">
           @csrf
           <div class="col-md-6 col-12">
             <div class="form-group">
-              <label for="">Tên đợt khảo sát</label>
+              <label for="">Tên đợt đánh giá</label>
               <input name="name" type="text" class="form-control" id=""
-                placeholder="Nhập đợt khảo sát mới (*)" value="{{ old('fullname') }}">
+                placeholder="Nhập đợt đánh giá mới (*)" value="{{ old('fullname') }}">
               @error('fullname')
               <strong class="text-red">
                 {{$message}}

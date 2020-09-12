@@ -10,11 +10,10 @@
 
 
 @section('title')
-    Các bài khảo sát
+    Các bài đánh giá
 @endsection
 
 @section('content')
-    {{-- @include('admin.partials.content_header', ['title' => 'Chấm điểm bài test']) --}}
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
