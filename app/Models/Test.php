@@ -37,18 +37,12 @@ class Test extends Model
         return $this->hasMany('App\Models\Answer', 'test_id', 'id');
     }
 
-    public function getScore()
+    public function totalScore()
     {
-        $max = $this->survey->getMaxScore();
         $total_score = 0;
-
         foreach ($this->answer as $answer) {
-            $total_score += $answer->selected_option->score;
+            $total_score += $answer->selected_option->score ?? 0;
         }
-        $total_score = round(($total_score / $max) * 100, 2);
-        $this->score = $total_score;
-
-        $this->save();
         return $total_score;
     }
 

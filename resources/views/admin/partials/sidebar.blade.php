@@ -100,7 +100,14 @@
                 </a>
               </li>  
               @endcan
-              
+
+              @can('xem báo cáo đợt đánh giá')
+              <li class="nav-item">
+                <a href="{{route('statistic.assessment.show_form')}}" class="nav-link">
+                  <p>Phân tích thống kê</p>
+                </a>
+              </li>  
+              @endcan
               
             </ul>
           </li>
