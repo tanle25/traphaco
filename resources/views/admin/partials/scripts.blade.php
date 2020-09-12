@@ -69,9 +69,9 @@
     element.style.height = (element.scrollHeight) + "px" ;
   }
 
-  $('.table').on('draw.dt', function(){
-    $('[data-toggle-for="tooltip"]').tooltip();
-  });
+  // $('.table').on('draw.dt', function(){
+  //   $('[data-toggle-for="tooltip"]').tooltip();
+  // });
 
 </script>
 
