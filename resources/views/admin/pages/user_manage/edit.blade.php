@@ -91,7 +91,7 @@
 							
 							<div class="form-group">
                                 <label>Chức vụ</label>
-                                <select name="position_id" class="form-control " id="position-select">
+                                <select name="position_id" class="form-control" value="{{ $user->position_id}}" id="position-select">
                                     @foreach ($user_positions as $user_position )
                                     <option {{$user_position->id == $user->position_id ? 'selected' : ''}} value="{{$user_position->id}}" data-department-id={{$user_position->department->id ?? ''}}>{{$user_position->name}}</option>
                                     @endforeach
@@ -169,15 +169,11 @@ $("input[data-bootstrap-switch]").each(function(){
         var id = $(this).val();
         getPostion(id);
     })
+
     function getPostion(id) {
-        var temp = 1;
         $('#position-select option').each(function(index){
             if($(this).data('department-id') == id){
                 $(this).show();
-                if(temp == 1){
-                    temp = 0;
-                    $('#position-select').val($(this).val())
-                }
             }
             else{
                 $(this).hide();
