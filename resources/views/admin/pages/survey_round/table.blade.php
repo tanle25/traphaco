@@ -18,20 +18,20 @@
                             <div class="form-group row col-md-6 col-12">
                                 <label for="staticEmail" class="col-form-label col-12 col-lg-2">Từ:</label>
                                 <div class="col-12 col-lg-9">
-                                    <input @if(!Auth::user()->can('sửa bài đánh giá')) readonly @endif  style="border:none" id="date-picker" class="date-picker form-control" type="text" name="time[{{$index}}][start_at]" value="{{Carbon\Carbon::parse( $survey->start_at)->format('d/m/Y H:i') ?? '01/01/2000 10:00'}}"> 
+                                    <input @if(!Auth::user()->can('sửa đợt đánh giá')) readonly @endif  style="border:none" id="date-picker" class="date-picker form-control" type="text" name="time[{{$index}}][start_at]" value="{{Carbon\Carbon::parse( $survey->start_at)->format('d/m/Y H:i') ?? '01/01/2000 10:00'}}"> 
                                 </div>
                             </div>
 
                             <div class="form-group row col-md-6 col-12">
                                 <label for="staticEmail" class="col-12 col-lg-2 col-form-label">đến:</label>
                                 <div class="col-12 col-lg-9" >
-                                    <input @if(!Auth::user()->can('sửa bài đánh giá')) readonly @endif  style="border:none" class="date-picker form-control" type="text" name="time[{{$index}}][end_at]" value="{{ Carbon\Carbon::parse( $survey->end_at)->format('d/m/Y H:i') ?? '01/01/2100 10:00'}}">
+                                    <input @if(!Auth::user()->can('sửa đợt đánh giá')) readonly @endif  style="border:none" class="date-picker form-control" type="text" name="time[{{$index}}][end_at]" value="{{ Carbon\Carbon::parse( $survey->end_at)->format('d/m/Y H:i') ?? '01/01/2100 10:00'}}">
                                 </div>
                             </div>
                         </div> 
                     </div>
                 @endforeach
-                @if (Auth::user()->can('sửa bài đánh giá'))
+                @if (Auth::user()->can('sửa đợt đánh giá'))
                     <button type="submit" class="btn btn-success">Cập nhật thời gian làm bài</button>
                 @endif
             </form>  
