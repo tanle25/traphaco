@@ -28,11 +28,11 @@
 
 
 @section('title')
-  Quản lý đợt khảo sát
+  Quản lý đợt đánh giá
 @endsection
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'])
+    @include('admin.partials.content_header', ['title' => 'Quản lý đợt đánh giá'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -71,7 +71,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Các bài khảo sát của người dùng</h3>
+                <h3 class="card-title">Các bài đánh giá của người dùng</h3>
                 {{-- <a href="{{route('admin.survey_round.create')}}" class="btn btn-success float-right">
                   <i class="far fa-file nav-icon">Thêm mới</i>
                 </a> --}}
@@ -82,7 +82,7 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Tên bài khảo sát</th>
+                        <th>Tên bài đánh giá</th>
                         <th>Người tạo</th>
                         <th>Thao tác</th>
                       </tr>
@@ -124,7 +124,7 @@
       <div class="modal-dialog" style="max-width: 1024px" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Chi tiết bài test</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Chi tiết bài đánh giá</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>

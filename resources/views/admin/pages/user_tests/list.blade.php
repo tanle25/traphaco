@@ -20,7 +20,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách bài test</h3>
+                <h3 class="card-title">Danh sách bài đánh giá</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -28,8 +28,8 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Đợt khảo sát</th>
-                        <th>Tên bài test</th>
+                        <th>Đợt đánh giá</th>
+                        <th>Tên bài đánh giá</th>
                         <th>Người được đánh giá</th>
                         <th>Thời gian bắt đầu</th>
                         <th>Thời gian kết thúc</th>

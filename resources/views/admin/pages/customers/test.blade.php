@@ -151,7 +151,7 @@
         })
 
         Swal.fire({
-            title: 'Hoàn thành bài test!',
+            title: 'Hoàn thành bài đánh giá!',
             text: "Gửi kết quả!",
             icon: 'success',
             showCancelButton: true,

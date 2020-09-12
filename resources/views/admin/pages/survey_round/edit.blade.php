@@ -1,6 +1,6 @@
 @extends('admin.main_layout')
 @section('title')
-  Quản lý đợt khảo sát
+  Quản lý đợt đánh giá
 @endsection
 
 @section('custom-css')
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-@include('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'])
+@include('admin.partials.content_header', ['title' => 'Quản lý đợt đánh giá'])
 
 
 
@@ -18,8 +18,8 @@
     <section class="col-12">
 
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Thông tin đợt khảo sát</h3>
+            <div class="card-header" style="vertical-align: middle;" >
+                <h5 class="d-inline-block mt-2"><strong>Thông tin đợt đánh giá</strong> </h5>
                 <a class="btn btn-success d-block float-right" href="{{route('admin.survey_round.index')}}">Back</a>
 
           </div>
@@ -27,9 +27,9 @@
           @csrf
           <div class="col-md-6 col-12">
             <div class="form-group">
-              <label for="">Tên đợt khảo sát</label>
+              <label for="">Tên đợt đánh giá</label>
               <input name="name" type="text" class="form-control" id=""
-                placeholder="Nhập đợt khảo sát mới (*)" value="{{  $survey_round->name ?? '' }}">
+                placeholder="Nhập đợt đánh giá mới (*)" value="{{  $survey_round->name ?? '' }}">
               @error('name')
               <strong class="text-red">
                 {{$message}}
@@ -53,13 +53,13 @@
         @if (Auth::user()->can('thêm bài đánh giá'))
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Quản lý bài test</h3>
+              <h5 class=""><strong>Quản lý bài đánh giá</strong></h5>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Bài khảo sát</a>
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Bài đánh giá</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bài đánh giá năng lực</a>
@@ -73,7 +73,7 @@
                         <input type="hidden" name="survey_round_id" value="{{$survey_round->id}}">
                         <input type="hidden" name="test_type" value="1">
                         <div class="form-group col-md-4">
-                            <label>Chọn bài khảo sát</label>
+                            <label>Chọn bài đánh giá</label>
                             <select name="survey_id[]" multiple="multiple" class="form-control select2" id="survey-select">
                                 @foreach ($survey as $item )
                                     @if ($item->type == 1)
@@ -134,7 +134,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-4">
-                            <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
+                            <button type="submit" class="btn btn-traphaco">Thêm bài đánh giá</button>
                         </div>
                     </form>
                 </div>
@@ -187,7 +187,7 @@
             
                         </div>
                         <div class="form-group col-12">
-                            <button type="submit" class="btn btn-traphaco">Thêm bài test</button>
+                            <button type="submit" class="btn btn-traphaco">Thêm bài đánh giá</button>
                         </div>
                     </form>   
                 </div>
@@ -209,7 +209,7 @@
       <div class="modal-content">
         <div class="modal-header">
             <h4>
-                Lịch sử bài khảo sát
+                Lịch sử bài đánh giá
             </h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -339,7 +339,7 @@ $("input[data-bootstrap-switch]").each(function(){
         e.preventDefault();
         var url = $(this).attr('href');
         Swal.fire({
-            title: 'Xóa đợt khảo sát này?',
+            title: 'Xóa đợt đánh giá này?',
             text: "Bạn không thể hoàn tác!",
             icon: 'warning',
             showCancelButton: true,

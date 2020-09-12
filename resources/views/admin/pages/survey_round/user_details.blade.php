@@ -8,12 +8,12 @@
 
 
 @section('title')
-  Chi tiết đợt khảo sát
+  Chi tiết đợt đánh giá
 @endsection
 
 
 @section('content')
-    @include('admin.partials.content_header', ['title' => 'Chi tiết đợt khảo sát'])
+    @include('admin.partials.content_header', ['title' => 'Chi tiết đợt đánh giá'])
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -21,13 +21,13 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h2 class="card-title">Danh sách bài khảo sát khảo sát</h2>                
+                <h2 class="card-title">Danh sách bài đánh giá đánh giá</h2>                
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="mb-4">
                     <h5>
-                        <strong>Người được khảo sát: </strong>  {{$candiate->fullname}}
+                        <strong>Người được đánh giá: </strong>  {{$candiate->fullname}}
                     </h5>
                     <h5>
                         <strong>Phòng ban: </strong>{{$candiate->department->department_name ?? 'Không rõ phòng ban'}}
@@ -69,7 +69,7 @@
                                    </div>
                                    <div class="mt-3">
                                        <h5>
-                                           {{$test->type == 1 ? 'Người được khảo sát' : 'Người làm bài'}}: {{$candiate->fullname}} |{{$candiate->department->department_name ?? ''}} - {{$candiate->position->name ?? ''}}
+                                           {{$test->type == 1 ? 'Người được đánh giá' : 'Người làm bài'}}: {{$candiate->fullname}} |{{$candiate->department->department_name ?? ''}} - {{$candiate->position->name ?? ''}}
                                        </h5>
                                    </div>
                                </div>
@@ -198,7 +198,7 @@
             e.preventDefault();
             var url = $(this).attr('href');
             Swal.fire({
-                title: 'Xóa đợt khảo sát này?',
+                title: 'Xóa bài đánh giá này?',
                 text: "Bạn không thể hoàn tác!",
                 icon: 'warning',
                 showCancelButton: true,

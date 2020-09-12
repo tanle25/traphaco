@@ -107,53 +107,6 @@
 <script src="{{asset('template/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script>
-  $(function () {
-    $("#round-table").dataTable({
-       autoWidth:false,
-       scrollX:true,
-    });
-  });
 
-  $(document).on('click', '.round-survey-delete', function(e){
-    e.preventDefault();
-    var url = $(this).attr('href');
-    Swal.fire({
-        title: 'Xóa đợt khảo sát này?',
-        text: "Bạn không thể hoàn tác!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Vẫn xóa nó!',
-    })
-    .then((result) => {
-        if (result.value) {
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                  _token: $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data){
-                    if(data.error){
-                        swalToast(data.error, 'error');
-                    }
-                    if(data.msg){
-                        swalToast(data.msg);
-                    }
-                    location.reload();
-                },
-                error: function(errors){
-                    swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
-                }
-            });
-        }
-    });
-})
-
-
-
-</script>
 
 @endsection

@@ -8,7 +8,7 @@
 
 
 @section('title')
-  Quản lý đợt khảo sát
+  Quản lý đợt đánh giá
 @endsection
 
 @section('content')
@@ -89,7 +89,7 @@
       <div class="modal-dialog" style="max-width: 1024px" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Chi tiết bài test</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Chi tiết bài đánh giá</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>

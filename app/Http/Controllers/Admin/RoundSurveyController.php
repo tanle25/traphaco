@@ -71,7 +71,7 @@ class RoundSurveyController extends Controller
         $request->validate([
             'name' => 'required|max:255',
         ], [
-            "name.required" => 'Tên đợt khảo sát không được để trống',
+            "name.required" => 'Tên đợt đánh giá không được để trống',
         ]);
 
         $new_survey_round = Surveyround::create($request->all());
@@ -125,7 +125,7 @@ class RoundSurveyController extends Controller
         $request->validate([
             'name' => 'required|max:255',
         ], [
-            "name.required" => 'Tên đợt khảo sát không được để trống',
+            "name.required" => 'Tên đợt đánh giá không được để trống',
         ]);
 
         $survey_round->update($request->all());

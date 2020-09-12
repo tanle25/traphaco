@@ -20,7 +20,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
+                <h3 class="card-title">Kết quả đợt đánh giá</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -28,9 +28,9 @@
                     <thead>
                       <tr>
                         <th >STT</th>
-                        <th>Tên đợt khảo sát</th>
+                        <th>Tên đợt đánh giá</th>
                         <th >Số được đánh giá</th>
-                        <th >Các bài khảo sát</th>
+                        <th >Các bài đánh giá</th>
                         <th >Thao tác</th>
                       </tr>
                     </thead>

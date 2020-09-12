@@ -1,7 +1,7 @@
 @extends('admin.main_layout')
 
 @section('title')
-  Thêm cuộc khảo sát
+  Thêm đề khảo sát
 @endsection
 
 @section('custom-css')
@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    Tạo mới khảo sát
+                    Tạo mới đề khảo sát
                 </div>
             </div>
             <div class="card-body">
