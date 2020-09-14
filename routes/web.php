@@ -311,8 +311,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('answer/list-test', 'Admin\AnswerController@listTest')
         ->name('answer.list_test');
     Route::get('answer/{id}/edit', 'Admin\AnswerController@edit')
-        ->name('answer.re_ans')
-        ->middleware('permission:sửa bài đánh giá đã làm');
+        ->name('answer.re_ans');
     Route::post('answer/update', 'Admin\AnswerController@update')
         ->name('answer.update_ans')
         ->middleware('permission:sửa bài đánh giá đã làm');
