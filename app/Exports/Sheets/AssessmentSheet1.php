@@ -13,7 +13,7 @@ class AssessmentSheet1 implements FromView, WithEvents, WithDrawings
 {
     public function __construct($tests)
     {
-        $this->tests = $tests;
+        $this->tests = $tests->groupBy('candiate_id');
     }
 
     /**

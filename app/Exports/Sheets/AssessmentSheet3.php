@@ -9,11 +9,12 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class AssessmentSheet2 implements FromView, WithEvents, WithDrawings
+class AssessmentSheet3 implements FromView, WithEvents, WithDrawings
 {
-    public function __construct($tests)
+    public function __construct($tests, $survey_round)
     {
-        $this->tests = $tests->groupBy('candiate_id');
+        $this->tests = $tests;
+        $this->survey_round = $survey_round;
     }
 
     /**
@@ -42,8 +43,9 @@ class AssessmentSheet2 implements FromView, WithEvents, WithDrawings
 
     public function view(): View
     {
-        return view('excel.assessment.sheet2', [
+        return view('excel.assessment.sheet3', [
             'tests' => $this->tests,
+            'survey_round' => $this->survey_round,
         ]);
     }
 
@@ -83,5 +85,6 @@ class AssessmentSheet2 implements FromView, WithEvents, WithDrawings
         $worksheet->getStyle('A3:' . $max_col_name . 6)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         $worksheet->getStyle('A3:' . $max_col_name . 6)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
     }
 }
