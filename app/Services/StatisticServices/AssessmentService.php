@@ -5,7 +5,6 @@ namespace App\Services\StatisticServices;
 use App\Exports\AssessmentExport;
 use App\Models\Test;
 use App\Services\StatisticServices\BaseService;
-use Excel;
 
 /**
  * Class chịu trách nhiệm tổng hợp bài đánh giá dành cho user
@@ -15,9 +14,10 @@ class AssessmentService extends BaseService
 {
     public function exportExcel()
     {
-        //return $this->getUserTest();
         $tests = $this->getUserTest();
-        return Excel::download(new AssessmentExport($tests), 'thong_ke_danh_gia_user.xlsx');
+        $survey_round = $this->getSurveyRoundInstance();
+        return new AssessmentExport($tests, $survey_round);
+        //return Excel::download(new AssessmentExport($tests, $survey_round), 'thong_ke_danh_gia_user.xlsx');
     }
 
     /**
@@ -39,10 +39,20 @@ class AssessmentService extends BaseService
      */
     public function getUserTest()
     {
-        $test = Test::with('candiate', 'survey', 'survey.section', 'candiate.department', 'candiate.position')
+
+        $test = Test::with(
+            'survey.section.questions',
+            'answer.selected_option',
+            'candiate',
+            'answer',
+            'examiner',
+            'survey',
+            'survey.section',
+            'candiate.department',
+            'candiate.position')
             ->where('survey_round', $this->survey_round_id)
-            ->get()
-            ->groupBy('candiate_id');
+            ->get();
+
         return $test;
     }
 }

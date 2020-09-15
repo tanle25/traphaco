@@ -9,11 +9,12 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class AssessmentSheet1 implements FromView, WithEvents, WithDrawings
+class AssessmentSheet3 implements FromView, WithEvents, WithDrawings
 {
-    public function __construct($tests)
+    public function __construct($tests, $survey_round)
     {
-        $this->tests = $tests->groupBy('candiate_id');
+        $this->tests = $tests;
+        $this->survey_round = $survey_round;
     }
 
     /**
@@ -42,8 +43,9 @@ class AssessmentSheet1 implements FromView, WithEvents, WithDrawings
 
     public function view(): View
     {
-        return view('excel.assessment.sheet1', [
+        return view('excel.assessment.sheet3', [
             'tests' => $this->tests,
+            'survey_round' => $this->survey_round,
         ]);
     }
 
@@ -67,16 +69,15 @@ class AssessmentSheet1 implements FromView, WithEvents, WithDrawings
                 ],
             ],
         ];
-        $worksheet->getStyle('A6:' . $max_col_name . $max_row)->applyFromArray($styleArray);
+        $worksheet->getStyle('A9:' . $max_col_name . $max_row)->applyFromArray($styleArray);
 
         $worksheet->getColumnDimension('A')->setWidth(5);
-        $worksheet->getColumnDimension('B')->setWidth(10);
-        $worksheet->getColumnDimension('E')->setWidth(80);
-        $worksheet->getColumnDimension('C')->setWidth(10);
-        $worksheet->getColumnDimension('D')->setWidth(15);
-        $worksheet->getColumnDimension('E')->setWidth(15);
-        $worksheet->getColumnDimension('F')->setWidth(15);
-        $worksheet->getColumnDimension('G')->setWidth(10);
+        $worksheet->getColumnDimension('B')->setWidth(30);
+
+        for ($i = 3; $i <= $max_col; $i++) {
+            $col_name = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($i);
+            $worksheet->getColumnDimension($col_name)->setWidth(35);
+        }
 
         $worksheet->getStyle('A6:' . $max_col_name . $max_row)->getAlignment()->setWrapText(true);
 
@@ -84,5 +85,10 @@ class AssessmentSheet1 implements FromView, WithEvents, WithDrawings
 
         $worksheet->getStyle('A3:' . $max_col_name . 6)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
+        $worksheet->getStyle('A6:G7')->getAlignment()->setVertical('center');
+        $worksheet->getStyle('A6:G7')->getAlignment()->setHorizontal('center');
+
+        $worksheet->getStyle('A10:' . $max_col_name . $max_row)->getAlignment()->setVertical('center');
+        $worksheet->getStyle('A10:' . $max_col_name . $max_row)->getAlignment()->setHorizontal('left');
     }
 }

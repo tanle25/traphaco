@@ -26,7 +26,7 @@ abstract class BaseService
      */
     public function getSurveyRoundInstance()
     {
-        return SurveyRound::where('id', $this->survey_round_id)->get();
+        return SurveyRound::where('id', $this->survey_round_id)->first();
     }
 
 }

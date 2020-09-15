@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SurveyRound;
 use App\Services\StatisticServices\AssessmentService;
+use Excel;
 use Illuminate\Http\Request;
 
 class StatisticController extends Controller
@@ -19,6 +20,10 @@ class StatisticController extends Controller
     {
         $survey_round_id = $request->survey_round_id;
         $service = new AssessmentService($survey_round_id);
+        $result_instance = $service->exportExcel();
+
+        return Excel::download($result_instance, 'thong_ke_danh_gia_user.xlsx');
+
         return $service->exportExcel();
     }
 }

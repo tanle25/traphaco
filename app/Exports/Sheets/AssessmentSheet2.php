@@ -13,7 +13,7 @@ class AssessmentSheet2 implements FromView, WithEvents, WithDrawings
 {
     public function __construct($tests)
     {
-        $this->tests = $tests;
+        $this->tests = $tests->groupBy('candiate_id');
     }
 
     /**
@@ -70,19 +70,20 @@ class AssessmentSheet2 implements FromView, WithEvents, WithDrawings
         $worksheet->getStyle('A6:' . $max_col_name . $max_row)->applyFromArray($styleArray);
 
         $worksheet->getColumnDimension('A')->setWidth(5);
-        $worksheet->getColumnDimension('B')->setWidth(10);
-        $worksheet->getColumnDimension('E')->setWidth(80);
-        $worksheet->getColumnDimension('C')->setWidth(10);
-        $worksheet->getColumnDimension('D')->setWidth(15);
-        $worksheet->getColumnDimension('E')->setWidth(15);
-        $worksheet->getColumnDimension('F')->setWidth(15);
+        $worksheet->getColumnDimension('B')->setWidth(20);
+        $worksheet->getColumnDimension('C')->setWidth(20);
+        $worksheet->getColumnDimension('D')->setWidth(10);
+        $worksheet->getColumnDimension('E')->setWidth(10);
+        $worksheet->getColumnDimension('F')->setWidth(10);
         $worksheet->getColumnDimension('G')->setWidth(10);
+
+        $worksheet->getStyle('A6:G7')->getAlignment()->setVertical('center');
+        $worksheet->getStyle('A6:G7')->getAlignment()->setHorizontal('center');
 
         $worksheet->getStyle('A6:' . $max_col_name . $max_row)->getAlignment()->setWrapText(true);
 
-        $worksheet->getStyle('A3:' . $max_col_name . 6)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-
-        $worksheet->getStyle('A3:' . $max_col_name . 6)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $worksheet->getStyle('A8:' . $max_col_name . $max_row)->getAlignment()->setVertical('center');
+        $worksheet->getStyle('A8:' . $max_col_name . $max_row)->getAlignment()->setHorizontal('left');
 
     }
 }
