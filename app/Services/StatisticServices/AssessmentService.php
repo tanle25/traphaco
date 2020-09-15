@@ -5,7 +5,6 @@ namespace App\Services\StatisticServices;
 use App\Exports\AssessmentExport;
 use App\Models\Test;
 use App\Services\StatisticServices\BaseService;
-use Excel;
 
 /**
  * Class chịu trách nhiệm tổng hợp bài đánh giá dành cho user
@@ -17,7 +16,8 @@ class AssessmentService extends BaseService
     {
         $tests = $this->getUserTest();
         $survey_round = $this->getSurveyRoundInstance();
-        return Excel::download(new AssessmentExport($tests, $survey_round), 'thong_ke_danh_gia_user.xlsx');
+        return new AssessmentExport($tests, $survey_round);
+        //return Excel::download(new AssessmentExport($tests, $survey_round), 'thong_ke_danh_gia_user.xlsx');
     }
 
     /**

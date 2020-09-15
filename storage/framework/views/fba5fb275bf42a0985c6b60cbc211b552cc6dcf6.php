@@ -16,8 +16,8 @@
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo e(Auth::user()->fullname); ?></a>
-          <a class="d-block"><?php echo e(Auth::user()->department->department_name); ?></a>
-          <a class="d-block"><?php echo e(Auth::user()->position->name); ?></a>
+          <a class="d-block"><?php echo e(Auth::user()->department->department_name ?? ''); ?></a>
+          <a class="d-block"><?php echo e(Auth::user()->position->name ?? ''); ?></a>
         </div>
       </div>
 

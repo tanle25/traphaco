@@ -16,8 +16,8 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">{{Auth::user()->fullname}}</a>
-          <a class="d-block">{{Auth::user()->department->department_name}}</a>
-          <a class="d-block">{{Auth::user()->position->name}}</a>
+          <a class="d-block">{{Auth::user()->department->department_name ?? ''}}</a>
+          <a class="d-block">{{Auth::user()->position->name ?? ''}}</a>
         </div>
       </div>
 

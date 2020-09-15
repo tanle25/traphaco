@@ -16,8 +16,7 @@
             <th colspan="7">Ngày tổng hợp báo cáo {{Carbon\Carbon::now()->format('d/m/Y')}}</th>
         </tr>
         <tr>
-            <th></th>
-            <th colspan="6">Đợt đánh giá: {{$survey_round->name}}</th>
+            <th colspan="7">Đợt đánh giá: {{$survey_round->name}}</th>
         </tr>
         <tr></tr>
         @php
@@ -35,14 +34,14 @@
             <tr></tr>
             <tr>
                 <th></th>
-                <th colspan="6">{{$survey->name}}</th>
+                <th colspan="6"><strong>{{$survey->name}}</strong> </th>
             </tr>
             
             <tr>
                 <th><strong>TT</strong></th>
                 <th><strong>Họ tên người được đánh giá</strong></th>
                 @foreach ($questions as $question)
-                <th>{{$question->content}}</th>
+                <th><strong>{{$question->content}}</strong> </th>
                 @endforeach
             </tr>      
             @foreach ($survey_group as $index => $test)
@@ -56,7 +55,6 @@
                 <td>{{$option_choice->content ?? ''}}</td>
                 @endforeach    
             </tr>
-                
             @endforeach
           
 

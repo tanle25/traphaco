@@ -26,8 +26,8 @@
             <th rowspan="2"><strong>Ghi chú</strong></th>
         </tr>
         <tr>
-            <th>Điểm Bài đánh giá</th>
-            <th>Điểm Phiếu đánh giá của Trưởng BP</th>
+            <th><strong>Điểm Bài đánh giá</strong> </th>
+            <th><strong>Điểm Phiếu đánh giá của Trưởng BP</strong></th>
         </tr>
     </thead>
     <tbody>
@@ -51,7 +51,11 @@
             <th><strong>{{$candiate_test->candiate->department->department_name}}</strong></th>
             <th><strong>{{$candiate_score ?? 0}}</strong></th>
             <th><strong>{{$examiner_score ?? 0}}</strong></th>
-            <th><strong>{{($candiate_score * 2 + $examiner_score*2)/(3*6)*100}}</strong></th>
+            @php
+                $score_by_percent = ($candiate_score * 2 + $examiner_score*2)/(3*6)*100;
+            @endphp
+
+            <th><strong>{{round( $score_by_percent, 2) }}</strong></th>
         </tr>
         @foreach ($candiate_test->survey->section as $section)
             @php
@@ -73,7 +77,10 @@
             <th></th>
             <th>{{$section_candiate_score}}</th>
             <th>{{$section_examiner_score}}</th>
-            <th>{{($section_candiate_score * 2 + $section_examiner_score*2)/(3*6)*100}}</th>    
+            @php
+                $score_by_percent = ($section_candiate_score * 2 + $section_examiner_score*2) / (3*6)*100;
+            @endphp
+            <th>{{round($score_by_percent , 2) }}</th>    
             </tr>
         @endforeach
 
