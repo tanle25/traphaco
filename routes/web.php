@@ -283,10 +283,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/history', 'HistoryLogController@index')
         ->name('history.index');
     // custonmer history
-    Route::get('/history/customer-info', 'HistoryLogController@customerInfoHistory')
+    Route::get('/history/customer-info/{customer_id}', 'HistoryLogController@customerInfoHistory')
         ->name('history.customer_info_history');
-    Route::get('/history/customer-info/list', 'HistoryLogController@customerInfoHistoryList')
-        ->name('history.customer_info_history_list');
     // user test history
     Route::get('/history/user-test/{test_id}', 'HistoryLogController@getUserTestHistory')
         ->name('history.user_test');

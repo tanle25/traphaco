@@ -50,7 +50,6 @@
                     <div class="small-box bg-success col-md-4 col-12 col-sm-6">
                         <div class="inner">
                             <h3>{{$customer_tests->count()}}<sup style="font-size: 20px"></sup></h3>
-          
                           <p>Lượt khảo sát khách hàng</p>
                         </div>
                         <div class="icon">
@@ -60,7 +59,6 @@
                     </div>
                 </div>
                 
-
               </div>
               <!-- /.card-body -->
             </div>

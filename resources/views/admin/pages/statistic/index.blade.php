@@ -24,7 +24,7 @@
           <div class="col-md-6 col-12">
             <div class="form-group">
               <label for="">Tên đợt đánh giá</label>
-                <select name="survey_round_id" id="" class="select2 form-control">
+                <select multiple="multiple" name="survey_round_id[]" id="" class="select2 form-control">
                     @foreach ($survey_rounds as $survey_round)
                     <option value="{{$survey_round->id}}">{{$survey_round->name}}</option>
                     @endforeach

@@ -1,112 +1,83 @@
-@extends('admin.main_layout')
+@php
+    function mapkey($key){
+      $result = '';
+      switch ($key) {
+        case 'fullname':
+          $result = 'Họ tên';
+          break;
 
-@section('custom-css')
-@parent
-<link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{asset('template/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-@endsection
+        case 'DMS_code':
+          $result = 'Mã DMS';
+          break;
 
+        case 'CRM_code':
+          $result = 'Mã CRM';
+          break;
+        
+        case 'contract_code':
+          $result = 'Mã hợp đồng';
+          break;
 
-@section('title')
-  Lịch sử khách hàng
-@endsection
+        case 'pharmacy_name':
+          $result = 'Tên nhà thuốc';
+          break;
+        
+        case 'address':
+          $result = 'Địa chỉ';
+          break;
 
-@section('content')
-    @include('admin.partials.content_header', ['title' => 'Lịch sử khách hàng'])
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Danh sách</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="round-table" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th>STT</th>
-                        <th>Thời gian</th>
-                        <th>Đối tượng</th>
-                        <th>Mô tả</th>
-                        <th>Dữ liệu cũ</th>
-                        <th>Dữ liệu mới</th>
-                        <th>Nguời thực hiện</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($history_list as $index => $item)
-                        <tr>
-                            <td>{{$index + 1}}</td>
-                            <td>{{Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s A') }}</td>
-                            <td>Khách hàng:{{$item->subject->contract_code ?? ''}}</td>
-                            <td>{{$item->description}}</td>
-                            <td>
-                                
-                            @switch($item->description)
-                                @case('created')
-                                    <p>N/A</p>
-                                    @break
-                                @case('deleted')
-                                    @foreach ($item->properties['attributes'] ?? [] as $key => $value)
-                                    <p>{{$key}}: {{$value}}</p>
-                                    @endforeach
-                                    @break
-                                @case('updated')
-                                    @foreach ($item->properties['old'] ?? [] as $key => $value)
-                                    <p>{{$key}}: {{$value}}</p>
-                                    @endforeach
-                                    @break
-                                @default  
-                            @endswitch
-                            </td>
-                            <td>
-                            @switch($item->description)
-                                @case('created')
-                                    @foreach ($item->properties['attributes'] ?? [] as $key => $value)
-                                    <p>{{$key}}: {{$value}}</p>
-                                    @endforeach
-                                    @break
-                                @case('deleted')
-                                    <p>N/A</p>
-                                    @break
-                                @case('updated')
-                                    @foreach ($item->properties['attributes'] ?? [] as $key => $value)
-                                    <p>{{$key}}: {{$value}}</p>
-                                    @endforeach
-                                    @break
-                                @default  
-                            @endswitch
-                          </td>
-                          <td>
-                            <p>{{$item->causer->username ?? '' }}</p>
-                          </td>
-                        </tr>    
-                        @endforeach
-                    </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-@endsection 
+        case 'phone':
+          $result = 'Số điện thoại';
+          break;
+        
+        case 'zone':
+          $result = 'Địa bàn';
+          break;
 
-@section('custom-js')
-@parent
-<script src="{{asset('template/AdminLTE/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('template/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+        case 'sale_chanel':
+          $result = 'Kênh bán hàng';
+          break;
+      
+        default:
+          $result = '';
+          break;
+      }
 
+      return $result;
+    }
+@endphp
 
-@endsection
+<table class="table">
+  <thead>
+    <tr>
+      <th>Thời gian</th>
+      <th>Thao tác</th>
+      <th>Người sửa</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($history_list as $item)
+    @php
+        $attribute = $item->properties['attributes'];
+    @endphp
+    <tr>
+      <td>{{\Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i')}}</td>
+      <td>
+
+        @foreach ($attribute as $key => $value)
+          @php
+              
+          @endphp
+          <p>Sửa {{mapkey($key)}} thành {{$value}}</p>
+        @endforeach
+
+      </td>
+      <td>
+        {{$item->causer->username ?? ''}}
+      </td>
+    </tr>    
+    @endforeach
+    
+  </tbody>
+
+</table>

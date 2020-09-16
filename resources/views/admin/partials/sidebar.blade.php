@@ -57,11 +57,7 @@
                 </a>
               </li>  
               @endcan
-              <li class="nav-item">
-                <a href="{{route('history.customer_info_history')}}" class="nav-link">
-                  <p>Lịch sử</p></p>
-                </a>
-              </li>
+             
             </ul>
           </li>
 

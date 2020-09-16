@@ -53,7 +53,7 @@ class Question extends Model
 
         $max_sum = $test->count() * $this->maxScore();
 
-        $score = round(($sum / $test->count()), 2);
+        $score = round(($sum / $test->count()), 2) ?? 1;
         return $score;
     }
 
@@ -67,7 +67,7 @@ class Question extends Model
             return null;
         }
 
-        $avg_score = ($high_score * 3 + $equal_score * 2 + $lower_score) / (($high_score != 0 ? 3 : 0) + ($equal_score != 0 ? 2 : 0) + ($lower_score != 0 ? 1 : 0));
+        $avg_score = ($high_score * 3 + $equal_score * 2 + $lower_score) / (($high_score != 0 ? 3 : 0) + ($equal_score != 0 ? 2 : 0) + ($lower_score != 0 ? 1 : 0)) ?? 0;
 
         return round($avg_score, 2);
     }
