@@ -57,7 +57,7 @@
                     $score_by_percent = ($candiate_score * 2 + $examiner_score*2)/(3*6)*100;
                 @endphp
 
-                <th><strong>{{round($score_by_percent, 2) }}</strong></th>
+                <th><strong>{{round($score_by_percent, 2) }}%</strong></th>
             </tr>
 
             @foreach ($candiate_test->survey->section as $index => $section)
@@ -96,7 +96,7 @@
                 @php
                     $score_by_percent = ($section_candiate_score * 2 + $section_examiner_score*2) / (3*6)*100;
                 @endphp
-                <th>{{round($score_by_percent , 2) }}</th>    
+                <th>{{round($score_by_percent , 2) }}%</th>    
                 </tr>
             @endforeach    
             @endif
