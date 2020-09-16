@@ -28,36 +28,42 @@
         </tr>
     </thead>
     <tbody>
+        @php
+            $index = 1;
+        @endphp
+        @foreach ($tests as $item)
+            @php
+                $candiate = $item->first()->candiate;
+                //Lấy bài test đầu tiên thuộc loại 2 (bài thi chất lượng)
+                $candiate_test = $item->filter(function($item){
+                    return $item->survey->type == 2;
+                })->first();
+                //Lấy bài test đầu tiên thuộc loại 1 (bài đánh giá của cấp trên)
+                $examiner_test = $item->filter(function($item){
+                    return $item->survey->type == 1;
+                })->first();
+            @endphp
 
-        @foreach ($tests as $index => $item)
-            <tr>
+            @if ($candiate_test)
                 @php
-                    $candiate = $item->first()->candiate;
-                    $survey = $item->filter(function($item){
-                        return $item->survey->type == 1;
-                    })->first()->survey;
+                    $survey = $candiate_test->survey;
                 @endphp
-
-                <td>{{$index + 1}}</td>
-                <td>{{$candiate->fullname}}</td>
-                <td>{{$candiate->department->department_name}}</td>
-                <td>{{$survey->section->count()}}</td>
-                <td>
-                    {{$item->filter(function($item){
-                            return $item->survey->type == 2;
-                        })->first()
-                        ->totalScore() ?? ''
-                    }}
-                </td>
-                <td>
-                    {{$item->filter(function($item){
-                            return $item->survey->type == 1;
-                        })->first()
-                        ->totalScore() ?? ''
-                    }}
-                </td>
-
-            </tr>
+                <tr>
+                    <td>{{$index}}</td>
+                    <td>{{$candiate->fullname}}</td>
+                    <td>{{$candiate->department->department_name}}</td>
+                    <td>{{$survey->section->count()}}</td>
+                    <td>
+                        {{ $candiate_test ? $candiate_test->totalScore() : 0}}
+                    </td>
+                    <td>
+                        {{ $examiner_test ? $examiner_test->totalScore() : 0}}
+                    </td>
+                </tr>    
+            @endif
+        @php
+            $index += 1;
+        @endphp
         @endforeach
     </tbody>
 </table> 
