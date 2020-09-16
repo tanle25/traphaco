@@ -164,10 +164,6 @@
 					
 				</div>
             </div>
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success customer-form-btn">Lưu</button>
-            </div> --}}
         </div>
     </div>
 </div>
@@ -202,6 +198,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade"  id="customer-history-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1024px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lịch sử thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection 
 
 @section('custom-js')
@@ -549,8 +563,22 @@
         //console.log($(this).get(0).scrollLeft);
         $(this).get(0).scrollLeft = scrollLeft - walk;
     });
-    
-    
+///====================history logic=======================////
+    $(document).on('click', '.customer-history',function(e){
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+            type: 'get',
+            url: url,
+            success: function(data){
+                $('#customer-history-modal .modal-body').html(data);
+            }
+        })
+    });
+
+
+
+
 </script>
 
 @error('customer_list')

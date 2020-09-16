@@ -19,15 +19,15 @@ class HistoryLogController extends Controller
         return \Auth::user()->actions;
     }
 
-    public function customerInfoHistory()
+    public function customerInfoHistory($id)
     {
         $history_list = Activity::with('subject')
             ->with('causer')
             ->where('subject_type', Customer::class)
+            ->where('subject_id', $id)
             ->orderByDesc('id')
             ->get();
-        return view('admin.pages.history.customer_info', compact('history_list'));
-        //return $history_list;
+        return view('admin.pages.history.customer_info', compact('history_list'))->render();
     }
 
     /**

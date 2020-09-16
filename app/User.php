@@ -73,6 +73,6 @@ class User extends Authenticatable
         $total_multiplier = $tests->reduce(function ($carry, $item) {
             return $carry += $item->multiplier;
         }, 0);
-        return round($total_score / $total_multiplier, 2);
+        return round($total_score / $total_multiplier, 2) ?? 0;
     }
 }

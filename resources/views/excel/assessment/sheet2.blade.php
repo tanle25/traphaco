@@ -42,8 +42,8 @@
             $examiner_test = $test->first(function($item){
                 return $item->survey->type == 2;
             });  
-            $candiate_score = $candiate_test->totalScore();
-            $examiner_score = $examiner_test->totalScore();
+            $candiate_score = $candiate_test->totalScore() ?? 0;
+            $examiner_score = $examiner_test->totalScore() ?? 0;
         @endphp
         <tr>
             <th>{{$index}}</th>

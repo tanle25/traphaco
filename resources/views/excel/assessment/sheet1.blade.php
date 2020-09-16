@@ -46,14 +46,14 @@
                     {{$item->filter(function($item){
                             return $item->survey->type == 2;
                         })->first()
-                        ->totalScore()
+                        ->totalScore() ?? ''
                     }}
                 </td>
                 <td>
                     {{$item->filter(function($item){
                             return $item->survey->type == 1;
                         })->first()
-                        ->totalScore()
+                        ->totalScore() ?? ''
                     }}
                 </td>
 

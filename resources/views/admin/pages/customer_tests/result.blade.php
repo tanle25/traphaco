@@ -1,25 +1,5 @@
 
 <div class="card card-info mx-auto mt-3" style="max-width: 1024px">
-    <div class="card-header">
-       Thông tin cuộc khảo sát
-       <div class="card-tools">
-        <button type="button" class="btn btn-info btn-sm" data-card-widget="collapse">
-          <i class="fas fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-danger btn-sm" data-card-widget="remove">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="card-body">
-        
-    </div> 
-</div>
-</div>
-
-
-<div class="card card-info mx-auto mt-3" style="max-width: 1024px">
        <div class="card-header">
            <h2>
                {{$survey->title ?? ''}}
@@ -46,7 +26,7 @@
                        <div class="row option-wraper">  
                            @foreach ($question->options as $option)
                            <div class="form-group col-md-12 d-flex justify-center align-center">
-                                <input class="option-input" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                                <input disabled class="option-input" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                 <span class="pl-2" >
                                  <span>
                                     {{$option->content ?? ''}}
@@ -67,7 +47,7 @@
 
                        @if ($question->can_comment == 1)
                        <div class="form-group d-flex align-items-center ">
-                            <input class="option-input  align-middle" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                            <input disabled class="option-input  align-middle" type="radio" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                             <span class="d-block ml-2 mr-2">Khác</span>
                             <div class="btn-group dropright">
                                 <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,7 +67,6 @@
                </div>  
                @endforeach
            @endforeach
-           <button href="{{route('admin.customer.store_customer_answer')}}" class="btn btn-traphaco send-result">Gửi kết quả</button>
        </div> 
    </div>
 </div>

@@ -39,6 +39,8 @@ class CustomerController extends Controller
 
                     <a data-toggle-for="tooltip" title="Xem thống kê" target="_blank" class="customer-result" href="' . route('admin.customer_test.get_test_by_customer', $customer->id) . '" class="btn text-primary"><i class="far fa-chart-bar"></i></i></a>
 
+                    <a data-toggle-for="tooltip" data-target="#customer-history-modal" data-toggle="modal" title="Xem lịch sử" href="' . route('history.customer_info_history', $customer->id) . '" class="btn text-warning customer-history"><i class="fa fa-history"></i></a>
+
                     <a data-toggle-for="tooltip" title="Xóa khách hàng" href="' . route('admin.customer.destroy', $customer->id) . '" class="btn text-danger customer-delete"><i class="far fa-trash-alt"></i></a>';
 
                 return $tools;
