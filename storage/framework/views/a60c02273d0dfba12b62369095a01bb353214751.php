@@ -166,5 +166,15 @@
 </style>
 <?php endif; ?>
 
+<?php if(!$user->can('xem lịch sử thông tin khách hàng')): ?>
+<style>
+    .customer-history{
+        display: none;
+    }
+</style>
+<?php endif; ?>
+
+
+
 
 <?php echo $__env->yieldContent('custom-css'); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/css.blade.php ENDPATH**/ ?>

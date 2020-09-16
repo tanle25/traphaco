@@ -166,5 +166,15 @@
 </style>
 @endif
 
+@if (!$user->can('xem lịch sử thông tin khách hàng'))
+<style>
+    .customer-history{
+        display: none;
+    }
+</style>
+@endif
+
+
+
 {{-- Hide all by permission style --}}
 @yield('custom-css')
