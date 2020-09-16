@@ -29,7 +29,10 @@ class StatisticController extends Controller
                 return Excel::download($result_instance, 'thong_ke.xlsx');
 
             } catch (\Exception $e) {
-                return abort(404);
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', 'Có lỗi trong quá trình tổng hợp. Vui lòng kiểm tra lại đợt đánh giá!');
             }
         }
 
@@ -44,8 +47,8 @@ class StatisticController extends Controller
                 $name = 'Thống kê ' . $index . $survey_round->name . '.xlsx';
                 $result_instance = $service->exportExcel();
                 Excel::store($result_instance, $name, 'temp');
-                $relativeNameInZipFile = basename($name);
-                $zip->addFile(storage_path('temp/' . $name), $relativeNameInZipFile);
+                //$relativeNameInZipFile = basename($name);
+                $zip->addFile(storage_path('temp/' . $name), $name);
                 Storage::delete('temp/' . $name);
             }
             $zip->close();
@@ -53,7 +56,11 @@ class StatisticController extends Controller
             return response()->download(public_path('thong_ke.zip'));
 
         } catch (\Exception $e) {
-            return abort(404);
+            return $e;
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Có lỗi trong quá trình tổng hợp. Vui lòng kiểm tra lại đợt đánh giá!');
         }
 
     }

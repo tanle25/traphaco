@@ -35,58 +35,75 @@
             $index = 1;
         @endphp
         @foreach ($tests as $test)
-        @php
-            $candiate_test = $test->first(function($item){
-                return $item->survey->type == 1;
-            });
-            $examiner_test = $test->first(function($item){
-                return $item->survey->type == 2;
-            });  
-            $candiate_score = $candiate_test->totalScore() ?? 0;
-            $examiner_score = $examiner_test->totalScore() ?? 0;
-        @endphp
-        <tr>
-            <th>{{$index}}</th>
-            <th><strong>{{$candiate_test->candiate->fullname}}</strong></th>
-            <th><strong>{{$candiate_test->candiate->department->department_name}}</strong></th>
-            <th><strong>{{$candiate_score ?? 0}}</strong></th>
-            <th><strong>{{$examiner_score ?? 0}}</strong></th>
             @php
-                $score_by_percent = ($candiate_score * 2 + $examiner_score*2)/(3*6)*100;
+                $candiate_test = $test->first(function($item){
+                    return $item->survey->type == 2;
+                });
+                $examiner_test = $test->first(function($item){
+                    return $item->survey->type == 1;
+                });  
+                $candiate_score = $candiate_test ? $candiate_test->totalScore() : 0;
+                $examiner_score = $examiner_test ? $examiner_test->totalScore() : 0;
             @endphp
 
-            <th><strong>{{round( $score_by_percent, 2) }}</strong></th>
-        </tr>
-        @foreach ($candiate_test->survey->section as $section)
-            @php
-                $question_list = $section->question ?  $section->question->pluck('id')->toArray() : [];
-                $section_candiate_score = $candiate_test->answer->reduce(function($total, $item) use($question_list){
-                    if (in_array($item->question_id, $question_list)){
-                        return $total += $item->selected_option->score;
-                    }
-                }, 0) ?? 0;
-                $section_examiner_score = $examiner_test->answer->reduce(function($total, $item) use($question_list){
-                    if (in_array($item->question_id, $question_list)){
-                        return $total += $item->selected_option->score;
-                    }
-                }, 0) ?? 0 ;
-            @endphp
+            @if ($candiate_test)
             <tr>
-            <th></th>
-            <th>{{$section->title}}</th>
-            <th></th>
-            <th>{{$section_candiate_score}}</th>
-            <th>{{$section_examiner_score}}</th>
-            @php
-                $score_by_percent = ($section_candiate_score * 2 + $section_examiner_score*2) / (3*6)*100;
-            @endphp
-            <th>{{round($score_by_percent , 2) }}</th>    
-            </tr>
-        @endforeach
+                <th>{{$index}}</th>
+                <th><strong>{{$candiate_test->candiate->fullname ?? ''}}</strong></th>
+                <th><strong>{{$candiate_test->candiate->department->department_name ?? ''}}</strong></th>
+                <th><strong>{{$candiate_score ?? 0}}</strong></th>
+                <th><strong>{{$examiner_score ?? 0}}</strong></th>
+                @php
+                    $score_by_percent = ($candiate_score * 2 + $examiner_score*2)/(3*6)*100;
+                @endphp
 
-        @php
-            $index++;
-        @endphp
+                <th><strong>{{round($score_by_percent, 2) }}</strong></th>
+            </tr>
+
+            @foreach ($candiate_test->survey->section as $index => $section)
+                @php
+                    $question_list = $section->questions ?  $section->questions->pluck('id')->toArray() : []; 
+                    $answers = $candiate_test->answer;
+                    $section_candiate_score = $answers->reduce(function($total, $item) use($question_list){
+
+                        if (in_array($item->question_id, $question_list)){
+                            $score = $item->selected_option->score ?? 0;
+                        }else{
+                            $score = 0;
+                        }
+
+                        return $total + $score ;
+                    }, 0);
+
+                    $section_examiner_score = 0;
+
+                    if($examiner_test){
+                        $examiner_test->answer->each(function($item, $key) use($index, &$section_examiner_score){
+                            if($key === $index){
+                                $section_examiner_score = $item->selected_option->score ?? 0;
+                            }
+
+                        });
+                    }
+
+                @endphp
+                <tr>
+                <th></th>
+                <th>{{$section->title}}</th>
+                <th></th>
+                <th>{{$section_candiate_score}}</th>
+                <th>{{$section_examiner_score}}</th>
+                @php
+                    $score_by_percent = ($section_candiate_score * 2 + $section_examiner_score*2) / (3*6)*100;
+                @endphp
+                <th>{{round($score_by_percent , 2) }}</th>    
+                </tr>
+            @endforeach    
+            @endif
+            
+            @php
+                $index++;
+            @endphp
         @endforeach
     </tbody>
 </table> 
