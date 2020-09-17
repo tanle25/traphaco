@@ -6,6 +6,7 @@ use App\Exports\AssessmentExport;
 use App\Models\Test;
 use App\Services\StatisticServices\BaseService;
 use Excel;
+use Str;
 
 /**
  * Class chịu trách nhiệm tổng hợp bài đánh giá dành cho user
@@ -19,7 +20,7 @@ class AssessmentService extends BaseService
         $survey_round = $this->getSurveyRoundInstance();
         //return new AssessmentExport($tests, $survey_round);
         $name = $survey_round->name . '.xlsx' ?? '';
-        $excel_file = Excel::store(new AssessmentExport($tests, $survey_round), basename($name), 'temp');
+        $excel_file = Excel::store(new AssessmentExport($tests, $survey_round), Str::slug($name, '_'), 'temp');
         $result = [];
         $result[] = $name;
         return $result;
