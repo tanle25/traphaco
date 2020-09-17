@@ -34,7 +34,7 @@ class StatisticController extends Controller
                 return response()->download(storage_path('app/temp/' . $file_name[0]))->deleteFileAfterSend(true);
             } else {
                 $zipped_file = $this->zipFile($file_name, 'thong_ke.zip');
-                return response()->download(public_path('thong_ke.zip'))->deleteFileAfterSend(true);
+                return response()->download(storage_path('thong_ke.zip'))->deleteFileAfterSend(true);
             }
             // } catch (\Exception $e) {
             //     return $e;
@@ -56,7 +56,7 @@ class StatisticController extends Controller
             };
             $zipped_file = $this->zipFile($file_list, 'thong_ke.zip');
 
-            return response()->download(public_path('thong_ke.zip'))->deleteFileAfterSend(true);
+            return response()->download(storage_path('thong_ke.zip'))->deleteFileAfterSend(true);
 
         } catch (\Exception $e) {
             return $e;
@@ -70,7 +70,7 @@ class StatisticController extends Controller
     protected function zipFile($file_list = [], $file_zip_name)
     {
         $zip = new ZipArchive;
-        $zip->open(public_path($file_zip_name), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $zip->open(storage_path($file_zip_name), ZipArchive::CREATE | ZipArchive::OVERWRITE);
         // Tạo file excel thống kê và zip vào file trên
         foreach ($file_list as $file_name) {
             $zip->addFile(storage_path('app/temp/' . $file_name), $file_name);
@@ -79,7 +79,7 @@ class StatisticController extends Controller
         foreach ($file_list as $file_name) {
             Storage::delete('temp/' . $file_name);
         }
-        return public_path($file_zip_name);
+        return storage_path($file_zip_name);
     }
 
     public function exportExcelAssessmentResult(Request $request)
