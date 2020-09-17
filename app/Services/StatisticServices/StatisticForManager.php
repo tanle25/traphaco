@@ -24,7 +24,8 @@ class StatisticForManager extends BaseService
         $result = [];
         foreach ($survey_list as $survey) {
             $name = $survey_round->name . '/' . $survey->name ?? '';
-            $excel_file = Excel::store(new UserResultExport($this->survey_round_id, $survey->id), Str::slug($name, '_') . '.xlsx', 'temp');
+            $name = Str::slug($name, '_') . '.xlsx';
+            $excel_file = Excel::store(new UserResultExport($this->survey_round_id, $survey->id), $name, 'temp');
             $result[] = $name;
         }
 
