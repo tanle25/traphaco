@@ -2,7 +2,7 @@
 
 namespace App\Services\StatisticServices;
 
-use App\Exports\AssessmentExport;
+use App\Exports\UserResultExport;
 use App\Models\Test;
 use App\Services\StatisticServices\BaseService;
 use Excel;
@@ -11,17 +11,22 @@ use Excel;
  * Class chịu trách nhiệm tổng hợp bài đánh giá dành cho user
  *
  */
-class AssessmentService extends BaseService
+class StatisticForManager extends BaseService
 {
+
     public function exportExcel()
     {
         $tests = $this->getUserTest();
         $survey_round = $this->getSurveyRoundInstance();
+        $survey_list = $survey_round->getSurveyList();
         //return new AssessmentExport($tests, $survey_round);
-        $name = $survey_round->name . '.xlsx' ?? '';
-        $excel_file = Excel::store(new AssessmentExport($tests, $survey_round), basename($name), 'temp');
         $result = [];
-        $result[] = $name;
+        foreach ($survey_list as $survey) {
+            $name = $survey_round->name . '/' . $survey->name . '.xlsx' ?? '';
+            $excel_file = Excel::store(new UserResultExport($this->survey_round_id, $survey->id), $name, 'temp');
+            $result[] = $name;
+        }
+
         return $result;
     }
 
@@ -44,6 +49,7 @@ class AssessmentService extends BaseService
      */
     public function getUserTest()
     {
+
         $test = Test::with(
             'survey.section.questions',
             'answer.selected_option',

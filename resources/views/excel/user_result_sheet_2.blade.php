@@ -1,3 +1,4 @@
+
 <table id="user-result-table" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -40,29 +41,35 @@
         </tr>
     </thead>
     <tbody>
-    @foreach ($list_candiate as $index => $candiate)
-    <tr>
-    <td><strong> {{$index + 1}}</strong> </td>
-    <td><strong>{{$candiate->fullname}}</strong></td>
-    <td><strong>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 3)}}</strong></td>
-    <td><strong>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 2)}}</strong></td>
-    <td><strong>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 1)}}</strong></td>
-    <td><strong>{{$survey->getAvgScore($survey_round->id, $candiate->id)}}</strong></td>
-    <td><strong>{{$survey->getScoreByPercent($survey_round->id, $candiate->id)}}%</strong></td>
-    <td>
-    </td>
-    </tr>
-    @foreach ($survey->getQuestions() as $index => $question)
-    <tr>
-        <td>{{$index+1}}</td>
-        <td>{{$question->content ?? ''}}</td>
-        <td>{{$question->getScoreFromLevel($survey_round->id, $candiate->id, 3)}}</td>
-        <td>{{$question->getScoreFromLevel($survey_round->id, $candiate->id, 2)}}</td>
-        <td>{{$question->getScoreFromLevel($survey_round->id, $candiate->id, 1)}}</td>
-        <td>{{$question->getAvgScore($survey_round->id, $candiate->id)}}</td>
-        <td>{{$question->getScoreByPercent($survey_round->id, $candiate->id)}}</td>
-      </tr>
-    @endforeach
+    @foreach ($result as $index => $candiate_test)
+        @php
+            $total = $candiate_test['total'];
+        @endphp
+        <tr>
+        <td><strong> {{$index + 1}}</strong> </td>
+        <td><strong>{{$total['candiate_name']}}</strong></td>
+        <td><strong>{{$total['score_from_level_3']}}</strong></td>
+        <td><strong>{{$total['score_from_level_2']}}</strong></td>
+        <td><strong>{{$total['score_from_level_1']}}</strong></td>
+        <td><strong>{{$total['avg_score']}}</strong></td>
+        <td><strong>{{$total['percent']}}%</strong></td>
+        <td>
+        </td>
+        </tr>
+        @foreach ($candiate_test['details'] as $index => $detail)
+        @php
+        @endphp
+        <tr>
+            <td>{{$index + 1}}</td>
+            <td>{{$detail['content']}}</td>
+            <td>{{$detail['score_from_level_3']}}</td>
+            <td>{{$detail['score_from_level_2']}}</td>
+            <td>{{$detail['score_from_level_1']}}</td>
+            <td>{{$detail['avg_score']}}</td>
+            <td>{{$detail['percent']}}</td>
+        </tr>
+        @endforeach
     @endforeach
     </tbody>
 </table> 
+

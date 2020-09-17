@@ -41,19 +41,22 @@
         </tr>
     </thead>
     <tbody>
-      @foreach ($list_candiate as $index => $candiate)
-      <tr>
-        <td>{{$index + 1}}</td>
-        <td>{{$candiate->fullname}}</td>
-        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 3)}}</td>
-        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 2)}}</td>
-        <td>{{$survey->getScoreFromLevel($survey_round->id, $candiate->id, 1)}}</td>
-        <td><strong>{{$survey->getAvgScore($survey_round->id, $candiate->id)}}</strong></td>
-        <td><strong>{{$survey->getScoreByPercent($survey_round->id, $candiate->id)}}%</strong></td>
-        <td>
+        
+        @foreach ($result as $index => $candiate_score)
+        <tr>
+            <td>{{$index + 1}}</td>
+            <td>{{ $candiate_score['candiate_name']}}</td>
+            <td>{{$candiate_score['score_from_level_3']}}</td>
+            <td>{{$candiate_score['score_from_level_2']}}</td>
+            <td>{{$candiate_score['score_from_level_1']}}</td>
+            <td><strong>{{$candiate_score['avg_score']}}</strong></td>
+            <td><strong>{{$candiate_score['percent']}}%</strong></td>
+            <td>
+            </td>
+        </tr>
 
-        </td>
-      </tr>
-      @endforeach
+        @endforeach
+
     </tbody>
 </table> 
+

@@ -49,7 +49,8 @@
               <label for="">Loại đánh giá</label>
               <select name="survey_round_type" class="select2 form-control">
                 <option value="1">Đợt đánh giá nhân viên</option>
-            </select>
+                <option value="2">Đợt đánh giá CBQL</option>
+              </select>
             </div>
           </div>
         
