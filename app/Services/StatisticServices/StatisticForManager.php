@@ -6,6 +6,7 @@ use App\Exports\UserResultExport;
 use App\Models\Test;
 use App\Services\StatisticServices\BaseService;
 use Excel;
+use Str;
 
 /**
  * Class chịu trách nhiệm tổng hợp bài đánh giá dành cho user
@@ -23,7 +24,7 @@ class StatisticForManager extends BaseService
         $result = [];
         foreach ($survey_list as $survey) {
             $name = $survey_round->name . '/' . $survey->name . '.xlsx' ?? '';
-            $excel_file = Excel::store(new UserResultExport($this->survey_round_id, $survey->id), $name, 'temp');
+            $excel_file = Excel::store(new UserResultExport($this->survey_round_id, $survey->id), Str::slug($name, '_'), 'temp');
             $result[] = $name;
         }
 
