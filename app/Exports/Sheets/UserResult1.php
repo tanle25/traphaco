@@ -4,6 +4,7 @@ namespace App\Exports\Sheets;
 
 use App\Models\Survey;
 use App\Models\SurveyRound;
+use App\Models\Test;
 use App\User;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -28,7 +29,6 @@ class UserResult1 implements FromView, WithEvents, WithDrawings
         return [
             // Array callable, refering to a static method.
             AfterSheet::class => [self::class, 'afterSheet'],
-
         ];
     }
 
@@ -43,8 +43,58 @@ class UserResult1 implements FromView, WithEvents, WithDrawings
             ->groupBy('users.id')
             ->get();
 
-        return view('excel.user_result_sheet_1', compact('list_candiate', 'survey_round', 'survey'));
+        $tests = Test::with(
+            'survey.section.questions',
+            'answer.selected_option',
+            'candiate',
+            'answer',
+            'examiner',
+            'survey',
+            'survey.section',
+            'candiate.department',
+            'candiate.position')
+            ->where('survey_round', $this->survey_round_id)
+            ->where('survey_id', $this->survey_id)
+            ->get()
+            ->groupBy(['candiate_id']);
 
+        $result = [];
+        foreach ($tests as $candiate_test) {
+
+            $candiate_score = [];
+            $candiate_score['candiate_name'] = $candiate_test->first() ? $candiate_test->first()->candiate->fullname : "";
+            $candiate_score['score_from_level_3'] = $this->getScoreByTest($candiate_test, 3);
+            $candiate_score['score_from_level_2'] = $this->getScoreByTest($candiate_test, 2);
+            $candiate_score['score_from_level_1'] = $this->getScoreByTest($candiate_test, 1);
+
+            $denominator = ($candiate_score['score_from_level_3'] != 0 ? 3 : 0) + ($candiate_score['score_from_level_2'] != 0 ? 2 : 0) + ($candiate_score['score_from_level_1'] != 0 ? 1 : 0); //mẫu số
+            if ($denominator === 0) {
+                $denominator = 1;
+            }
+
+            $avg_score = ($candiate_score['score_from_level_3'] * 3 + $candiate_score['score_from_level_2'] * 2 + $candiate_score['score_from_level_1']) / ($denominator) ?? 0;
+            $candiate_score['avg_score'] = round($avg_score, 2);
+            $candiate_score['percent'] = round(($avg_score / 3 * 100), 2);
+            $result[] = $candiate_score;
+        }
+        return view('excel.user_result_sheet_1', compact('result', 'survey_round', 'survey'));
+
+    }
+
+    private function getScoreByTest($test_list, $multiplier)
+    {
+        $count = $test_list->where('multiplier', $multiplier)->count();
+        if ($count == 0) {
+            $count = 1;
+        }
+
+        $result = $test_list->reduce(function ($total, $item) use ($multiplier) {
+            if ($item->multiplier === $multiplier) {
+                return $total + $item->totalScore();
+            }
+            return $total;
+        }, 0);
+        return $result / $count ?? 0;
     }
 
     public function drawings()

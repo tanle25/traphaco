@@ -82,7 +82,6 @@
                             if($key === $index){
                                 $section_examiner_score = $item->selected_option->score ?? 0;
                             }
-
                         });
                     }
 

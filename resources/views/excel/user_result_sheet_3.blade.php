@@ -42,26 +42,31 @@
     </thead>
     
     <tbody>
-        @foreach ($list_candiate as $index => $candiate)
+        @foreach ($result as $index => $candiate_test)
+        @php
+            $total = $candiate_test['total'];
+            $details = $candiate_test['details'];
+        @endphp
         <tr>
            <td><strong>{{$index + 1}}</strong></td>       
-           <td><strong>{{$candiate->fullname}}</strong></td>     
-           @foreach ($questions as $question)
+           <td><strong>{{$total['candiate_name']}}</strong></td>     
+           @foreach ($details as $detail)
            <td>
-            {{$question->getAvgScore($survey_round->id, $candiate->id)}}
+            {{$detail['avg_score']}}
            </td>
            @endforeach
            <td>
                <strong>
-                    {{$survey->getAvgScore($survey_round->id, $candiate->id)}}
+                    {{$total['avg_score']}}
                 </strong>
             </td>
             <td>
                 <strong>
-                    {{$survey->getScoreByPercent($survey_round->id, $candiate->id)}}%
+                    {{$total['percent']}}%
                 </strong>
             </td>
         </tr>   
         @endforeach
     </tbody>
 </table>
+
