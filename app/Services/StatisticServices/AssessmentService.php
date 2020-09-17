@@ -20,7 +20,7 @@ class AssessmentService extends BaseService
         $survey_round = $this->getSurveyRoundInstance();
         //return new AssessmentExport($tests, $survey_round);
         $name = $survey_round->name . '.xlsx' ?? '';
-        $excel_file = Excel::store(new AssessmentExport($tests, $survey_round), Str::slug($name, '_'), 'temp');
+        $excel_file = Excel::store(new AssessmentExport($tests, $survey_round), Str::slug($name, '_') . 'xlsx', 'temp');
         $result = [];
         $result[] = $name;
         return $result;
