@@ -10,12 +10,17 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image d-flex align-items-center">
-          <img src="{{asset('template/AdminLTE/dist/img/user6-128x128.jpg')}}" class="img-circle elevation-2 d-block" alt="User Image'">
+        <div class="user-panel mt-3 pb-3 mb-3">
+          <div class="d-flex user-panel" style="border-bottom: none">
+          <div class="image d-flex align-items-center">
+            <img src="{{asset('template/AdminLTE/dist/img/user6-128x128.jpg')}}" class="img-circle elevation-2 d-block" alt="User Image'">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block font-weight-bold" style="font-size: 1.1rem">{{Auth::user()->fullname}}</a>
+          </div>
         </div>
-        <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->fullname}}</a>
+        
+        <div class="info mt-1">
           <a class="d-block">{{Auth::user()->department->department_name ?? ''}}</a>
           <a class="d-block">{{Auth::user()->position->name ?? ''}}</a>
         </div>

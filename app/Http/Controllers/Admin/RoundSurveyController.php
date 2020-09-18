@@ -30,7 +30,7 @@ class RoundSurveyController extends Controller
 
     public function getList()
     {
-        $survey_rounds = SurveyRound::query();
+        $survey_rounds = SurveyRound::query()->orderByDesc('id');
 
         return DataTables::eloquent($survey_rounds)
             ->addIndexColumn()

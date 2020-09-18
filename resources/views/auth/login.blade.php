@@ -50,23 +50,25 @@
             
             <p class="text-center">Đăng nhập vào hệ thống</p>
             <h6 style="font-size: .9rem">Tên đăng nhập</h6>
-            <div class="input-group mb-2">
+            <div class="input-group">
               <span class="input-group-prepend"><i class="fa fa-envelope input-group-text"></i></span>
               <input type="text" class="form-control" placeholder="username" name="username">
             </div>
-            <h6 style="font-size: .9rem">Mật khẩu</h6>
+            @if ($errors->has('username'))
+              <div class="text-red" style="font-size: .9rem">
+                <strong>{{ $errors->first('username') }}</strong>
+              </div>                 
+            @endif
+            <h6 class="mt-2" style="font-size: .9rem">Mật khẩu</h6>
             <div class="input-group">
               <span class="input-group-prepend"><i class="fa fa-key input-group-text" style="font-weight: 600"></i></span>
               <input type="password" class="form-control" placeholder="Password" name="password">
             </div>
-            <div class="form-group clearfix">
-              @error('fail')
-                  <span class="invalid-feedback text-red" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
-            </div>
-
+            @if ($errors->has('password'))
+                <div class="text-red" style="font-size: .9rem">
+                  <strong>{{ $errors->first('password') }}</strong>
+                </div>                 
+            @endif
             <div class="form-group clearfix" style="font-size: .9rem">
               <div class="row ">
                 <div class="col-sm-6">
@@ -75,9 +77,15 @@
                       <input type="checkbox" name="remember"> Nhớ mật khẩu
                     </label>
                   </div>
+                  @if ($errors->has('fail'))
+                    <div class="text-red" style="font-size: .9rem">
+                      <strong>{{ $errors->first('fail') }}</strong>
+                    </div>                 
+                  @endif
                 </div>
               </div>
             </div>
+            
             <div class="form-group clearfix">
               <div class="row ">
                 <div class="col-xs-6 ">

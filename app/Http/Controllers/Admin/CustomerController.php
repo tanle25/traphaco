@@ -22,13 +22,13 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $survey = Survey::where('type', 3)->get();
+        $survey = Survey::where('type', 3)->orderByDesc('id')->get();
         return view('admin.pages.customers.index', compact('survey'));
 
     }
 
     function list() {
-        $customers = Customer::query();
+        $customers = Customer::query()->orderByDesc('id');
 
         return DataTables::eloquent($customers)
             ->addIndexColumn()
@@ -47,16 +47,6 @@ class CustomerController extends Controller
             })
             ->rawColumns(['action'])
             ->make(true);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**

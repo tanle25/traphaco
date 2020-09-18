@@ -27,7 +27,7 @@ class SurveyController extends Controller
 
     public function listSurvey(Request $request)
     {
-        $survey = Survey::query();
+        $survey = Survey::query()->orderByDesc('id');
         // Using datatable dependency
         // Đoạn code này dùng để setup dữ liệu data table
         // Link tham khảo: https://yajrabox.com/docs/laravel-datatables/master/filter-column

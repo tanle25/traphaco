@@ -75,6 +75,20 @@
     });
   });
 
+  function checkCurrentLocaionMenu(){
+    var currentUrl = window.location.href;
+    console.log(currentUrl);
+    $('.sidebar .nav-link').each(function(){
+      console.log($(this).attr('href'));
+      if(currentUrl.indexOf($(this).attr('href')) !== -1 ){
+        $(this).closest('.nav-item.has-treeview').addClass('menu-open');
+      }
+    })
+  }
+  checkCurrentLocaionMenu()
+
+
+
 </script>
 
 @yield('custom-js')

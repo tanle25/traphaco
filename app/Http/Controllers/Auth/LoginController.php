@@ -66,6 +66,10 @@ class LoginController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'password' => 'min:6|required',
+        ], [
+            'username.required' => 'Tên đăng nhập không được để trống',
+            'password.min' => 'Mật khẩu tối thiểu 6 ký tự!',
+            'password.required' => 'Mật khẩu không được để trống!',
         ]);
         $remember = isset($request->remember) ? true : false;
 

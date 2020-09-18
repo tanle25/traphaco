@@ -33,6 +33,7 @@ class CustomerTestController extends Controller
                 'survey.name as survey_name',
                 DB::raw('COUNT(distinct customers.id) as customer_count'),
             ])
+            ->orderByDesc('survey.id')
             ->groupBy('survey.id');
 
         return DataTables::eloquent($tests)
