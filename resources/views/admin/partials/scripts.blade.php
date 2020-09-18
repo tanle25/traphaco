@@ -85,7 +85,7 @@
       }
     })
   }
-  checkCurrentLocaionMenu()
+  checkCurrentLocaionMenu();
 
 
 

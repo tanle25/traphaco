@@ -335,7 +335,7 @@ $("input[data-bootstrap-switch]").each(function(){
 		});
 	});
 
-    $(document).on('click', '.test-delete', function (e) {
+    $(document).on('click', '.user-test-delete', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
         Swal.fire({

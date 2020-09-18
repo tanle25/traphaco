@@ -82,7 +82,7 @@ class TestController extends Controller
 
                         <span data-toggle-for="tooltip" title="Xem lịch sử" href="' . route('history.user_test', $test->id) . '"  data-toggle="modal" data-target="#survey_history_modal" class="btn text-info test-history"><i class="fas fa-history"></i></span>
 
-                        <span data-toggle-for="tooltip" title="Xóa" href="' . route('admin.test.destroy', $test->id) . '" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></span>';
+                        <span data-toggle-for="tooltip" title="Xóa" href="' . route('admin.test.destroy', $test->id) . '" class="btn text-danger user-test-delete"><i class="far fa-trash-alt"></i></span>';
             })
             ->rawColumns(['action', 'status', 'multiplier'])
             ->make(true);
