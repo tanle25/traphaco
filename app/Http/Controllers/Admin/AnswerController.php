@@ -49,11 +49,11 @@ class AnswerController extends Controller
     {
         if ($request->has('marked')) {
             if ($request->marked == 1) {
-                $test = Test::where('status', '3');
+                $test = Test::where('status', '3')->orderByDesc('id');
             } elseif ($request->marked == 0) {
-                $test = Test::where('status', '2');
+                $test = Test::where('status', '2')->orderByDesc('id');
             } else {
-                $test = Test::query();
+                $test = Test::query()->orderByDesc('id');
             }
         }
         $examiner = Auth::user();
