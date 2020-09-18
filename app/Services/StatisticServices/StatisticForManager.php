@@ -23,8 +23,8 @@ class StatisticForManager extends BaseService
         //return new AssessmentExport($tests, $survey_round);
         $result = [];
         foreach ($survey_list as $survey) {
-            $name = $survey_round->name . '/' . $survey->name ?? '';
-            $name = Str::slug($name, '_') . '.xlsx';
+            $name = Str::slug($survey_round->name, '_') . '/' . Str::slug($survey->name, '_') ?? '';
+            $name .= '.xlsx';
             $excel_file = Excel::store(new UserResultExport($this->survey_round_id, $survey->id), $name, 'temp');
             $result[] = $name;
         }
