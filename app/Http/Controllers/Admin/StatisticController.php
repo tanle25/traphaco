@@ -24,27 +24,26 @@ class StatisticController extends Controller
 
         // Nếu có 1 id thì tạo 1 file excel và trả về người dùng
         if (count($survey_round_id) == 1) {
-            // try {
-            // Khởi tạo dynamic instance
-            $refl = new ReflectionClass($class_name);
-            $service = $refl->newInstanceArgs(['survey_round_id' => $survey_round_id[0]]);
+            try {
+                // Khởi tạo dynamic instance
+                $refl = new ReflectionClass($class_name);
+                $service = $refl->newInstanceArgs(['survey_round_id' => $survey_round_id[0]]);
 
-            $file_name = $service->exportExcel();
-            if (count($file_name) == 1) {
-                return response()->download(storage_path('app/temp/' . $file_name[0]))->deleteFileAfterSend(true);
-            } else {
-                $zipped_file = $this->zipFile($file_name, 'thong_ke.zip');
-                return response()->download(storage_path('thong_ke.zip'))->deleteFileAfterSend(true);
+                $file_name = $service->exportExcel();
+                if (count($file_name) == 1) {
+                    return response()->download(storage_path('app/temp/' . $file_name[0]))->deleteFileAfterSend(true);
+                } else {
+                    $zipped_file = $this->zipFile($file_name, 'thong_ke.zip');
+                    return response()->download(storage_path('thong_ke.zip'))->deleteFileAfterSend(true);
+                }
+            } catch (\Exception $e) {
+                return $e;
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', 'Có lỗi trong quá trình tổng hợp. Vui lòng kiểm tra lại đợt đánh giá!');
             }
-            // } catch (\Exception $e) {
-            //     return $e;
-            //     return redirect()
-            //         ->back()
-            //         ->withInput()
-            //         ->with('error', 'Có lỗi trong quá trình tổng hợp. Vui lòng kiểm tra lại đợt đánh giá!');
-            // }
         }
-
         try {
             // Tạo mới file zip
             $file_list = [];

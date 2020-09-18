@@ -182,6 +182,7 @@
                   <p>Thống kê cá nhân</p>
                 </a>
               </li>
+              
             </ul>
           </li>
           <?php else: ?>
@@ -202,14 +203,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="<?php echo e(route('result.index')); ?>" class="nav-link">
-              <i class="nav-icon far fa-id-badge"></i> 
-              <p>
-                Thống kế cá nhân
-              </p>
-            </a>
-          </li>
+          
           <?php endif; ?>
 
 
