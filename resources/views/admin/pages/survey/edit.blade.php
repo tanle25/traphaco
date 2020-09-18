@@ -63,15 +63,18 @@
                                 </strong>
                                 @enderror
                             </div>
-
                             <div class="form-group">
-                                <label for="">Loại khảo sát</label>
-                                <select name="type" class="form-control" id="">
-                                    <option {{$survey->type == 1 ? 'selected' : ''}} value="1">Bài đánh giá nhân viên</option>
-                                    <option {{$survey->type == 2 ? 'selected' : ''}} value="2">Bài đánh giá chất lượng nhân viên</option>
-                                    <option {{$survey->type == 3 ? 'selected' : ''}} value="3">Bài khảo sát khách hàng</option>
-                                </select>
+                                <label for="">Nội dung bài khảo sát</label>
+                                <textarea name="content" type="text" class="form-control" id=""
+                                    placeholder="Nhập nội dung bài khảo sát" value="" cols="30"
+                                    rows="5" oninput="auto_grow(this)">{{ $survey->content }}</textarea>
+                                @error('content')
+                                <strong class="text-red">
+                                    {{$message}}
+                                </strong>
+                                @enderror
                             </div>
+                            
                         </div>
                         <div class="col-md-6 col-12">
 
@@ -81,21 +84,27 @@
                                     placeholder="Nhập password (*)" value="{{ $survey->author->fullname ?? 'Không rõ' }}">
                                 <input type="hidden" name="created_by" value="{{$survey->author->id ?? null}}">
                             </div>
+                            <div class="form-group">
+                                <label for="">Loại khảo sát</label>
+                                <select name="type" class="form-control" id="">
+                                    <option {{$survey->type == 1 ? 'selected' : ''}} value="1">Bài đánh giá nhân viên</option>
+                                    <option {{$survey->type == 2 ? 'selected' : ''}} value="2">Bài đánh giá chất lượng nhân viên</option>
+                                    <option {{$survey->type == 3 ? 'selected' : ''}} value="3">Bài khảo sát khách hàng</option>
+                                </select>
+                            </div>
 
                             <div class="form-group">
-                                <label for="">Nội dung bài khảo sát</label>
-                                <textarea name="content" type="text" class="form-control" id=""
-                                    placeholder="Nhập nội dung bài khảo sát" value="" cols="30"
-                                    rows="5">{{ $survey->content }}</textarea>
-                                @error('content')
+                                <label for="">Hướng dẫn làm bài khảo sát</label>
+                                <textarea name="tutorial" type="text" class="form-control" id=""
+                                    placeholder="Nhập hướng dẫn làm bài khảo sát" value="" cols="30"
+                                    rows="5" oninput="auto_grow(this)">{{ $survey->tutorial }}</textarea>
+                                @error('tutorial')
                                 <strong class="text-red">
                                     {{$message}}
                                 </strong>
                                 @enderror
                             </div>
-
                         </div>
-
                     </div>
 
                     <button class="btn btn-traphaco">

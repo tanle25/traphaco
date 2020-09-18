@@ -42,6 +42,9 @@
                         </h5>
                         <h5>Phòng ban: {{$test->candiate->department->department_name ?? ''}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Chức vụ: {{$test->candiate->position->name ?? ''}}</h5>
                     </div>
+                    <div class="mt-3">
+                        <h5 style="white-space: pre">{{$test->survey->tutorial ?? ''}}</h5>
+                    </div>
                 </div>
 
                 <div class="card-body">

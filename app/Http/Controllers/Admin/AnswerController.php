@@ -122,7 +122,7 @@ class AnswerController extends Controller
             })
             ->addColumn('action', function (Test $test) {
                 if ($test->status == 3) {
-                    return '<a data-toggle-for="tooltip" title="Sửa kết quả" href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="far fa-edit"></i></a>';
+                    return '<a data-toggle-for="tooltip" title="Xem bài làm" href="' . route('answer.re_ans', $test->id) . '"class="btn text-info send-test"><i class="fas fa-eye"></i></a>';
                 }
                 if ($test->end_at < Carbon::now()) {
                     return '';
@@ -201,9 +201,9 @@ class AnswerController extends Controller
     {
         $test = Test::findOrFail($id);
 
-        if (Auth::user()->id !== $test->examiner->id || $test->examiner->status == 1) {
-            return abort(404);
-        }
+        // if (Auth::user()->id !== $test->examiner->id || $test->examiner->status == 1) {
+        //     return abort(404);
+        // }
 
         $survey = $test->survey;
 
@@ -220,9 +220,9 @@ class AnswerController extends Controller
     {
         $test = Test::findOrFail($id);
 
-        if (Auth::user()->id !== $test->examiner->id || $test->examiner->status == 1) {
-            return abort(404);
-        }
+        // if (Auth::user()->id !== $test->examiner->id || $test->examiner->status == 1) {
+        //     return abort(404);
+        // }
 
         $survey = $test->survey;
 

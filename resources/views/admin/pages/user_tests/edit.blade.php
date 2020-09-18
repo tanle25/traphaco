@@ -64,7 +64,20 @@
 
                                     @foreach ($question->options as $option)
                                     <div class="form-group  @if ($option_length <= 72) col-md-3 @else col-12 @endif d-flex justify-center align-center">
-                                        <input {{$answer->option_choice == $option->id ? 'checked' : ''}} class="option-input" type="radio" style="height:23px; width:23px;flex: 0 0 23px " data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+
+                                        <input 
+                                        {{$answer->option_choice == $option->id ? 'checked' : ''}} 
+                                        class="option-input" 
+                                        type="radio" 
+                                        style="height:23px; width:23px;flex: 0 0 23px " 
+                                        data-question-id="{{$question->id}}" 
+                                        name="question-{{$question->id}}" 
+                                        value="{{$option->id}}"
+                                        @if ($answer->option_choice !== $option->id )
+                                        @cannot('sửa bài đánh giá đã làm') disabled @endcan
+                                        @endif
+                                        >
+
                                         <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                                             @if ($test->survey->type == 1)
                                             ({{$option->score ?? 0}} điểm)</span> 
@@ -74,7 +87,15 @@
                                 </div>
                                 <div class="form-group">
                                     @if ($question->can_comment == 1)
-                                    <textarea class="form-control comment" value="" oninput="auto_grow(this)" rows="1" placeholder="Nhận xét khác">{{$question->getAnswerByUserTest($test->id)->comment ?? ''}}</textarea>                                        
+                                    <textarea 
+                                    class="form-control comment" 
+                                    value="" oninput="auto_grow(this)" 
+                                    rows="1" 
+                                    placeholder="Nhận xét khác"
+                                    @cannot('sửa bài đánh giá đã làm')readonly @endcan
+                                    >
+                                        {{$question->getAnswerByUserTest($test->id)->comment ?? ''}}
+                                    </textarea>                                        
                                     @endif
                                 </div>
                             </div>

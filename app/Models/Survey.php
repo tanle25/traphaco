@@ -9,7 +9,7 @@ class Survey extends Model
 {
     protected $table = 'survey';
 
-    protected $fillable = ['title', 'name', 'content', 'created_by', 'type'];
+    protected $fillable = ['title', 'name', 'content', 'tutorial', 'created_by', 'type'];
 
     public $timestamps = true;
 

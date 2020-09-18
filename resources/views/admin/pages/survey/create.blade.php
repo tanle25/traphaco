@@ -51,12 +51,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="">Loại khảo sát</label>
-                                <select name="type" class="form-control" id="">
-                                    <option value="1">Bài đánh giá nhân viên</option>
-                                    <option value="2">Bài kiểm tra chất lượng nhân viên</option>
-                                    <option value="3">Bài khảo sát khách hàng</option>
-                                </select>
+                                <label for="">Nội dung bài khảo sát</label>
+                                <textarea name="content" type="text" class="form-control" id=""
+                                    placeholder="Nhập nội dung bài khảo sát" value="{{ old('content') }}" cols="30"
+                                    rows="5"></textarea>
+                                @error('content')
+                                <strong class="text-red">
+                                    {{$message}}
+                                </strong>
+                                @enderror
                             </div>
 
                         </div>
@@ -67,11 +70,19 @@
                                     placeholder="Nhập password (*)" value="{{Auth::user()->fullname}}">
                                 <input type="hidden" name="created_by" value="{{Auth::user()->id}}">
                             </div>
+                            <div class="form-group">
+                                <label for="">Loại khảo sát</label>
+                                <select name="type" class="form-control" id="">
+                                    <option value="1">Bài đánh giá nhân viên</option>
+                                    <option value="2">Bài kiểm tra chất lượng nhân viên</option>
+                                    <option value="3">Bài khảo sát khách hàng</option>
+                                </select>
+                            </div>
 
                             <div class="form-group">
-                                <label for="">Nội dung bài khảo sát</label>
-                                <textarea name="content" type="text" class="form-control" id=""
-                                    placeholder="Nhập nội dung bài khảo sát" value="{{ old('content') }}" cols="30"
+                                <label for="">Hướng dẫn làm bài khảo sát</label>
+                                <textarea name="tutorial" type="text" class="form-control" id=""
+                                    placeholder="Nhập hướng dẫn làm bài khảo sát" value="{{ old('tutotial') }}" cols="30"
                                     rows="5"></textarea>
                                 @error('content')
                                 <strong class="text-red">
