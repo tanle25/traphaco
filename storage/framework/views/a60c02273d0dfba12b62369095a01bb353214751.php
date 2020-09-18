@@ -160,7 +160,7 @@
 
 <?php if(!$user->can('xóa bài đánh giá')): ?>
 <style>
-    .test-delete{
+    .user-test-delete{
         display: none;
     }
 </style>
