@@ -234,42 +234,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //export excel
     Route::get('user/export', 'UserManageController@export')
         ->name('admin.usermanage.export');
-
-    //customer
-    // Route::get('customer/index', 'CustomerController@index')
-    // ->name('admin.customer.index')
-    // ->middleware('permission:xem khách hàng');
     Route::post('customer/create-survey', 'CustomerController@createTestAndSend')
         ->name('admin.customer.create_and_send_test')
         ->middleware('permission:thêm bài khảo sát khách hàng');
     Route::post('customer/store-answer', 'CustomerController@storeCustomerAnswer')
         ->name('admin.customer.store_customer_answer')
         ->middleware('permission:thêm bài khảo sát khách hàng');
-    //Route::get('customer/list', 'CustomerController@list')
-    // ->name('admin.customer.list')
-    // ->middleware('permission:xem khách hàng');
-    //Route::post('customer/store', 'CustomerController@store')
-    // ->name('admin.customer.store')
-    // ->middleware('permission:thêm khách hàng');
-    //Route::post('customer/update', 'CustomerController@update')
-    // ->name('admin.customer.update')
-    // ->middleware('permission:sửa khách hàng');
     Route::get('customer-test/remove-all-empty', 'CustomerTestController@removeAllEmpty')
         ->name('admin.customer.remove_all_empty')
         ->middleware('permission:xóa bài khảo sát khách hàng');
-
-    //Route::get('/customer/edit/{id}', 'CustomerController@edit')
-    // ->name('admin.customer.edit')
-    // ->middleware('permission:sửa khách hàng');
     Route::post('/customer/destroy/{id}', 'CustomerController@destroy')
         ->name('admin.customer.destroy')
         ->middleware('permission:xóa khách hàng');
     Route::post('customer/import', 'CustomerController@importExcel')
         ->name('admin.customer.import')
         ->middleware('permission:thêm khách hàng');
-    //Route::get('/customer/edit-field/{id}', 'CustomerController@editCustomerField')
-    // ->name('admin.customer.edit_field')
-    // ->middleware('permission:sửa khách hàng');
 
     //excel
     Route::get('/customer/tests/details/{survey_id}/export', 'CustomerTestController@exportAll')
@@ -380,7 +359,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/round-survey/details/{id}/candiate/{candiate_id}', 'Admin\RoundSurveyController@getUserDetails')
         ->name('admin.survey_round.candiate_details');
 
-    Route::get('/statistic/index', 'Admin\StatisticController@showForm')->name('statistic.assessment.show_form');
-    Route::get('/statistic/assessment-user/export', 'Admin\StatisticController@exportExcelAssessmentResult')->name('statistic.assessment.export');
+    Route::get('/statistic/index', 'Admin\StatisticController@showForm')->name('statistic.assessment.show_form')->middleware('permission:xem báo cáo đợt đánh giá');
+    Route::get('/statistic/assessment-user/export', 'Admin\StatisticController@exportExcelAssessmentResult')->name('statistic.assessment.export')->middleware('permission:xuất_excel báo cáo đợt đánh giá');
 
 });
