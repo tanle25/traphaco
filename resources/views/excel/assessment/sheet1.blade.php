@@ -52,6 +52,7 @@
                     @php
                         $canditate_score = $candiate_test ? $candiate_test->totalScore() : 0;
                         $examiner_score = $examiner_test ? $examiner_test->totalScore() : 0;
+                        $section_count = $survey->section ? $survey->section->count() : 1;
                     @endphp
                     <td>{{$index}}</td>
                     <td>{{$candiate->fullname}}</td>
@@ -64,7 +65,7 @@
                         {{ $examiner_score }}
                     </td>
                     <td>
-                        {{round((($canditate_score * 2 + $examiner_score*2) / (3*6)*100), 2)}}%
+                        {{round((($canditate_score * 2 + $examiner_score*2) / (3*6*$section_count)*100), 2)}}%
                     </td>
                 </tr>    
             @endif
