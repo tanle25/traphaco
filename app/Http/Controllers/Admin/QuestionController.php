@@ -45,6 +45,8 @@ class QuestionController extends Controller
                 'content' => null,
                 'created_by' => Auth::user()->id,
             ]);
+            $new_question->order = $new_question->id;
+            $new_question->save();
             DB::table('survey_section_has_questions')->insert([
                 'survey_section_id' => $request->section_id,
                 'question_id' => $new_question->id,
@@ -142,6 +144,8 @@ class QuestionController extends Controller
                 'created_by' => Auth::user()->id,
                 'can_comment' => $question->can_comment,
             ]);
+            $new_question->order = $new_question->id;
+            $new_question->save();
             DB::table('survey_section_has_questions')->insert([
                 'survey_section_id' => $section_id,
                 'question_id' => $new_question->id,

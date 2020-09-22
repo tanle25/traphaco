@@ -44,6 +44,8 @@ class QuestionOptionController extends Controller
                 'question_id' => $request->question_id,
                 'score' => 0,
             ]);
+            $new_option->order = $new_option->id;
+            $new_option->save();
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
