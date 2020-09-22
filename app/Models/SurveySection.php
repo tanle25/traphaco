@@ -14,7 +14,13 @@ class SurveySection extends Model
 
     public function questions()
     {
-        return $this->belongsToMany('App\Models\Question', 'survey_section_has_questions', 'survey_section_id', 'question_id')->orderBy('order');
+        return $this->belongsToMany(
+            'App\Models\Question',
+            'survey_section_has_questions',
+            'survey_section_id',
+            'question_id')
+            ->orderBy('order')
+            ->orderBy('id');
     }
 
     public function getScoreFromLevel($survey_round, $candiate, $level)

@@ -17,7 +17,7 @@ class Question extends Model
 
     public function options()
     {
-        return $this->hasMany('App\Models\QuestionOption', 'question_id', 'id')->orderBy('order');
+        return $this->hasMany('App\Models\QuestionOption', 'question_id', 'id')->orderBy('order')->orderBy('id');
     }
 
     public function created_by()
