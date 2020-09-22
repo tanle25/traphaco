@@ -78,6 +78,8 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'quản_lý quyền']);
         Permission::firstOrCreate(['name' => 'quản_lý quyền']);
 
+        Permission::firstOrCreate(['name' => 'quản_lý tất cả đề thi']);
+
         // gets all permissions via Gate::before rule; see AuthServiceProvider
     }
 }

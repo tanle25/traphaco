@@ -28,23 +28,29 @@ class SurveyController extends Controller
     public function listSurvey(Request $request)
     {
         $survey = Survey::query()->orderByDesc('id');
+        if (Auth::user()->cannot('quản_lý tất cả đề thi')) {
+            $survey = $survey->where('created_by', Auth::user()->id);
+        }
         // Using datatable dependency
         // Đoạn code này dùng để setup dữ liệu data table
         // Link tham khảo: https://yajrabox.com/docs/laravel-datatables/master/filter-column
-        return DataTables::eloquent($survey)
-            ->addIndexColumn()
-            ->addColumn('action', function ($survey) {
-                return '<a data-toggle-for="tooltip" title="Sửa thông tin" href="' . route('admin.survey.edit', $survey->id) . '"class="btn text-success edit-survey-btn"><i class="fas fa-edit"></i></a>
+        {
+            return DataTables::eloquent($survey)
+                ->addIndexColumn()
+                ->addColumn('action', function ($survey) {
+                    return '<a data-toggle-for="tooltip" title="Sửa thông tin" href="' . route('admin.survey.edit', $survey->id) . '"class="btn text-success edit-survey-btn"><i class="fas fa-edit"></i></a>
                         <span data-toggle-for="tooltip" title="Xóa" href="' . route('admin.survey.destroy', $survey->id) . '" class="btn text-danger remove-survey-btn"><i class="far fa-trash-alt"></i></span>';
-            })
-            ->addColumn('created_by', function ($survey) {
-                if ($survey->author) {
-                    return $survey->author->fullname ?? '';
-                }
-                return null;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                })
+                ->addColumn('created_by', function ($survey) {
+                    if ($survey->author) {
+                        return $survey->author->fullname ?? '';
+                    }
+                    return null;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
     }
 
     /**
