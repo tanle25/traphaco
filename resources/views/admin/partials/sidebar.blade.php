@@ -182,12 +182,6 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="{{route('result.index')}}" class="nav-link">
-                  <p>Thống kê cá nhân</p>
-                </a>
-              </li>
-              
             </ul>
           </li>
           @else
