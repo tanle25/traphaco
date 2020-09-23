@@ -262,9 +262,7 @@ class RoundSurveyController extends Controller
                 'end_at' => $item['end_at'],
             ]);
         }
-
         return back()->with('success', 'Cập nhật thành công');
-
     }
 
 }

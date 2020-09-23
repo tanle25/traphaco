@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Carbon;
+
 class HomeController extends Controller
 {
     /**
@@ -32,6 +34,12 @@ class HomeController extends Controller
     public function adminHome()
     {
         return view('admin.pages.home');
+    }
+
+    public function getTimeNow()
+    {
+        $time = Carbon::now()->timestamp;
+        return $time;
     }
 
 }
