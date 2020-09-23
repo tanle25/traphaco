@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('', 'HomeController@index')
     ->name('home');
 
+Route::get('current-time', 'HomeController@getTimeNow')->name('current_time');
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/department', 'DepartmentController@index')
         ->name('admin.department.index')

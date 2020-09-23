@@ -31,9 +31,11 @@ class Survey extends Model
             return null;
         }
         foreach ($survey_sections as $survey_section) {
-            $result = $result->merge($survey_section->questions);
+            foreach ($survey_section->questions as $question) {
+                $result = $result->push($question);
+            }
         }
-        return $result->sortBy('order')->sortBy('id');
+        return $result;
     }
 
     public function getScoreFromLevel($survey_round, $candiate, $level)

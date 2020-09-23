@@ -29,7 +29,6 @@
             @php
                 $survey = $survey_group->first()->survey;
                 $questions = $survey->getQuestions();
-
             @endphp
             <tr></tr>
             <tr>

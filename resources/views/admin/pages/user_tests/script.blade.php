@@ -57,7 +57,6 @@
                 if (data.msg) {
                     swalToast(data.msg);
                     setTimeout(function () {
-                        //Kiểm tra location nếu có edit thì trả về những bài đã làm
                         if(location.href.indexOf('edit') == - 1){
                             location.href = "{{route('answer.index', ['marked' => 0])}}";
                         }else{
@@ -115,31 +114,14 @@
         }
 
         var answer = getAnswer();
-
-        Swal.fire({
-            title: 'Hoàn thành bài đánh giá!',
-            text: "Gửi kết quả!",
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Gửi kết quả!',
-        })
-        .then((result) => {
-            if (result.value) {
-                saveAnswer(url, answer);
-            }
-        });
+        saveAnswer(url, answer);
     })
 
-    // console.log(Date.now());
-    // console.log(Date.parse( "{{$test->getEndTime()}}"));
-
+    var session_time = {{Carbon\Carbon::now()->timestamp * 1000}};
     @if(\Request::route()->getName() === "answer.mark" )
     var checkTime =  setInterval(function(){
-        console.log(Date.now());
-
-        if( Date.now() >  Date.parse("{{$test->getEndTime()}}") - 10000 ){
+        session_time += 2000;
+        if( session_time >  Date.parse("{{$test->getEndTime()}}") - 10000 ){
             clearInterval(checkTime);
             Swal.fire({
                 title: 'Hết thời gian làm bài!',
@@ -149,12 +131,10 @@
             var answer = getAnswer();
             setTimeout(function(){
                 saveAnswer(url, answer);
-            }, 3000)
-
+            }, 1000)
         }
-    }, 2000)    
+    }, 2000)
+
     @endif
-    
-    
 
 </script>
