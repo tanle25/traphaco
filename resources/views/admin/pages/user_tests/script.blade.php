@@ -120,8 +120,8 @@
     var session_time = {{Carbon\Carbon::now()->timestamp * 1000}};
     @if(\Request::route()->getName() === "answer.mark" )
     var checkTime =  setInterval(function(){
-        session_time += 2000;
-        if( session_time >  Date.parse("{{$test->getEndTime()}}") - 10000 ){
+        session_time += 2000; 
+        if( session_time >  {{Carbon\Carbon::parse($test->getEndTime())->timestamp * 1000}} - 10000 ){
             clearInterval(checkTime);
             Swal.fire({
                 title: 'Hết thời gian làm bài!',
