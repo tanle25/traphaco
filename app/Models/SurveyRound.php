@@ -24,6 +24,12 @@ class SurveyRound extends Model
             ->groupBy('survey.id')
             ->get();
     }
+
+    public function tests()
+    {
+        return $this->hasMany('App\Models\Test', 'survey_round', 'id')->with('answer');
+    }
+
     public function getSurveyListAndTime()
     {
         return Test::join('survey_round', 'survey_round.id', '=', 'tests.survey_round')

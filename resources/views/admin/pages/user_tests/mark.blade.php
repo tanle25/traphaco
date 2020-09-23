@@ -81,7 +81,6 @@
                                             @endif 
                                     </div>
                                     @endforeach 
-
                                 </div>
                                 <div class="form-group">
                                     @if ($question->can_comment == 1)

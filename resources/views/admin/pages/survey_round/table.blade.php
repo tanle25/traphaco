@@ -34,6 +34,9 @@
                 @if (Auth::user()->can('sửa đợt đánh giá'))
                     <button type="submit" class="btn btn-success">Cập nhật thời gian làm bài</button>
                 @endif
+                @if (Auth::user()->can('sửa bài đánh giá'))
+                    <a class="btn btn-success" href="{{route('admin.survey_round.stop', $survey_round->id)}}">Thu bài đánh giá</a>
+                @endif
             </form>  
         </div>
     </div>
@@ -55,6 +58,7 @@
         @if (Auth::user()->can('gửi bài đánh giá'))
         <a class="btn btn-success" href="{{route('admin.test.send_all', $survey_round->id)}}">Gửi tất cả</a>
         @endif
+
     </div>
 </div>
 @section('custom-js')

@@ -110,6 +110,20 @@ class RoundSurveyController extends Controller
         return view('admin.pages.survey_round.edit', compact('survey_round', 'survey', 'users', 'departments'));
     }
 
+    public function stopSurveyRound($id)
+    {
+        $survey_round = SurveyRound::findOrFail($id);
+
+        $tests = $survey_round->tests;
+        foreach ($tests as $test) {
+            if ($test->answer->isEmpty() && $test->end_at < Carbon::now()) {
+                $test->status = 4;
+                $test->save();
+            };
+        };
+        return redirect()->back()->with('success', 'Đã thu bài đánh giá');
+    }
+
     /**
      * Update the specified resource in storage.
      *
