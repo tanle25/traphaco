@@ -65,7 +65,7 @@
                                     @foreach ($question->options as $option)
                                     <div class="form-group  @if ($option_length <= 72) col-md-3 @else col-12 @endif d-flex justify-center align-center">
                                         <input 
-                                        @if ($answer) {{$answer->option_choice == $option->id ? 'checked' : ''}}@endif
+                                        @if ($answer) {{$answer->option_choice == $option->id ? 'checked' : ''}} @endif
                                         class="option-input" 
                                         type="radio" 
                                         style="height:23px; width:23px;flex: 0 0 23px " 
@@ -79,19 +79,26 @@
                                         
                                         @endif
                                         >
-                                        <span class="pl-2" style="line-height: 23px">
-                                            @if ($test->survey->type == 2 && $option->score == 1 && $answer->option_choice == $option->id)
-                                                <strong class="text-success">{{$option->content ?? ''}}</strong>
-                                            @elseif($test->survey->type == 2 && $option->score == 1)
-                                            <strong class="text-danger">{{$option->content ?? ''}}</strong>
-                                            @else
-                                            {{$option->content ?? ''}}
-                                            @endif
 
+                                        <span class="pl-2" style="line-height: 23px">
+                                            @if ($answer)
+                                                @if ($test->survey->type == 2 && $option->score == 1 && $answer->option_choice == $option->id)
+                                                    <strong class="text-success">{{$option->content ?? ''}}</strong>
+                                                @elseif($test->survey->type == 2 && $option->score == 1)
+                                                    <strong class="text-danger">{{$option->content ?? ''}}</strong>
+                                                @else
+                                                    {{$option->content ?? ''}}
+                                                @endif
+                                            @else
+                                                {{$option->content ?? ''}}
+                                            @endif 
+
+                                            
                                             @if ($test->survey->type == 1)
                                             ({{$option->score ?? 0}} điểm)
-                                        </span> 
                                             @endif 
+                                        </span> 
+                                            
                                     </div>
                                     @endforeach 
                                 </div>

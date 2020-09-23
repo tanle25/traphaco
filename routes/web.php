@@ -214,6 +214,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/round-survey/list-survey-round', 'RoundSurveyController@getList')
         ->name('admin.survey_round.list')
         ->middleware('permission:xem đợt đánh giá');
+    Route::get('/round-survey/stop-survey-round/{id}', 'RoundSurveyController@stopSurveyRound')
+        ->name('admin.survey_round.stop')
+        ->middleware('permission:sửa đợt đánh giá');
 
     Route::get('/round-survey/details/{id}', 'RoundSurveyController@details')
         ->name('admin.survey_round.details')

@@ -182,12 +182,6 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="<?php echo e(route('result.index')); ?>" class="nav-link">
-                  <p>Thống kê cá nhân</p>
-                </a>
-              </li>
-              
             </ul>
           </li>
           <?php else: ?>

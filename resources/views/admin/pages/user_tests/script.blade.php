@@ -53,6 +53,7 @@
                 if (data.error) {
                     swalToast(data.error, 'error');
                 }
+                
                 if (data.msg) {
                     swalToast(data.msg);
                     setTimeout(function () {
@@ -149,6 +150,7 @@
             setTimeout(function(){
                 saveAnswer(url, answer);
             }, 3000)
+
         }
     }, 2000)    
     @endif
