@@ -82,21 +82,6 @@ class Survey extends Model
 
     }
 
-    public function getMaxScore()
-    {
-        $result = 0;
-        $survey_sections = $this->section;
-        foreach ($survey_sections as $survey_section) {
-            foreach ($survey_section->questions as $question) {
-                $result += $question->maxScore();
-            }
-        }
-        if ($result == 0) {
-            $result = 1;
-        }
-        return $result;
-    }
-
     public function getScoreByPercent($survey_round, $candiate)
     {
         $score = $this->getAvgScore($survey_round, $candiate) / 3 * 100;
