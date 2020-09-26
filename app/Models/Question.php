@@ -11,7 +11,7 @@ class Question extends Model
 {
     protected $table = 'questions';
 
-    protected $fillable = ['content', 'created_by', 'can_comment', 'order'];
+    protected $fillable = ['content', 'created_by', 'can_comment', 'order', 'must_mark'];
 
     public $timestamps = true;
 

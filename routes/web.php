@@ -113,6 +113,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         ->name('admin.survey.list_survey')
         ->middleware('permission:xem bộ đề');
 
+    Route::post('survey/import/{survey_id}', 'SurveyController@importExcel')
+        ->name('admin.survey.import')
+        ->middleware('permission:sửa bộ đề');
+
     Route::get('/survey-section', 'SurveySectionController@index')
         ->name('admin.survey_section.index')
         ->middleware('permission:sửa bộ đề');

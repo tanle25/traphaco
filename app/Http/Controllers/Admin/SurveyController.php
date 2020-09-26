@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Survey\CreateSurveyRequest;
 use App\Http\Requests\Admin\Survey\UpdateSurveyRequest;
+use App\Imports\SurveyImport;
 use App\Models\Question;
 use App\Models\Survey;
 use App\Models\SurveySection;
 use Auth;
 use DataTables;
 use DB;
+use Excel;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
@@ -145,6 +147,20 @@ class SurveyController extends Controller
     {
         Survey::findOrFail($id)->delete();
         return ['msg' => 'Xóa thành công'];
+    }
+
+    public function importExcel($survey_id, Request $request)
+    {
+        $request->validate([
+            'customer_list' => 'mimes:xls,xlsx',
+        ], [
+            'customer_list.mimes' => 'File phải có định dạng xls hoặc xlsx',
+        ]);
+
+        $file = $request->file('customer_list');
+        Excel::import(new SurveyImport($survey_id), $file);
+
+        return redirect()->back()->with(['success' => 'Import dữ liệu thành công']);
     }
 
 }
