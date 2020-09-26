@@ -30,9 +30,9 @@ class SurveyImport implements ToCollection, WithStartRow
         DB::beginTransaction();
         try {
             foreach ($rows as $row) {
-                if ($row[0] === 'question') {
+                if ($row[0] === 'cau_tra_loi' && $current_question) {
                     $current_option = QuestionOption::create([
-                        'question_id' => $current_section->id,
+                        'question_id' => $current_question->id,
                         'score' => $row[2],
                         'content' => $row[1],
                     ]);
@@ -40,12 +40,12 @@ class SurveyImport implements ToCollection, WithStartRow
                     $current_option->save();
                 };
 
-                if ($row[0] === 'another_option') {
+                if ($row[0] === 'cau_tra_loi_khac' && $current_question) {
                     $current_question->can_comment = 1;
                     $current_question->save();
                 };
 
-                if ($row[0] === 'question') {
+                if ($row[0] === 'cau_hoi' && $current_section) {
                     $current_question = Question::create([
                         'content' => $row[1],
                         'created_by' => Auth::user()->id,
@@ -58,7 +58,7 @@ class SurveyImport implements ToCollection, WithStartRow
                     ]);
                 };
 
-                if ($row[0] === 'must_mark_question') {
+                if ($row[0] === 'cau_hoi_bat_buoc' && $current_section) {
                     $current_question = Question::create([
                         'content' => $row[1],
                         'create_by' => Auth::user()->id,
