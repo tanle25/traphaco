@@ -17,6 +17,13 @@
             <div class="card-title">
                 Bộ câu hỏi
             </div>
+            <a href="#" 
+            class="btn btn-success float-right mr-4" 
+            data-toggle="modal"
+            data-target="#import-model"
+            >
+                <i class="fas fa-file-excel"></i> Import Excel
+            </a>
         </div>
         <div class="card-body ">
             {{-- start section question --}}
@@ -155,4 +162,36 @@
     </div>
 
 </div> 
+
+<div class="modal fade"  id="import-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1024px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Import file dữ liệu khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+				<form action="{{route('admin.survey.import', $survey->id)}}" id="import-form" method="post" enctype="multipart/form-data">
+					@csrf
+                    <div class="form-group">
+                        <label for="exampleInputFile">Chọn file xlsx</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="customer_list" id="exampleInputFile">
+                            <label class="custom-file-label" for="exampleInputFile">Chọn file...</label>
+                          </div>
+                          <div class="input-group-append">
+                            <button class="input-group-text" id="">Upload</button>
+                          </div>
+                        </div>
+                    </div>
+				</form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--=========================================================-->

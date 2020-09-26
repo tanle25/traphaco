@@ -1,6 +1,11 @@
 
 <script src="{{asset('template/js/stickyfloat.js')}}"></script>
 <script>
+
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
     jQuery('.question-tool-menu').stickyfloat({ duration: 400 });
 
     // Question logic 

@@ -37,12 +37,10 @@
                             data-target="#customer-model">
                             <i class="fas fa-plus-circle"></i> Thêm mới
                             </span>
-                            @if (Auth::user()->is_admin == 1 )
                             <a href="#" class="btn btn-success float-right mr-4" data-toggle="modal"
                             data-target="#import-model">
                                 <i class="fas fa-file-excel"></i> Import Excel
                             </a>
-                            @endif
                         @endcan
 
                     </div>

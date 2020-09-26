@@ -73,4 +73,5 @@ class UserImport implements ToModel, WithChunkReading, SkipsOnFailure, WithValid
             '3' => 'required',
         ];
     }
+
 }
