@@ -80,13 +80,18 @@
 
                     $section_examiner_score = 0;
 
+
                     if($examiner_test){
-                        $examiner_test->answer->each(function($item, $key) use($index, &$section_examiner_score){
-                            if($key === $index){
+                        $questions = $examiner_test->survey->getQuestions();
+                        $section_question = $questions[$index];
+
+                        $examiner_test->answer->each(function($item, $key) use($section_question, &$section_examiner_score){
+                            if($item->question_id === $section_question->id){
                                 $section_examiner_score = $item->selected_option->score ?? 0;
                             }
                         });
                     }
+
 
                 @endphp
                 <tr>
