@@ -47,25 +47,37 @@
             @if ($candiate_test)
                 @php
                     $survey = $candiate_test->survey;
+                    $candiate_multiplier = $candiate_test->multiplier;
+                    $candiate_max_score = $survey->getQuestions()->count();
+
+                    $examiner_survey = $examiner_test->survey;
+                    $examiner_multiplier = $examiner_test->multiplier;
+                    $examiner_max_score = $examiner_survey->getQuestions()->count() * 3;
                 @endphp
                 <tr>
                     @php
-                        $canditate_score = $candiate_test ? $candiate_test->totalScore() : 0;
+                        $candiate_score = $candiate_test ? $candiate_test->totalScore() : 0;
                         $examiner_score = $examiner_test ? $examiner_test->totalScore() : 0;
                         $section_count = $survey->section ? $survey->section->count() : 1;
+
+                        $candiate_percent = $candiate_score / $candiate_max_score * 100;
+                        $examiner_percent = $examiner_score / $examiner_max_score * 100;
+
+                        $score_by_percent = ($candiate_percent * $candiate_multiplier + $examiner_percent * $examiner_multiplier)
+                                            / ($candiate_multiplier +  $examiner_multiplier);
                     @endphp
                     <td>{{$index}}</td>
                     <td>{{$candiate->fullname}}</td>
                     <td>{{$candiate->department->department_name}}</td>
                     <td>{{$survey->section->count()}}</td>
                     <td>
-                        {{ $canditate_score }}
+                        {{ $candiate_score }}
                     </td>
                     <td>
                         {{ $examiner_score }}
                     </td>
                     <td>
-                        {{round((($canditate_score * 2 + $examiner_score*2) / (3*6*$section_count)*100), 2)}}%
+                        {{round($score_by_percent, 2)}}%
                     </td>
                 </tr>    
             @endif
