@@ -40,9 +40,6 @@
                     </thead>
                     <tbody>
                       @foreach ($customer_tests as $index => $test)
-                        @if (Auth::user()->is_admin !== 1 && Auth::user()->id !== $test->author->id )
-                          @break                           
-                        @endif
                         <tr>
                           <td>{{$index + 1}}</td>
                           <td>{{$test->survey->name ?? ''}}</td>
@@ -54,7 +51,6 @@
                             <a data-toggle-for="tooltip" title="Xóa" href="{{route('admin.customer_test.destroy', $test->id)}}" class="btn text-danger test-delete"><i class="far fa-trash-alt"></i></a>
                           </td>
                         </tr>
-                          
                       @endforeach
                     </tbody>
                 </table>
