@@ -174,9 +174,10 @@ class CustomerTestController extends Controller
             ->get()
             ->sortByDesc('id');
 
-        if (Auth::user()->cannot('sửa bài khảo sát khách hàng')) {
-            $customer_tests->where('created_by', Auth::user()->id);
+        if (Auth::user()->cannot('xem thống kê khách hàng')) {
+            $customer_tests = $customer_tests->where('created_by', Auth::user()->id);
         }
+
         return view('admin.pages.customer_tests.tests_by_customer', compact('customer_tests'));
     }
 

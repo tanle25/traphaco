@@ -507,32 +507,32 @@
             cancelButtonColor: '#d33',
             confirmButtonText: 'Vẫn xóa!',
         })
-            .then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        url: url,
-                        type: "POST",
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (data) {
-                            if (data.error) {
-                                swalToast(data.error, 'error');
-                            }
-                            if (data.msg) {
-                                swalToast(data.msg);
-                            }
-                            location.reload();
-                        },
-                        error: function (errors) {
-                            if(errors.status == 403){
-                                return swalToast('Bạn không có quyền truy cập', 'error');
-                            }
-                            swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        if (data.error) {
+                            swalToast(data.error, 'error');
                         }
-                    });
-                }
-            });
+                        if (data.msg) {
+                            swalToast(data.msg);
+                        }
+                        location.reload();
+                    },
+                    error: function (errors) {
+                        if(errors.status == 403){
+                            return swalToast('Bạn không có quyền truy cập', 'error');
+                        }
+                        swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
+                    }
+                });
+            }
+        });
     })
 // survey logic
     //drag table
