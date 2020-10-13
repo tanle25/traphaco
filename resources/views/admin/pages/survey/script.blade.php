@@ -50,12 +50,10 @@
                     </div>
                     <div class="can-comment"></div>
                     <div class="add-question row ">
-
                         <div class="col-12 add-option d-flex">
                             <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
                             <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
                         </div>
-
                         <div class="mt-3 d-flex justify-content-end col-12 question-footer " >
                             <div class="question-duplicate ">
                                 <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
@@ -67,7 +65,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

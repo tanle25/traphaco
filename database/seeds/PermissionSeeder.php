@@ -65,6 +65,9 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'gửi bài đánh giá']);
         Permission::firstOrCreate(['name' => 'xóa bài đánh giá']);
 
+        Permission::firstOrCreate(['name' => 'xem_bài_đánh_giá nội bộ phòng ban']);
+        Permission::firstOrCreate(['name' => 'quản_lý nội bộ phòng ban']);
+
         Permission::firstOrCreate(['name' => 'sửa bài đánh giá đã làm']);
         Permission::firstOrCreate(['name' => 'xem thống kê cá nhân']);
         Permission::firstOrCreate(['name' => 'xuất_excel thống kê cá nhân']);
@@ -77,7 +80,6 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'quản_lý quyền']);
         Permission::firstOrCreate(['name' => 'quản_lý quyền']);
         Permission::firstOrCreate(['name' => 'quản_lý quyền']);
-
         Permission::firstOrCreate(['name' => 'quản_lý tất cả đề thi']);
 
         // gets all permissions via Gate::before rule; see AuthServiceProvider

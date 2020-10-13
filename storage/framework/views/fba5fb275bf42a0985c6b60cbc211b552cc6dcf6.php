@@ -154,6 +154,31 @@
             </ul>
           </li>
 
+          <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('quản_lý nội bộ phòng ban')): ?>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Nội bộ phòng ban
+                <i class="fa fa-angle-right right"></i> 
+              </p>
+            </a>            
+            <?php
+                $department = Auth::user()->department
+            ?>
+            <ul class="nav nav-treeview">
+
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xem_bài_đánh_giá nội bộ phòng ban')): ?>
+              <li class="nav-item">
+                <a href="<?php echo e(route('admin.internal_department.show_user_test', $department->id ?? 0)); ?>" class="nav-link">
+                  <p>Xem báo cáo khảo sát</p> 
+                </a>
+              </li>    
+              <?php endif; ?>            
+            </ul>
+          </li>
+          <?php endif; ?>
+          
           <?php if(Auth::user()->hasAnyPermission(['xem khách hàng','xem thống kê khách hàng','xem phòng ban', 'xem user', 'xem đợt đánh giá','xem bộ đề','xem báo cáo đợt đánh giá'])): ?>
           <li class="nav-item has-treeview">
             

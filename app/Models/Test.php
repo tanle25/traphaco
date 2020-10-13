@@ -32,6 +32,11 @@ class Test extends Model
         return $this->belongsTo('App\Models\Survey', 'survey_id');
     }
 
+    public function survey_round_instance()
+    {
+        return $this->belongsTo('App\Models\SurveyRound', 'survey_round');
+    }
+
     public function answer()
     {
         return $this->hasMany('App\Models\Answer', 'test_id', 'id');
