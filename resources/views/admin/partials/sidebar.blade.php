@@ -154,6 +154,31 @@
             </ul>
           </li>
 
+          @can('quản_lý nội bộ phòng ban')
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Nội bộ phòng ban
+                <i class="fa fa-angle-right right"></i> 
+              </p>
+            </a>            
+            @php
+                $department = Auth::user()->department
+            @endphp
+            <ul class="nav nav-treeview">
+
+              @can('xem_bài_đánh_giá nội bộ phòng ban')
+              <li class="nav-item">
+                <a href="{{route('admin.internal_department.show_user_test', $department->id ?? 0)}}" class="nav-link">
+                  <p>Xem báo cáo khảo sát</p> 
+                </a>
+              </li>    
+              @endcan            
+            </ul>
+          </li>
+          @endcan
+          
           @if (Auth::user()->hasAnyPermission(['xem khách hàng','xem thống kê khách hàng','xem phòng ban', 'xem user', 'xem đợt đánh giá','xem bộ đề','xem báo cáo đợt đánh giá']))
           <li class="nav-item has-treeview">
             

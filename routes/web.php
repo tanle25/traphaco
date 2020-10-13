@@ -370,5 +370,6 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
 
     Route::get('/statistic/index', 'Admin\StatisticController@showForm')->name('statistic.assessment.show_form')->middleware('permission:xem báo cáo đợt đánh giá');
     Route::get('/statistic/assessment-user/export', 'Admin\StatisticController@exportExcelAssessmentResult')->name('statistic.assessment.export')->middleware('permission:xuất_excel báo cáo đợt đánh giá');
-
+    // Thống kê nội bộ phòng ban
+    Route::get('/internal-department/{id}/show-test', 'Admin\IternalCompanyController@showTest')->name('admin.internal_department.show_user_test')->middleware('permission:xem_bài_đánh_giá nội bộ phòng ban');
 });
