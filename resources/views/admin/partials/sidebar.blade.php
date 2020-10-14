@@ -157,9 +157,9 @@
           @can('quản_lý nội bộ phòng ban')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cogs"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Báo cáo cho quản lý bộ phận
+                Báo cáo cho quản lý
                 <i class="fa fa-angle-right right"></i> 
               </p>
             </a>            
@@ -171,7 +171,7 @@
               @can('xem_bài_đánh_giá nội bộ phòng ban')
               <li class="nav-item">
                 <a href="{{route('admin.internal_department.show_user_test', $department->id ?? 0)}}" class="nav-link">
-                  <p>Bài đánh giá của nhân viên trong bộ phận</p> 
+                  <p>Bài đánh giá của nhân viên</p> 
                 </a>
               </li>    
               @endcan            
