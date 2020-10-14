@@ -26,7 +26,7 @@ class CreateUserRequest extends FormRequest
         return [
             'fullname' => 'required|max:255',
             'password' => 'required|min:6',
-            'username' => 'required|max:255|min:4|unique:users,username',
+            'username' => 'required|max:255|min:3|unique:users,username',
             'email' => 'email:rfc|nullable|max:255|min:4|unique:users,username',
         ];
     }
@@ -45,6 +45,7 @@ class CreateUserRequest extends FormRequest
             'username.required' => 'Username không được để trống',
             'username.max:255' => 'Username tối đa 255 ký tự',
             'username.unique' => 'Username đã tồn tại',
+            'username.min' => 'Username tối thiểu 3 ký tự',
 
             'email.email' => 'Email không đúng định dạng',
             'email.unique' => 'Email đã tồn tại',
