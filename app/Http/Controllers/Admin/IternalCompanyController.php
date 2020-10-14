@@ -35,7 +35,15 @@ class IternalCompanyController extends Controller
             })
             ->pluck('id')
             ->toArray();
-        $tests = Test::with(['survey_round_instance', 'survey', 'candiate', 'candiate.position', 'candiate.department'])
+        $tests = Test::with(['survey_round_instance',
+            'survey',
+            'candiate',
+            'candiate.position',
+            'candiate.department',
+            'examiner',
+            'examiner.position',
+            'examiner.department',
+        ])
             ->whereIn('candiate_id', $users)->get();
         return view('admin.pages.internal_department.show_test', compact('tests'));
     }
