@@ -30,6 +30,7 @@
                         <th >STT</th>
                         <th>Tên đợt đánh giá</th>
                         <th >Tên bài đánh giá</th>
+                        <th >Người được đánh giá</th>
                         <th >Người làm đánh giá</th>
                         <th >Thao tác</th>
                       </tr>
@@ -41,6 +42,8 @@
                           <td>{{$test->survey_round_instance->name ?? ''}}</td>
                           <td>{{$test->survey->name ?? ''}}</td>
                           <td>{{$test->candiate->fullname ?? ''}}|{{$test->candiate->position->name ?? ''}}-{{$test->candiate->department->department_name ?? ''}}</td>
+                          <td>{{$test->examiner->fullname ?? ''}}|{{$test->examiner->position->name ?? ''}}-{{$test->examiner->department->department_name ?? ''}}</td>
+
                           <td>
                             <a data-toggle-for="tooltip" title="Xem kết quả" href="{{route("answer.re_ans", $test->id)}}"><i class="fas fa-eye"></i></a>
                           </td>
