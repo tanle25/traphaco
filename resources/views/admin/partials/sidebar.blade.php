@@ -159,7 +159,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
-                Nội bộ phòng ban
+                Báo cáo cho quản lý bộ phận
                 <i class="fa fa-angle-right right"></i> 
               </p>
             </a>            
@@ -171,7 +171,7 @@
               @can('xem_bài_đánh_giá nội bộ phòng ban')
               <li class="nav-item">
                 <a href="{{route('admin.internal_department.show_user_test', $department->id ?? 0)}}" class="nav-link">
-                  <p>Xem báo cáo khảo sát</p> 
+                  <p>Bài đánh giá của nhân viên trong bộ phận</p> 
                 </a>
               </li>    
               @endcan            
