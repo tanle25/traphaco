@@ -86,9 +86,6 @@
     })
   }
   checkCurrentLocaionMenu();
-
-
-
 </script>
 
 @yield('custom-js')

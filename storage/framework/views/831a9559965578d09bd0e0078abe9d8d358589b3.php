@@ -85,9 +85,6 @@
     })
   }
   checkCurrentLocaionMenu();
-
-
-
 </script>
 
 <?php echo $__env->yieldContent('custom-js'); ?><?php /**PATH E:\DEV\Employees management\HR manager\resources\views/admin/partials/scripts.blade.php ENDPATH**/ ?>

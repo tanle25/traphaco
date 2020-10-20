@@ -13,7 +13,7 @@
         <div class="user-panel mt-3 pb-3 mb-3">
           <div class="d-flex user-panel" style="border-bottom: none">
           <div class="image d-flex align-items-center">
-            <img src="<?php echo e(asset('template/AdminLTE/dist/img/user6-128x128.jpg')); ?>" class="img-circle elevation-2 d-block" alt="User Image'">
+            <img src="<?php echo e(asset('images/user6-128x128.jpg')); ?>" class="img-circle elevation-2 d-block" alt="User Image'">
           </div>
           <div class="info">
             <a href="#" class="d-block font-weight-bold" style="font-size: 1.1rem"><?php echo e(Auth::user()->fullname); ?></a>
