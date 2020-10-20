@@ -228,8 +228,21 @@ class AnswerController extends Controller
         // }
 
         $survey = $test->survey;
+        $total_score = $test->totalScore();
+        $question_count = $survey->getQuestions()->count();
+        switch ($survey->type) {
+            case 1:
+                $max_score = $question_count * 3;
+                break;
+            case 2:
+                $max_score = $question_count * 1;
+                break;
+            default:
+                $max_score = $question_count * 1;
+                break;
+        }
 
-        return view('admin.pages.user_tests.edit', compact('test', 'survey'));
+        return view('admin.pages.user_tests.edit', compact('test', 'survey', 'total_score', 'max_score'));
     }
 
     /**

@@ -8,7 +8,6 @@
 </style>
 @endsection
 
-
 @section('title')
     Các bài đánh giá
 @endsection
@@ -31,6 +30,9 @@
                         <h5>
                             {{$test->survey->type == 1 ? 'Người được đánh giá' : 'Người làm bài'}}: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}}
                         </h5>
+                    </div>
+                    <div>
+                        <h5>Điểm số: {{$total_score ?? 0}} / {{$max_score ?? 0}}</h5> 
                     </div>
                 </div>
 
