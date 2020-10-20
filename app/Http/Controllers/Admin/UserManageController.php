@@ -226,8 +226,22 @@ class UserManageController extends Controller
         return view('admin.pages.user_manage.edit_normal_user', compact('user'));
     }
 
-    public function updateNormalUser(UpdateUserRequest $request, $id)
+    public function updateNormalUser(Request $request, $id)
     {
+        $request->validate([
+            'password' => 'min:4|nullable',
+            'username' => 'required|max:255|min:3|unique:users,username,' . $id,
+            'email' => 'email:rfc|nullable|max:255|min:4|unique:users,email,' . $id,
+        ], [
+            'username.required' => 'Username không được để trống',
+            'username.max:255' => 'Username tối đa 255 ký tự',
+            'username.unique' => 'Username đã tồn tại',
+
+            'email.email' => 'Email không đúng định dạng',
+            'email.unique' => 'Email đã tồn tại',
+
+            'password.min' => 'Password tối thiểu 4 ký tự',
+        ]);
         $user = User::findOrFail($id);
 
         if (Auth::user()->id != $id) {
@@ -246,7 +260,6 @@ class UserManageController extends Controller
         $new_data = [];
 
         $new_data['username'] = $data['username'];
-        $new_data['fullname'] = $data['fullname'];
         $new_data['email'] = $data['email'];
         $new_data['password'] = $data['password'];
 

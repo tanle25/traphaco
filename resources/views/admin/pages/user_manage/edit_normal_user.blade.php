@@ -28,16 +28,6 @@
 
                     <div class="row">
                         <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label for="">Họ và tên</label>
-                                <input name="fullname" type="text" class="form-control" id=""
-                                    placeholder="Nhập tên người dùng mới (*)" value="{{ $user->fullname }}">
-                                @error('fullname')
-                                <strong class="text-red">
-                                    {{$message}}
-                                </strong>
-                                @enderror
-                            </div>
 
                             <div class="form-group">
                                 <label for="">Tên đăng nhập</label>
