@@ -31,12 +31,12 @@
                             {{$test->survey->type == 1 ? 'Người được đánh giá' : 'Người làm bài'}}: {{$test->candiate->fullname}} |{{$test->candiate->department->department_name ?? ''}} - {{$test->candiate->position->department_name ?? ''}}
                         </h5>
                     </div>
-                    <div>
-                        <h5>Điểm số: {{$total_score ?? 0}} / {{$max_score ?? 0}}</h5> 
-                    </div>
                 </div>
 
                 <div class="card-body">
+                    <div>
+                        <h4 class="text-red font-weight-bold">KẾT QUẢ: {{$total_score ?? 0}} / {{$max_score ?? 0}}</h4> 
+                    </div>
                     @foreach ($survey->section as $section)
                     <div class="section-header mb-3">
                         <h3>
