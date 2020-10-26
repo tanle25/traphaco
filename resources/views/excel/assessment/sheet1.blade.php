@@ -50,9 +50,11 @@
                     $candiate_multiplier = $candiate_test->multiplier;
                     $candiate_max_score = $survey->getQuestions()->count();
 
-                    $examiner_survey = $examiner_test->survey;
-                    $examiner_multiplier = $examiner_test->multiplier;
-                    $examiner_max_score = $examiner_survey->getQuestions()->count() * 3;
+                    if ($examiner_test) {
+                        $examiner_survey = $examiner_test->survey ?? null;
+                        $examiner_multiplier = $examiner_test->multiplier ?? 1;
+                        $examiner_max_score = $examiner_survey->getQuestions()->count() * 3 ?? 1;
+                    }
                 @endphp
                 <tr>
                     @php
