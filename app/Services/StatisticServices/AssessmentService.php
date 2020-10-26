@@ -58,7 +58,6 @@ class AssessmentService extends BaseService
             'candiate.position')
             ->where('survey_round', $this->survey_round_id)
             ->get();
-
         return $test;
     }
 }

@@ -53,9 +53,11 @@
                     $candiate_multiplier = $candiate_test->multiplier;
                     $candiate_max_score = $survey->getQuestions()->count();
 
-                    $examiner_survey = $examiner_test->survey;
-                    $examiner_multiplier = $examiner_test->multiplier;
-                    $examiner_max_score = $examiner_survey->getQuestions()->count() * 3;
+                    if ($examiner_test) {
+                        $examiner_survey = $examiner_test->survey;
+                        $examiner_multiplier = $examiner_test->multiplier;
+                        $examiner_max_score = $examiner_survey->getQuestions()->count() * 3;
+                    }
 
                     $candiate_percent = $candiate_score / $candiate_max_score * 100;
                     $examiner_percent = $examiner_score / $examiner_max_score * 100;
