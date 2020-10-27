@@ -41,7 +41,7 @@
                         @if ($answer->comment)
                         <td>{{$answer->comment}}</td>
                         @elseif($answer->option_choice)
-                        <td>{{$answer->option_choice_model->content}}</td>
+                        <td>{{$answer->option_choice_model->content ?? ''}}</td>
                         @else
                         <td></td>
                         @endif
