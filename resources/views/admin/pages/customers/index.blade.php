@@ -557,8 +557,6 @@
         e.preventDefault();
         const x = e.pageX - $(this).get(0).offsetLeft;
         const walk = (x - startX) * 1; //scroll-fast
-        console.log(x, walk);
-        //console.log($(this).get(0).scrollLeft);
         $(this).get(0).scrollLeft = scrollLeft - walk;
     });
 ///====================history logic=======================////

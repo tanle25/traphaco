@@ -160,7 +160,6 @@
         x = setInterval(function() {    
 
             distance = duration;
-            console.log(distance);
             //document.getElementById("days").innerText = Math.floor(distance / (day)),
             //document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
             document.getElementById("minutes").innerText = Math.floor((distance / (minute))),
