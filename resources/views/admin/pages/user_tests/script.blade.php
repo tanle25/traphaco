@@ -120,7 +120,7 @@
             }else{
                 location.href = "{{route('answer.index', ['marked' => 1])}}";
             }
-        }, 300)
+        }, 1000)
     })
 
     setInterval(() => {
@@ -151,7 +151,7 @@
                 }else{
                     location.href = "{{route('answer.index', ['marked' => 1])}}";
                 }
-            }, 300)
+            }, 3000)
         }
     }, 2000)
     @endif
