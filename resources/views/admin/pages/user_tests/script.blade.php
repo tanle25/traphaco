@@ -144,6 +144,14 @@
             setTimeout(function(){
                 saveAnswer(url, answer);
             }, 1000)
+
+            setTimeout(function () {
+                if(location.href.indexOf('edit') == - 1){
+                    location.href = "{{route('answer.index', ['marked' => 0])}}";
+                }else{
+                    location.href = "{{route('answer.index', ['marked' => 1])}}";
+                }
+            }, 300)
         }
     }, 2000)
     @endif
