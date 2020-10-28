@@ -151,7 +151,7 @@
                 }else{
                     location.href = "{{route('answer.index', ['marked' => 1])}}";
                 }
-            }, 3000)
+            }, 2000)
         }
     }, 2000)
     @endif
