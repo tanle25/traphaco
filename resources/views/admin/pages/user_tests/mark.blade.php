@@ -6,6 +6,13 @@
         resize: none;
         overflow: hidden;
     }
+    #countdown strong{
+        font-size: 1.5rem;
+    }
+
+    #countdown div{
+        font-size: 1.5rem;
+    }
 </style>
 @endsection
 
@@ -45,9 +52,20 @@
                     <div class="mt-3">
                         <h5 style="white-space: pre">{{$test->survey->tutorial ?? ''}}</h5>
                     </div>
+                    
                 </div>
 
                 <div class="card-body">
+                    <div class="">
+                        <div id="countdown">
+                          <ul class="d-flex p-0">
+                            <div><strong>Thời gian còn lại: &nbsp</strong></div>
+                            <div><span id="minutes"></span> phút</div> &nbsp;&nbsp;&nbsp;
+                            <div><span id="seconds"></span> giây</div>
+                          </ul>
+                        </div>
+                      </div>
+
                     @foreach ($survey->section as $section)
                     <div class="section-header mb-3">
                         <h3>
@@ -59,6 +77,9 @@
                     </div>
                     
                     @foreach ($section->questions as $question)
+                        @php
+                        $answer = $question->getAnswerByUserTest($test->id);
+                        @endphp
                         <div data-question-id="{{$question->id}}" class="mb-3 question {{$question->must_mark == 1 ? 'must-mark' : ''}}">
                             <div class="question-title">
                                 <h5 style="white-space: pre-line">{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(*)' : ''}}</h5>
@@ -74,7 +95,10 @@
 
                                     @foreach ($question_options as $option)
                                     <div class="form-group d-flex justify-center align-center @if ($option_length <= 72) col-md-3 @else col-12 @endif">
-                                        <input class="option-input" type="radio" style="height:23px; width:23px; flex: 0 0 23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
+                                        <input 
+                                            class="option-input"
+                                            @if ($answer) {{$answer->option_choice == $option->id ? 'checked' : ''}} @endif
+                                            type="radio" style="height:23px; width:23px; flex: 0 0 23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                         <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                                             @if ($test->type == 1)
                                             ({{$option->score ?? 0}} điểm)</span>

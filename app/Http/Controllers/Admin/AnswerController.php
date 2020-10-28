@@ -159,7 +159,7 @@ class AnswerController extends Controller
         }
 
         if (empty($request->answer)) {
-            return ['error' => 'Không tìm thấy câu trả lời!'];
+            return ['error' => 'Mời bạn làm bài, hệ thống sẽ tự động cập nhật kết quả sau 1 phút!'];
         };
 
         DB::beginTransaction();
@@ -182,7 +182,7 @@ class AnswerController extends Controller
                         'test_id' => $request->test_id,
                         'question_id' => $answer['question_id'],
                     ]);
-                    $test->status = 3;
+                    // $test->status = 3;
                     $test->save();
                 };
             }
@@ -203,7 +203,6 @@ class AnswerController extends Controller
     public function showTest($id)
     {
         $test = Test::findOrFail($id);
-
         // if (Auth::user()->id !== $test->examiner->id || $test->examiner->status == 1) {
         //     return abort(404);
         // }

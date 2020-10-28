@@ -41,12 +41,16 @@
     }
 
     function saveAnswer(url, answer){
+        var input = answer.filter(function(item){
+            return item.option_id !== '';
+        });
+
         $.ajax({
             url: url,
             type: "POST",
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
-                answer: answer,
+                answer: input,
                 test_id: {{$test->id}},
             },
             success: function (data) {
@@ -56,13 +60,7 @@
                 
                 if (data.msg) {
                     swalToast(data.msg);
-                    setTimeout(function () {
-                        if(location.href.indexOf('edit') == - 1){
-                            location.href = "{{route('answer.index', ['marked' => 0])}}";
-                        }else{
-                            location.href = "{{route('answer.index', ['marked' => 1])}}";
-                        }
-                    }, 300)
+                    
                 } 
             },
             error: function (errors) {
@@ -115,9 +113,23 @@
 
         var answer = getAnswer();
         saveAnswer(url, answer);
+
+        setTimeout(function () {
+            if(location.href.indexOf('edit') == - 1){
+                location.href = "{{route('answer.index', ['marked' => 0])}}";
+            }else{
+                location.href = "{{route('answer.index', ['marked' => 1])}}";
+            }
+        }, 300)
     })
 
+    setInterval(() => {
+        var answer = getAnswer();
+        saveAnswer(url, answer);
+    }, 60000);
+
     var session_time = {{Carbon\Carbon::now()->timestamp * 1000}};
+
     @if(\Request::route()->getName() === "answer.mark" )
     var checkTime =  setInterval(function(){
         session_time += 2000; 
@@ -134,7 +146,39 @@
             }, 1000)
         }
     }, 2000)
-
     @endif
+
+    (function () {
+    let  duration = "{{- Carbon\Carbon::now()->timestamp * 1000 + Carbon\Carbon::parse($test->getEndTime())->timestamp * 1000}}";
+    const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+    
+    let endTime = new Date(),
+        countDown = new Date(endTime).getTime(),
+        x = setInterval(function() {    
+
+            distance = duration;
+            console.log(distance);
+            //document.getElementById("days").innerText = Math.floor(distance / (day)),
+            //document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+            document.getElementById("minutes").innerText = Math.floor((distance / (minute))),
+            document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+            duration -= 1000;
+            //do something later when date is reached
+            if (distance < 0) {
+            let headline = document.getElementById("headline"),
+                countdown = document.getElementById("countdown"),
+                content = document.getElementById("content");
+
+            countdown.style.display = "none";
+            content.style.display = "block";
+
+            clearInterval(x);
+            }
+            //seconds
+        }, 1000)
+    }());
 
 </script>
