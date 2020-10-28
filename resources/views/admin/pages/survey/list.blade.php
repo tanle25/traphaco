@@ -44,7 +44,6 @@
         $(document).on('click', '.remove-survey-btn', function(e){
             e.preventDefault();
             var url = $(this).attr('href');
-            console.log('hellop');
             Swal.fire({
                 title: 'Xóa bài khảo sát này?',
                 text: "Bạn không thể hoàn tác!",

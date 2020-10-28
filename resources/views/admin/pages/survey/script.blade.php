@@ -179,7 +179,6 @@
         $(document).on("blur",'.section-content',function(e) {
             var sectionId = $(this).closest('.section-wraper').data('section-id');
             var title = $(this).closest('.section-header').find('.section-title input').val();
-            console.log(title);
             var content = $(this).val();
             if(surveyId) {
                 updateSection(sectionId, title, content);
@@ -733,7 +732,6 @@ $(document).on('sortbeforestop', '.sortable', function(e){
         if(dataQuestion[0] == ''){
             return;
         }
-        console.log(dataQuestion)
         orderQuestions(dataQuestion)
     }
 
@@ -742,7 +740,6 @@ $(document).on('sortbeforestop', '.sortable', function(e){
         if(dataSection[0] == ''){
             return;
         }
-        console.log(dataSection);
     }
 });
 

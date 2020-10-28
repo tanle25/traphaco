@@ -237,7 +237,6 @@ $('.select2').select2({
 });
 
 $('.select2').on('select2:select', function(e){
-//console.log(e.params.data.element.getAttribute('value'));
 selectContain = e.target;
 
 if(e.params.data.element.classList.contains('department')){
