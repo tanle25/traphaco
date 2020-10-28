@@ -182,6 +182,7 @@ class AnswerController extends Controller
                         'test_id' => $request->test_id,
                         'question_id' => $answer['question_id'],
                     ]);
+
                     $test->status = 3;
                     $test->save();
                 };
