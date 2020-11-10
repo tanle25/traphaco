@@ -54,17 +54,17 @@
                     </div>
                     
                 </div>
-
-                <div class="card-body">
-                    <div class="">
+                <div class="card-body" style="position: relative">
+                    
+                    <div class="sticky-countdown" style="position: relative; top:0; z-index:1000">
                         <div id="countdown">
-                          <ul class="d-flex p-0">
-                            <div><strong>Thời gian còn lại: &nbsp</strong></div>
-                            <div><span id="minutes"></span> phút</div> &nbsp;&nbsp;&nbsp;
-                            <div><span id="seconds"></span> giây</div>
+                          <ul class="mx-auto d-flex p-2 bg-light justify-content-center border" style="width:max-content">
+                            <div><strong class="text-danger">Thời gian: &nbsp</strong></div>
+                            <div><strong id="minutes" class='text-danger'></strong> :</div> &nbsp;&nbsp;
+                            <div><strong id="seconds" class='text-danger'></strong></div>
                           </ul>
                         </div>
-                      </div>
+                    </div>
 
                     @foreach ($survey->section as $section)
                     <div class="section-header mb-3">
@@ -130,5 +130,12 @@
 @endsection 
 
 @section('custom-js')
+<script>
+
+</script>
+    <script src="{{asset('template/js/stickyfloat.js')}}"></script>
+    <script>
+        $('.sticky-countdown').stickyfloat({ duration: 400 });
+    </script>
     @include('admin.pages.user_tests.script');
 @endsection
