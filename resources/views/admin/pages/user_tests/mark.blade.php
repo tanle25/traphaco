@@ -52,14 +52,14 @@
                     <div class="mt-3">
                         <h5 style="white-space: pre">{{$test->survey->tutorial ?? ''}}</h5>
                     </div>
-                    
+
                 </div>
                 <div class="card-body" style="position: relative">
-                    
+
                     <div class="sticky-countdown" style="position: relative; top:0; z-index:1000">
                         <div id="countdown">
                           <ul class="mx-auto d-flex p-2 bg-light justify-content-center border" style="width:max-content">
-                            <div><strong class="text-danger">Thời gian: &nbsp</strong></div>
+                            <div><strong class="text-danger">Thời gian làm bài còn: &nbsp</strong></div>
                             <div><strong id="minutes" class='text-danger'></strong> :</div> &nbsp;&nbsp;
                             <div><strong id="seconds" class='text-danger'></strong></div>
                           </ul>
@@ -75,7 +75,7 @@
                             {{$section->content}}
                         </h4>
                     </div>
-                    
+
                     @foreach ($section->questions as $question)
                         @php
                         $answer = $question->getAnswerByUserTest($test->id);
@@ -85,7 +85,7 @@
                                 <h5 style="white-space: pre-line">{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(*)' : ''}}</h5>
                             </div>
                             <div class="question-option pt-2">
-                                <div class="row" style="font-size: 18px">  
+                                <div class="row" style="font-size: 18px">
                                     @php
                                         $question_options = $question->options;
                                         $option_length = $question_options->reduce(function($length, $item){
@@ -95,28 +95,28 @@
 
                                     @foreach ($question_options as $option)
                                     <div class="form-group d-flex justify-center align-center @if ($option_length <= 72) col-md-3 @else col-12 @endif">
-                                        <input 
+                                        <input
                                             class="option-input"
                                             @if ($answer) {{$answer->option_choice == $option->id ? 'checked' : ''}} @endif
                                             type="radio" style="height:23px; width:23px; flex: 0 0 23px" data-question-id="{{$question->id}}" name="question-{{$question->id}}" value="{{$option->id}}">
                                         <span class="pl-2" style="line-height: 23px">{{$option->content ?? ''}}
                                             @if ($test->type == 1)
                                             ({{$option->score ?? 0}} điểm)</span>
-                                            @endif 
+                                            @endif
                                     </div>
-                                    @endforeach 
+                                    @endforeach
                                 </div>
                                 <div class="form-group">
                                     @if ($question->can_comment == 1)
-                                    <textarea class="form-control comment" value="" oninput="auto_grow(this)" rows="1" placeholder="Nhận xét"></textarea>                                        
+                                    <textarea class="form-control comment" value="" oninput="auto_grow(this)" rows="1" placeholder="Nhận xét"></textarea>
                                     @endif
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         @endforeach
                     @endforeach
                     <button href="{{route('answer.store')}}" class="btn btn-traphaco send-result">Gửi kết quả</button>
-                </div> 
+                </div>
             </div>
             <!-- /.card -->
           </div>
@@ -127,7 +127,7 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection 
+@endsection
 
 @section('custom-js')
 <script>
