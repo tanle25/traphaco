@@ -35,7 +35,7 @@
 
                 <div class="card-body">
                     <div>
-                        <h4 class="text-red font-weight-bold">KẾT QUẢ: {{$total_score ?? 0}} / {{$max_score ?? 0}}</h4> 
+                        <h4 class="text-red font-weight-bold">KẾT QUẢ: {{$total_score ?? 0}} / {{$max_score ?? 0}}</h4>
                     </div>
                     @foreach ($survey->section as $section)
                     <div class="section-header mb-3">
@@ -46,7 +46,7 @@
                             {{$section->content}}
                         </h4>
                     </div>
-                    
+
                     @foreach ($section->questions as $question)
                         @php
                         $answer = $question->getAnswerByUserTest($test->id);
@@ -56,7 +56,7 @@
                                 <h5 style="white-space: pre-line">{{$question->content ?? ''}} {{$question->must_mark == 1 ? '(*)' : ''}}</h5>
                             </div>
                             <div class="question-option pt-2">
-                                <div class="row" style="font-size: 18px"> 
+                                <div class="row" style="font-size: 18px">
                                     @php
                                         $question_options = $question->options;
                                         $option_length = $question_options->reduce(function($length, $item){
@@ -66,19 +66,19 @@
 
                                     @foreach ($question->options as $option)
                                     <div class="form-group  @if ($option_length <= 72) col-md-3 @else col-12 @endif d-flex justify-center align-center">
-                                        <input 
+                                        <input
                                         @if ($answer) {{$answer->option_choice == $option->id ? 'checked' : ''}} @endif
-                                        class="option-input" 
-                                        type="radio" 
-                                        style="height:23px; width:23px;flex: 0 0 23px " 
-                                        data-question-id="{{$question->id}}" 
-                                        name="question-{{$question->id}}" 
+                                        class="option-input"
+                                        type="radio"
+                                        style="height:23px; width:23px;flex: 0 0 23px "
+                                        data-question-id="{{$question->id}}"
+                                        name="question-{{$question->id}}"
                                         value="{{$option->id}}"
-                                        @if ($answer) 
+                                        @if ($answer)
                                             @if ($answer->option_choice !== $option->id )
                                             @cannot('sửa bài đánh giá đã làm') disabled @endcan
                                         @endif
-                                        
+
                                         @endif
                                         >
 
@@ -93,38 +93,38 @@
                                                 @endif
                                             @else
                                                 {{$option->content ?? ''}}
-                                            @endif 
+                                            @endif
 
-                                            
+
                                             @if ($test->survey->type == 1)
                                             ({{$option->score ?? 0}} điểm)
-                                            @endif 
-                                        </span> 
-                                            
+                                            @endif
+                                        </span>
+
                                     </div>
-                                    @endforeach 
+                                    @endforeach
                                 </div>
                                 <div class="form-group">
                                     @if ($question->can_comment == 1)
-                                    <textarea 
-                                    class="form-control comment" 
-                                    value="" oninput="auto_grow(this)" 
-                                    rows="1" 
+                                    <textarea
+                                    class="form-control comment"
+                                    value="" oninput="auto_grow(this)"
+                                    rows="1"
                                     placeholder="Nhận xét khác"
                                     @cannot('sửa bài đánh giá đã làm')readonly @endcan
                                     >
                                         {{$question->getAnswerByUserTest($test->id)->comment ?? ''}}
-                                    </textarea>                                        
+                                    </textarea>
                                     @endif
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         @endforeach
                     @endforeach
                     @can('sửa bài đánh giá đã làm')
                     <button href="{{route('answer.update_ans')}}" class="btn btn-traphaco send-result">Sửa kết quả</button>
                     @endcan
-                </div> 
+                </div>
             </div>
             <!-- /.card -->
           </div>
@@ -135,7 +135,7 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection 
+@endsection
 
 @section('custom-js')
     @include('admin.pages.user_tests.script');

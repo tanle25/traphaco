@@ -6,11 +6,11 @@
 
 
 <?php $__env->startSection('title'); ?>
-  Quản lý đợt khảo sát
+  Quản lý đợt đánh giá
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Quản lý đợt khảo sát'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Quản lý đợt đánh giá'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -18,10 +18,12 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách người dùng</h3>
+                <h3 class="card-title">Danh sách đợt đánh giá</h3>
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('thêm đợt đánh giá')): ?>
                 <a href="<?php echo e(route('admin.survey_round.create')); ?>" class="btn btn-success float-right">
-                  <i class="far fa-file nav-icon">  Thêm mới</i>
+                  <i class="fas fa-plus-circle nav-icon"></i> Thêm mới
                 </a>
+                <?php endif; ?>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -29,8 +31,8 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Tên đợt khảo sát</th>
-                        <th>Người tao</th>
+                        <th>Tên đợt đánh giá</th>
+                        <th>Người tạo</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
@@ -47,7 +49,7 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-<?php $__env->stopSection(); ?> 
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('custom-js'); ?>
 ##parent-placeholder-9861867d401053ff2325265a70136f5f44ff874e##
@@ -61,11 +63,12 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
+      scrollX:true,
       ajax: "<?php echo e(route('admin.survey_round.list')); ?>",
       columns: [
-        { "data": "id" },
+        { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
         { "data": "name" },
-        { "data": "created_by" },
+        { "data": "created_by", 'name' : "fullname"  },
         { "data" :"action"}
       ]
     });
@@ -75,7 +78,7 @@
             e.preventDefault();
             var url = $(this).attr('href');
             Swal.fire({
-                title: 'Xóa đợt khảo sát này?',
+                title: 'Xóa đợt đánh giá này?',
                 text: "Bạn không thể hoàn tác!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -112,4 +115,5 @@
 </script>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('admin.main_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/admin/web/dg.traphaco.vn/public_html/resources/views/admin/pages/survey_round/index.blade.php ENDPATH**/ ?>

@@ -51,27 +51,27 @@
 
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Tên khách hàng:</label>
-                <input type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="fullname" value="<?php echo e($customer->fullname); ?>" placeholder="Nhập tên khách hàng">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="fullname" value="<?php echo e($customer->fullname); ?>" placeholder="Nhập tên khách hàng">
                 <label for="test-fullname-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Tên nhà thuốc:</label>
-                <input type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="pharmacy_name" value="<?php echo e($customer->pharmacy_name); ?>" placeholder="Nhập tên hiệu thuốc">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-fullname-value" class="col-md-9 col-11 form-control  no-border" name="pharmacy_name" value="<?php echo e($customer->pharmacy_name); ?>" placeholder="Nhập tên hiệu thuốc">
                 <label for="test-fullname-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 col-12 d-inline-block text-left">Địa chỉ:</label>
-                <input type="test" id="test-address-value" class="col-md-9 col-11 form-control  no-border" value="<?php echo e($customer->address); ?>" name="address" placeholder="Nhập địa chỉ khách hàng">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-address-value" class="col-md-9 col-11 form-control  no-border" value="<?php echo e($customer->address); ?>" name="address" placeholder="Nhập địa chỉ khách hàng">
                 <label for="test-address-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Số điện thoại:</label>
-                <input type="test" id="test-phone-value" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->phone); ?>" name="phone" placeholder="Nhập số điện thoại">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> type="test" id="test-phone-value" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->phone); ?>" name="phone" placeholder="Nhập số điện thoại">
                 <label for="test-phone-value" class="col-1">...</label>
             </div>
             <div class="form-inline">
                 <label class="col-md-2 d-inline-block text-left">Địa bàn:</label>
-                <input id="test-zone-value" type="test" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->zone); ?>" name="zone" placeholder="Nhập tên địa bàn">
+                <input <?php echo e(Auth::user()->is_admin == 1 ? '' :'readonly'); ?> id="test-zone-value" type="test" class="col-md-9 col-11 form-control no-border" value="<?php echo e($customer->zone); ?>" name="zone" placeholder="Nhập tên địa bàn">
                 <label for="test-zone-value" class="col-1">...</label>
             </div>
     </div> 
@@ -102,17 +102,25 @@
            <?php $__currentLoopData = $section->questions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                <div class="mb-3 question" data-question-id="<?php echo e($question->id); ?>">
                    <div class="question-title">
-                       <h5> <strong> Câu hỏi:</strong><?php echo e($question->content ?? ''); ?></h5>
+                    <h5 style="white-space: pre-line"><?php echo e($question->content  ?? ''); ?></h5>
                    </div>
                    <div class="question-option pt-2">
                        <div class="row option-wraper" style="font-size: 18px">  
-                           <?php $__currentLoopData = $question->options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                           <div class="form-group col-md-3 d-flex justify-center align-center">
-                               <input class="option-input" type="radio" style="height:23px; width:23px" data-question-id="<?php echo e($question->id); ?>" name="question-<?php echo e($question->id); ?>" value="<?php echo e($option->id); ?>">
+                            <?php
+                                $question_options = $question->options;
+                                $option_length = $question_options->reduce(function($length, $item){
+                                    return $length + strlen($item->content);
+                                }, 0);
+                            ?>
+
+                           <?php $__currentLoopData = $question_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                           <div class="form-group <?php if($option_length <= 72): ?> col-md-3 <?php else: ?> col-12 <?php endif; ?> d-flex justify-center align-center">
+                               <input class="option-input" type="radio" style="height:23px; width:23px; flex: 0 0 23px" data-question-id="<?php echo e($question->id); ?>" name="question-<?php echo e($question->id); ?>" value="<?php echo e($option->id); ?>">
                                <span class="pl-2" style="line-height: 23px"><?php echo e($option->content ?? ''); ?>
 
                            </div>
                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+
                        </div>
 
                        <?php if($question->can_comment == 1): ?>
@@ -140,13 +148,13 @@
             var questionId = $(this).data('question-id');
             answer.push({
                 question_id: questionId,
-                option_id: $(this).find('.option-input:checked').attr('value') ?? '',
-                comment: $(this).find('.comment').val() ?? '',
+                option_id: $(this).find('.option-input:checked').attr('value') ? $(this).find('.option-input:checked').attr('value') :  '',
+                comment: $(this).find('.comment').val() ? $(this).find('.comment').val() : '',
             });     
         })
 
         Swal.fire({
-            title: 'Hoàn thành bài test!',
+            title: 'Hoàn thành bài đánh giá!',
             text: "Gửi kết quả!",
             icon: 'success',
             showCancelButton: true,
@@ -181,6 +189,7 @@
             }
         });
     })
+    
     $(document).on('blur', '#customer-test-form input',function(e){
         var url = $('#customer-test-form').attr('action');
         var key = $(this).attr('name');
@@ -193,7 +202,13 @@
             url: url,
             data: data,
             success: function(data){
-                swalToast(data.success, 'success');
+                if (data.error) {
+                    swalToast(data.error, 'error');
+                }
+                if (data.success) {
+                    swalToast(data.success);
+                }
+
                 setTimeout(function () {
                     $("#customer-table").DataTable().ajax.reload();
                 }, 500);

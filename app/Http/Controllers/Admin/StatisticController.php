@@ -36,13 +36,7 @@ class StatisticController extends Controller
                 $zipped_file = $this->zipFile($file_name, 'thong_ke.zip');
                 return response()->download(storage_path('thong_ke.zip'))->deleteFileAfterSend(true);
             }
-            // } catch (\Exception $e) {
-            //     return $e;
-            //     return redirect()
-            //         ->back()
-            //         ->withInput()
-            //         ->with('error', 'Có lỗi trong quá trình tổng hợp. Vui lòng kiểm tra lại đợt đánh giá!');
-            // }
+
         }
         try {
             // Tạo mới file zip
@@ -66,7 +60,7 @@ class StatisticController extends Controller
         }
     }
 
-    protected function zipFile($file_list = [], $file_zip_name)
+    protected function zipFile($file_list, $file_zip_name)
     {
         $zip = new ZipArchive;
         $zip->open(storage_path($file_zip_name), ZipArchive::CREATE | ZipArchive::OVERWRITE);

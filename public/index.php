@@ -5,8 +5,8 @@
  *
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
- */
-
+ini_set('memory_limit', '-1'); */
+ini_set('memory_limit', '-1');
 define('LARAVEL_START', microtime(true));
 
 /*

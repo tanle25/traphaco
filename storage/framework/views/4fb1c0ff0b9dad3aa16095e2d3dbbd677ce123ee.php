@@ -19,9 +19,16 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách người dùng</h3>
-                <a href="<?php echo e(route('admin.usermanage.create')); ?>" class="btn btn-success float-right">
-                  <i class="fas fa-user-plus nav-icon"> Thên mới</i>
-                </a>
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('thêm user')): ?>
+                  <a href="<?php echo e(route('admin.usermanage.import')); ?>" class="ml-3 btn btn-success float-right">
+                    <i class="fas fa-plus-circle nav-icon">Import</i>
+                  </a>
+                  <a href="<?php echo e(route('admin.usermanage.create')); ?>" class="btn btn-success float-right">
+                    <i class="fas fa-plus-circle nav-icon"> Thên mới</i>
+                  </a>
+                <?php endif; ?>
+                
+
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -52,9 +59,11 @@
       processing: true,
       serverSide: true,
       autoWidth:false,
+      scrollX:true,
       ajax: "<?php echo e(route('admin.usermanage.list_user')); ?>",
       columns: [
-        { "data": "id" },
+        { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
+        { "data": "username"},
         { "data": "fullname" },
         { "data": "email" },
         { "data": "department_name" },

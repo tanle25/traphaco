@@ -18,20 +18,33 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Kết quả các cuộc khảo sát</h3>
+                <h3 class="card-title">Kết quả đợt đánh giá</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="test-table" class="table table-bordered table-hover">
+                <table id="user-result-table" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>Đợt khảo sát</th>
-                        <th>Tên bài test</th>
-                        <th>Tổng số điểm</th>
-                        <th>Thao tác</th>
+                        <th >STT</th>
+                        <th>Tên đợt đánh giá</th>
+                        <th >Số được đánh giá</th>
+                        <th >Các bài đánh giá</th>
+                        <th >Thao tác</th>
                       </tr>
                     </thead>
+                    <tbody>
+                      <?php $__currentLoopData = $survey_round; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                          <td><?php echo e($index + 1); ?></td>
+                          <td><?php echo e($item->survey_round_name); ?></td>
+                          <td><?php echo e($item->user_count); ?></td>
+                          <td><?php echo e($item->survey_list); ?></td>
+                          <td>
+                            <a href="<?php echo e(route('admin.user_result.show', $item->survey_round_id)); ?>"> Xem chi tiết </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </tbody>
                   </table>                
               </div>
               <!-- /.card-body -->
@@ -55,17 +68,8 @@
 <script src="<?php echo e(asset('template/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
 <script>
   $(function () {
-    $("#test-table").dataTable({
-      processing: true,
+    $("#user-result-table").dataTable({
       autoWidth:false,
-      ajax: "<?php echo e(route('result.list_test')); ?>",
-      columns: [
-        { "data": "id" },
-        { "data": "survey_round_name" },
-        { "data": "test_list" },
-        { "data": "total_score" },
-        { "data": "action"},
-      ]
     });
   });
 </script>

@@ -11,6 +11,7 @@ use DataTables;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class AnswerController extends Controller
 {
@@ -148,6 +149,7 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $request->validate([
             'test_id' => 'required|numeric',
         ]);
@@ -186,7 +188,9 @@ class AnswerController extends Controller
                     $test->status = 3;
                     $test->save();
                 };
+
             }
+
             DB::commit();
         } catch (Exception $th) {
             DB::rollback();
@@ -201,15 +205,19 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showTest($id)
+    public function showTest($test_id)
     {
-        $test = Test::findOrFail($id);
+        $test = Test::findOrFail($test_id);
         // if (Auth::user()->id !== $test->examiner->id || $test->examiner->status == 1) {
         //     return abort(404);
         // }
 
         $survey = $test->survey;
 
+            // dd($survey);
+            if($survey->type ==4){
+                return view('admin.pages.user_tests.answer-vote',compact('test', 'survey'));
+            }
         return view('admin.pages.user_tests.mark', compact('test', 'survey'));
     }
 
@@ -241,8 +249,14 @@ class AnswerController extends Controller
                 $max_score = $question_count * 1;
                 break;
         }
+        if($survey->type == 4){
+            // dd($test);
+            return view('admin.pages.user_tests.answer', compact('test', 'survey', 'total_score', 'max_score'));
+
+        }
 
         return view('admin.pages.user_tests.edit', compact('test', 'survey', 'total_score', 'max_score'));
+
     }
 
     /**
@@ -301,5 +315,48 @@ class AnswerController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function storeAnswer(Request $request)
+    {
+        # code...
+        $request->validate([
+            'test_id' => 'required|numeric',
+        ]);
+        $test = Test::findOrFail($request->test_id);
+        $count = 0;
+        foreach($request->input() as $key =>$value){
+            $count++;
+            if($count <= 2){
+                continue;
+            }else{
+            $question = Str::replaceFirst('question-',null,$key);
+
+            Answer::create([
+                'option_choice' => $value,
+                'comment' => null,
+                'test_id' => $request->test_id,
+                'question_id' => $question,
+            ]);
+            $test->status = 3;
+            $test->save();
+            }
+        }
+        $image = $request->file('attachment');
+        $link = $image->move('attach',$image->getClientOriginalName());
+        $test->attach = $link;
+        $test->save();
+        return redirect()->route('answer.index');
+    }
+    public function UploadImage(Request $request)
+    {
+        # code...
+
+
+        $test = Test::findOrFail($request->testId);
+        $image = $request->file('attachment');
+        $link = $image->move('attach',$image->getClientOriginalName());
+        $test->attach = $link;
+        $test->save();
+        return ['msg' => 'Cập nhật hình ảnh thành công!'];
     }
 }

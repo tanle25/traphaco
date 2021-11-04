@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AnswerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -303,7 +304,8 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
         ->middleware('permission:sửa bài đánh giá đã làm');
     Route::get('answer/list', 'Admin\AnswerController@index')
         ->name('answer.index');
-
+    Route::post('answer/send',[AnswerController::class,'storeAnswer'])->name('store.answer');
+    Route::post('uploadimage',[AnswerController::class,'UploadImage'])->name('upload.image');
     Route::get('/result/index', 'ResultController@index')
         ->name('result.index');
     Route::get('/result/list-test', 'ResultController@listResult')
@@ -372,4 +374,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/statistic/assessment-user/export', 'Admin\StatisticController@exportExcelAssessmentResult')->name('statistic.assessment.export')->middleware('permission:xuất_excel báo cáo đợt đánh giá');
     // Thống kê nội bộ phòng ban
     Route::get('/internal-department/{id}/show-test', 'Admin\IternalCompanyController@showTest')->name('admin.internal_department.show_user_test')->middleware('permission:xem_bài_đánh_giá nội bộ phòng ban');
+});
+Route::get('test', function () {
+    view('admin.pages.user_tests.answer');
 });

@@ -51,7 +51,7 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection 
+@endsection
 
 @section('custom-js')
 @parent
@@ -70,7 +70,7 @@
       columns: [
         { "data": "DT_RowIndex","name": 'DT_Row_Index' , "orderable": false, "searchable": false},
         { "data": "name" },
-        { "data": "created_by", 'name' : "author.fullname"  },
+        { "data": "created_by", 'name' : "fullname"  },
         { "data" :"action"}
       ]
     });

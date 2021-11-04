@@ -65,10 +65,24 @@
 
   function auto_grow(element) {
     element.style.height = "5px";
-    element.style.height = (element.scrollHeight)+"px" ;
+    element.style.height = (element.scrollHeight) + "px" ;
   }
 
+  $('.table').on('draw.dt', function(){
+    $('[data-toggle-for="tooltip"]').tooltip({
+      placement: 'auto',
+    });
+  });
+
+  function checkCurrentLocaionMenu(){
+    var currentUrl = window.location.href;
+    $('.sidebar .nav-link').each(function(){
+      if(currentUrl.indexOf($(this).attr('href')) !== -1 ){
+        $(this).closest('.nav-item.has-treeview').addClass('menu-open');
+      }
+    })
+  }
+  checkCurrentLocaionMenu();
 </script>
 
-<?php echo $__env->yieldContent('custom-js'); ?>
-<?php /**PATH /home/admin/web/dg.traphaco.vn/public_html/resources/views/admin/partials/scripts.blade.php ENDPATH**/ ?>
+<?php echo $__env->yieldContent('custom-js'); ?><?php /**PATH /home/admin/web/dg.traphaco.vn/public_html/resources/views/admin/partials/scripts.blade.php ENDPATH**/ ?>

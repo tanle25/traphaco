@@ -1,4 +1,4 @@
-<!--=========================================================-->
+
 @php
     if (isset($survey->section)) {
         $sections = $survey->section;
@@ -17,8 +17,8 @@
             <div class="card-title">
                 Bộ câu hỏi
             </div>
-            <a href="#" 
-            class="btn btn-success float-right mr-4" 
+            <a href="#"
+            class="btn btn-success float-right mr-4"
             data-toggle="modal"
             data-target="#import-model"
             >
@@ -107,7 +107,7 @@
                                         <div class="col-10">
                                             <input readonly type="text" class="question-comment" placeholder="Khác">
                                         </div>
-                                        
+
                                         <div class="question-comment-remove">
                                             <i class="far fa-trash-alt" style="font-size: 20px; cursor:pointer"></i>
                                         </div>
@@ -115,7 +115,7 @@
                                     @endif
                                 </div>
                                 {{-- question add --}}
-                                
+
                                 <div class="add-question row ">
                                     <div class="col-12 add-option d-flex">
                                         <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
@@ -125,7 +125,7 @@
                                         <input readonly type="text" class="question-comment-add" style="display:block" id="" placeholder="Thêm khác">
                                         @endif
                                     </div>
-                                    
+
                                     <div class="mt-3 d-flex justify-content-end col-12 question-footer " >
                                         <div class="question-duplicate ">
                                             <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
@@ -143,11 +143,11 @@
                         </div>
                 </div>
                 @endforeach
-                
+
             </div>
             {{-- end section question --}}
         </div>
-        
+
     </div>
     {{-- Menu tool --}}
     <div class="question-tool-menu card" data-csstransition="false">
@@ -161,7 +161,7 @@
         </div>
     </div>
 
-</div> 
+</div>
 
 <div class="modal fade"  id="import-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

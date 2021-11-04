@@ -12,11 +12,11 @@
         }
         .question-footer .form-group{
             border-left: 1px solid rgb(211, 211, 211);
-            margin-left: 30px; 
+            margin-left: 30px;
         }
 
         .question-footer .form-group label{
-            
+
         }
 
 
@@ -74,7 +74,7 @@
                                 </strong>
                                 @enderror
                             </div>
-                            
+
                         </div>
                         <div class="col-md-6 col-12">
 
@@ -86,10 +86,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Loại khảo sát</label>
-                                <select name="type" class="form-control" id="">
+                                <select name="type" class="form-control" id="sur">
                                     <option {{$survey->type == 1 ? 'selected' : ''}} value="1">Bài đánh giá nhân viên</option>
                                     <option {{$survey->type == 2 ? 'selected' : ''}} value="2">Bài đánh giá chất lượng nhân viên</option>
                                     <option {{$survey->type == 3 ? 'selected' : ''}} value="3">Bài khảo sát khách hàng</option>
+                                    <option {{$survey->type == 4 ? 'selected' : ''}} value="4">Biểu quyết</option>
                                 </select>
                             </div>
 
@@ -114,11 +115,13 @@
             </div>
         </div>
         {{-- Question editor --}}
+        <div id="editor">
         @include('admin.pages.survey.editor')
+    </div>
     </section>
 </div>
 
-@endsection 
+@endsection
 
 @section('custom-js')
 <script src="{{asset('template/js/nestable.js')}}"></script>
@@ -211,10 +214,10 @@ document.querySelectorAll('textarea').forEach(function(item){
         var result = {};
         data.forEach(function (item) {
             result[item.name] = item.value;
-        })   
+        })
         return result;
     }
-    
+
     $("#survey-create-form").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -239,6 +242,7 @@ document.querySelectorAll('textarea').forEach(function(item){
             $('.survey-create-msg').text(errStr);
         });
     });
+
 </script>
 
 @include('admin.pages.survey.script')

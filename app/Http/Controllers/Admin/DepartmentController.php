@@ -132,7 +132,7 @@ class DepartmentController extends Controller
     {
         $data = $request->jsonData;
         $result = [];
-        function getDepartmentAndParent($result = [], $array, $parent_id)
+        function getDepartmentAndParent($result, $array, $parent_id)
         {
             foreach ($array as $key => $item) {
                 //return $item['id'];

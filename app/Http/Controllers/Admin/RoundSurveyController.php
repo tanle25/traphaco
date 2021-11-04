@@ -13,6 +13,7 @@ use App\User;
 use DataTables;
 use DB;
 use Excel;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -32,15 +33,19 @@ class RoundSurveyController extends Controller
     {
         $survey_rounds = SurveyRound::with('author')->orderByDesc('id');
 
-        return DataTables::eloquent($survey_rounds)
+        $sur = SurveyRound::join('users','survey_round.created_by','=','users.id')->select('survey_round.*','users.fullname')->orderBy('survey_round.id','desc');
+
+
+        return DataTables::eloquent($sur)
             ->addIndexColumn()
-            ->addColumn('action', function (SurveyRound $surveyround) {
-                return '<a data-toggle-for="tooltip" title="Xem thông tin" href="' . route('admin.survey_round.details', $surveyround->id) . '"class="btn text-primary survey-round-result"><i class="far fa-chart-bar "></i></a>
-                        <a data-toggle-for="tooltip" title="Sửa" href="' . route('admin.survey_round.edit', $surveyround->id) . '"class="btn text-success survey-round-edit"><i class="fas fa-edit"></i></a>
-                        <span data-toggle-for="tooltip" title="Xóa" href="' . route('admin.survey_round.destroy', $surveyround->id) . '" class="btn text-danger round-survey-delete"><i class="far fa-trash-alt"></i></span>';
+            ->addColumn('action', function ($s) {
+
+                return '<a data-toggle-for="tooltip" title="Xem thông tin" href="' . route('admin.survey_round.details', $s->id) . '"class="btn text-primary survey-round-result"><i class="far fa-chart-bar "></i></a>
+                        <a data-toggle-for="tooltip" title="Sửa" href="' . route('admin.survey_round.edit', $s->id) . '"class="btn text-success survey-round-edit"><i class="fas fa-edit"></i></a>
+                        <span data-toggle-for="tooltip" title="Xóa" href="' . route('admin.survey_round.destroy', $s->id) . '" class="btn text-danger round-survey-delete"><i class="far fa-trash-alt"></i></span>';
             })
-            ->editColumn('created_by', function (SurveyRound $surveyround) {
-                return $surveyround->author->fullname ?? '';
+            ->editColumn('created_by', function ($s) {
+                return $s->fullname?? '';
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -55,6 +60,7 @@ class RoundSurveyController extends Controller
     {
         // Get Survey
         $survey = Survey::all()->sortByDesc('id');
+        // dd($survey->first());
         //Get User
         //Get Send view with examiner choose, user choice
         return view('admin.pages.survey_round.create');
@@ -99,9 +105,11 @@ class RoundSurveyController extends Controller
      */
     public function edit($id)
     {
-        $survey_round = SurveyRound::findOrFail($id);
+        // dd($id);
+        $survey_round = SurveyRound::find($id);
 
         $survey = Survey::all()->sortByDesc('id');
+        // dd(count($survey));
 
         $users = User::all()->sortBy('id');
 

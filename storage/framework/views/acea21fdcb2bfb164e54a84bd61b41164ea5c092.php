@@ -3,7 +3,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Bài khỏa sát'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('admin.partials.content_header', ['title' => 'Bài khảo sát'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -12,9 +12,11 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách bài khảo sát</h3>
+                <?php if(Auth::user()->can('thêm bộ đề')): ?>
                 <a href="<?php echo e(route('admin.survey.create')); ?>" class="btn float-right btn-success">
-                  <i class="far fa-file nav-icon"> Thêm mới</i>
-                </a>
+                  <i class="fas fa-plus-circle nav-icon"></i> Thêm mới
+                </a>    
+                <?php endif; ?>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -39,7 +41,6 @@
         $(document).on('click', '.remove-survey-btn', function(e){
             e.preventDefault();
             var url = $(this).attr('href');
-            console.log('hellop');
             Swal.fire({
                 title: 'Xóa bài khảo sát này?',
                 text: "Bạn không thể hoàn tác!",

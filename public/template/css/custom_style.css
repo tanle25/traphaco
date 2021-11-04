@@ -9,6 +9,10 @@ html,body{
     -webkit-font-smoothing: antialiased;
     height: 100%;
     overflow-x: hidden;
+
+}
+img#preview {
+    box-shadow: 1px 1px 10px #ccc;
 }
 .swal2-popup {
     display: none;

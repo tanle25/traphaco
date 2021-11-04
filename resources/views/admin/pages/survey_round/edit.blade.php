@@ -37,7 +37,7 @@
               @enderror
             </div>
           </div>
-    
+
           <div class="col-md-6 col-12">
             <div class="form-group">
               <label for="">Người tạo</label>
@@ -46,9 +46,9 @@
               <input type="hidden" name="created_by" value="{{Auth::user()->id}}">
             </div>
           </div>
-        
+
           <button type="submit" class="btn btn-traphaco ml-2">Lưu thông tin</button>
-        </form>      
+        </form>
         </div>
         @if (Auth::user()->can('thêm bài đánh giá'))
         <div class="card">
@@ -62,9 +62,12 @@
                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Bài đánh giá</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bài đánh giá năng lực</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#capacity" role="tab" aria-controls="profile" aria-selected="false">Bài đánh giá năng lực</a>
                 </li>
-            
+                <li class="nav-item">
+                    <a class="nav-link" id="vote-tab" data-toggle="tab" href="#vote" role="tab" aria-controls="profile" aria-selected="false">Biểu quyết</a>
+                  </li>
+
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -86,8 +89,8 @@
                                 {{$message}}
                             </strong>
                             @enderror
-                        </div>    
-                        
+                        </div>
+
                         <div class="form-group col-md-4">
                             <label>Chọn người được đánh giá</label>
                             <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select">
@@ -110,7 +113,7 @@
                             </strong>
                             @enderror
                         </div>
-                    
+
                         <div class="form-group col-md-4">
                             <label>Chọn người đánh giá</label>
                             <select name="examiner_id[]" multiple="multiple" class="form-control select2" id="examiner-select">
@@ -138,12 +141,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="tab-pane fade" id="capacity" role="tabpanel" aria-labelledby="profile-tab">
                     <form action="{{route('admin.test.store2')}}" class="row mb-3" method="post">
                         @csrf
                         <input type="hidden" name="survey_round_id" value="{{$survey_round->id}}">
                         <input type="hidden" name="test_type" value="2">
-            
+
                         <div class="form-group col-md-4">
                             <label>Chọn bài đánh giá</label>
                             <select name="survey_id[]" multiple="multiple" class="form-control select2" id="survey-select2">
@@ -158,11 +161,11 @@
                                 {{$message}}
                             </strong>
                             @enderror
-            
-                        </div>    
-                        
+
+                        </div>
+
                         <div class="form-group col-md-4">
-            
+
                             <label>Chọn người làm bài</label>
                             <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select2">
                                 @foreach ($departments as $department)
@@ -178,24 +181,77 @@
                                     @endif
                                 @endforeach
                             </select>
-                            
+
                             @error('candiate_id')
                             <strong class="text-red">
                                 {{$message}}
                             </strong>
                             @enderror
-            
+
                         </div>
                         <div class="form-group col-12">
                             <button type="submit" class="btn btn-traphaco">Thêm bài đánh giá</button>
                         </div>
-                    </form>   
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="vote" role="tabpanel" aria-labelledby="profile-tab">
+                    <form action="{{route('admin.test.store2')}}" class="row mb-3" method="post">
+                        @csrf
+                        <input type="hidden" name="survey_round_id" value="{{$survey_round->id}}">
+                        <input type="hidden" name="test_type" value="2">
+
+                        <div class="form-group col-md-4">
+                            <label>Chọn bài đánh giá</label>
+                            <select name="survey_id[]" multiple="multiple" class="form-control select2" id="survey-select3">
+                                @foreach ($survey as $item )
+                                    @if ($item->type == 4)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('survey_id')
+                            <strong class="text-red">
+                                {{$message}}
+                            </strong>
+                            @enderror
+
+                        </div>
+
+                        <div class="form-group col-md-4">
+
+                            <label>Chọn người làm bài</label>
+                            <select name="candiate_id[]" multiple="multiple" class="form-control select2" id="candiate-select3">
+                                @foreach ($departments as $department)
+                                    <option class="department" department-holder="{{$department->id}}">{{$department->department_name}}</option>
+                                    @foreach ($department->users as $user)
+                                    <option department-holder="{{$department->id}}"  value="{{$user->id}}">{{$user->fullname ?? ''}} {{$user->department ? "| ". $user->department->department_name : '' }} {{  $user->position ? ' - '. $user->position->name . "" : ' ' }} </option>
+                                    @endforeach
+                                @endforeach
+                                <option value="1"  class="department" department-holder="x">Không rõ phòng ban</option>
+                                @foreach ($users as $user)
+                                    @if ($user->department == null)
+                                    <option data-department="1000" department-holder="x"  value="{{$user->id}}">{{$user->fullname ?? ''}} </option>
+                                    @endif
+                                @endforeach
+                            </select>
+
+                            @error('candiate_id')
+                            <strong class="text-red">
+                                {{$message}}
+                            </strong>
+                            @enderror
+
+                        </div>
+                        <div class="form-group col-12">
+                            <button type="submit" class="btn btn-traphaco">Thêm bài đánh giá</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            
+
             </div>
             <!-- /.card-body -->
-        </div>    
+        </div>
         @endif
 
         @include('admin.pages.survey_round.table')
@@ -221,7 +277,7 @@
       </div>
     </div>
   </div>
-@endsection 
+@endsection
 
 @section('custom-js')
 <script src="{{asset('template/js/nestable.js')}}"></script>
@@ -278,7 +334,7 @@ $("input[data-bootstrap-switch]").each(function(){
 @endif
 
 <script>
-	
+
 	$(document).on('blur', '.multipiler-input', function(){
 		var url = $(this).attr('href');
 		var value = $(this).val();
@@ -307,7 +363,7 @@ $("input[data-bootstrap-switch]").each(function(){
 		});
 	});
 
-	
+
 	$(document).on('click', '.send-test', function(){
 		var url = $(this).attr('href');
 		$.ajax({

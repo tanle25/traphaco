@@ -1,6 +1,11 @@
 
 <script src="<?php echo e(asset('template/js/stickyfloat.js')); ?>"></script>
 <script>
+
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
     jQuery('.question-tool-menu').stickyfloat({ duration: 400 });
 
     // Question logic 
@@ -44,11 +49,22 @@
                     <div class="sortable options-wraper">
                     </div>
                     <div class="can-comment"></div>
-                    <div class="col-8 add-option  d-flex">
-                        <input readonly type="text" class="question-option-add" id=""
-                            placeholder="Thêm câu trả lời">
-                        <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
-
+                    <div class="add-question row ">
+                        <div class="col-12 add-option d-flex">
+                            <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
+                            <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
+                        </div>
+                        <div class="mt-3 d-flex justify-content-end col-12 question-footer " >
+                            <div class="question-duplicate ">
+                                <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="d-none custom-control-input"  data-question-id="${newQuestion}" id="must-mark-${newQuestion}">
+                                    <label class="ml-3 custom-control-label" for="must-mark-${newQuestion}">Bắt buộc</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,6 +95,10 @@
                 appendSurveySectionFrontend(data.newSection, data.newQuestion);
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }                
                 swalToast('Lỗi tạo section', 'error');
             }
         });
@@ -102,7 +122,11 @@
                 }
             },
             error: function(errors){
-                swalToast('Lỗi cập nhật tiêu đề sectio quá 255 ký tự', 'error');
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }
+                swalToast('Lỗi cập nhật tiêu đề section quá 255 ký tự', 'error');
             }
         });
     }
@@ -143,8 +167,9 @@
         $(document).on("blur",'.section-title input',function(e) {
             var sectionId = $(this).closest('.section-wraper').data('section-id');
             var title = $(this).val();
+            var content =  $(this).closest('.section-wraper').find('.section-content').val();
             if(surveyId) {
-                updateSection(sectionId, title, null);
+                updateSection(sectionId, title, content);
             }
             else{
                 swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
@@ -153,9 +178,10 @@
 
         $(document).on("blur",'.section-content',function(e) {
             var sectionId = $(this).closest('.section-wraper').data('section-id');
+            var title = $(this).closest('.section-header').find('.section-title input').val();
             var content = $(this).val();
             if(surveyId) {
-                updateSection(sectionId,null, content);
+                updateSection(sectionId, title, content);
             }
             else{
                 swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
@@ -181,16 +207,16 @@
             });
         });
 
-        $(document).on("blur",'.section-content',function(e) {
-            var sectionId = $(this).closest('.section-wraper').data('section-id');
-            var content = $(this).val();
-            if(surveyId) {
-                updateSection(sectionId,null, content);
-            }
-            else{
-                swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
-            }
-        });
+        // $(document).on("blur",'.section-content',function(e) {
+        //     var sectionId = $(this).closest('.section-wraper').data('section-id');
+        //     var content = $(this).val();
+        //     if(surveyId) {
+        //         updateSection(sectionId,null, content);
+        //     }
+        //     else{
+        //         swalToast('Bạn phải tạo cuộc khảo sát trước', 'error');
+        //     }
+        // });
 
 
     });
@@ -235,10 +261,25 @@
             </div>
             <div class="sortable options-wraper ui-sortable"></div>
             <div class="can-comment"></div>
-            <div class="col-8 add-option d-flex">
-                <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
-                <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
+
+            <div class="add-question row ">
+                <div class="col-12 add-option d-flex">
+                    <input readonly type="text" class="question-option-add" id="" placeholder="Thêm câu trả lời">
+                    <input readonly type="text" class="question-comment-add" id="" placeholder="Thêm khác">
+                </div>
+                <div class="mt-3 d-flex justify-content-end col-12 question-footer " >
+                    <div class="question-duplicate ">
+                        <i class="far fa-copy align-m" style="font-size: 25px; cursor:pointer"></i>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="d-none custom-control-input" data-question-id="${questionId}" id="must-mark-${questionId}">
+                            <label class="ml-3 custom-control-label" for="must-mark-${questionId}">Bắt buộc</label>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         </div>
         `;
         $('.sortable').sortable('destroy');
@@ -248,6 +289,8 @@
             zIndex              : 999999,
             animation: 150,
         });
+
+        return $(questiontemplate);
     }
 
     function createQuestion(section = null){
@@ -265,6 +308,10 @@
                 appendQuestionFrontEnd(data.newQuestion);
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo câu hỏi', 'error');
             }
         });
@@ -287,6 +334,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi cập nhật nội dung câu hỏi', 'error');
             }
         });
@@ -319,6 +370,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
             }
         });
@@ -385,6 +440,10 @@
                 appendQuestionOptionFrontEnd(questionWraper, data.newOption);
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo đáp án!', 'error');
             }
         });
@@ -417,6 +476,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi cập nhật nội dung câu trả lời', 'error');
             }
         });
@@ -449,6 +512,10 @@
                 }
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi không rõ phát sinh trong quá trình xóa', 'error');
             }
         });
@@ -525,6 +592,10 @@
 
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo đáp án!', 'error');
             }
         });
@@ -548,10 +619,161 @@
 
             },
             error: function(errors){
+                if(errors.status == 403){
+                    swalToast('Bạn không có quyền truy cập', 'error');
+                    return;
+                }   
                 swalToast('Lỗi tạo đáp án!', 'error');
             }
         });
     })
 
+
+/**
+duplicate question
+*/
+
+
+function duplicateQuestion(question_id, section_id){
+    localStorage.setItem('scrollpos', window.scrollY);
+    $.ajax({
+        url: "<?php echo e(route('admin.question.duplicate')); ?>",
+        data: {
+            question_id: question_id, 
+            section_id: section_id
+        },
+        type:'post',
+        success: function(data){
+            location.reload();            
+        },
+        error: function(errors){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
+        }
+    })
+
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+
+$(document).on('click', '.question-duplicate', function(e){
+    var question = $(this).closest('.question-wraper');
+    var section = $(this).closest('.section-wraper');
+    var question_id = question.data('question-id'); 
+    var section_id = section.data('section-id');
+    duplicateQuestion(question_id, section_id);
+})
+
+/*
+    Order question
+*/
+
+function orderOptions(dataOptions){
+    $.ajax({
+        url: "<?php echo e(route('admin.question_option.update_order')); ?>",
+        type: 'post',
+        data: {
+            options: dataOptions,
+        },
+        success: function(data){
+            swalToast(data.success);
+        },
+        error: function(errors){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
+            swalToast('Lỗi không xác định phát sinh trong quá trình cập nhật', 'error');
+        }
+    })
+}
+
+
+function orderQuestions(dataQuestion){
+    $.ajax({
+        url: "<?php echo e(route('admin.question.update_order')); ?>",
+        type: 'post',
+        data: {
+            questions: dataQuestion,
+        },
+        success: function(data){
+            swalToast(data.success);
+        },
+        error: function(errors){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
+            swalToast('Lỗi không xác định phát sinh trong quá trình cập nhật', 'error');
+        }
+    })
+}
+
+
+$(document).on('sortbeforestop', '.sortable', function(e){
+
+    if(e.target.classList.contains('options-wraper')){
+        var dataOptions = $(this).sortable('toArray', {attribute: 'data-question-option-id'});
+        if (dataOptions[0] == '') {
+            return;
+        }
+        orderOptions(dataOptions);
+    }
+
+
+    if(e.target.classList.contains('question-container')){
+        var dataQuestion = $(this).sortable('toArray', {attribute: 'data-question-id'});
+        if(dataQuestion[0] == ''){
+            return;
+        }
+        orderQuestions(dataQuestion)
+    }
+
+    if(e.target.classList.contains('editor-body')){
+        var dataSection = $(this).sortable('toArray', {attribute: 'data-section-id'});
+        if(dataSection[0] == ''){
+            return;
+        }
+    }
+});
+
+function saveQuestionMustMask(questionId, value){
+    $.ajax({
+        url: "<?php echo e(route('admin.question.save_question_must_mask')); ?>",
+        type: 'post',
+        data: {
+            question_id: questionId,
+            value: value
+        },
+        success: function(data){
+            if(data.success){
+                swalToast(data.success);
+            }
+            if(data.errors){
+                swalToast(data.errors);
+            }
+        },
+        error: function(error){
+            if(errors.status == 403){
+                swalToast('Bạn không có quyền truy cập', 'error');
+                return;
+            }   
+            swalToast("Lỗi không rõ phía server", "error");
+
+        }
+    })
+}
+
+$(document).on('change', '.question-footer .custom-switch input', function(){
+    var questionId = $(this).data('question-id');
+    var value = $(this).prop("checked") ? 1 : 0;
+    saveQuestionMustMask(questionId, value);
+})
 
 </script><?php /**PATH /home/admin/web/dg.traphaco.vn/public_html/resources/views/admin/pages/survey/script.blade.php ENDPATH**/ ?>

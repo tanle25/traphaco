@@ -76,6 +76,7 @@
                                     <option value="1">Bài đánh giá nhân viên</option>
                                     <option value="2">Bài kiểm tra chất lượng nhân viên</option>
                                     <option value="3">Bài khảo sát khách hàng</option>
+                                    <option value="4">Biểu quyết</option>
                                 </select>
                             </div>
 
@@ -103,7 +104,7 @@
     </section>
 </div>
 
-@endsection 
+@endsection
 
 @section('custom-js')
 <script src="{{asset('template/js/nestable.js')}}"></script>
@@ -190,10 +191,10 @@ function auto_grow(element) {
         var result = {};
         data.forEach(function (item) {
             result[item.name] = item.value;
-        })   
+        })
         return result;
     }
-    
+
     $("#survey-create-form").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         var form = $(this);

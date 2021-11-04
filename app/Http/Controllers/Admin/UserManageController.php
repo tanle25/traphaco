@@ -86,6 +86,7 @@ class UserManageController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        // dd($request);
         $data = $request->all();
         if ($request->has('is_admin') && $data['is_admin'] == 'on') {
             $data['is_admin'] = 1;
@@ -100,8 +101,25 @@ class UserManageController extends Controller
         }
 
         $data['password'] = Hash::make($data['password']);
-        $newUser = User::create($data);
-
+        // dd($data);
+        // $newUser = User::create($data);
+        $newUser = new User();
+        $newUser ->fullname= $data['fullname'];
+        $newUser ->nationality= $data['nationality'];
+        $newUser ->registration_number= $data['registration_number'];
+        $newUser ->date_range= $data['date_range'];
+        $newUser ->place_issued= $data['place_issued'];
+        $newUser ->deputy= $data['deputy'];
+        $newUser ->document_number= $data['document_number'];
+        $newUser ->address= $data['address'];
+        $newUser ->number_share= $data['number_share'];
+        $newUser ->username= $data['username'];
+        $newUser ->email= $data['email'];
+        $newUser ->password= $data['password'];
+        $newUser ->department_id= $data['department_id'];
+        $newUser ->position_id= $data['position_id'];
+        $newUser ->is_admin= $data['is_admin'];
+        $newUser->save();
         foreach ($data['roles'] as $role) {
             $newUser->assignRole($role);
         }
@@ -179,7 +197,23 @@ class UserManageController extends Controller
             }
         }
 
-        $user->update($data);
+$user->fullname = $data['fullname'];
+        $user->nationality = $data['nationality'];
+        $user->registration_number = $data['registration_number'];
+        $user->date_range = $data['date_range'];
+        $user->place_issued = $data['place_issued'];
+        $user->deputy = $data['deputy'];
+        $user->document_number = $data['document_number'];
+        $user->address = $data['address'];
+        $user->number_share = $data['number_share'];
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        $user->department_id = $data['department_id'];
+        $user->position_id = $data['position_id'];
+        $user->is_admin = $data['is_admin'];
+        $user->save();
+       // $user->update($data);
 
         foreach ($user->roles as $role) {
             $user->removeRole($role->name);
@@ -237,7 +271,7 @@ class UserManageController extends Controller
 
             'password.min' => 'Password tối thiểu 4 ký tự',
         ]);
-        $user = User::findOrFail($id);
+        $user = User::where('id',$id)->first();
 
         if (Auth::user()->id != $id) {
             return abort(404);
@@ -252,12 +286,31 @@ class UserManageController extends Controller
             }
         }
 
-        $new_data = [];
+        // $new_data = [];
 
-        $new_data['email'] = $data['email'];
-        $new_data['password'] = $data['password'];
+        // $new_data['email'] = $data['email'];
+        // $new_data['password'] = $data['password'];
+        // $new_data['nationality'] =$data['nationality'];
+        // $new_data['registration_number'] =$data['registration_number'];
+        // $new_data['date_range'] =$data['date_range'];
+        // $new_data['place_issued'] =$data['place_issued'];
+        // $new_data['deputy'] =$data['deputy'];
+        // $new_data['document_number'] =$data['document_number'];
+        // $new_data['address'] =$data['address'];
+        // // dd($new_data);
+        // $user->update($data);
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        $user->nationality = $data['nationality'];
+        $user->registration_number = $data['registration_number'];
+        $user->date_range = $data['date_range'];
+        $user->place_issued = $data['place_issued'];
+        $user->deputy = $data['deputy'];
+        $user->document_number = $data['document_number'];
+        $user->address = $data['address'];
+        $user->save();
 
-        $user->update($data);
+
         return redirect()->back()->with(['success' => 'Cập nhật thông tin thành công']);
     }
 

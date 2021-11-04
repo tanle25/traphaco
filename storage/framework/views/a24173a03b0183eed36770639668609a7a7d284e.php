@@ -13,7 +13,7 @@
         <div class="inner">
           <h3><?php echo e(Auth::user()->asExaminerTests->where('status', '2')->count()); ?></h3>
 
-          <p>Bài khảo sát mới</p>
+          <p>Bài đánh giá mới</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
@@ -27,12 +27,12 @@
       <div class="small-box bg-success">
         <div class="inner">
           <h3><?php echo e(Auth::user()->asExaminerTests->where('status', '3')->count()); ?><sup style="font-size: 20px"></sup></h3>
-          <p>Bài khảo sát đã hoàn thành</p>
+          <p>Bài đánh giá đã hoàn thành</p>
         </div>
         <div class="icon">
           <i class="ion ion-stats-bars"></i>
         </div>
-        <a href="<?php echo e(route('answer.index', ['marked' => 1])); ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="<?php echo e(route('answer.index', ['marked' => 1])); ?>" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->

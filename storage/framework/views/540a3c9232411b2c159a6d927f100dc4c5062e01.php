@@ -50,30 +50,25 @@
             
             <p class="text-center">Đăng nhập vào hệ thống</p>
             <h6 style="font-size: .9rem">Tên đăng nhập</h6>
-            <div class="input-group mb-2">
+            <div class="input-group">
               <span class="input-group-prepend"><i class="fa fa-envelope input-group-text"></i></span>
               <input type="text" class="form-control" placeholder="username" name="username">
             </div>
-            <h6 style="font-size: .9rem">Mật khẩu</h6>
+            <?php if($errors->has('username')): ?>
+              <div class="text-red" style="font-size: .9rem">
+                <strong><?php echo e($errors->first('username')); ?></strong>
+              </div>                 
+            <?php endif; ?>
+            <h6 class="mt-2" style="font-size: .9rem">Mật khẩu</h6>
             <div class="input-group">
               <span class="input-group-prepend"><i class="fa fa-key input-group-text" style="font-weight: 600"></i></span>
               <input type="password" class="form-control" placeholder="Password" name="password">
             </div>
-            <div class="form-group clearfix">
-              <?php $__errorArgs = ['fail'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                  <span class="invalid-feedback text-red" role="alert">
-                      <strong><?php echo e($message); ?></strong>
-                  </span>
-              <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-            </div>
-
+            <?php if($errors->has('password')): ?>
+                <div class="text-red" style="font-size: .9rem">
+                  <strong><?php echo e($errors->first('password')); ?></strong>
+                </div>                 
+            <?php endif; ?>
             <div class="form-group clearfix" style="font-size: .9rem">
               <div class="row ">
                 <div class="col-sm-6">
@@ -82,9 +77,15 @@ unset($__errorArgs, $__bag); ?>
                       <input type="checkbox" name="remember"> Nhớ mật khẩu
                     </label>
                   </div>
+                  <?php if($errors->has('fail')): ?>
+                    <div class="text-red" style="font-size: .9rem">
+                      <strong><?php echo e($errors->first('fail')); ?></strong>
+                    </div>                 
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
+            
             <div class="form-group clearfix">
               <div class="row ">
                 <div class="col-xs-6 ">

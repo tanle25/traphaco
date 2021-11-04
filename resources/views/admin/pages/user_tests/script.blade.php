@@ -35,7 +35,7 @@
                 question_id: questionId,
                 option_id: $(this).find('.option-input:checked').attr('value') ? $(this).find('.option-input:checked').attr('value') :  '',
                 comment: $(this).find('.comment').val() ? $(this).find('.comment').val() : '',
-            });     
+            });
         })
         return answer
     }
@@ -57,11 +57,12 @@
                 if (data.error) {
                     swalToast(data.error, 'error');
                 }
-                
+
                 if (data.msg) {
+                    console.log(data.msg);
                     swalToast(data.msg);
-                    
-                } 
+
+                }
             },
             error: function (errors) {
                 swalToast('Lỗi không rõ phát sinh trong quá trình gửi', 'error');
@@ -72,7 +73,7 @@
     $(document).on('click', '.send-result', function (e) {
         var mustMark = $('.must-mark');
         var isValidAnswer = true;
-        
+
         mustMark.each(function(){
             var option = $(this).find('.option-input');
             var comment = $(this).find('textarea');
@@ -132,7 +133,7 @@
 
     @if(\Request::route()->getName() === "answer.mark" )
     var checkTime =  setInterval(function(){
-        session_time += 2000; 
+        session_time += 2000;
         if( session_time >  {{Carbon\Carbon::parse($test->getEndTime())->timestamp * 1000}} - 10000 ){
             clearInterval(checkTime);
             Swal.fire({
@@ -156,16 +157,56 @@
     }, 2000);
     @endif
 
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#attachment").change(function(e){
+    e.preventDefault();
+    readURL(this);
+    console.log("{{$test->id}}")
+    let formData = new FormData($('#form-id')[0]);
+    // console.log(formData);
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+    $.ajax({
+        type: "Post",
+        url: "{{route('upload.image')}}",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        dataType: "JSON",
+        success: function (response) {
+            // console.log(response['code']);
+            // if(response.code==200){
+                swalToast(response.msg);
+            // }
+
+        }
+    });
+});
     (function () {
     let  duration = "{{- Carbon\Carbon::now()->timestamp * 1000 + Carbon\Carbon::parse($test->getEndTime())->timestamp * 1000}}";
     const second = 1000,
             minute = second * 60,
             hour = minute * 60,
             day = hour * 24;
-    
+
     let endTime = new Date(),
         countDown = new Date(endTime).getTime(),
-        x = setInterval(function() {    
+        x = setInterval(function() {
 
             distance = duration;
             //document.getElementById("days").innerText = Math.floor(distance / (day)),

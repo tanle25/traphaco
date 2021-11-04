@@ -6,7 +6,7 @@
         <a style="color:white" class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a style="color:white; letter-spacing:1px" href="" class="nav-link">CÔNG TY CỔ PHẦN TRAPHACO</a>
+        <a style="color:white; letter-spacing:1px" href="" class="nav-link">HỆ THỐNG ĐÁNH GIÁ NĂNG LỰC - CÔNG TY CỔ PHẦN TRAPHACO</a>
       </li>
       
     </ul>
@@ -23,14 +23,17 @@
       
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-user"></i>
+          <i class="fas fa-user-circle"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           
           
+          <a href="<?php echo e(route('user.edit_normal_user')); ?>" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> Thông tin cá nhân
+          </a>
           <form action="<?php echo e(route('logout')); ?>" method="post">
             <?php echo csrf_field(); ?>
-            <button type="submit" class="dropdown-item text-center">Đăng xuất</button>
+            <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
           </form>
         </div>
       </li>
